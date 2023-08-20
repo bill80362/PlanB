@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[\App\Http\Controllers\Admin\IndexController::class,"indexHTML"]);
+
+
+
+Route::get('/login',[\App\Http\Controllers\Admin\LoginController::class,"loginHTML"]);
+Route::post('/login',[\App\Http\Controllers\Admin\LoginController::class,"login"]);
