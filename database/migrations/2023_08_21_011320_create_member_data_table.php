@@ -14,13 +14,32 @@ return new class extends Migration
         Schema::create('Member_Data', function (Blueprint $table) {
             $table->id();
             $table->string('MemberNum')->unique();
-            $table->string('CellPhone')->unique();
+            $table->string('Login_Email')->unique();
+            $table->string('Login_Password');
             //
-            $table->string('Name');
+            $table->integer("Member_Level_ID")->nullable();
+            $table->string("LID")->nullable();
+            $table->string("UID")->nullable();
+            //
+            $table->string('Name')->nullable();
+            $table->string('CellPhone')->nullable();
             $table->string('Email')->nullable();
             $table->tinyInteger('Formal_Flag')->default(1);
             $table->tinyInteger('Sex')->nullable()->default(null);
             $table->date('Birthday')->nullable();
+            //
+            $table->integer("Country_ID")->nullable();
+            $table->integer("City_ID")->nullable();
+            $table->integer("Area_ID")->nullable();
+            $table->string("Area_No1")->nullable();
+            $table->string("Area_No2")->nullable();
+            $table->string("Address")->nullable();
+            $table->string("Tel")->nullable();
+            $table->string("Remark_Item")->nullable();
+            $table->string("Remark")->nullable();
+            //
+            $table->integer("Build_Date")->nullable();
+            //
             $table->timestamps();
         });
     }
