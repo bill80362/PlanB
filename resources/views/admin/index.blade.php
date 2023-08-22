@@ -29,10 +29,7 @@
             </div>
 
         </div>
-
     </div>
-
-
 @endsection
 
 @section('BodyJavascript')

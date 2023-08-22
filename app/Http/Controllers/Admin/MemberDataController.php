@@ -9,10 +9,11 @@ class MemberDataController extends \App\Http\Controllers\Controller
 {
     //列表
     public function listHTML(){
-        $Member_Data_Paginate = Member_Data::paginate(15);
+        $pageLimit = 15;
+        $Paginator = Member_Data::paginate($pageLimit);
         //
         return view('admin/Member_Data/List', [
-            'Paginate' => $Member_Data_Paginate
+            'Paginator' => $Paginator,
         ]);
     }
     //編輯

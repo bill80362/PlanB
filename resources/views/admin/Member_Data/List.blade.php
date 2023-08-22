@@ -92,7 +92,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    @foreach ($Paginate->items() as $Item)
+                                                    @foreach ($Paginator->items() as $Item)
                                                     <td>
                                                         <input type="checkbox" class="form-check-input" value="{{$Item->ID}}">
                                                         {{$Item->ID}}
