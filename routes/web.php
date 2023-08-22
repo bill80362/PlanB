@@ -13,9 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[\App\Http\Controllers\Admin\IndexController::class,"indexHTML"]);
+/**後台*/
+Route::middleware([])->group(function () {
+    //Dashboard
+    Route::get('/',[\App\Http\Controllers\Admin\IndexController::class,"indexHTML"]);
+    //Member_Data
+    Route::get('/Member_Data',[\App\Http\Controllers\Admin\MemberDataController::class,"listHTML"]);
+    Route::get('/Member_Data/{ID}',[\App\Http\Controllers\Admin\MemberDataController::class,"updateHTML"]);
+    Route::post('/Member_Data/{ID}',[\App\Http\Controllers\Admin\MemberDataController::class,"update"]);
+    //登入
+    Route::get('/login',[\App\Http\Controllers\Admin\LoginController::class,"loginHTML"]);
+    Route::post('/login',[\App\Http\Controllers\Admin\LoginController::class,"login"]);
+});
 
-
-
-Route::get('/login',[\App\Http\Controllers\Admin\LoginController::class,"loginHTML"]);
-Route::post('/login',[\App\Http\Controllers\Admin\LoginController::class,"login"]);
