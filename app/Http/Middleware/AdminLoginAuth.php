@@ -16,7 +16,7 @@ class AdminLoginAuth
     public function handle(Request $request, Closure $next): Response
     {
         //
-        echo 123;
+//        echo 123;
 
         //
         return $next($request);
