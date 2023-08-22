@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**後台*/
-Route::middleware([])->group(function () {
+Route::middleware(["AdminLoginAuth"])->group(function () {
     //Dashboard
     Route::get('/',[\App\Http\Controllers\Admin\IndexController::class,"indexHTML"]);
     //Member_Data
