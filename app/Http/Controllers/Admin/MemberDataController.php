@@ -18,27 +18,16 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     //編輯
     public function updateHTML($ID){
-        var_dump($ID);
+        $Data = Member_Data::find($ID);
+        //
+        return view('admin/Member_Data/Update', [
+            'Data' => $Data,
+        ]);
     }
-    public function update($ID){
-//        Member_Data::create([
-//            "MemberNum" => "M0001",
-//            "Login_Email" => "bill@gmail.com",
-//            "Login_Password" => "A123",
-//            "Member_Level_ID" => "1",
-//            "CellPhone" => "0911222333",
-//            "Email" => "bill@gmail.com",
-//            "Formal_Flag" => "1",
-//            "Sex" => "1",
-//            "Birthday" => "2020-11-11",
-//            "Country_ID" => "1",
-//            "City_ID" => "1",
-//            "Area_ID" => "1",
-//            "Area_No1" => "12",
-//            "Area_No2" => "133",
-//            "Address" => "AAABBASDADS",
-//            "Tel" => "062323339",
-//        ]);
+    public function update(Request $request,$ID){
+        Member_Data::find($ID)->update($request->post());
+        //
+        return redirect('/Member_Data/'.$ID);
     }
     //刪除
     public function del($ID){
