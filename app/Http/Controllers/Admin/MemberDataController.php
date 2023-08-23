@@ -18,7 +18,14 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     //編輯
     public function updateHTML($ID){
-        $Data = Member_Data::find($ID);
+        if($ID){
+            $Data = Member_Data::find($ID);
+        }else{
+            $Data = new Member_Data();
+            //新增預設值
+            $Data->ID = 0;
+            $Data->Name = "AAA";
+        }
         //
         return view('admin/Member_Data/Update', [
             'Data' => $Data,
@@ -27,7 +34,10 @@ class MemberDataController extends \App\Http\Controllers\Controller
     public function update(Request $request,$ID){
         Member_Data::find($ID)->update($request->post());
         //
-        return redirect('/Member_Data/'.$ID);
+        return view('alert_redirect', [
+            'Alert' => "更新成功",
+            'Redirect' => '/Member_Data/'.$ID,
+        ]);
     }
     //刪除
     public function del($ID){
