@@ -20,4 +20,9 @@ class Member_Data extends Model
     const UPDATED_AT = '';
     //
     protected $guarded = [];
+    //狀態文字
+    public $Formal_Flag_Text = [
+        1 => "非正式",
+        2 => "正式",
+    ];
 }

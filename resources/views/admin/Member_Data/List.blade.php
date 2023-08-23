@@ -91,26 +91,30 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    @foreach ($Paginator->items() as $Item)
-                                                    <td>
-                                                        <input type="checkbox" class="form-check-input" value="{{$Item->ID}}">
-                                                        {{$Item->ID}}
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control form-control-sm" type="text" style="width: 50px;" name="Order_No[{{$Item->ID}}]" value="">
-                                                    </td>
-                                                    <td>{{$Item->Name}}</td>
-                                                    <td>{{$Item->Birthday}}</td>
+                                                @foreach ($Paginator->items() as $Item)
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" class="form-check-input"
+                                                                   value="{{$Item->ID}}">
+                                                            {{$Item->ID}}
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control form-control-sm" type="text"
+                                                                   style="width: 50px;" name="Order_No[{{$Item->ID}}]"
+                                                                   value="">
+                                                        </td>
+                                                        <td>{{$Item->Name}}</td>
+                                                        <td>{{$Item->Birthday}}</td>
                                                         <td>{{$Item->Cellphone}}</td>
                                                         <td>{{$Item->Email}}</td>
-                                                        <td>{{$Item->Formal_Flag}}</td>
-                                                    <td>
-                                                        <a class="btn btn-xs btn-primary" href="/Member_Data/{{$Item->ID}}">編輯</a>
-                                                        <a class="btn btn-xs btn-danger" type="button">刪除</a>
-                                                    </td>
-                                                    @endforeach
-                                                </tr>
+                                                        <td>{{$Item->Formal_Flag_Text[$Item->Formal_Flag]}}</td>
+                                                        <td>
+                                                            <a class="btn btn-xs btn-primary"
+                                                               href="/Member_Data/{{$Item->ID}}">編輯</a>
+                                                            <a class="btn btn-xs btn-danger" type="button">刪除</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

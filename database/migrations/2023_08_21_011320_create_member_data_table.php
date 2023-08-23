@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Member_Data', function (Blueprint $table) {
-            $table->integer("ID")->primary()->autoIncrement();
+//            $table->integer("ID")->primary()->autoIncrement();
+            $table->id("ID");
             $table->string('MemberNum')->unique();
             $table->string('Login_Email')->unique();
             $table->string('Login_Password');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string("UID")->nullable();
             //
             $table->string('Name')->nullable();
-            $table->string('CellPhone')->nullable();
+            $table->string('Cellphone')->nullable();
             $table->string('Email')->nullable();
             $table->tinyInteger('Formal_Flag')->default(1);
             $table->tinyInteger('Sex')->nullable()->default(null);

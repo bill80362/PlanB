@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Member\Member_Data;
+use Database\Factories\Member\Member_DataFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +20,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        \App\Models\Member\Member_Data::factory()->create();
+        //目前數量
+        Member_DataFactory::$counter = Member_Data::all()->count()+1;
+        //製造
+        \App\Models\Member\Member_Data::factory(10)->create();
     }
 }

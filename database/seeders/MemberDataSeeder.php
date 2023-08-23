@@ -12,6 +12,6 @@ class MemberDataSeeder extends Seeder
      */
     public function run(): void
     {
-         \App\Models\Member\Member_Data::factory(10)->create();
+         \App\Models\Member\Member_Data::factory()->create();
     }
 }

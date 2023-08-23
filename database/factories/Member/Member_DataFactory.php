@@ -16,21 +16,25 @@ class Member_DataFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    public static int $counter = 1;
     public function definition(): array
     {
         $Email = fake()->unique()->safeEmail();
         $Cellphone = "0921".rand(111111,999999);
         //
+        $MemberNum = self::$counter++;
+        $MemberNum = "M".str_pad($MemberNum,"8","0",STR_PAD_LEFT);//formatting
+        //
         return [
             //
-            'MemberNum' => "M".str_pad(Member_Data::all()->count(),"8","0",STR_PAD_LEFT),
+            'MemberNum' => $MemberNum,
             "Login_Email" => $Cellphone,
             'Name' => fake()->name(),
             'Login_Password' => "123",
             'Member_Level_ID' => 1,
             'LID' => null,
             'UID' => null,
-            'CellPhone' => $Cellphone,
+            'Cellphone' => $Cellphone,
             'Email' => $Email,
             'Formal_Flag' => 1,
             'Sex' => 1,

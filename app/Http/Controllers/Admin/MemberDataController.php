@@ -21,24 +21,24 @@ class MemberDataController extends \App\Http\Controllers\Controller
         var_dump($ID);
     }
     public function update($ID){
-        Member_Data::create([
-            "MemberNum" => "M0001",
-            "Login_Email" => "bill@gmail.com",
-            "Login_Password" => "A123",
-            "Member_Level_ID" => "1",
-            "CellPhone" => "0911222333",
-            "Email" => "bill@gmail.com",
-            "Formal_Flag" => "1",
-            "Sex" => "1",
-            "Birthday" => "2020-11-11",
-            "Country_ID" => "1",
-            "City_ID" => "1",
-            "Area_ID" => "1",
-            "Area_No1" => "12",
-            "Area_No2" => "133",
-            "Address" => "AAABBASDADS",
-            "Tel" => "062323339",
-        ]);
+//        Member_Data::create([
+//            "MemberNum" => "M0001",
+//            "Login_Email" => "bill@gmail.com",
+//            "Login_Password" => "A123",
+//            "Member_Level_ID" => "1",
+//            "CellPhone" => "0911222333",
+//            "Email" => "bill@gmail.com",
+//            "Formal_Flag" => "1",
+//            "Sex" => "1",
+//            "Birthday" => "2020-11-11",
+//            "Country_ID" => "1",
+//            "City_ID" => "1",
+//            "Area_ID" => "1",
+//            "Area_No1" => "12",
+//            "Area_No2" => "133",
+//            "Address" => "AAABBASDADS",
+//            "Tel" => "062323339",
+//        ]);
     }
     //刪除
     public function del($ID){
