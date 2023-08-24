@@ -36,7 +36,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-4">
-                                    <label>條件搜尋</label>
+                                    <label>文字搜尋</label>
                                     <div class="form-group">
                                         <div class="input-group input-group">
                                             <div class="input-group-prepend">
@@ -60,8 +60,13 @@
                                         <option>建立時間(正)</option>
                                     </select>
                                 </div>
+                                <div class="col-lg-4">
+                                    <label></label>
+                                    <button class="btn btn-primary">搜尋</button>
+                                    <button class="btn btn-secondary">取消</button>
+                                </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-2">
                                 <div class="col-12">
                                     <div class="card card-primary">
                                         <div class="card-header">
@@ -69,9 +74,10 @@
                                                 <button class="btn btn-sm btn-warning">全選</button>
                                                 <button class="btn btn-sm btn-warning">取消</button>
                                                 <button class="btn btn-sm btn-danger">勾選刪除</button>
+                                                <button class="btn btn-sm btn-danger">更新排序</button>
                                             </div>
                                             <div class="card-tools">
-                                                <button class="btn btn-sm btn-warning">更新排序</button>
+                                                <a class="btn btn-sm btn-primary" href="/Member_Data/0">新增</a>
                                                 <button class="btn btn-sm btn-warning">匯入</button>
                                                 <button class="btn btn-sm btn-warning">匯出</button>
                                             </div>

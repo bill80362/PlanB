@@ -9,7 +9,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
 {
     //列表
     public function listHTML(){
-        $pageLimit = 15;
+        $pageLimit = 30;
         $Paginator = Member_Data::paginate($pageLimit);
         //
         return view('admin/Member_Data/List', [
@@ -17,14 +17,14 @@ class MemberDataController extends \App\Http\Controllers\Controller
         ]);
     }
     //編輯
-    public function updateHTML($ID){
+    public function updateHTML(Request $request,$ID){
         if($ID){
             $Data = Member_Data::find($ID);
         }else{
             $Data = new Member_Data();
             //新增預設值
             $Data->ID = 0;
-            $Data->Name = "AAA";
+            $Data->Name = $request->old("Name");
         }
         //
         return view('admin/Member_Data/Update', [
@@ -32,11 +32,24 @@ class MemberDataController extends \App\Http\Controllers\Controller
         ]);
     }
     public function update(Request $request,$ID){
-        Member_Data::find($ID)->update($request->post());
+        //
+        $request->validate([
+            "Name" => "require",
+        ]);
+
+        //
+        if($ID){
+            Member_Data::find($ID)->update($request->post());
+        }else{
+            $Data = $request->post();
+            $oMember_Data = new Member_Data();
+            $Data["MemberNum"] = $oMember_Data->formatMemberNum(Member_Data::count()+1);
+            Member_Data::create($Data);
+        }
         //
         return view('alert_redirect', [
-            'Alert' => "更新成功",
-            'Redirect' => '/Member_Data/'.$ID,
+            'Alert' => "送出成功",
+            'Redirect' => '/Member_Data',
         ]);
     }
     //刪除

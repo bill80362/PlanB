@@ -39,4 +39,9 @@ class Member_Data extends Model
         "UID" => "FB_ID",
         "Member_Level_ID" => "會員等級",
     ];
+
+    public function formatMemberNum(int $number): string
+    {
+        return "M".str_pad($number,"8","0",STR_PAD_LEFT);
+    }
 }
