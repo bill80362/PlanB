@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="/template/AdminLTE-310/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="/template/AdminLTE-310/plugins/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/template/AdminLTE-310/dist/css/adminlte.min.css">
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="/template/AdminLTE-310/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
@@ -29,7 +28,13 @@
     <!-- summernote -->
     <link rel="stylesheet" href="/template/AdminLTE-310/plugins/summernote/summernote-bs4.min.css">
 
-    <link rel="stylesheet" href="/template/Admin/css/global.css">
+{{--    <link rel="stylesheet" href="/template/Admin/css/global.css">--}}
+    <!-- select2 -->
+    <link rel="stylesheet" href="/template/AdminLTE-310/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/template/AdminLTE-310/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/template/AdminLTE-310/dist/css/adminlte.min.css">
 
     @yield("HeaderCSS")
 </head>
@@ -82,7 +87,19 @@
 <script src="/template/AdminLTE-310/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
 <script src="/template/AdminLTE-310/dist/js/adminlte.js?v=3.2.0"></script>
+<!-- select2 -->
+<script src="/template/AdminLTE-310/plugins/select2/js/select2.full.min.js"></script>
+
 @yield("BodyJavascript")
+<script>
+    {{--統一開啟的JS--}}
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+</script>
 </body>
 
 </html>

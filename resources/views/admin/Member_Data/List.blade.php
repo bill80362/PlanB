@@ -26,46 +26,58 @@
                 <div class="col-12">
                     <div class="card card-primary card-outline">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label>狀態</label>
-                                    <select class="form-control">
-                                        <option>不限制</option>
-                                        <option>正式</option>
-                                        <option>非正式</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label>文字搜尋</label>
-                                    <div class="form-group">
-                                        <div class="input-group input-group">
-                                            <div class="input-group-prepend">
-                                                <select class="form-control">
-                                                    <option>不限制</option>
-                                                    <option>姓名</option>
-                                                    <option>ID</option>
-                                                    <option>手機</option>
-                                                    <option>Email</option>
-                                                    <option>地址</option>
-                                                </select>
-                                            </div>
-                                            <input type="text" class="form-control">
+                            {{--搜尋START--}}
+                            <form>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>{{$Model->Column_Title_Text["Formal_Flag"]}}</label>
+                                            <select name="Formal_Flag" class="select2bs4" multiple="multiple"
+                                                    style="width: 100%;">
+                                                @foreach ($Model->Formal_Flag_Text as $key => $value)
+                                                    <option value="{{$key}}">{{$value}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label>排序</label>
-                                    <select class="form-control">
-                                        <option>建立時間(反)</option>
-                                        <option>建立時間(正)</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>文字搜尋</label>
+                                        <div class="form-group">
+                                            <div class="input-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <select class="form-control">
+                                                        <option>不限制</option>
+                                                        <option>姓名</option>
+                                                        <option>ID</option>
+                                                        <option>手機</option>
+                                                        <option>Email</option>
+                                                        <option>地址</option>
+                                                    </select>
+                                                </div>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>排序</label>
+                                        <select class="form-control">
+                                            <option>建立時間(反)</option>
+                                            <option>建立時間(正)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>&nbsp;</label>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary">搜尋</button>
+                                            <button class="btn btn-secondary">取消</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label></label>
-                                    <button class="btn btn-primary">搜尋</button>
-                                    <button class="btn btn-secondary">取消</button>
-                                </div>
-                            </div>
+                            </form>
+                            {{--搜尋END--}}
+
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <div class="card card-primary">
@@ -131,8 +143,6 @@
                             </div>
 
 
-
-
                         </div>
                     </div>
                 </div>
@@ -142,9 +152,10 @@
 
     </div>
 
-
 @endsection
 
 @section('BodyJavascript')
+    <script>
 
+    </script>
 @endsection

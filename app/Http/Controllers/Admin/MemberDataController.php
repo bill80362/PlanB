@@ -14,6 +14,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         return view('admin/Member_Data/List', [
             'Paginator' => $Paginator,
+            'Model' => new Member_Data(),
         ]);
     }
     //編輯
@@ -24,7 +25,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
             $Data = new Member_Data();
             //新增預設值
             $Data->ID = 0;
-            $Data->Name = $request->old("Name");
+            $Data->Name = "";
         }
         //
         return view('admin/Member_Data/Update', [
