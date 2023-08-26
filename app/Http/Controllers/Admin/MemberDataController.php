@@ -28,6 +28,8 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         $Paginator = $oModel->paginate($pageLimit);
         //
+//        var_dump($Paginator->links());
+        //
         return view('admin/Member_Data/List', [
             'Paginator' => $Paginator,
             //
@@ -38,14 +40,21 @@ class MemberDataController extends \App\Http\Controllers\Controller
     //編輯
     public function updateHTML(Request $request,$ID){
         if($ID){
+            //修改
             $Data = Member_Data::find($ID);
         }else{
+            //新增
             $Data = new Member_Data();
             //新增預設值
             $Data->ID = 0;
             $Data->Name = "";
         }
-        //
+        //輸入驗證遭擋，會有舊資料，優先使用舊資料
+        foreach ((array)$request->old() as $key => $value){
+            if(!$value) continue;
+            $Data->$key = $value;
+        }
+        //View
         return view('admin/Member_Data/Update', [
             'Data' => $Data,
         ]);
@@ -64,8 +73,10 @@ class MemberDataController extends \App\Http\Controllers\Controller
         }
         //
         if($ID){
+            //修改
             Member_Data::find($ID)->update($request->post());
         }else{
+            //新增
             $Data = $request->post();
             $oMember_Data = new Member_Data();
             $Data["MemberNum"] = $oMember_Data->formatMemberNum(Member_Data::count()+1);
@@ -78,8 +89,15 @@ class MemberDataController extends \App\Http\Controllers\Controller
         ]);
     }
     //刪除
-    public function del($ID){
-
+    public function del(Request $request){
+        $ID = $request->post("ID");
+        $Data = Member_Data::find($ID);
+        $Data->delete();
+        //
+        return view('alert_redirect', [
+            'Alert' => "刪除成功",
+            'Redirect' => '/Member_Data?'.$request->getQueryString(),
+        ]);
     }
     //批次刪除
     public function delBatch(){

@@ -35,7 +35,8 @@
                                             <select name="Filter_Formal_Flag[]" class="select2bs4" multiple="multiple"
                                                     style="width: 100%;">
                                                 @foreach ($Model->Formal_Flag_Text as $key => $value)
-                                                    <option value="{{$key}}" {{in_array($key,(array)request()->get("Filter_Formal_Flag"))?"selected":""}} >{{$value}}</option>
+                                                    <option
+                                                        value="{{$key}}" {{in_array($key,(array)request()->get("Filter_Formal_Flag"))?"selected":""}} >{{$value}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -82,64 +83,76 @@
 
                             <div class="row mt-2">
                                 <div class="col-12">
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <div class="card-title">
-                                                <button class="btn btn-sm btn-warning">全選</button>
-                                                <button class="btn btn-sm btn-warning">取消</button>
-                                                <button class="btn btn-sm btn-danger">勾選刪除</button>
-                                                <button class="btn btn-sm btn-danger">更新排序</button>
+                                    <form>
+                                        <div class="card card-primary">
+                                            <div class="card-header">
+                                                <div class="card-title">
+                                                    <button class="btn btn-sm btn-warning">全選</button>
+                                                    <button class="btn btn-sm btn-warning">取消</button>
+                                                    <button class="btn btn-sm btn-danger">勾選刪除</button>
+                                                    <button class="btn btn-sm btn-danger">更新排序</button>
+                                                </div>
+                                                <div class="card-tools">
+                                                    <a class="btn btn-sm btn-primary" href="/Member_Data/0">新增</a>
+                                                    <button class="btn btn-sm btn-warning">匯入</button>
+                                                    <button class="btn btn-sm btn-warning">匯出</button>
+                                                </div>
                                             </div>
-                                            <div class="card-tools">
-                                                <a class="btn btn-sm btn-primary" href="/Member_Data/0">新增</a>
-                                                <button class="btn btn-sm btn-warning">匯入</button>
-                                                <button class="btn btn-sm btn-warning">匯出</button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body table-responsive p-0">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>排序</th>
-                                                    <th>姓名</th>
-                                                    <th>生日</th>
-                                                    <th>手機</th>
-                                                    <th>Email</th>
-                                                    <th>狀態</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach ($Paginator->items() as $Item)
+                                            <div class="card-body table-responsive p-0">
+                                                <table class="table table-hover">
+                                                    <thead>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" class="form-check-input"
-                                                                   value="{{$Item->ID}}">
-                                                            {{$Item->ID}}
-                                                        </td>
-                                                        <td>
-                                                            <input class="form-control form-control-sm" type="text"
-                                                                   style="width: 50px;" name="Order_No[{{$Item->ID}}]"
-                                                                   value="">
-                                                        </td>
-                                                        <td>{{$Item->Name}}</td>
-                                                        <td>{{$Item->Birthday}}</td>
-                                                        <td>{{$Item->Cellphone}}</td>
-                                                        <td>{{$Item->Email}}</td>
-                                                        <td>{{$Item->Formal_Flag_Text[$Item->Formal_Flag]}}</td>
-                                                        <td>
-                                                            <a class="btn btn-xs btn-primary"
-                                                               href="/Member_Data/{{$Item->ID}}?{{request()->getQueryString()}}">編輯</a>
-                                                            <a class="btn btn-xs btn-danger" type="button">刪除</a>
-                                                        </td>
+                                                        <th>ID</th>
+                                                        <th>排序</th>
+                                                        <th>姓名</th>
+                                                        <th>生日</th>
+                                                        <th>手機</th>
+                                                        <th>Email</th>
+                                                        <th>狀態</th>
+                                                        <th>操作</th>
                                                     </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach ($Paginator->items() as $Item)
+                                                        <tr>
+                                                            <td>
+                                                                <input type="checkbox" class="form-check-input"
+                                                                       value="{{$Item->ID}}">
+                                                                {{$Item->ID}}
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control form-control-sm" type="text"
+                                                                       style="width: 50px;"
+                                                                       name="Order_No[{{$Item->ID}}]"
+                                                                       value="">
+                                                            </td>
+                                                            <td>{{$Item->Name}}</td>
+                                                            <td>{{$Item->Birthday}}</td>
+                                                            <td>{{$Item->Cellphone}}</td>
+                                                            <td>{{$Item->Email}}</td>
+                                                            <td>{{$Item->Formal_Flag_Text[$Item->Formal_Flag]}}</td>
+                                                            <td>
+                                                                <a class="btn btn-xs btn-primary"
+                                                                   href="/Member_Data/{{$Item->ID}}?{{request()->getQueryString()}}"
+                                                                >編輯</a>
+                                                                <button class="btn btn-xs btn-danger"
+                                                                        type="button"
+                                                                        onclick="postForm('/Member_Data/del?{{request()->getQueryString()}}',{
+                                                                            ID:{{$Item->ID}},
+                                                                            _token:'{{ csrf_token() }}'
+                                                                            })"
+                                                                >刪除
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                                {{$Paginator->total() }}
+                                            </div>
 
-                                    </div>
+                                        </div>
+                                    </form>
 
                                 </div>
                             </div>
