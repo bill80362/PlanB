@@ -9,7 +9,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">會員{{$Data->ID?"編輯":"新增"}}</h1>
+                    <h1 class="m-0">
+                        <a class="btn btn-primary mr-2" href="/Member_Data?{{request()->getQueryString()}}"> < </a>
+                        會員{{$Data->ID?"編輯":"新增"}}
+                    </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -36,6 +39,16 @@
                                                 ID:{{$Data->ID}}
                                             </div>
                                             <div class="card-body">
+                                                {{--錯誤訊息--}}
+                                                @if ($errors->any())
+                                                    <div class="alert alert-danger">
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                                 <div class="form-group">
                                                     <label>會員編號</label>
                                                     <input type="text" class="form-control" name="MemberNum" value="{{$Data->MemberNum}}">
