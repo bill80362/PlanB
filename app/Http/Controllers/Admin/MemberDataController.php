@@ -100,6 +100,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     public function sortBatch(){
 
     }
+    //匯入
     public function import(){
 
     }
