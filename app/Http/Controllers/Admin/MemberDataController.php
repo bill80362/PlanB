@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Services\Admin\RequestModelList;
 use App\Models\Member\Member_Data;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -12,16 +13,9 @@ class MemberDataController extends \App\Http\Controllers\Controller
 {
     //列表
     public function listHTML(Request $request){
-        $pageLimit = 10;
-        $oModel = new Member_Data();
+        $pageLimit = $request->get("pageLimit")?:10;//預設10
         //過濾條件
-        if($request->get("Filter_Formal_Flag")){
-            $oModel = $oModel->whereIn("Formal_Flag",(array)$request->get("Filter_Formal_Flag"));
-        }
-        if($request->get("Order_By")){
-            $Order_By = explode("_",$request->get("Order_By"));
-            $oModel = $oModel->orderBy($Order_By[0],$Order_By[1]);
-        }
+        $oModel = (new RequestModelList())->filter($request,new Member_Data());
         //
         $Filter_Text_Key_Options = [
 
@@ -90,8 +84,8 @@ class MemberDataController extends \App\Http\Controllers\Controller
     //刪除
     public function del(Request $request){
         $ID = $request->post("ID");
-        $Data = Member_Data::find($ID);
-        $Data->delete();
+        //刪除
+        Member_Data::find($ID)->delete();
         //
         return view('alert_redirect', [
             'Alert' => "刪除成功",
@@ -111,33 +105,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     //匯出
     public function export(Request $request){
-        //整理匯出資料
-        $ExportList = [];
-        //要匯出的欄位
-        $Column_Title_Text = (new Member_Data)->Column_Title_Text;
-        //標題
-        $Temp = [];
-        foreach ($Column_Title_Text as $key => $value){
-            $Temp[] = $value;
-        }
-        $ExportList[] = $Temp;
-        $oModel = new Member_Data();
-        //過濾條件
-        if($request->get("Filter_Formal_Flag")){
-            $oModel = $oModel->whereIn("Formal_Flag",(array)$request->get("Filter_Formal_Flag"));
-        }
-        if($request->get("Order_By")){
-            $Order_By = explode("_",$request->get("Order_By"));
-            $oModel = $oModel->orderBy($Order_By[0],$Order_By[1]);
-        }
-        //要匯出的資料
-        foreach ($oModel->get() as $model){
-            $Temp = [];
-            foreach ($Column_Title_Text as $key => $value){
-                $Temp[] = $model->$key??"";
-            }
-            $ExportList[] = $Temp;
-        }
+        $ExportList = (new RequestModelList())->export($request,new Member_Data());
         //匯出
         return (new Collection($ExportList))->downloadExcel("member_data.xlsx");
     }
