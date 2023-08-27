@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         //目前數量
-        Member_DataFactory::$counter = Member_Data::all()->count()+1;
+        Member_DataFactory::$counter = Member_Data::max("ID")+1;
         //製造
         \App\Models\Member\Member_Data::factory(10)->create();
     }

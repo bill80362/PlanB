@@ -12,3 +12,6 @@
 - php artisan migrate:reset 資料表初始化(全部刪除)
 - php artisan migrate 建立資料表
 - php artisan db:seed 塞入測試假資料
+
+### 使用非官方套件
+- Excel https://docs.laravel-excel.com/

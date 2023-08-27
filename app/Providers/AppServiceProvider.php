@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\View\Components\paginator\pageList;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        Blade::component(pageList::class);
     }
 }
