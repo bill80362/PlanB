@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberDataController extends \App\Http\Controllers\Controller
 {
+    public function __construct(
+        protected RequestModelList $oRequestModelList,
+    ){}
+
     //列表
     public function listHTML(Request $request){
         $pageLimit = $request->get("pageLimit")?:10;//預設10
         //過濾條件
-        $oModel = (new RequestModelList())->filter($request,new Member_Data());
+        $oModel = $this->oRequestModelList->filter($request,new Member_Data());
         //
         $Filter_Text_Key_Options = [
 
@@ -106,7 +110,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     //匯出
     public function export(Request $request){
-        $ExportList = (new RequestModelList())->export($request,new Member_Data());
+        $ExportList = $this->oRequestModelList->export($request,new Member_Data());
         //匯出
         return (new Collection($ExportList))->downloadExcel("member_data.xlsx");
     }
