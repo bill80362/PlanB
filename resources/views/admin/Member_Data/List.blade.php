@@ -95,7 +95,7 @@
                                                 <div class="card-tools">
                                                     <a class="btn btn-sm btn-primary" href="/Member_Data/0">新增</a>
                                                     <button class="btn btn-sm btn-warning">匯入</button>
-                                                    <a class="btn btn-sm btn-warning" href="/Member_Data/export" target="_blank">匯出</a>
+                                                    <a class="btn btn-sm btn-warning" href="/Member_Data/export?{{request()->getQueryString()}}" target="_blank">匯出</a>
                                                 </div>
                                             </div>
                                             <div class="card-body table-responsive p-0">

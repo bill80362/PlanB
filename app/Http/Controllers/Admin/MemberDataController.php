@@ -14,7 +14,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     public function listHTML(Request $request){
         $pageLimit = 10;
         $oModel = new Member_Data();
-        //
+        //過濾條件
         if($request->get("Filter_Formal_Flag")){
             $oModel = $oModel->whereIn("Formal_Flag",(array)$request->get("Filter_Formal_Flag"));
         }
@@ -110,7 +110,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
 
     }
     //匯出
-    public function export(){
+    public function export(Request $request){
         //整理匯出資料
         $ExportList = [];
         //要匯出的欄位
@@ -121,8 +121,17 @@ class MemberDataController extends \App\Http\Controllers\Controller
             $Temp[] = $value;
         }
         $ExportList[] = $Temp;
+        $oModel = new Member_Data();
+        //過濾條件
+        if($request->get("Filter_Formal_Flag")){
+            $oModel = $oModel->whereIn("Formal_Flag",(array)$request->get("Filter_Formal_Flag"));
+        }
+        if($request->get("Order_By")){
+            $Order_By = explode("_",$request->get("Order_By"));
+            $oModel = $oModel->orderBy($Order_By[0],$Order_By[1]);
+        }
         //要匯出的資料
-        foreach (Member_Data::all() as $model){
+        foreach ($oModel->get() as $model){
             $Temp = [];
             foreach ($Column_Title_Text as $key => $value){
                 $Temp[] = $model->$key??"";
