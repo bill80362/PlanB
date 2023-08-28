@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Services\Admin\RequestModelList;
 use App\Models\Member\Member_Data;
+use App\Services\Admin\Common\ServiceMemberData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Validator;
 class MemberDataController extends \App\Http\Controllers\Controller
 {
     public function __construct(
-        protected RequestModelList $oRequestModelList,
+        protected ServiceMemberData $oServiceMemberData,
     ){}
 
     //列表
     public function listHTML(Request $request){
         $pageLimit = $request->get("pageLimit")?:10;//預設10
         //過濾條件
-        $oModel = $this->oRequestModelList->filter($request,new Member_Data());
+        $oModel = $this->oServiceMemberData->filter($request);
         //
         $Filter_Text_Key_Options = [
 
@@ -110,7 +110,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     //匯出
     public function export(Request $request){
-        $ExportList = $this->oRequestModelList->export($request,new Member_Data());
+        $ExportList = $this->oServiceMemberData->export($request);
         //匯出
         return (new Collection($ExportList))->downloadExcel("member_data.xlsx");
     }
