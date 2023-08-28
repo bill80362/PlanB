@@ -1,7 +1,7 @@
 ## 專案 B計畫
 
 ### 指令集-環境
-- 請先複製出一份.env，並設定mysql資料庫
+- 請先複製出一份.env，並設定mysql資料庫(複製根目錄底下.env.example，命名為.env)
 - 設定 資料庫名稱:laravel 帳號密碼:root root
 - php artisan serve 跑測試環境
 
