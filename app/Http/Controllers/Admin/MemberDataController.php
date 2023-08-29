@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Member\Member_Data;
 use App\Services\Admin\Common\ServiceMemberData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -30,7 +29,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
         return view('admin/Member_Data/List', [
             'Paginator' => $Paginator,
             //
-            'Model' => new Member_Data(),
+            'Model' => $this->oServiceMemberData->getModel(),
             "Filter_Text_Key_Options" => $Filter_Text_Key_Options,
         ]);
     }
@@ -38,10 +37,10 @@ class MemberDataController extends \App\Http\Controllers\Controller
     public function updateHTML(Request $request,$ID){
         if($ID){
             //修改
-            $Data = Member_Data::find($ID);
+            $Data = $this->oServiceMemberData->getModel()->find($ID);
         }else{
             //新增
-            $Data = new Member_Data();
+            $Data = $this->oServiceMemberData->getModel();
             //新增預設值
             $Data->ID = 0;
             $Data->Name = "";
@@ -71,13 +70,13 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         if($ID){
             //修改
-            Member_Data::find($ID)->update($request->post());
+            $this->oServiceMemberData->getModel()->find($ID)->update($request->post());
         }else{
             //新增
             $Data = $request->post();
-            $oMember_Data = new Member_Data();
-            $Data["MemberNum"] = $oMember_Data->formatMemberNum(Member_Data::count()+1);
-            Member_Data::create($Data);
+            $oMember_Data = $this->oServiceMemberData->getModel();
+            $Data["MemberNum"] = $oMember_Data->formatMemberNum($this->oServiceMemberData->getModel()->count()+1);
+            $this->oServiceMemberData->getModel()->create($Data);
         }
         //
         return view('alert_redirect', [
@@ -89,7 +88,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     public function del(Request $request){
         $ID = $request->post("ID");
         //刪除
-        Member_Data::find($ID)->delete();
+        $this->oServiceMemberData->getModel()->find($ID)->delete();
         //
         return view('alert_redirect', [
             'Alert' => "刪除成功",

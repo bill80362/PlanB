@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 abstract class Master
 {
+    public function getModel(){
+        return clone $this->oModel;
+    }
     public function export(Request $request)
     {
         //整理匯出資料
@@ -16,9 +19,9 @@ abstract class Master
         //放入標題
         $ExportList[] = array_values($Column_Title_Text);
         //過濾條件
-        $this->oModel = $this->filter($request);
+        $oModel = $this->filter($request);
         //要匯出的資料
-        foreach ($this->oModel->get() as $model) {
+        foreach ($oModel->get() as $model) {
             $Temp = [];
             foreach ($Column_Title_Text as $key => $value) {
                 //放入標題對應的資料
@@ -33,14 +36,15 @@ abstract class Master
     public function filter(Request $request)
     {
         //過濾條件
+        $oModel = clone $this->oModel;
         if ($request->get("Filter_Formal_Flag")) {
-            $this->oModel = $this->oModel->whereIn("Formal_Flag", (array)$request->get("Filter_Formal_Flag"));
+            $oModel = $this->oModel->whereIn("Formal_Flag", (array)$request->get("Filter_Formal_Flag"));
         }
         if ($request->get("Order_By")) {
             $Order_By = explode("_", $request->get("Order_By"));
-            $this->oModel = $this->oModel->orderBy($Order_By[0], $Order_By[1]);
+            $oModel = $oModel->orderBy($Order_By[0], $Order_By[1]);
         }
-        return $this->oModel;
+        return $oModel;
     }
 
 }
