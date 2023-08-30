@@ -12,13 +12,14 @@ class MemberDataController extends \App\Http\Controllers\Controller
 {
     public function __construct(
         protected ServiceMemberData $oServiceMemberData,
+        protected Request $request,
     ){}
 
     //列表
-    public function listHTML(Request $request){
-        $pageLimit = $request->get("pageLimit")?:10;//預設10
+    public function listHTML(){
+        $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
-        $oModel = $this->oServiceMemberData->filter($request);
+        $oModel = $this->oServiceMemberData->filter($this->request);
         //
         $Filter_Text_Key_Options = [
 
@@ -34,7 +35,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
         ]);
     }
     //編輯
-    public function updateHTML(Request $request,$ID){
+    public function updateHTML($ID){
         if($ID){
             //修改
             $Data = $this->oServiceMemberData->getModel()->find($ID);
@@ -46,7 +47,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
             $Data->Name = "";
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
-        foreach ((array)$request->old() as $key => $value){
+        foreach ((array)$this->request->old() as $key => $value){
             if(!$value) continue;
             $Data->$key = $value;
         }
@@ -55,13 +56,10 @@ class MemberDataController extends \App\Http\Controllers\Controller
             'Data' => $Data,
         ]);
     }
-    public function update(Request $request,$ID){
+    public function update($ID){
         //驗證資料
-        $validator = Validator::make($request->all(), [
-            "Name" => "required",
-        ],[
-            "Name" => '姓名必填',
-        ]);
+        $validator = Validator::make($this->request->all(), $this->oServiceMemberData->getModel()->ValidatorRules,$this->oServiceMemberData->getModel()->ValidatorMessage);
+        //
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
@@ -70,10 +68,10 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         if($ID){
             //修改
-            $this->oServiceMemberData->getModel()->find($ID)->update($request->post());
+            $this->oServiceMemberData->getModel()->find($ID)->update($this->request->post());
         }else{
             //新增
-            $Data = $request->post();
+            $Data = $this->request->post();
             $oMember_Data = $this->oServiceMemberData->getModel();
             $Data["MemberNum"] = $oMember_Data->formatMemberNum($this->oServiceMemberData->getModel()->count()+1);
             $this->oServiceMemberData->getModel()->create($Data);
@@ -81,18 +79,18 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         return view('alert_redirect', [
             'Alert' => "送出成功",
-            'Redirect' => '/Member_Data?'.$request->getQueryString(),
+            'Redirect' => '/Member_Data?'.$this->request->getQueryString(),
         ]);
     }
     //刪除
-    public function del(Request $request){
-        $ID = $request->post("ID");
+    public function del(){
+        $ID = $this->request->post("ID");
         //刪除
         $this->oServiceMemberData->getModel()->find($ID)->delete();
         //
         return view('alert_redirect', [
             'Alert' => "刪除成功",
-            'Redirect' => '/Member_Data?'.$request->getQueryString(),
+            'Redirect' => '/Member_Data?'.$this->request->getQueryString(),
         ]);
     }
     //批次刪除
@@ -108,8 +106,8 @@ class MemberDataController extends \App\Http\Controllers\Controller
 
     }
     //匯出
-    public function export(Request $request){
-        $ExportList = $this->oServiceMemberData->export($request);
+    public function export(){
+        $ExportList = $this->oServiceMemberData->export($this->request);
         //匯出
         return (new Collection($ExportList))->downloadExcel("member_data.xlsx");
     }

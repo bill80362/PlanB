@@ -39,6 +39,12 @@ class Member_Data extends Model
         "UID" => "FB_ID",
         "Member_Level_ID" => "會員等級",
     ];
+    public array $ValidatorRules = [
+        "Name" => "required",
+    ];
+    public array $ValidatorMessage = [
+        "Name" => ':attribute 必填',
+    ];
 
     public function formatMemberNum(int $number): string
     {
