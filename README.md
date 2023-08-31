@@ -3,6 +3,7 @@
 ### 指令集-環境
 - 請先複製出一份.env，並設定mysql資料庫(複製根目錄底下.env.example，命名為.env)
 - 設定 資料庫名稱:laravel 帳號密碼:root root
+- composer install
 - php artisan serve 跑測試環境
 
 ### 指令集-DB
@@ -15,3 +16,18 @@
 
 ### 使用非官方套件
 - Excel https://docs.laravel-excel.com/
+
+### 針對非官方套件，如何評估風險
+- 套件風險等級評量表的基準為何?大廠、弱點掃描程式...等等
+- 針對評量中高風險以上，需要制定快速更換套件的設計模式
+
+### 需要了解的基本課題
+- 基礎架站
+- DB資料CRUD，migrate、factory、seed
+- 使用版面熟悉，範本是AdminLTE3
+- Laravel的Service和Repository模式，
+
+### 需要了解，但先不用實作的課題
+- Laravel test 如何測試程式
+
+### 後續再說的課題

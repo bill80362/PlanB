@@ -95,7 +95,16 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     //批次刪除
     public function delBatch(){
-
+        $ID_Array = $this->request->post("ID");
+        //刪除
+        foreach ($ID_Array as $ID){
+            $this->oServiceMemberData->getModel()->find($ID)->delete();
+        }
+        //
+        return view('alert_redirect', [
+            'Alert' => "刪除成功",
+            'Redirect' => '/Member_Data?'.$this->request->getQueryString(),
+        ]);
     }
     //批次修改排序
     public function sortBatch(){
