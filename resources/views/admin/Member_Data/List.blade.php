@@ -138,7 +138,7 @@
                                                                 <button class="btn btn-xs btn-danger"
                                                                         type="button"
                                                                         onclick="postForm('/Member_Data/del?{{request()->getQueryString()}}',{
-                                                                            ID:{{$Item->ID}},
+                                                                            'ID[]':{{$Item->ID}},
                                                                             _token:'{{ csrf_token() }}'
                                                                             })"
                                                                 >刪除

@@ -14,16 +14,11 @@ class MemberDataController extends \App\Http\Controllers\Controller
         protected ServiceMemberData $oServiceMemberData,
         protected Request $request,
     ){}
-
     //列表
     public function listHTML(){
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
         $oModel = $this->oServiceMemberData->filter($this->request);
-        //
-        $Filter_Text_Key_Options = [
-
-        ];
         //
         $Paginator = $oModel->paginate($pageLimit);
         //
@@ -31,7 +26,6 @@ class MemberDataController extends \App\Http\Controllers\Controller
             'Paginator' => $Paginator,
             //
             'Model' => $this->oServiceMemberData->getModel(),
-            "Filter_Text_Key_Options" => $Filter_Text_Key_Options,
         ]);
     }
     //編輯
@@ -58,7 +52,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     }
     public function update($ID){
         //驗證資料
-        $validator = Validator::make($this->request->all(), $this->oServiceMemberData->getModel()->ValidatorRules,$this->oServiceMemberData->getModel()->ValidatorMessage);
+        $validator =  $this->oServiceMemberData->getValidator($this->request);
         //
         if ($validator->fails()) {
             return redirect()->back()
@@ -66,30 +60,10 @@ class MemberDataController extends \App\Http\Controllers\Controller
                 ->withInput();
         }
         //
-        if($ID){
-            //修改
-            $this->oServiceMemberData->getModel()->find($ID)->update($this->request->post());
-        }else{
-            //新增
-            $Data = $this->request->post();
-            $oMember_Data = $this->oServiceMemberData->getModel();
-            $Data["MemberNum"] = $oMember_Data->formatMemberNum($this->oServiceMemberData->getModel()->count()+1);
-            $this->oServiceMemberData->getModel()->create($Data);
-        }
+        $this->oServiceMemberData->update($this->request,$ID);
         //
         return view('alert_redirect', [
             'Alert' => "送出成功",
-            'Redirect' => '/Member_Data?'.$this->request->getQueryString(),
-        ]);
-    }
-    //刪除
-    public function del(){
-        $ID = $this->request->post("ID");
-        //刪除
-        $this->oServiceMemberData->getModel()->find($ID)->delete();
-        //
-        return view('alert_redirect', [
-            'Alert' => "刪除成功",
             'Redirect' => '/Member_Data?'.$this->request->getQueryString(),
         ]);
     }

@@ -21,7 +21,7 @@ Route::middleware(["AdminLoginAuth"])->group(function () {
     Route::get('/Member_Data',[\App\Http\Controllers\Admin\MemberDataController::class,"listHTML"]);
     Route::get('/Member_Data/{ID}',[\App\Http\Controllers\Admin\MemberDataController::class,"updateHTML"])->whereNumber("ID");
     Route::post('/Member_Data/{ID}',[\App\Http\Controllers\Admin\MemberDataController::class,"update"])->whereNumber("ID");
-    Route::post('/Member_Data/del',[\App\Http\Controllers\Admin\MemberDataController::class,"del"]);
+    Route::post('/Member_Data/del',[\App\Http\Controllers\Admin\MemberDataController::class,"delBatch"]);
     Route::get('Member_Data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
 
     //登入

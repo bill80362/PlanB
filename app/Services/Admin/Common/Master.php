@@ -4,11 +4,31 @@ namespace App\Services\Admin\Common;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 abstract class Master
 {
     public function getModel(){
         return clone $this->oModel;
+    }
+    public function getValidator(Request $request){
+        return Validator::make(
+            $request->all(),
+            $this->getModel()->getValidatorRules(),
+            $this->getModel()->getValidatorMessage(),
+        );
+    }
+    public function update(Request $request,$ID){
+        if($ID){
+            //修改
+            $this->getModel()->find($ID)->update($request->post());
+        }else{
+            //新增
+            $Data = $request->post();
+            $oMember_Data = $this->getModel();
+            $Data["MemberNum"] = $oMember_Data->formatMemberNum($this->getModel()->count()+1);
+            $this->getModel()->create($Data);
+        }
     }
     public function export(Request $request)
     {
