@@ -124,7 +124,8 @@
 {{--        </li>--}}
         <li class="nav-item">
             <span class="nav-link" role="textbox">
-                登入:Bill
+                Bill
+                (<a href="/logout">登出</a>)
             </span>
         </li>
         <li class="nav-item">

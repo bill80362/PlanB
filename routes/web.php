@@ -24,8 +24,9 @@ Route::middleware(["AdminLoginAuth"])->group(function () {
     Route::post('/Member_Data/del',[\App\Http\Controllers\Admin\MemberDataController::class,"delBatch"]);
     Route::get('Member_Data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
 
-    //登入
-    Route::get('/login',[\App\Http\Controllers\Admin\LoginController::class,"loginHTML"]);
-    Route::post('/login',[\App\Http\Controllers\Admin\LoginController::class,"login"]);
-});
 
+});
+//登入
+Route::get('/login',[\App\Http\Controllers\Admin\LoginController::class,"loginHTML"])->name("adminLogin");
+Route::post('/login',[\App\Http\Controllers\Admin\LoginController::class,"login"]);
+Route::get('/logout',[\App\Http\Controllers\Admin\LoginController::class,"logout"]);
