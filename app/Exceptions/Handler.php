@@ -24,15 +24,21 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        //接住Model的找不到
-//        dd($this);
-//        $this->renderable(function (ModelNotFoundException $e, $request) {
-//            dd("AA");
-//            return response()->json(['status' => 'failed', 'message' => 'Model not found'], 404);
-//        });
+
 
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        //接住Model的找不到，寫一個專門處理找不到資料錯誤的View
+        if ($e instanceof ModelNotFoundException) {
+            dd("錯誤：".$e->getMessage());
+//            return view();
+        }
+
+        return parent::render($request, $e);
     }
 }
