@@ -6,6 +6,7 @@ use App\Services\Admin\Common\ServiceMemberData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class MemberDataController extends \App\Http\Controllers\Controller
@@ -32,7 +33,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     public function updateHTML($ID){
         if($ID){
             //修改
-            $Data = $this->oServiceMemberData->getModel()->find($ID);
+            $Data = $this->oServiceMemberData->getModel()->findOrFail($ID);
         }else{
             //新增
             $Data = $this->oServiceMemberData->getModel();

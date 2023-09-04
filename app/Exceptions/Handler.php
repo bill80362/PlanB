@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -23,6 +24,13 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+        //接住Model的找不到
+//        dd($this);
+//        $this->renderable(function (ModelNotFoundException $e, $request) {
+//            dd("AA");
+//            return response()->json(['status' => 'failed', 'message' => 'Model not found'], 404);
+//        });
+
         $this->reportable(function (Throwable $e) {
             //
         });
