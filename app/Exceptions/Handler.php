@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -33,7 +34,12 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        //接住Model的找不到，寫一個專門處理找不到資料錯誤的View
+//        dd($e);
+        //資料庫無法連線
+        if ($e instanceof QueryException ) {
+            dd("錯誤：".$e->getMessage());
+        }
+        //資料更新，根據ID去find找不到資料
         if ($e instanceof ModelNotFoundException) {
             dd("錯誤：".$e->getMessage());
 //            return view();
