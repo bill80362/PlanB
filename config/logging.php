@@ -54,6 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
+//            'name' => 'LOG的主機名稱',
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
@@ -125,6 +126,12 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+        //
+        'API_LOG' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/api.log'),
+            'channels' => ['daily'],
         ],
     ],
 
