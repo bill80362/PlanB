@@ -51,7 +51,7 @@ class Member_Data extends Model
     }
     public function getValidatorMessage(){
         $Array = [
-            "Name" => ':attribute 必填',
+//            "Name" => ':attribute 必填',
         ];
         return $Array;
     }

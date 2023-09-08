@@ -87,7 +87,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Fallback Locale
+    | Application Fallback Locale 當語言包沒有該語言時候，使用此備用語言包
     |--------------------------------------------------------------------------
     |
     | The fallback locale determines the locale to use when the current one

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 /**後台*/
 Route::middleware(["AdminLoginAuth"])->group(function () {
+    //測試使用多語言
+    App::setLocale("zh-tw");
+
     //Dashboard
     Route::get('/',[\App\Http\Controllers\Admin\IndexController::class,"indexHTML"]);
     //Member_Data
@@ -26,7 +29,19 @@ Route::middleware(["AdminLoginAuth"])->group(function () {
 
 
 });
+
 //登入
 Route::get('/login',[\App\Http\Controllers\Admin\LoginController::class,"loginHTML"])->name("adminLogin");
 Route::post('/login',[\App\Http\Controllers\Admin\LoginController::class,"login"]);
 Route::get('/logout',[\App\Http\Controllers\Admin\LoginController::class,"logout"]);
+
+
+/**多語言*/
+Route::get('/greeting/{locale}', function (string $locale) {
+    if (! in_array($locale, ['en', 'es', 'fr'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+
+});
