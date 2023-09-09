@@ -14,6 +14,17 @@
 - php artisan migrate 建立資料表
 - php artisan db:seed 塞入測試假資料
 
+### Session使用Redis說明
+- 先安裝 composer require predis/predis
+- .env 環境設定redis主機連線資料 
+- REDIS_HOST=127.0.0.1
+- REDIS_PASSWORD=null
+- REDIS_PORT=6379
+- REDIS_CLIENT=predis
+- 然後改 SESSION_DRIVER=redis
+- 此時使用session後，可以去http://localhost:8898/查看session資料
+
+
 ### 使用非官方套件
 - Excel https://docs.laravel-excel.com/
 

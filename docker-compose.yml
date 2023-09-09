@@ -1,5 +1,4 @@
 version: "3"
-
 services:
     # Database
     db:
@@ -16,11 +15,11 @@ services:
             MYSQL_PASSWORD: root
         networks:
             - mysql-phpmyadmin
-
     # phpmyadmin
     phpmyadmin:
         depends_on:
             - db
+#        platform: linux/x86_64
         image: phpmyadmin
         restart: always
         ports:
@@ -30,7 +29,22 @@ services:
             MYSQL_ROOT_PASSWORD: root
         networks:
             - mysql-phpmyadmin
-
+    # redis
+    redis:
+        image: redis:latest
+        container_name: redis
+        ports:
+            - "6379:6379"
+    # phpredisadmin
+    phpredisadmin:
+        depends_on:
+            - redis
+        image: erikdubbelboer/phpredisadmin:latest
+        environment:
+            - REDIS_1_HOST=redis #登入位置
+            - REDIS_1_PORT=6379
+        ports:
+            - "8898:80"
 networks:
     mysql-phpmyadmin:
 
