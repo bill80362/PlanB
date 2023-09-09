@@ -23,7 +23,8 @@
 - REDIS_CLIENT=predis
 - 然後改 SESSION_DRIVER=redis
 - 此時使用session後，可以去http://localhost:8898/查看session資料
-
+- 相關設定參考 https://laravel.com/docs/10.x/redis#configuration
+- redis預設架設會有資料庫0~15號，注意使用Cache和Session資料庫要分開
 
 ### 使用非官方套件
 - Excel https://docs.laravel-excel.com/

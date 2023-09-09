@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Services\Admin\Common\ServiceMemberData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -17,6 +18,11 @@ class MemberDataController extends \App\Http\Controllers\Controller
     ){}
     //列表
     public function listHTML(){
+        //緩存範本
+//        $CacheData = Cache::get("cacheTest");
+//        echo $CacheData;
+//        Cache::add('cacheTest', 'AABBCC', 60);//60秒
+        //
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
         $oModel = $this->oServiceMemberData->filter($this->request);
