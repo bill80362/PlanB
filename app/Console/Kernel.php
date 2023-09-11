@@ -10,6 +10,8 @@ class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
+     * 【 * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1 】
+     * 【php artisan schedule:work】
      */
     protected function schedule(Schedule $schedule): void
     {
