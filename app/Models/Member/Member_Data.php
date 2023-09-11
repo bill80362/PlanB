@@ -4,8 +4,9 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Member_Data extends Model
+class Member_Data extends Authenticatable
 {
     use HasFactory;
 

@@ -7,7 +7,6 @@ use App\Services\SystemConfig;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
-
 class MemberDataController extends \App\Http\Controllers\Controller
 {
     public function __construct(
@@ -17,6 +16,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     ){}
     //列表
     public function listHTML(){
+        // dd(auth('web')->user());
         //使用全域變數範本
 //        echo $this->oSystemConfig->TestConfigData;
 //        echo app(SystemConfig::class)->TestConfigData;

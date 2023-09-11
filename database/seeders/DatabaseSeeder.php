@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Member\Member_Data;
 use Database\Factories\Member\Member_DataFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,14 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::create([
+            'name' => 'admin',
+            'email' => 'test@gmail.com',
+            'password' => Hash::make('admin'),
+        ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
         //目前數量
-        Member_DataFactory::$counter = Member_Data::max("ID")+1;
+        Member_DataFactory::$counter = Member_Data::max("ID") + 1;
         //製造
         \App\Models\Member\Member_Data::factory(10)->create();
     }

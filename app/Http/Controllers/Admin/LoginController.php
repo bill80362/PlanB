@@ -2,28 +2,44 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class LoginController extends \App\Http\Controllers\Controller
 {
     public function __construct(
         protected Request $request,
-    ){}
-    public function loginHTML(){
+    ) {
+    }
+    public function loginHTML()
+    {
         return view('admin/login', ['name' => 'Bill']);
     }
-    public function login(){
-        $this->request->session()->put('adminLogin', [
-            "ID" => 1,
-            "Name" => "測試用",
-            "Role" => "Root",
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'Account' => ['required', Rule::exists('users', 'name')],
+            'Password' => ['required']
         ]);
-        //
+
+        $user = User::where('name', $request->get('Account'))->first();
+        if (!Hash::check($request->get('Password'), $user->password)) {
+            return back()->with([
+                'errors' => ['帳號或密碼有誤，請重新確認輸入']
+            ]);
+        }
+
+        auth('web')->login($user);
+        // auth('web_front')->login($memberModel);
         return redirect("/Member_Data");
     }
-    public function logout(){
-        $this->request->session()->flush();
-        //
+
+    public function logout()
+    {
+        auth()->logout();
         return redirect("/");
     }
 }
