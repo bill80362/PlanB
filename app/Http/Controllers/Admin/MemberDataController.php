@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PodcastProcessed;
 use App\Services\Admin\Common\ServiceMemberData;
 use App\Services\SystemConfig;
 use Illuminate\Database\Eloquent\Collection;
@@ -44,6 +45,8 @@ class MemberDataController extends \App\Http\Controllers\Controller
         if($ID){
             //修改
             $Data = $this->oServiceMemberData->getModel()->findOrFail($ID);
+            //事件偵測範本
+            PodcastProcessed::dispatch($Data);
         }else{
             //新增
             $Data = $this->oServiceMemberData->getModel();
