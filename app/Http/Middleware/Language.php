@@ -6,20 +6,28 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+
 
 class Language
 {
     /**
-     * @todo 沒語系需導轉，待補
+     * 
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->route()->parameter('lang');
-        if (!in_array($locale, ['en', 'zh-tw'])) {
+        $param = $request->route()->parameter('lang');
+
+        if (in_array($param, ['en', 'zh-tw'])) {
+            $locale = $param;
+        } else if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        } else {
             $locale = 'zh-tw';
         }
+
 
         App::setLocale($locale);
         return $next($request);
