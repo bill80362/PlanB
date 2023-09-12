@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\PodcastProcessed;
+use App\Listeners\SendPodcastNotification;
+use App\Listeners\UserLoginListener;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Listeners\UserLoginListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -16,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Auth\Events\Registered::class => [
+        Registered::class => [
             SendEmailVerificationNotification::class,
         ],
         Auth\Events\Login::class => [
@@ -35,7 +38,15 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //啟用監聽
+        Event::listen(
+            PodcastProcessed::class,
+            [SendPodcastNotification::class, 'handle']
+        );
+//        //啟用監聽
+//        Event::listen(function (PodcastProcessed $event) {
+//
+//        });
     }
 
     /**
