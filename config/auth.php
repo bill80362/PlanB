@@ -45,6 +45,10 @@ return [
             'driver' => 'session',
             'provider' => 'memberDatas',
         ],
+
+        'api' => [
+            'driver' => 'custom-token',
+        ],
     ],
 
     /*
