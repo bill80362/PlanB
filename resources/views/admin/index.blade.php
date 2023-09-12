@@ -1,7 +1,6 @@
 @extends('admin.layout._Master')
 
 @section('HeaderCSS')
-
 @endsection
 
 @section('Content')
@@ -26,6 +25,10 @@
                 <div class="col-12">
                     Dashboard
                 </div>
+
+                @can('manage_users')
+                    有權限manage_users的帳號才看的到
+                @endcan
             </div>
 
         </div>
@@ -33,5 +36,4 @@
 @endsection
 
 @section('BodyJavascript')
-
 @endsection
