@@ -17,6 +17,10 @@
             @auth('web_front')
                 前台有登入，才看到的這一列
             @endauth
+
+            @if($errors->any())
+                {!! implode('', $errors->all('<div>:message</div>')) !!}
+            @endif
            
             <div class="card-body">               
                 <form method="post">

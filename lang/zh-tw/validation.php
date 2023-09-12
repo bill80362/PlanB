@@ -51,7 +51,7 @@ return [
     'email' => 'The :attribute field must be a valid email address.',
     'ends_with' => 'The :attribute field must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
-    'exists' => 'The selected :attribute is invalid.',
+    'exists' => '此 :attribute 不存在',
     'file' => 'The :attribute field must be a file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
@@ -179,7 +179,9 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-
-    'attributes' => [],
+    'attributes' => [
+        'Account' => '帳號',
+        'Password' => '密碼',
+    ],
 
 ];
