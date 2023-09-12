@@ -124,8 +124,8 @@
 {{--        </li>--}}
         <li class="nav-item">
             <span class="nav-link" role="textbox">
-                Bill
-                (<a href="/logout">登出</a>)
+                {{auth('web')->user()->name}}
+                (<a href="/oper/logout">登出</a>)
             </span>
         </li>
         <li class="nav-item">

@@ -11,16 +11,14 @@
                 <h2>B計畫管理系統</h2>
             </div>
             @auth('web')
-                登入後才看到這一列<a href="/Member_Data">進入後台</a>
+                登入後才看到這一列<a href="/oper/Member_Data">進入後台</a>
             @endauth
 
             @auth('web_front')
                 前台有登入，才看到的這一列
             @endauth
            
-            <div class="card-body">
-
-               
+            <div class="card-body">               
                 <form method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="input-group mb-3">
