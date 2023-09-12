@@ -13,3 +13,6 @@ Route::get('/greeting/{locale}', function (string $locale) {
 
     App::setLocale($locale);
 });
+
+
+Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index']);
