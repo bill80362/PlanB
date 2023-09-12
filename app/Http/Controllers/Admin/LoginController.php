@@ -27,9 +27,10 @@ class LoginController extends \App\Http\Controllers\Controller
 
         $user = User::where('name', $request->get('Account'))->first();
         if (!Hash::check($request->get('Password'), $user->password)) {
-            return back()->with([
+            return back()->withErrors([
                 'errors' => ['帳號或密碼有誤，請重新確認輸入']
             ]);
+            
         }
 
         auth('web')->login($user);
