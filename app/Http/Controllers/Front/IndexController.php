@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 
 class IndexController extends Controller
@@ -40,7 +41,17 @@ class IndexController extends Controller
 
     public function index()
     {
-        
+
         return view('front.index');
+    }
+
+    public function changeLang(Request $request)
+    {
+        $locale = $request->query('lang', 'en');
+        if (!in_array($locale, ['en', 'zh-tw'])) {
+            $locale = 'zh-tw';
+        }
+        App::setLocale($locale);
+        return back();
     }
 }
