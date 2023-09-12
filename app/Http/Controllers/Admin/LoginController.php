@@ -40,7 +40,7 @@ class LoginController extends \App\Http\Controllers\Controller
 
     public function logout()
     {
-        auth()->logout();
+        auth('web')->logout();
         return redirect("/oper/login");
     }
 }

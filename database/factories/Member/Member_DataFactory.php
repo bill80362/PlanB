@@ -5,6 +5,7 @@ namespace Database\Factories\Member;
 use App\Models\Member\Member_Data;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -30,7 +31,7 @@ class Member_DataFactory extends Factory
             'MemberNum' => $MemberNum,
             "Login_Email" => $Cellphone,
             'Name' => fake()->name(),
-            'Login_Password' => "123",
+            'Login_Password' => Hash::make('123'),
             'Member_Level_ID' => 1,
             'LID' => null,
             'UID' => null,

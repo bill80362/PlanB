@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function httpTest()
     {
         $response = Http::retry(3, 100)
             ->connectTimeout(60)
@@ -35,6 +35,12 @@ class IndexController extends Controller
         //     'name' => 'Steve',
         //     'role' => 'Network Administrator',
         // ]);
+        return view('front.index');
+    }
+
+    public function index()
+    {
+        
         return view('front.index');
     }
 }
