@@ -16,6 +16,7 @@ class MemberDataSavingEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $oMember_Data;
     /**
      * Create a new event instance.
      *

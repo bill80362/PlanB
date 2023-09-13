@@ -16,10 +16,10 @@ class Member_Data extends Authenticatable
     public $incrementing = true;
     protected $keyType = 'int';
     //
-    public $timestamps = false;
-    protected $dateFormat = 'U';
-    const CREATED_AT = 'Build_Date';
-    const UPDATED_AT = '';
+    // public $timestamps = false;
+    // protected $dateFormat = 'U';
+    // const CREATED_AT = 'Build_Date';
+    // const UPDATED_AT = '';
     //
     protected $guarded = [];
 

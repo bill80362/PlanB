@@ -36,7 +36,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                         <div class="card card-primary">
                                             <div class="card-header">
-                                                ID:{{$Data->ID}}
+                                                ID:{{$Data->ID}} , updated_at: {{$Data->updated_at}}
                                             </div>
                                             <div class="card-body">
                                                 {{--錯誤訊息--}}
@@ -49,6 +49,7 @@
                                                         </ul>
                                                     </div>
                                                 @endif
+                                                <input type="hidden" class="form-control" name="updated_at" value="{{$Data->updated_at}}">
                                                 <div class="form-group">
                                                     <label>會員編號</label>
                                                     <input type="text" class="form-control" name="MemberNum" value="{{$Data->MemberNum}}">
