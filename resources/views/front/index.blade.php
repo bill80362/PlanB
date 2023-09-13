@@ -1,7 +1,7 @@
 <form action="/login" method="post">
     @csrf
-    {{__('common.手機')}}: <input type="text" name="Cellphone">
-    {{__('common.密碼')}}: <input type="password" name="Login_Password">
+    {{ __('common.手機') }}: <input type="text" name="Cellphone">
+    {{ __('common.密碼') }}: <input type="password" name="Login_Password">
     <button>submit</button>
 
 
@@ -11,6 +11,14 @@
 </form>
 
 <br><br>
-{{-- <a href="/change-lang?lang=zh-tw"><button>中文</button></a>
-<a href="/change-lang?lang=en"><button>English</button></a> --}}
+<button onclick="event.preventDefault(); document.getElementById('zt-form').submit();">中文</button>
+<button onclick="event.preventDefault(); document.getElementById('en-form').submit();">English</button>
 
+
+<form id="en-form" style="visibility:none" class="hidden" action="/change-lang?lang=en" method="POST">
+    {{ csrf_field() }}
+</form>
+
+<form id="zt-form" style="visibility:none" class="hidden" action="/change-lang?lang=zh-tw" method="POST">
+    {{ csrf_field() }}
+</form>

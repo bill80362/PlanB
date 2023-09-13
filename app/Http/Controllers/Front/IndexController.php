@@ -51,7 +51,7 @@ class IndexController extends Controller
         if (!in_array($locale, ['en', 'zh-tw'])) {
             $locale = 'zh-tw';
         }
-        App::setLocale($locale);
-        return back();
+        $request->session()->put("locale", $locale);
+        return redirect($locale . '/');
     }
 }
