@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
             if ('pass123' == $request->header('token')) {
                 $obj = new stdClass();
                 $obj->id = 1;
-                $obj->id = "other-erp-company";
+                $obj->name = "other-erp-company";
                 return $obj;
             }
             return null;
