@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\DemoQueueEvent;
 use App\Events\PodcastProcessed;
+use App\Listeners\MemberDataSaving;
 use App\Services\Admin\Common\ServiceMemberData;
 use App\Services\SystemConfig;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 class MemberDataController extends \App\Http\Controllers\Controller
 {
@@ -22,11 +25,13 @@ class MemberDataController extends \App\Http\Controllers\Controller
 //        echo $this->oSystemConfig->TestConfigData;
 //        echo app(SystemConfig::class)->TestConfigData;
 //        echo app(SystemConfig::class)->TestConfigData;
-
         //緩存範本
 //        $CacheData = Cache::get("cacheTest");
 //        echo $CacheData;
 //        Cache::add('cacheTest', 'AABBCC', 60);//60秒
+        //自訂事件範本
+//        PodcastProcessed::dispatch($this->oServiceMemberData->getModel());
+        DemoQueueEvent::dispatch();
         //
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件

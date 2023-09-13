@@ -2,6 +2,7 @@
 
 namespace App\Models\Member;
 
+use App\Events\MemberDataSavingEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,6 +22,13 @@ class Member_Data extends Authenticatable
     const UPDATED_AT = '';
     //
     protected $guarded = [];
+
+    //事件偵測 retrieved, creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored
+    protected $dispatchesEvents = [
+        'saving' => MemberDataSavingEvent::class,
+//        'deleted' => UserDeleted::class,
+    ];
+
     //狀態文字
     public array $Formal_Flag_Text = [
         1 => "非正式",

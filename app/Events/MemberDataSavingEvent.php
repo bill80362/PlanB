@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Member\Member_Data;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,31 +12,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PodcastProcessed
+class MemberDataSavingEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
-     */
-    public function __construct(protected Model $oModel)
-    {
-        //
-    }
-
-    public function getModel(){
-        return $this->oModel;
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @param \App\Models\Member\ $oMember_Data
      */
-    public function broadcastOn(): array
+    public function __construct(Member_Data $oMember_Data)
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        $this->oMember_Data = $oMember_Data;
     }
 }

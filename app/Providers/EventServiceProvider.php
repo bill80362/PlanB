@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\DemoQueueEvent;
+use App\Events\MemberDataSavingEvent;
 use App\Events\PodcastProcessed;
+use App\Listeners\DemoQueueListener;
+use App\Listeners\MemberDataSaving;
 use App\Listeners\SendPodcastNotification;
 use App\Listeners\UserLoginListener;
 use Illuminate\Auth\Events\Registered;
@@ -31,6 +35,14 @@ class EventServiceProvider extends ServiceProvider
             // ... other providers
             \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
         ],
+        //Model監聽事件
+        MemberDataSavingEvent::class => [
+            MemberDataSaving::class,
+        ],
+        //
+        DemoQueueEvent::class=> [
+            DemoQueueListener::class,
+        ]
     ];
 
     /**
