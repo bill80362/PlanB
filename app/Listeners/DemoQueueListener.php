@@ -17,7 +17,6 @@ class DemoQueueListener implements ShouldQueue
      */
     public function handle(DemoQueueEvent $event): void
     {
-//        sleep(10);
         //
         app('log')->info("delay9999988888");
     }

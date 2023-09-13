@@ -17,6 +17,9 @@ class MemberDataSaving
      */
     public function handle(MemberDataSavingEvent $event)
     {
-        app('log')->info($event->oMember_Data);
+        //
+        echo "我是 MemberDataSaving";
+//        app('log')->info($event->oMember_Data);
+//        echo 123;
     }
 }

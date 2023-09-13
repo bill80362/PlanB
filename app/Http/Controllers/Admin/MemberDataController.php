@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\DemoQueueEvent;
 use App\Events\PodcastProcessed;
+use App\Jobs\DoSomething;
 use App\Listeners\MemberDataSaving;
 use App\Services\Admin\Common\ServiceMemberData;
 use App\Services\SystemConfig;
@@ -31,7 +32,9 @@ class MemberDataController extends \App\Http\Controllers\Controller
 //        Cache::add('cacheTest', 'AABBCC', 60);//60秒
         //自訂事件範本
 //        PodcastProcessed::dispatch($this->oServiceMemberData->getModel());
-        DemoQueueEvent::dispatch();
+//        DemoQueueEvent::dispatch();
+        //Job
+        DoSomething::dispatch();
         //
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
