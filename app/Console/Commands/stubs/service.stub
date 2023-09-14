@@ -1,0 +1,15 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Models;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+
+class DummyClass
+{
+    public function __construct()
+    {
+    }
+
+}
