@@ -18,7 +18,9 @@ Route::prefix('/operate')->group(function () {
         Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export']);
 
         //Dashboard
-        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"]);
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"])
+            // ->middleware(['can:memberLevel.read'])
+            ;
 
         //Member_Data
         Route::get('/Member_Data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
