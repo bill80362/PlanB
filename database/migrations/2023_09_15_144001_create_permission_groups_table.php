@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('per_group_data', function (Blueprint $table) {
+        Schema::create('permission_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('show_flag')->default(true);            
+            $table->boolean('show_flag')->default(true);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('per_group_data');
+        Schema::dropIfExists('permission_groups');
     }
 };

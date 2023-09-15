@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perms', function (Blueprint $table) {
+        Schema::create('permission_group_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('permission_group_id')->unsigned();
             $table->string('perm_key');
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perms');
+        Schema::dropIfExists('permission_group_items');
     }
 };

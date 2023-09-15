@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Oper;
+namespace Tests\Feature\Operate;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Services\Oper\PermService;
+use App\Services\Operate\PermissionService;
 // test command: php artisan test --filter=PermTest
 class PermTest extends TestCase
 {
@@ -14,9 +14,8 @@ class PermTest extends TestCase
      */
     public function test_perm_list(): void
     {
-        $permService = app(PermService::class);
-        $list = $permService->getPermList();
-        var_dump($list);
+        $permService = app(PermissionService::class);
+        $list = $permService->getGroupItemPermission();
         // 確認可執行
         $this->assertTrue(count($list) > 0);
         // 確認格式
@@ -29,8 +28,8 @@ class PermTest extends TestCase
      */
     public function test_perm_actions(): void
     {
-        $permService = app(PermService::class);
-        $list = $permService->getActions();
+        $permService = app(PermissionService::class);
+        $list = $permService->getPermissions();
         // 確認可執行
         $this->assertTrue(count($list) > 0);
         // 確認格式

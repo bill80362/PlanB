@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Oper;
+namespace App\Services\Operate;
 
 use App\Models;
 use Illuminate\Support\Arr;
@@ -12,6 +12,9 @@ class MenuService
     {
     }
 
-    // public function 
+    public function getMenu()
+    {
+        
+    }
 
 }

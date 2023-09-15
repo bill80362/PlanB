@@ -5,7 +5,7 @@ namespace App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PerGroup extends Model
+class Permission extends Model
 {
     use HasFactory;
     

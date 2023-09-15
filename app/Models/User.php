@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Permission\Perms;
+use App\Models\Permission\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +14,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $with = ['perms'];
+    protected $with = ['permissions'];
     /**
      * The attributes that are mass assignable.
      *
@@ -58,8 +58,8 @@ class User extends Authenticatable
         // 'deleted' => xxx::class,
     ];
 
-    public function perms()
+    public function permissions()
     {
-        return $this->hasMany(Perms::class);
+        return $this->hasMany(Permission::class);
     }
 }

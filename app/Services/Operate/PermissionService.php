@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Oper;
+namespace App\Services\Operate;
 
-class PermService
+class PermissionService
 {
     /**
      * 定義操作種類
@@ -23,36 +23,36 @@ class PermService
     /**
      * 定義權限群組，要加權限或刪除在此處修改。
      */
-    public function getPermList()
+    public function getGroupItemPermission()
     {
-        $allPerm = [
+        $groups = [
             [
                 'groupName' => __('會員管理群組'),
-                'permissions' => $this->getMemberGroup(),
+                'permissions' => $this->getMemberItem(),
             ],
             [
                 'groupName' => __('商品管理群組'),
-                'permissions' => $this->getProductGroup(),
+                'permissions' => $this->getProductItem(),
             ],
             [
                 'groupName' => __('系統管理群組'),
-                'permissions' => $this->getSystemGroup(),
+                'permissions' => $this->getSystemItem(),
             ],
         ];
 
-        foreach ($allPerm as $key => $perm) {
-            $allPerm[$key]['permissions'] = $this->changeActions($perm['permissions']);
+        foreach ($groups as $key => $group) {
+            $groups[$key]['permissions'] = $this->changeActions($group['permissions']);
         }
 
-        return $allPerm;
+        return $groups;
     }
 
     /**
      * 取得所有權限
      */
-    public function getActions()
+    public function getPermissions()
     {
-        $permList = $this->getPermList();
+        $permList = $this->getGroupItemPermission();
         $actions = collect($permList)->map(function ($item) {
             return $item['permissions'];
         })->flatten(1)
@@ -65,7 +65,7 @@ class PermService
     }
 
     // 會員管理群組
-    private function getMemberGroup()
+    private function getMemberItem()
     {
         return [
             [
@@ -81,7 +81,7 @@ class PermService
         ];
     }
 
-    private function getProductGroup()
+    private function getProductItem()
     {
         return [
             [
@@ -98,7 +98,7 @@ class PermService
     }
 
     // 系統管理群組
-    private function getSystemGroup()
+    private function getSystemItem()
     {
         return [
             [
