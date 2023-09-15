@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\Operate\MasterToolService;
+use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -51,6 +52,7 @@ class UserController extends Controller
         //View
         return view('operate/pages/user/update', [
             'Data' => $Data,
+            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
         ]);
     }
     public function update($id){
