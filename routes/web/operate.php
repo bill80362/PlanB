@@ -11,7 +11,7 @@ Route::prefix('/operate')->group(function () {
         // App::setLocale("zh-tw");
 
         //Dashboard
-        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"]);
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"])->middleware(['can:memberLevel.read']);
 
         //Member_Data
         Route::get('/Member_Data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
@@ -19,6 +19,15 @@ Route::prefix('/operate')->group(function () {
         Route::post('/Member_Data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("ID");
         Route::post('/Member_Data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
         Route::get('/Member_Data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
+
+        //管理員
+        Route::get('/user', [\App\Http\Controllers\Operation\User::class, "listHTML"]);
+        Route::get('/user/{ID}', [\App\Http\Controllers\Operation\User::class, "updateHTML"])->whereNumber("ID");
+        Route::post('/user/{ID}', [\App\Http\Controllers\Operation\User::class, "update"])->whereNumber("ID");
+        Route::post('/user/del', [\App\Http\Controllers\Operation\User::class, "delBatch"]);
+        Route::get('/user/export', [\App\Http\Controllers\Operation\User::class, 'export']);
+
+
     });
 
     //登入

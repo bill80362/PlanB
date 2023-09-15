@@ -16,6 +16,7 @@ class PermTest extends TestCase
     {
         $permService = app(PermService::class);
         $list = $permService->getPermList();
+        var_dump($list);
         // 確認可執行
         $this->assertTrue(count($list) > 0);
         // 確認格式
