@@ -11,7 +11,7 @@ Route::prefix('/operate')->group(function () {
         // App::setLocale("zh-tw");
 
         //管理員
-        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user.list");
+        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
         Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id");
         Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id");
         Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"]);

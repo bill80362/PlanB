@@ -21,7 +21,6 @@ class UserController extends Controller
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
         $this->oModel = $this->oMasterService->filter($this->request->all(),$this->oModel);
-//        $oModel = $this->oModel->filter($this->request);
         //
         $Paginator = $this->oModel->paginate($pageLimit);
         //
@@ -35,20 +34,23 @@ class UserController extends Controller
         if($id){
             //修改
             $Data = $this->oModel->findOrFail($id);
+            $Data->password = "";
         }else{
+            $Data = $this->oModel;
             //新增預設值
-            $this->oModel->id = 0;
-            $this->oModel->name = "";
-            $this->oModel->email = "";
+            $Data->id = 0;
+            $Data->name = "";
+            $Data->email = "";
+            $Data->password = "";
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array)$this->request->old() as $key => $value){
             if(!$value) continue;
-            $this->oModel->$key = $value;
+            $Data->$key = $value;
         }
         //View
-        return view('operate/user/Update', [
-            'Data' => $this->oModel,
+        return view('operate/user/update', [
+            'Data' => $Data,
         ]);
     }
 }

@@ -14,7 +14,7 @@
                         <div class="box_header m-0">
                             <div class="main-title">
                                 <h2>
-                                    <a class="btn btn-primary mr-2" href="{{route("user.list")}}{{request()->getQueryString()}}"> < </a>
+                                    <a class="btn btn-primary mr-2" href="{{route("user_list")}}{{request()->getQueryString()}}"> < </a>
                                     {{ __('後台管理員') }} {{$Data->id?__('修改'):__('新增')}}
                                 </h2>
                             </div>
