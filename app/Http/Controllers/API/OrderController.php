@@ -11,7 +11,7 @@ class OrderController extends Controller
 
     public function queryOrder(Request $request)
     {
-        $user = auth('api')->user();
+        $user = auth('erp')->user();
 
         return [
             'userinfo' => $user,

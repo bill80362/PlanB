@@ -8,6 +8,7 @@ use App\Models\Member\Member_Data;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
 class MemberController extends Controller
 {
@@ -31,7 +32,7 @@ class MemberController extends Controller
                 'errors' => ['帳號或密碼有誤，請重新確認輸入']
             ]);
         }
-        
+
         auth('web_front')->login($member);
         return redirect("/member");
     }

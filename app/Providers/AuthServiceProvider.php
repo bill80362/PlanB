@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use stdClass;
 use App\Models\User;
+use App\Services\Oper\PermService;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      */
-    public function boot(): void
+    public function boot(PermService $permService): void
     {
         /**
          * @example 第三方驗證
@@ -40,13 +41,14 @@ class AuthServiceProvider extends ServiceProvider
             // return User::where('token', (string) $request->token)->first();
         });
 
-
-        /**
-         * @example 權限認證
-         * 如user id為1才是管理者
-         */
-        Gate::define('manage_users', function (User $user) {
-            return $user->id == 1;
-        });
+        $actions = $permService->getActions();
+        foreach ($actions as $action) {
+            Gate::define($action['key'], function (User $user) use ($action) {                
+                $permKeys = $user->perms->map(function ($item) {
+                    return $item['perm_key'];
+                })->toArray();
+                return in_array($action['key'], $permKeys);
+            });
+        }
     }
 }
