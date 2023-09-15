@@ -25,7 +25,7 @@ class UserController extends Controller
         //
         $Paginator = $this->oModel->paginate($pageLimit);
         //
-        return view('operate/user/list', [
+        return view('operate/pages/user/list', [
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
@@ -48,7 +48,7 @@ class UserController extends Controller
             $Data->$key = $value;
         }
         //View
-        return view('operate/user/update', [
+        return view('operate/pages/user/update', [
             'Data' => $Data,
         ]);
     }
