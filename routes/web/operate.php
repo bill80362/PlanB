@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\App;
 /**後台*/
 Route::prefix('/operate')->group(function () {
     Route::middleware(["AdminLoginAuth"])->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"]);
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "index"]);
 
         //管理員
         Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");

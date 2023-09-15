@@ -11,6 +11,6 @@ class IndexController extends \App\Http\Controllers\Controller
     }
 
     public function index(){
-        return redirect('/dashboard');
+        return redirect('/operate/dashboard');
     }
 }
