@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission\Permission;
 use App\Models\User;
 use App\Services\Operate\MasterToolService;
 use App\Services\Operate\PermissionService;
@@ -82,8 +83,12 @@ class UserController extends Controller
         if($id){
             $this->oModel->find($id)->update($UpdateData);
         }else{
-            $this->oModel->create($UpdateData);
+            $id = $this->oModel->create($UpdateData);
         }
+        //寫入權限
+        $this->oModel->find($id)->permissions()->saveMany([
+            new Permission(["perm_key" => "permissionGroup.read"]),
+        ]);
 
         //
         return view('alert_redirect', [
