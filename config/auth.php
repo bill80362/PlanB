@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'web_front',
+        'passwords' => 'memberDatas',
     ],
 
     /*
@@ -36,7 +36,7 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'oper' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
@@ -46,7 +46,7 @@ return [
             'provider' => 'memberDatas',
         ],
 
-        'api' => [
+        'erp' => [
             'driver' => 'custom-token',
         ],
     ],
