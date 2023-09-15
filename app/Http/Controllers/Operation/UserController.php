@@ -50,9 +50,14 @@ class UserController extends Controller
             if(!$value) continue;
             $Data->$key = $value;
         }
+        //整理權限
+        $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function($item){
+            return $item->perm_key;
+        });
         //View
         return view('operate/pages/user/update', [
             'Data' => $Data,
+            'DataPermission' => $DataPermission,
             'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
         ]);
     }
@@ -86,10 +91,11 @@ class UserController extends Controller
             $id = $this->oModel->create($UpdateData);
         }
         //寫入權限
-        $this->oModel->find($id)->permissions()->saveMany([
-            new Permission(["perm_key" => "permissionGroup.read"]),
-        ]);
-
+        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function($item){return $item["key"];});
+        $PermissionArray = collect($this->request->only($allPermissionsKey->toArray()))->map(function ($item,$key){
+            return new Permission(["perm_key" => $key]);
+        });
+        $this->oModel->find($id)->permissions()->saveMany($PermissionArray);
         //
         return view('alert_redirect', [
             'Alert' => __("送出成功"),

@@ -123,7 +123,7 @@ class PermissionService
             $details = collect($perm['actions'])->map(function ($act) use ($perm, $defineAction) {
                 return [
                     'label' => $defineAction[$act],
-                    'key' => $perm['groupKey'] . '.' . $act,
+                    'key' => $perm['groupKey'] . '_' . $act,
                 ];
             })->all();
             $permList[$key]['actions'] = [];

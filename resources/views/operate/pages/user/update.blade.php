@@ -82,7 +82,7 @@
                                                                         @foreach($permission["actions"] as $action)
                                                                             <div class="col-3">
                                                                                 <div class="form-check">
-                                                                                    <input class="form-check-input" type="checkbox" id="{{$action["key"]}}" name="{{$action["key"]}}">
+                                                                                    <input class="form-check-input" type="checkbox" id="{{$action["key"]}}" name="{{$action["key"]}}" {{in_array($action["key"],$DataPermission->toArray())?"checked":""}} >
                                                                                     <label class="form-label form-check-label" for="{{$action["key"]}}">
                                                                                         {{$action["label"]}}
                                                                                     </label>
