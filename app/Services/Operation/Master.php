@@ -6,8 +6,14 @@ use App\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-abstract class Master
+class Master
 {
+    public $oModel;
+
+    public function setModel($oModel) {
+        $this->oModel = $oModel;
+    }
+
     public function getModel(){
         return clone $this->oModel;
     }
