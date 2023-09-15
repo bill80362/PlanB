@@ -35,13 +35,9 @@
                                             <button type="submit" class="btn_1 full_width text-center">登入</button>
                                         </form>
 
-                                        @if ($errors->any())
-                                            <div class="mt_30">
-                                                @include('operate.components.alert.error', [
-                                                    'message' => implode('', $errors->all('<div>:message</div>')),
-                                                ])
-                                            </div>
-                                        @endif
+                                        <div class="mt_30">
+                                            @include('operate.components.alert.error_message')
+                                        </div>
 
                                     </div>
                                 </div>
