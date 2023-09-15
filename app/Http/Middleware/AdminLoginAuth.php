@@ -17,7 +17,7 @@ class AdminLoginAuth
     {
         //
         
-        if (!auth('oper')->check()) {
+        if (!auth('operate')->check()) {
             return redirect('/oper/login');
         }
         //

@@ -21,7 +21,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
     ){}
     //列表
     public function listHTML(){
-        // dd(auth('oper')->user());
+        // dd(auth('operate')->user());
         //使用全域變數範本
 //        echo $this->oSystemConfig->TestConfigData;
 //        echo app(SystemConfig::class)->TestConfigData;

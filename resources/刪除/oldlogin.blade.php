@@ -10,7 +10,7 @@
             <div class="card-header text-center">
                 <h2>Oper管理系統</h2>
             </div>
-            @auth('oper')
+            @auth('operate')
                 登入後才看到這一列<a href="/oper/Member_Data">進入後台</a>
             @endauth
 
