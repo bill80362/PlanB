@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Common;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Foundation\Console\ModelMakeCommand;
