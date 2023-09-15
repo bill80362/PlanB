@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\App;
 /**後台*/
 Route::prefix('/operate')->group(function () {
     Route::middleware(["AdminLoginAuth"])->group(function () {
-        //測試使用多語言
-        // App::setLocale("zh-tw");
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"]);
 
         //管理員
         Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
@@ -20,7 +19,7 @@ Route::prefix('/operate')->group(function () {
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"])
             // ->middleware(['can:memberLevel.read'])
-            ;
+        ;
 
         //Member_Data
         Route::get('/member_data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
@@ -28,10 +27,6 @@ Route::prefix('/operate')->group(function () {
         Route::post('/member_data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("id");
         Route::post('/member_data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
         Route::get('/member_data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
-
-
-
-
     });
 
     //登入
