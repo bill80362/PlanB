@@ -2,7 +2,7 @@
 
 namespace App\Services\Operate;
 
-class PermService
+class PermissionService
 {
     /**
      * 定義操作種類

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use stdClass;
 use App\Models\User;
-use App\Services\Operate\PermService;
+use App\Services\Operate\PermissionService;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      */
-    public function boot(PermService $permService): void
+    public function boot(PermissionService $permissionService): void
     {
         /**
          * @example 第三方驗證
@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
             // return User::where('token', (string) $request->token)->first();
         });
 
-        $actions = $permService->getPermissions();
+        $actions = $permissionService->getPermissions();
         foreach ($actions as $action) {
             Gate::define($action['key'], function (User $user) use ($action) {
                 $permKeys = $user->permissions->map(function ($item) {
