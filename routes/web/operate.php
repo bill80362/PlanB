@@ -11,16 +11,16 @@ Route::prefix('/operate')->group(function () {
         // App::setLocale("zh-tw");
 
         //Dashboard
-        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"])
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"])
             // ->middleware(['can:memberLevel.read'])
             ;
 
         //Member_Data
-        Route::get('/Member_Data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
-        Route::get('/Member_Data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("ID");
-        Route::post('/Member_Data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("ID");
-        Route::post('/Member_Data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
-        Route::get('/Member_Data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
+        Route::get('/member_data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
+        Route::get('/member_data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("ID");
+        Route::post('/member_data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("ID");
+        Route::post('/member_data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
+        Route::get('/member_data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
 
         //管理員
         Route::get('/user', [\App\Http\Controllers\Operation\User::class, "listHTML"]);

@@ -15,7 +15,7 @@ class MenuService
         return [
             [
                 'name' => __('儀表板'),
-                'href' => '/operate',
+                'href' => '/operate/dashboard',
                 'icon' => '/template/Salessa/img/menu-icon/dashboard.svg',
                 'permission' => ''
             ],
@@ -30,7 +30,7 @@ class MenuService
                     ],
                     [
                         'name' => __('群組管理'),
-                        'href' => '/operate/Permission_Group',
+                        'href' => '/operate/permission_group',
                         'permission' => '' //permissionGroup.read
                     ],
                 ]
@@ -41,12 +41,12 @@ class MenuService
                 'subMenu' => [
                     [
                         'name' => __('會員資料'),
-                        'href' => '/operate/Member_Data',
+                        'href' => '/operate/member_data',
                         'permission' => '' //member.read
                     ],
                     [
                         'name' => __('會員等級'),
-                        'href' => '/operate/Member_Level',
+                        'href' => '/operate/member_level',
                         'permission' => 'memberLevel.read'
                     ],
                 ]
