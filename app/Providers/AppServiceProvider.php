@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\SystemConfig;
 use App\View\Components\paginator\pageList;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,12 +16,12 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-        $this->app->bind(SystemConfig::class, function ($app) {
-            return new SystemConfig("register1");
-        });
-        $this->app->bind(SystemConfig::class, function ($app) {
-            return new SystemConfig("register2");
-        });
+//        $this->app->bind(SystemConfig::class, function ($app) {
+//            return new SystemConfig("register1");
+//        });
+//        $this->app->bind(SystemConfig::class, function ($app) {
+//            return new SystemConfig("register2");
+//        });
 //        $this->app->singleton(SystemConfig::class, function ($app) {
 //            return new SystemConfig();
 //        });

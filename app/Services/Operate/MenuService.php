@@ -25,7 +25,7 @@ class MenuService
                 'subMenu' => [
                     [
                         'name' => __('管理人管理'),
-                        'href' => '/operate/User',
+                        'href' => '/operate/user',
                         'permission' => '' //user.read
                     ],
                     [

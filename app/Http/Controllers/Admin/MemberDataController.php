@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\DemoQueueEvent;
 use App\Events\PodcastProcessed;
 use App\Jobs\DoSomething;
-use App\Listeners\MemberDataSaving;
 use App\Services\Admin\Common\ServiceMemberData;
-use App\Services\SystemConfig;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Event;
 
 class MemberDataController extends \App\Http\Controllers\Controller
 {
     public function __construct(
-        protected SystemConfig $oSystemConfig,
+//        protected SystemConfig $oSystemConfig,
         protected ServiceMemberData $oServiceMemberData,
         protected Request $request,
     ){}

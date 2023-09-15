@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Services\Operation;
+namespace App\Services\Operate;
 
-use App\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class Master
+class MasterToolService
 {
     public $oModel;
 
-    public function setModel($oModel) {
-        $this->oModel = $oModel;
-    }
-
-    public function getModel(){
-        return clone $this->oModel;
-    }
     public function getValidator(Request $request){
         return Validator::make(
             $request->all(),
@@ -59,15 +51,15 @@ class Master
         return $ExportList;
     }
 
-    public function filter(Request $request)
+    public function filter(Array $Data,$oModel)
     {
         //過濾條件
-        $oModel = clone $this->oModel;
-        if ($request->get("Filter_Formal_Flag")) {
-            $oModel = $this->oModel->whereIn("Formal_Flag", (array)$request->get("Filter_Formal_Flag"));
+        $oModel = clone $oModel;
+        if ( isset($Data["Filter_Formal_Flag"]) ) {
+            $oModel = $this->oModel->whereIn("Formal_Flag", (array)$Data["Filter_Formal_Flag"]);
         }
-        if ($request->get("Order_By")) {
-            $Order_By = explode("_", $request->get("Order_By"));
+        if ( isset($Data["Order_By"])) {
+            $Order_By = explode("_", $Data["Order_By"]);
             $oModel = $oModel->orderBy($Order_By[0], $Order_By[1]);
         }
         return $oModel;
