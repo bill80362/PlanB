@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Operation;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,8 +34,7 @@ class LoginController extends \App\Http\Controllers\Controller
         }
 
         auth('operate')->login($user);
-        // auth('web_front')->login($memberModel);
-        return redirect("/operate/Member_Data");
+        return redirect("/operate");
     }
 
     public function logout()

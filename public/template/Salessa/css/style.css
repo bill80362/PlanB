@@ -4613,7 +4613,7 @@ body::-webkit-scrollbar {
 /* line 532, G:/admin_project/6 admin/sales/scss/_sidebar.scss */
 .sidebar #sidebar_menu li a .icon_menu {
   width: 34px;
-  height: 34px;
+  /* height: 34px; */
   text-align: center;
   line-height: 32px;
 }
