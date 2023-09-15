@@ -4,58 +4,44 @@
 @endsection
 
 @section('Content')
-    <div class="login-box">
-        <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <h2>B計畫管理系統</h2>
+    <div class="container-fluid p-0">
+        <form method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="dashboard_header mb_50">
+
+                </div>
             </div>
-            @auth('web')
-                登入後才看到這一列<a href="/oper/Member_Data">進入後台</a>
-            @endauth
+            <div class="col-lg-12">
+                <div class="white_box mb_30">
+                    <div class="row justify-content-center">
 
-            @auth('web_front')
-                前台有登入，才看到的這一列
-            @endauth
-
-           
-
-            @if ($errors->any())
-                {!! implode('', $errors->all('<div>:message</div>')) !!}
-            @endif
-
-            <div class="card-body">
-                <form method="post">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="帳號" name="Account">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
+                        <div class="col-lg-6">
+                            <div class="modal-content cs_modal">
+                                <div class="modal-header justify-content-center theme_bg_1">
+                                    <h5 class="modal-title text_white">Oper管理系統</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="">
+                                            <input type="text" class="form-control" placeholder="請輸入帳號" name="Account">
+                                        </div>
+                                        <div class="">
+                                            <input type="password" class="form-control" placeholder="請輸入密碼" name="Password">
+                                        </div>
+                                        <button type="submit" class="btn_1 full_width text-center">登入</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="密碼" name="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">登入</button>
-                        </div>
-                    </div>
-                </form>
 
+                </div>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
+        </form>
     </div>
-    <!-- /.login-box -->
 @endsection
 
 @section('BodyJavascript')
