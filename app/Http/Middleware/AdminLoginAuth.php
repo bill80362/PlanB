@@ -18,7 +18,7 @@ class AdminLoginAuth
         //
         
         if (!auth('oper')->check()) {
-            return redirect()->route("adminLogin");
+            return redirect('/oper/login');
         }
         //
         return $next($request);
