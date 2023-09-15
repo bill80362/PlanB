@@ -41,10 +41,10 @@ class AuthServiceProvider extends ServiceProvider
             // return User::where('token', (string) $request->token)->first();
         });
 
-        $actions = $permService->getActions();
+        $actions = $permService->getPermissions();
         foreach ($actions as $action) {
-            Gate::define($action['key'], function (User $user) use ($action) {                
-                $permKeys = $user->perms->map(function ($item) {
+            Gate::define($action['key'], function (User $user) use ($action) {
+                $permKeys = $user->permissions->map(function ($item) {
                     return $item['perm_key'];
                 })->toArray();
                 return in_array($action['key'], $permKeys);

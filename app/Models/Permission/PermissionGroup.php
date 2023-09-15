@@ -5,7 +5,7 @@ namespace App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Perms extends Model
+class PermissionGroup extends Model
 {
     use HasFactory;
     
@@ -20,6 +20,4 @@ class Perms extends Model
         // 'created' => '',
         // 'updated' => '',
     ];
-
-   
 }

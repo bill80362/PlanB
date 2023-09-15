@@ -12,6 +12,9 @@ class MenuService
     {
     }
 
-    // public function 
+    public function getMenu()
+    {
+        
+    }
 
 }

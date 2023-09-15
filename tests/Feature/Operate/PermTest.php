@@ -15,7 +15,7 @@ class PermTest extends TestCase
     public function test_perm_list(): void
     {
         $permService = app(PermService::class);
-        $list = $permService->getPermList();
+        $list = $permService->getGroupItemPermission();
         // 確認可執行
         $this->assertTrue(count($list) > 0);
         // 確認格式
@@ -29,7 +29,7 @@ class PermTest extends TestCase
     public function test_perm_actions(): void
     {
         $permService = app(PermService::class);
-        $list = $permService->getActions();
+        $list = $permService->getPermissions();
         // 確認可執行
         $this->assertTrue(count($list) > 0);
         // 確認格式
