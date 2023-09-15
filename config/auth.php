@@ -36,7 +36,7 @@ return [
     */
 
     'guards' => [
-        'oper' => [
+        'operate' => [
             'driver' => 'session',
             'provider' => 'users',
         ],

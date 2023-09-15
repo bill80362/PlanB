@@ -124,7 +124,7 @@
 {{--        </li>--}}
         <li class="nav-item">
             <span class="nav-link" role="textbox">
-                {{auth('oper')->user()->name}}
+                {{auth('operate')->user()->name}}
                 (<a href="/oper/logout">登出</a>)
             </span>
         </li>
