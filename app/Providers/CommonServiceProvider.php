@@ -14,9 +14,9 @@ class CommonServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-        $this->app->singleton(ServiceMemberData::class, function () {
-            return new ServiceMemberData(new Member_Data());
-        });
+//        $this->app->singleton(ServiceMemberData::class, function () {
+//            return new ServiceMemberData(new Member_Data());
+//        });
     }
 
     /**

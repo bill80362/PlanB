@@ -10,22 +10,24 @@ Route::prefix('/operate')->group(function () {
         //測試使用多語言
         // App::setLocale("zh-tw");
 
+        //管理員
+        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user.list");
+        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id");
+        Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id");
+        Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"]);
+        Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export']);
+
         //Dashboard
-        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"])->middleware(['can:memberLevel.read']);
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"]);
 
         //Member_Data
         Route::get('/Member_Data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
-        Route::get('/Member_Data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("ID");
-        Route::post('/Member_Data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("ID");
+        Route::get('/Member_Data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("id");
+        Route::post('/Member_Data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("id");
         Route::post('/Member_Data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
         Route::get('/Member_Data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
 
-        //管理員
-        Route::get('/user', [\App\Http\Controllers\Operation\User::class, "listHTML"]);
-        Route::get('/user/{ID}', [\App\Http\Controllers\Operation\User::class, "updateHTML"])->whereNumber("ID");
-        Route::post('/user/{ID}', [\App\Http\Controllers\Operation\User::class, "update"])->whereNumber("ID");
-        Route::post('/user/del', [\App\Http\Controllers\Operation\User::class, "delBatch"]);
-        Route::get('/user/export', [\App\Http\Controllers\Operation\User::class, 'export']);
+
 
 
     });

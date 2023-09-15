@@ -62,4 +62,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Permission::class);
     }
+    //狀態文字
+    public array $Formal_Flag_Text = [
+        1 => "非正式",
+        2 => "正式",
+    ];
+    public array $Column_Title_Text = [
+        "id" => "編號",
+        "name" => "姓名",
+        "email" => "Email",
+        "password" => "密碼",
+    ];
 }
