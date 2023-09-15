@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class IndexController extends \App\Http\Controllers\Controller
 {
-    public function indexHTML(){
-        return view('operate/index', ['name' => 'Bill']);
+    public function dashboard(){
+        return view('operate/dashboard', ['name' => 'Bill']);
     }
 
     public function index(){
