@@ -43,8 +43,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $actions = $permService->getActions();
         foreach ($actions as $action) {
-            Gate::define($action['key'], function (User $user) use ($action) {
-                dd("test");
+            Gate::define($action['key'], function (User $user) use ($action) {                
                 $permKeys = $user->perms->map(function ($item) {
                     return $item['perm_key'];
                 })->toArray();
