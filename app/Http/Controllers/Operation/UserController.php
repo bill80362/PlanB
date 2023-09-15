@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\Operate\MasterToolService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -49,6 +50,33 @@ class UserController extends Controller
         //View
         return view('operate/user/update', [
             'Data' => $Data,
+        ]);
+    }
+    public function update($id){
+        //過濾
+        $UpdateData = $this->request->only(["name","email","password"]);
+        //驗證資料
+        $validator = Validator::make(
+            $UpdateData,
+            $this->oModel->getValidatorRules(),
+            $this->oModel->getValidatorMessage(),
+        );
+        //驗證有誤
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        if($id){
+            $this->oModel->find($id)->update($UpdateData);
+        }else{
+            $id = $this->oModel->create($UpdateData);
+        }
+
+        //
+        return view('alert_redirect', [
+            'Alert' => __("送出成功"),
+            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
         ]);
     }
 }

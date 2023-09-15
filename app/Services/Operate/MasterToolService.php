@@ -2,6 +2,7 @@
 
 namespace App\Services\Operate;
 
+use App\Models\ValidatorInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -9,26 +10,7 @@ class MasterToolService
 {
     public $oModel;
 
-    public function getValidator(Request $request){
-        return Validator::make(
-            $request->all(),
-            $this->getModel()->getValidatorRules(),
-            $this->getModel()->getValidatorMessage(),
-        );
-    }
-    public function update(Request $request,$ID){
-        if($ID){
-            //修改
-            $this->getModel()->find($ID)->update($request->post());
-        }else{
-            //新增
-            $Data = $request->post();
-            $oMember_Data = $this->getModel();
-            $Data["MemberNum"] = $oMember_Data->formatMemberNum($this->getModel()->count()+1);
-            $this->getModel()->create($Data);
-        }
-    }
-    public function export(Request $request)
+    public function export(Array $Data,$oModel)
     {
         //整理匯出資料
         $ExportList = [];
@@ -37,7 +19,7 @@ class MasterToolService
         //放入標題
         $ExportList[] = array_values($Column_Title_Text);
         //過濾條件
-        $oModel = $this->filter($request);
+        $oModel = $this->filter($Data,$oModel);
         //要匯出的資料
         foreach ($oModel->get() as $model) {
             $Temp = [];

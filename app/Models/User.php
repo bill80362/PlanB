@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ValidatorInterface
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -73,4 +73,14 @@ class User extends Authenticatable
         "email" => "Email",
         "password" => "密碼",
     ];
+    //
+    public function getValidatorRules(){
+        return [
+            "name" => "required",
+            "password" => $this->password?"required":"",
+        ];
+    }
+    public function getValidatorMessage(){
+        return [];
+    }
 }

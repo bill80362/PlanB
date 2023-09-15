@@ -11,9 +11,11 @@
         <div class="col-lg-12">
             <div class="white_card">
                 <div class="white_card_header">
-                    <div class="box_header m-0">
-                        <div class="main-title">
-                            <h2>{{ __('後台管理員') }}</h2>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2>{{ __('後台管理員') }}</h2>
+                        <div>
+                            <a class="btn btn-primary mr-2" href="{{route("user_list")}}?{{request()->getQueryString()}}"> {{__("新增")}} </a>
+                            <a class="btn btn-warning mr-2" href="{{route("user_list")}}?{{request()->getQueryString()}}"> {{__("匯入")}} </a>
                         </div>
                     </div>
                 </div>
@@ -64,6 +66,7 @@
                                 <div class="form-group">
                                     <button class="btn btn-primary">搜尋</button>
                                     <a class="btn btn-secondary" href="{{request()->url()}}">取消</a>
+                                    <a class="btn btn-warning" href="{{route("user_list")}}?{{request()->getQueryString()}}">匯出</a>
                                 </div>
                             </div>
                         </div>

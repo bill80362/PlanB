@@ -1,8 +1,8 @@
 <html>
-<bod>
+<body>
     <script>
         alert("{{$Alert}}");
         window.location.href = "{{$Redirect}}";
     </script>
-</bod>
+</body>
 </html>
