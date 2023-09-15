@@ -30,17 +30,17 @@ class LoginController extends \App\Http\Controllers\Controller
             return back()->withErrors([
                 'errors' => ['帳號或密碼有誤，請重新確認輸入']
             ]);
-            
+
         }
 
         auth('web')->login($user);
         // auth('web_front')->login($memberModel);
-        return redirect("/oper/Member_Data");
+        return redirect("/operate/Member_Data");
     }
 
     public function logout()
     {
         auth('web')->logout();
-        return redirect("/oper/login");
+        return redirect("/operate/login");
     }
 }

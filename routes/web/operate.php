@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\App;
 
 
 /**後台*/
-Route::prefix('/oper')->group(function () {
+Route::prefix('/operate')->group(function () {
     Route::middleware(["AdminLoginAuth"])->group(function () {
         //測試使用多語言
         App::setLocale("zh-tw");

@@ -18,6 +18,61 @@
                     </div>
                 </div>
                 <div class="white_card_body">
+                    {{--搜尋START--}}
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>{{$Model->Column_Title_Text["Formal_Flag"]}}</label>
+                                    <select name="Filter_Formal_Flag[]" class="select2bs5" multiple="multiple" style="width: 100%;">
+                                        @foreach ($Model->Formal_Flag_Text as $key => $value)
+                                            <option
+                                                value="{{$key}}" {{in_array($key,(array)request()->get("Filter_Formal_Flag"))?"selected":""}} >{{$value}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label>文字搜尋</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group">
+                                        <div class="input-group-prepend">
+                                            <select class="form-control" name="Filter_Text_Key">
+                                                <option>不限制</option>
+                                                <option value="Name">姓名</option>
+                                                <option value="ID">ID</option>
+                                                <option value="Cellphone">手機</option>
+                                                <option value="Email">Email</option>
+                                                <option value="Address">地址</option>
+                                            </select>
+                                        </div>
+                                        <input type="text" class="form-control" name="Filter_Text_Value">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <label>排序</label>
+                                <select class="form-control" name="Order_By">
+                                    <option value="ID_DESC">建立時間(反)</option>
+                                    <option value="ID_ASC">建立時間(正)</option>
+                                    <option value="ID_DESC">ID(反)</option>
+                                    <option value="ID_ASC">ID(正)</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label>&nbsp;</label>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">搜尋</button>
+                                    <a class="btn btn-secondary" href="{{request()->url()}}">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    {{--搜尋END--}}
+
+                    {{--表格--}}
                     <div class="table-responsive m-b-30">
                         <table class="table table-striped">
                             <thead>
