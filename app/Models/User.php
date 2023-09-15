@@ -74,10 +74,11 @@ class User extends Authenticatable implements ValidatorInterface
         "password" => "密碼",
     ];
     //
+    public String $newPassword="";
     public function getValidatorRules(){
         return [
             "name" => "required",
-            "password" => $this->password?"required":"",
+            "password" => $this->newPassword?"required":"",
         ];
     }
     public function getValidatorMessage(){

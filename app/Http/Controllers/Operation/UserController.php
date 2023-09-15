@@ -8,6 +8,7 @@ use App\Services\Operate\MasterToolService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,12 +56,21 @@ class UserController extends Controller
     public function update($id){
         //過濾
         $UpdateData = $this->request->only(["name","email","password"]);
+        if(!$UpdateData["password"]){
+            unset($UpdateData["password"]);
+        }else{
+            $this->oModel->newPassword = $UpdateData["password"];
+        }
         //驗證資料
         $validator = Validator::make(
             $UpdateData,
             $this->oModel->getValidatorRules(),
             $this->oModel->getValidatorMessage(),
         );
+        //密碼處理
+        if(isset($UpdateData["password"])){
+            $UpdateData["password"] = Hash::make($UpdateData["password"]);
+        }
         //驗證有誤
         if ($validator->fails()) {
             return redirect()->back()
@@ -70,7 +80,7 @@ class UserController extends Controller
         if($id){
             $this->oModel->find($id)->update($UpdateData);
         }else{
-            $id = $this->oModel->create($UpdateData);
+            $this->oModel->create($UpdateData);
         }
 
         //
