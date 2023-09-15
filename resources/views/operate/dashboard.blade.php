@@ -26,7 +26,6 @@
                     Dashboard
                 </div>
 
-                @include('operate.components.alert.error', ['message' => 'alert—check it out!'])
             </div>
 
         </div>
