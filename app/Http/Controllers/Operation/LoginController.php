@@ -15,7 +15,7 @@ class LoginController extends \App\Http\Controllers\Controller
     }
     public function loginHTML()
     {
-        return view('admin/login', ['name' => 'Bill']);
+        return view('operate/pages/login', ['name' => 'Bill']);
     }
 
     public function login(Request $request)

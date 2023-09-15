@@ -1,4 +1,4 @@
-@extends('admin.layout._Master')
+@extends('operate.layout._Master')
 
 @section('HeaderCSS')
 @endsection
@@ -26,9 +26,7 @@
                     Dashboard
                 </div>
 
-                @can('manage_users')
-                    有權限manage_users的帳號才看的到
-                @endcan
+                @include('operate.components.alert.error', ['message' => 'alert—check it out!'])
             </div>
 
         </div>
