@@ -102,8 +102,8 @@ class PermissionService
     {
         return [
             [
-                'label' => __('權限管理'),
-                'groupKey' => 'perm',
+                'label' => __('群組管理'),
+                'groupKey' => 'permissionGroup',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
             [
