@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\App;
 
 
 /**後台*/
-Route::prefix('/oper')->group(function () {
+Route::prefix('/operate')->group(function () {
     Route::middleware(["AdminLoginAuth"])->group(function () {
         //測試使用多語言
         // App::setLocale("zh-tw");
 
         //Dashboard
         Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, "indexHTML"]);
-            
+
         //Member_Data
         Route::get('/Member_Data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
         Route::get('/Member_Data/{ID}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("ID");

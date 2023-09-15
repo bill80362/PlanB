@@ -11,7 +11,7 @@
                 <h2>Oper管理系統</h2>
             </div>
             @auth('operate')
-                登入後才看到這一列<a href="/oper/Member_Data">進入後台</a>
+                登入後才看到這一列<a href="/operate/Member_Data">進入後台</a>
             @endauth
 
             @auth('web_front')

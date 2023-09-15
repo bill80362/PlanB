@@ -44,6 +44,11 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="/template/Salessa/css/style.css" />
     <link rel="stylesheet" href="/template/Salessa/css/colors/default.css" id="colorSkinCSS">
+
+    {{--select2--}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+
+
 </head>
 <body class="crm_body_bg">
 
@@ -133,7 +138,18 @@
 <!-- custom js -->
 <script src="/template/Salessa/js/custom.js"></script>
 
+{{--select2--}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+
+
 <script>
+    {{--統一開啟的JS--}}
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2bs5').select2({
+        // theme: 'bootstrap-5'
+    })
     /**
      * sends a request to the specified url from a form. this will change the window location.
      * @param {string} path the path to send the post request to

@@ -125,7 +125,7 @@
         <li class="nav-item">
             <span class="nav-link" role="textbox">
                 {{auth('operate')->user()->name}}
-                (<a href="/oper/logout">登出</a>)
+                (<a href="/operate/logout">登出</a>)
             </span>
         </li>
         <li class="nav-item">
