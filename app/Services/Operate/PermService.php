@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Oper;
+namespace App\Services\Operate;
 
 class PermService
 {

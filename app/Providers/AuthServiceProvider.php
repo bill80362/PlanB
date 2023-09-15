@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use stdClass;
 use App\Models\User;
-use App\Services\Oper\PermService;
+use App\Services\Operate\PermService;
 
 class AuthServiceProvider extends ServiceProvider
 {

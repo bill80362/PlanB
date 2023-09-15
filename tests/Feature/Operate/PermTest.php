@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Oper;
+namespace Tests\Feature\Operate;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Services\Oper\PermService;
+use App\Services\Operate\PermService;
 // test command: php artisan test --filter=PermTest
 class PermTest extends TestCase
 {
