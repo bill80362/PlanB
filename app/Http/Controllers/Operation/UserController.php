@@ -34,14 +34,12 @@ class UserController extends Controller
         if($id){
             //修改
             $Data = $this->oModel->findOrFail($id);
-            $Data->password = "";
         }else{
             $Data = $this->oModel;
             //新增預設值
             $Data->id = 0;
             $Data->name = "";
             $Data->email = "";
-            $Data->password = "";
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array)$this->request->old() as $key => $value){

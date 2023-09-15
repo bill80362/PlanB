@@ -27,7 +27,10 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="card card-primary">
                                         <div class="card-header">
-                                            ID:{{$Data->id}} , updated_at: {{$Data->updated_at}}
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div>{{_("編號")}}:{{$Data->id}}</div>
+                                                <div>{{_("最後更新時間")}}:{{$Data->updated_at}}</div>
+                                            </div>
                                         </div>
                                         <div class="card-body">
                                             {{--錯誤訊息--}}
@@ -47,15 +50,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>密碼</label>
-                                                <input type="text" class="form-control" name="password" value="{{$Data->password}}">
+                                                <input type="password" class="form-control" name="password" value="">
                                             </div>
                                             <div class="form-group">
                                                 <label>Email</label>
                                                 <input type="text" class="form-control" name="email" value="{{$Data->email}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>信箱驗證時間</label>
-                                                <input type="text" class="form-control" name="email_verified_at" value="{{$Data->email_verified_at}}">
                                             </div>
 
                                         </div>
