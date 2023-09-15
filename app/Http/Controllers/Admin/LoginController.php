@@ -35,12 +35,12 @@ class LoginController extends \App\Http\Controllers\Controller
 
         auth('operate')->login($user);
         // auth('web_front')->login($memberModel);
-        return redirect("/oper/Member_Data");
+        return redirect("/operate/Member_Data");
     }
 
     public function logout()
     {
         auth('operate')->logout();
-        return redirect("/oper/login");
+        return redirect("/operate/login");
     }
 }

@@ -40,13 +40,13 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: block;">
                         <li class="nav-item">
-                            <a href="/oper/Member_Data" class="nav-link">
+                            <a href="/operate/Member_Data" class="nav-link">
                                 <i class="far fa-user"></i>
                                 <p>會員等級</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/oper/Member_Data" class="nav-link">
+                            <a href="/operate/Member_Data" class="nav-link">
                                 <i class="far fa-user"></i>
                                 <p>會員管理</p>
                             </a>

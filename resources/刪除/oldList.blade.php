@@ -93,10 +93,10 @@
                                                     <button class="btn btn-sm btn-danger">更新排序</button>
                                                 </div>
                                                 <div class="card-tools">
-                                                    <a class="btn btn-sm btn-primary" href="/oper/Member_Data/0">新增</a>
+                                                    <a class="btn btn-sm btn-primary" href="/operate/Member_Data/0">新增</a>
                                                     <button class="btn btn-sm btn-warning">匯入</button>
                                                     <a class="btn btn-sm btn-warning"
-                                                       href="/oper/Member_Data/export?{{request()->getQueryString()}}"
+                                                       href="/operate/Member_Data/export?{{request()->getQueryString()}}"
                                                        target="_blank">匯出</a>
                                                 </div>
                                             </div>
@@ -135,11 +135,11 @@
                                                             <td>{{$Item->Formal_Flag_Text[$Item->Formal_Flag]}}</td>
                                                             <td>
                                                                 <a class="btn btn-xs btn-primary"
-                                                                   href="/oper/Member_Data/{{$Item->ID}}?{{request()->getQueryString()}}"
+                                                                   href="/operate/Member_Data/{{$Item->ID}}?{{request()->getQueryString()}}"
                                                                 >編輯</a>
                                                                 <button class="btn btn-xs btn-danger"
                                                                         type="button"
-                                                                        onclick="postForm('/oper/Member_Data/del?{{request()->getQueryString()}}',{
+                                                                        onclick="postForm('/operate/Member_Data/del?{{request()->getQueryString()}}',{
                                                                             'ID[]':{{$Item->ID}},
                                                                             _token:'{{ csrf_token() }}'
                                                                             })"

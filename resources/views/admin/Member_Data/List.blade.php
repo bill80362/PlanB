@@ -109,11 +109,11 @@
                                     <td>{{$Item->Formal_Flag_Text[$Item->Formal_Flag]}}</td>
                                     <td>
                                         <a class="btn btn-sm btn-primary"
-                                           href="/oper/Member_Data/{{$Item->ID}}?{{request()->getQueryString()}}"
+                                           href="/operate/Member_Data/{{$Item->ID}}?{{request()->getQueryString()}}"
                                         >編輯</a>
                                         <button class="btn btn-sm btn-danger"
                                                 type="button"
-                                                onclick="postForm('/oper/Member_Data/del?{{request()->getQueryString()}}',{
+                                                onclick="postForm('/operate/Member_Data/del?{{request()->getQueryString()}}',{
                                                                             'ID[]':{{$Item->ID}},
                                                                             _token:'{{ csrf_token() }}'
                                                                             })"

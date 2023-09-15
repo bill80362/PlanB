@@ -16,9 +16,9 @@ class AdminLoginAuth
     public function handle(Request $request, Closure $next): Response
     {
         //
-        
+
         if (!auth('operate')->check()) {
-            return redirect('/oper/login');
+            return redirect('/operate/login');
         }
         //
         return $next($request);

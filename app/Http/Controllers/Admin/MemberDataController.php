@@ -86,7 +86,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         return view('alert_redirect', [
             'Alert' => "送出成功",
-            'Redirect' => '/oper/Member_Data?'.$this->request->getQueryString(),
+            'Redirect' => '/operate/Member_Data?'.$this->request->getQueryString(),
         ]);
     }
     //批次刪除
@@ -99,7 +99,7 @@ class MemberDataController extends \App\Http\Controllers\Controller
         //
         return view('alert_redirect', [
             'Alert' => "刪除成功",
-            'Redirect' => '/oper/Member_Data?'.$this->request->getQueryString(),
+            'Redirect' => '/operate/Member_Data?'.$this->request->getQueryString(),
         ]);
     }
     //批次修改排序

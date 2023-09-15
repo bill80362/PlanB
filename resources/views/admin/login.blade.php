@@ -23,7 +23,7 @@
                                     <h5 class="modal-title text_white">Oper管理系統</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/oper/login" method="POST">
+                                    <form action="/operate/login" method="POST">
                                         <div class="">
                                             <input type="text" class="form-control" placeholder="請輸入帳號" name="Account">
                                         </div>

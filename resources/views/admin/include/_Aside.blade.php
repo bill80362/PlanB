@@ -27,8 +27,8 @@
                 <span>會員管理</span>
             </a>
             <ul>
-                <li><a class="active" href="/oper/member_data">會員管理</a></li>
-                <li><a class="" href="/oper/member_level">會員等級</a></li>
+                <li><a class="active" href="/operate/member_data">會員管理</a></li>
+                <li><a class="" href="/operate/member_level">會員等級</a></li>
             </ul>
         </li>
 
