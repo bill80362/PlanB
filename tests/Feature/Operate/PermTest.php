@@ -33,8 +33,7 @@ class PermTest extends TestCase
         // 確認可執行
         $this->assertTrue(count($list) > 0);
         // 確認格式
-        $this->assertTrue(array_key_exists('label', $list[0])); // 名稱
-        $this->assertTrue(array_key_exists('group', $list[0])); // 群組名
+        $this->assertTrue(array_key_exists('label', $list[0])); // 名稱        
         $this->assertTrue(array_key_exists('key', $list[0])); // key值
     }
 }

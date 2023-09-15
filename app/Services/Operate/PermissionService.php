@@ -122,7 +122,6 @@ class PermissionService
         foreach ($permList as $key => $perm) {
             $details = collect($perm['actions'])->map(function ($act) use ($perm, $defineAction) {
                 return [
-                    'group' => $perm['label'],
                     'label' => $perm['label'] . '-' . $defineAction[$act],
                     'key' => $perm['groupKey'] . '.' . $act,
                 ];
