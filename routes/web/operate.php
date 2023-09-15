@@ -23,11 +23,11 @@ Route::prefix('/operate')->group(function () {
             ;
 
         //Member_Data
-        Route::get('/Member_Data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
-        Route::get('/Member_Data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("id");
-        Route::post('/Member_Data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("id");
-        Route::post('/Member_Data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
-        Route::get('/Member_Data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
+        Route::get('/member_data', [\App\Http\Controllers\Admin\MemberDataController::class, "listHTML"]);
+        Route::get('/member_data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "updateHTML"])->whereNumber("id");
+        Route::post('/member_data/{id}', [\App\Http\Controllers\Admin\MemberDataController::class, "update"])->whereNumber("id");
+        Route::post('/member_data/del', [\App\Http\Controllers\Admin\MemberDataController::class, "delBatch"]);
+        Route::get('/member_data/export', [\App\Http\Controllers\Admin\MemberDataController::class, 'export']);
 
 
 
