@@ -62,6 +62,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
+
                                                     @foreach($GroupItemPermission as $key => $value)
                                                     <div class="card card-outline mb-2">
                                                         <div class="card-header">
@@ -69,18 +70,28 @@
                                                         </div>
                                                         <div class="card-body">
                                                             @foreach($value["permissions"] as $permission)
-                                                            <div class="row">
-                                                                @foreach($permission["actions"] as $action)
-                                                                <div class="col-3">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" id="{{$action["key"]}}" name="{{$action["key"]}}">
-                                                                        <label class="form-label form-check-label" for="{{$action["key"]}}">
-                                                                            {{$action["label"]}}
-                                                                        </label>
-                                                                    </div>
-
+                                                            <div class="card">
+                                                                <div class="card-header" id="heading_{{$permission["label"]}}">
+                                                                    <span class="btn" data-bs-toggle="collapse" data-bs-target="#collapse_{{$permission["label"]}}" aria-expanded="true" aria-controls="heading_{{$permission["label"]}}">
+                                                                        {{$permission["label"]}}
+                                                                    </span>
                                                                 </div>
-                                                                @endforeach
+                                                                <div class="collapse show" id="collapse_{{$permission["label"]}}" aria-labelledby="heading_{{$permission["label"]}}" data-parent="#accordionclose" style="">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                        @foreach($permission["actions"] as $action)
+                                                                            <div class="col-3">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="{{$action["key"]}}" name="{{$action["key"]}}">
+                                                                                    <label class="form-label form-check-label" for="{{$action["key"]}}">
+                                                                                        {{$action["label"]}}
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             @endforeach
                                                         </div>
