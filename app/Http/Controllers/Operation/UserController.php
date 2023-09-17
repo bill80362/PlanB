@@ -126,6 +126,10 @@ class UserController extends Controller
     }
     //匯入
     public function import(){
+        //
+        $file = $this->request->file('file');
+//        $file->getClientOriginalName();
+
 
     }
     //匯出

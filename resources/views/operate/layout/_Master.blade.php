@@ -78,6 +78,10 @@
 </section>
 <!-- main content part end -->
 
+{{--彈出視窗--}}
+@yield('Modal')
+
+
 <div id="back-top" style="display: none;">
     <a title="Go to Top" href="#">
         <i class="ti-angle-up"></i>

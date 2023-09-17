@@ -15,7 +15,9 @@
                         <h2>{{ __('管理人管理') }}</h2>
                         <div>
                             <a class="btn btn-sm btn-primary mr-2" href="{{route("user_update",["id"=>0])}}?{{request()->getQueryString()}}"> {{__("新增")}} </a>
-                            <a class="btn btn-sm btn-warning mr-2" href="{{route("user_list")}}?{{request()->getQueryString()}}"> {{__("匯入")}} </a>
+                            <button type="button" class="btn btn-sm btn-warning mr-2" data-bs-toggle="modal" data-bs-target="#importModal">
+                                {{__("匯入")}}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -55,12 +57,12 @@
                             <div class="col-lg-3">
                                 <label>排序</label>
                                 <select class="form-control" name="order_by">
-                                    <option value="id,desc">ID(反)</option>
-                                    <option value="id,asc">ID(正)</option>
-                                    <option value="created_at,desc">建立時間(反)</option>
-                                    <option value="created_at,asc">建立時間(正)</option>
-                                    <option value="updated_at,desc">更新時間(反)</option>
-                                    <option value="updated_at,asc">更新時間(正)</option>
+                                    <option value="id,desc">{{__($Model->Column_Title_Text["id"])}}({{__("反序")}})</option>
+                                    <option value="id,asc">{{__($Model->Column_Title_Text["id"])}}({{__("正序")}})</option>
+                                    <option value="created_at,desc">{{__("建立時間")}}({{__("反序")}})</option>
+                                    <option value="created_at,asc">{{__("建立時間")}}({{__("正序")}})</option>
+                                    <option value="updated_at,desc">{{__("更新時間")}}({{__("反序")}})</option>
+                                    <option value="updated_at,asc">{{__("更新時間")}}({{__("正序")}})</option>
                                 </select>
                             </div>
                             <div class="col-lg-3">
@@ -140,6 +142,38 @@
     </div>
 </div>
 
+
+
+@endsection
+
+@section('Modal')
+    <!-- 彈出視窗 -->
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{route("user_import")}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">匯入新增</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <h6 class="card-subtitle mb-2">請上傳Excel檔案</h6>
+                        <div class=" mb-0">
+                            <input type="file" class="" name="file">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 
 @section('BodyJavascript')
@@ -148,7 +182,6 @@
     $("#btnDeleteBatch").on("click",function(){
         var postArray = [];
         $("input[type=checkbox][name^='id_array']:checked").map(function(){
-            // return $(this).val()
             let val = $(this).val();
             postArray["id_array["+val+"]"] = val;
         });

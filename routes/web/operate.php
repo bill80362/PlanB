@@ -18,6 +18,7 @@ Route::prefix('/operate')->group(function () {
         Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id")->name("user_update");
         Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("user_del");
         Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("user_export");
+        Route::post('/user/import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("user_import");
 
         //Member_Data
         Route::get('/member_data', [\App\Http\Controllers\Operation\MemberDataController::class, "listHTML"]);
