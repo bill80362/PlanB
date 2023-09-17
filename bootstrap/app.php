@@ -15,6 +15,12 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+//修改.env檔案目錄
+//$app->useEnvironmentPath($env_path);
+//修改.env檔案名稱
+//$app->loadEnvironmentFrom(".abc");
+
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
