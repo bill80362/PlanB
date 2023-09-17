@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\Models\Permission\Permission;
 use App\Models\User;
 use App\Services\Operate\CollectionImport;
@@ -127,7 +128,7 @@ class UserController extends Controller
     }
     //匯入
     public function import(){
-
+        Excel::import(new UsersImport, $this->request->file('file')->store('temp'));
 
     }
     //匯出
