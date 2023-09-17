@@ -14,10 +14,10 @@ Route::prefix('/operate')->group(function () {
 
         //管理員
         Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
-        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id");
-        Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id");
-        Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"]);
-        Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export']);
+        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id")->name("user_update_html");
+        Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id")->name("user_update");
+        Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("user_del");
+        Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("user_export");
 
         //Member_Data
         Route::get('/member_data', [\App\Http\Controllers\Operation\MemberDataController::class, "listHTML"]);

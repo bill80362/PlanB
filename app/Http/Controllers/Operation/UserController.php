@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\Operate\MasterToolService;
 use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -17,17 +18,15 @@ class UserController extends Controller
     public function __construct(
         protected Request $request,
         protected SystemConfigService $oSystemConfigService,
-        protected MasterToolService $oMasterService,
         protected User $oModel,
     ){}
     public function listHTML(){
         //
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
-        $this->oModel = $this->oMasterService->filter($this->request->all(),$this->oModel);
+        $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
         //
-        $Paginator = $this->oModel->paginate($pageLimit);
-        //
+//        dd($this->oModel->statusText);
         return view('operate/pages/user/list', [
             'Paginator' => $Paginator,
             //
@@ -51,9 +50,15 @@ class UserController extends Controller
             $Data->$key = $value;
         }
         //整理權限
-        $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function($item){
-            return $item->perm_key;
-        });
+        if($id){
+            $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function($item){
+                return $item->perm_key;
+            });
+        }else{
+            $DataPermission = collect([
+                "items" => "",
+            ]);
+        }
         //View
         return view('operate/pages/user/update', [
             'Data' => $Data,
@@ -88,7 +93,7 @@ class UserController extends Controller
         if($id){
             $this->oModel->find($id)->update($UpdateData);
         }else{
-            $id = $this->oModel->create($UpdateData);
+            $id = $this->oModel->create($UpdateData)->id;
         }
         //寫入權限
         $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function($item){return $item["key"];});
@@ -101,5 +106,33 @@ class UserController extends Controller
             'Alert' => __("送出成功"),
             'Redirect' => '/operate/user?'.$this->request->getQueryString(),
         ]);
+    }
+    //批次刪除
+    public function delBatch(){
+        //刪除
+        foreach ((array)$this->request->post("id_array") as $id){
+            $this->oModel->find($id)->delete();
+        }
+        //
+        return view('alert_redirect', [
+            'Alert' => "刪除成功",
+            'Redirect' => route('user_list').'?'.$this->request->getQueryString(),
+        ]);
+    }
+    //批次修改排序
+    public function sortBatch(){
+        $ID_Array = $this->request->post("sort");
+
+    }
+    //匯入
+    public function import(){
+
+    }
+    //匯出
+    public function export(){
+        //匯出的標題和內文
+        $ExportList = $this->oModel->filter($this->request->all())->export();
+        //匯出
+        return (new Collection($ExportList))->downloadExcel("member_data_".time().".xlsx");
     }
 }

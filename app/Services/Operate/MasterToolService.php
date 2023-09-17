@@ -8,14 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class MasterToolService
 {
-    public $oModel;
-
     public function export(Array $Data,$oModel)
     {
         //整理匯出資料
         $ExportList = [];
         //要匯出的欄位
-        $Column_Title_Text = $this->oModel->Column_Title_Text;
+        $Column_Title_Text = $oModel->Column_Title_Text;
         //放入標題
         $ExportList[] = array_values($Column_Title_Text);
         //過濾條件
@@ -36,9 +34,8 @@ class MasterToolService
     public function filter(Array $Data,$oModel)
     {
         //過濾條件
-        $oModel = clone $oModel;
         if ( isset($Data["Filter_Formal_Flag"]) ) {
-            $oModel = $this->oModel->whereIn("Formal_Flag", (array)$Data["Filter_Formal_Flag"]);
+            $oModel = $oModel->whereIn("Formal_Flag", (array)$Data["Filter_Formal_Flag"]);
         }
         if ( isset($Data["Order_By"])) {
             $Order_By = explode("_", $Data["Order_By"]);

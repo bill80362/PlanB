@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'test@gmail.com',
             'password' => Hash::make('admin'),
+            'status' => "Y",
         ]);
 
         // Permission::create([
@@ -31,8 +32,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         //目前數量
-        Member_DataFactory::$counter = Member_Data::max("ID") + 1;
+//        Member_DataFactory::$counter = Member_Data::max("ID") + 1;
         //製造
-        \App\Models\Member\Member_Data::factory(10)->create();
+//        \App\Models\Member\Member_Data::factory(10)->create();
     }
 }
