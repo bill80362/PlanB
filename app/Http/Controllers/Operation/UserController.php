@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
 use App\Models\Permission\Permission;
 use App\Models\User;
-use App\Services\Operate\MasterToolService;
+use App\Services\Operate\CollectionImport;
 use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -126,9 +127,6 @@ class UserController extends Controller
     }
     //匯入
     public function import(){
-        //
-        $file = $this->request->file('file');
-//        $file->getClientOriginalName();
 
 
     }

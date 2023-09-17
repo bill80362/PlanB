@@ -9,12 +9,12 @@ class MakeService extends GeneratorCommand
 {
 
     /**
-     * @example php artisan make:service Payment/LinePayService     
+     * @example php artisan make:service Payment/LinePayService
      * @var string
      */
     protected $signature = 'make:service {name}';
 
- 
+
 
     /**
      * The console command description.
@@ -48,7 +48,7 @@ class MakeService extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'./stubs/service.stub';
+        return __DIR__.'/stubs/service.stub';
     }
 
      /**
@@ -61,5 +61,5 @@ class MakeService extends GeneratorCommand
     {
         return is_dir(app_path('Services')) ? $rootNamespace.'\\Services' : $rootNamespace;
     }
-    
+
 }
