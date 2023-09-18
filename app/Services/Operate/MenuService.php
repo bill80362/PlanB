@@ -2,10 +2,7 @@
 
 namespace App\Services\Operate;
 
-use App\Models;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 
 class MenuService
 {
@@ -52,6 +49,40 @@ class MenuService
                 ]
             ],
         ];
+    }
+
+     /**
+     * 取得使用者有權限的選單
+     */
+    public function userMenu()
+    {
+        $user = auth('operate')->user();
+        $menus = $this->getMenu();
+        $defaultIcon =  $this->getDefaultMenuIcon();
+        $userMenus = [];
+        foreach ($menus as $menu) {
+            if ((array_key_exists('subMenu', $menu))) {
+                if ($this->checkSubMenuPermission($menu['subMenu'])) {
+                    // array_push($userMenus, $menu);
+                    $userSubMenus = [];
+                    foreach ($menu['subMenu'] as $subMenu) {
+                        if (($subMenu['permission'] == '' || $user->can($subMenu['permission']))) {
+                            array_push($userSubMenus, $subMenu);
+                        }
+                    }
+                    $menu['subMenu'] = $userSubMenus;
+                    $menu['icon'] = $menu['icon'] ?: $defaultIcon;
+                    array_push($userMenus, $menu);
+                }
+            } else {
+                if (($menu['permission'] == '' || $user->can($menu['permission']))) {
+                    $menu['icon'] = $menu['icon'] ?: $defaultIcon;
+                    array_push($userMenus, $menu);
+                }
+            }
+        }
+
+        return $userMenus;
     }
 
     public function checkSubMenuPermission($subMenus)

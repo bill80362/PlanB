@@ -10,44 +10,34 @@
     </div>
     <ul id="sidebar_menu">
         @php
-            $menus = $menuService->getMenu();
-            $defaultIcon = $menuService->getDefaultMenuIcon();
-            $user = auth('operate')->user();
+            $menus = $menuService->userMenu();
         @endphp
 
         @foreach ($menus as $menu)
             @if (array_key_exists('subMenu', $menu))
-                @if ($menuService->checkSubMenuPermission($menu['subMenu']))
-                    <li class="">
-                        <a class="has-arrow" href="#" aria-expanded="false">
-                            <div class="icon_menu">
-                                <img src="{{ $menu['icon'] ?: $defaultIcon }}" alt="">
-                            </div>
-                            <span>{{ $menu['name'] }}</span>
-                        </a>
-                        <ul>
-                            @foreach ($menu['subMenu'] as $subMenu)
-                                @if ($subMenu['permission'] == '' || $user->can($subMenu['permission']))
-                                    <li><a class="{{ '/' . Request::path() == $subMenu['href'] ? 'active' : '' }}"
-                                            href="{{ $subMenu['href'] }}">{{ $subMenu['name'] }}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </li>
-                @endif
+                <li class="">
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <div class="icon_menu">
+                            <img src="{{ $menu['icon'] }}" alt="">
+                        </div>
+                        <span>{{ $menu['name'] }}</span>
+                    </a>
+                    <ul>
+                        @foreach ($menu['subMenu'] as $subMenu)
+                            <li><a class="{{ '/' . Request::path() == $subMenu['href'] ? 'active' : '' }}"
+                                    href="{{ $subMenu['href'] }}">{{ $subMenu['name'] }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
             @else
-                @if ($menu['permission'] == '' || $user->can($menu['permission']))
-                    <li class="">
-                        <a href="{{ $menu['href'] }}" 
-                            class="{{ '/' . Request::path() == $menu['href'] ? 'active' : '' }}">
-                            <div class="icon_menu">
-                                <img src="{{ $menu['icon'] ?: $defaultIcon }}" alt="">
-                            </div>
-                            <span>{{ $menu['name'] }}</span>
-                        </a>
-                    </li>
-                @endif
-               
+                <li class="">
+                    <a href="{{ $menu['href'] }}" class="{{ '/' . Request::path() == $menu['href'] ? 'active' : '' }}">
+                        <div class="icon_menu">
+                            <img src="{{ $menu['icon'] }}" alt="">
+                        </div>
+                        <span>{{ $menu['name'] }}</span>
+                    </a>
+                </li>
             @endif
         @endforeach
 
