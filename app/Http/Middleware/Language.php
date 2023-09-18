@@ -31,6 +31,7 @@ class Language
             if ($request->method() == 'GET') {
                 return redirect("/zh-tw/{$urlPath}");
             }
+            $locale = 'zh-tw';
         }
 
         App::setLocale($locale);
