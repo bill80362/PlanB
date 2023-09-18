@@ -35,6 +35,10 @@ class PermissionService
                 'permissions' => $this->getProductItem(),
             ],
             [
+                'groupName' => __('國家&運費設定'),
+                'permissions' => $this->getCountryAndShippingFee(),
+            ],
+            [
                 'groupName' => __('系統管理群組'),
                 'permissions' => $this->getSystemItem(),
             ],
@@ -96,6 +100,19 @@ class PermissionService
             ],
         ];
     }
+
+    //國家&運費設定
+    private function getCountryAndShippingFee()
+    {
+        return [
+            [
+                'label' => __('語系管理'),
+                'groupKey' => 'language',
+                'actions' => ['read', 'create', 'update', 'delete']
+            ],
+        ];
+    }
+
 
     // 系統管理群組
     private function getSystemItem()

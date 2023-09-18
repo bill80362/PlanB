@@ -17,7 +17,7 @@ class MenuService
                 'permission' => ''
             ],
             [
-                'name' => '管理人管理',
+                'name' => __('管理人管理'),
                 'icon' => '/template/Salessa/img/menu-icon/5.svg',
                 'subMenu' => [
                     [
@@ -33,7 +33,18 @@ class MenuService
                 ]
             ],
             [
-                'name' => '會員管理',
+                'name' => __('國家&運費設定'),
+                'icon' => '/template/Salessa/img/menu-icon/5.svg',
+                'subMenu' => [
+                    [
+                        'name' => __('語系管理'),
+                        'href' => '/operate/language',
+                        'permission' => '' //user.read
+                    ],
+                ]
+            ],
+            [
+                'name' => __('會員管理'),
                 'icon' => '',
                 'subMenu' => [
                     [
