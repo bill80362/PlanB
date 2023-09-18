@@ -18,23 +18,26 @@ class LanguageService extends LaravelTranslator
 
     public function get($key, array $replace = [], $locale = null, $fallback = true)
     {
-        $ignoreKey = ['validation.'];
-        $check = Str::startsWith($key, $ignoreKey);
-        if (!$check) {
-            foreach (['1', '2', '3'] as $langType) {
-                // Language::firstOrCreate([
-                //     'type' => '4',
-                //     'lang_type' => $langType,
-                //     'text' => $key,
-                // ], [
-                //     'status' => 'Y',
-                //     'type' => '4',
-                //     'lang_type' => $langType,
-                //     'text' => $key,
-                //     'tran_text' => $key
-                // ]);
+        if (!app()->runningInConsole()) {
+            $ignoreKey = ['validation.'];
+            $check = Str::startsWith($key, $ignoreKey);
+            if (!$check) {
+                foreach (['1', '2', '3'] as $langType) {
+                    Language::firstOrCreate([
+                        'type' => '4',
+                        'lang_type' => $langType,
+                        'text' => $key,
+                    ], [
+                        'status' => 'Y',
+                        'type' => '4',
+                        'lang_type' => $langType,
+                        'text' => $key,
+                        'tran_text' => $key
+                    ]);
+                }
             }
         }
+
 
 
         return parent::get($key, $replace, $locale, $fallback);
