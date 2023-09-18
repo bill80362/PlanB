@@ -133,7 +133,7 @@
                                     <div>
                                         <button id="btnDeleteBatch"
                                             class="btn btn-sm btn-danger">{{ __('勾選刪除') }}</button>
-                                        <button class="btn btn-sm btn-warning">{{ __('更新排序') }}</button>
+                                        {{-- <button class="btn btn-sm btn-warning">{{ __('更新排序') }}</button> --}}
                                     </div>
                                     {{-- <div>
                                         <a class="btn btn-sm btn-warning"
