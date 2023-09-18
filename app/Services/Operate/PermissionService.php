@@ -108,7 +108,7 @@ class PermissionService
             [
                 'label' => __('語系管理'),
                 'groupKey' => 'language',
-                'actions' => ['read', 'create', 'update', 'delete']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
         ];
     }
