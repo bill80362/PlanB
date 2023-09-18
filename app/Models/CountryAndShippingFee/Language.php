@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Language extends Model
 {
     use HasFactory;
-    
+
     public $incrementing = true;
     protected $keyType = 'int';
-    // protected $table = 'table name';
     protected $guarded = [];
 
     //事件偵測 retrieved, creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored
@@ -23,7 +22,7 @@ class Language extends Model
 
     public array $Column_Title_Text = [
         "id" => "編號",
-        "status" => "校正狀態",
+        "status" => "狀態",
         "type" => "類型",
         "lang_type" => "語系",
         "text" => "名稱",
@@ -51,4 +50,25 @@ class Language extends Model
         "3" => "英文",
     ];
 
+    public array $langFileMap = [
+        "1" => "zh-tw.json",
+        "2" => "zh-cn.json",
+        "3" => "en.json",
+    ];
+
+    public function getValidatorRules()
+    {
+        return [
+            "status" => ['required'],
+            "type" => ['required'],
+            "lang_type" => ['required'],
+            "text" => ['required'],
+            "tran_text" => ['required'],
+            "memo" => ['required'],
+        ];
+    }
+    public function getValidatorMessage()
+    {
+        return [];
+    }
 }

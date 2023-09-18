@@ -26,6 +26,12 @@ Route::prefix('/operate')->group(function () {
         Route::post('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "update"])->whereNumber("id");
         Route::post('/member_data/del', [\App\Http\Controllers\Operation\MemberDataController::class, "delBatch"]);
         Route::get('/member_data/export', [\App\Http\Controllers\Operation\MemberDataController::class, 'export']);
+
+        //語系
+        Route::get('/language', [\App\Http\Controllers\Operation\LanguageController::class, "listHTML"])->name("language_list");
+        Route::get('/language/{id}', [\App\Http\Controllers\Operation\LanguageController::class, "updateHTML"])->whereNumber("id")->name("language_update_html");
+
+        Route::post('/language/{id}', [\App\Http\Controllers\Operation\LanguageController::class, "update"])->whereNumber("id")->name("language_update");
     });
 
     //登入

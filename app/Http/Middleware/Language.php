@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use App\Services\Operate\SystemConfigService;
 
 class Language
 {
@@ -17,6 +18,12 @@ class Language
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $systemConfigService = app(SystemConfigService::class);
+        $useLang = $systemConfigService->useLangPrefix;
+        if (!$useLang) {
+            return $next($request);
+        }
+
         $param = $request->route()->parameter('lang');
         $urlPath =  $request->path();
 

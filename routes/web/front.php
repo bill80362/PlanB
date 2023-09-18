@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Services\Operate\SystemConfigService;
 
 /**前台*/
 
@@ -17,7 +18,10 @@ Route::middleware(['lang'])->group(function () {
 /**
  * Get方法
  */
-Route::middleware(['lang'])->prefix('{lang?}')->group(function () {
+$systemConfigService = app(SystemConfigService::class);
+$useLangPrefix = $systemConfigService->useLangPrefix;
+
+Route::middleware(['lang'])->prefix($useLangPrefix ? '{lang?}' : '')->group(function () {
     Route::middleware(['auth:web_front'])->group(function () {
         Route::get('/member', [\App\Http\Controllers\Front\MemberController::class, 'index']);
         Route::get('/logout', [\App\Http\Controllers\Front\MemberController::class, "logout"]);
