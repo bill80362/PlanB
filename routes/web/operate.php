@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\App;
 
 /**後台*/
 Route::prefix('/operate')->group(function () {
+    //登入
+    Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, "loginHTML"]);
+    Route::post('/login', [\App\Http\Controllers\Operation\LoginController::class, "login"]);
+    Route::get('/logout', [\App\Http\Controllers\Operation\LoginController::class, "logout"]);
+
     Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
         Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, "index"]);
 
@@ -41,9 +46,4 @@ Route::prefix('/operate')->group(function () {
         // Route::post('/language/import', [\App\Http\Controllers\Operation\LanguageController::class, 'import'])->name("language_import");
         Route::post('/language/make_file', [\App\Http\Controllers\Operation\LanguageController::class, "makeFile"])->name("language_makeFile");
     });
-
-    //登入
-    Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, "loginHTML"]);
-    Route::post('/login', [\App\Http\Controllers\Operation\LoginController::class, "login"]);
-    Route::get('/logout', [\App\Http\Controllers\Operation\LoginController::class, "logout"]);
 });

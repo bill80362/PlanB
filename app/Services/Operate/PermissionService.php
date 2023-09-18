@@ -10,13 +10,13 @@ class PermissionService
     public function getDefineAction()
     {
         return [
-            'read' => __('讀取'),
-            'create' => __('新增'),
-            'update' => __('修改'),
-            'delete' => __('刪除'),
-            'export' => __('匯出'),
-            'import' => __('匯入'),
-            'print' => __('列印'),
+            'read' => '讀取',
+            'create' => '新增',
+            'update' => '修改',
+            'delete' => '刪除',
+            'export' => '匯出',
+            'import' => '匯入',
+            'print' => '列印',
         ];
     }
 
@@ -27,19 +27,19 @@ class PermissionService
     {
         $groups = [
             [
-                'groupName' => __('會員管理群組'),
+                'groupName' => '會員管理群組',
                 'permissions' => $this->getMemberItem(),
             ],
             [
-                'groupName' => __('商品管理群組'),
+                'groupName' => '商品管理群組',
                 'permissions' => $this->getProductItem(),
             ],
             [
-                'groupName' => __('國家&運費設定'),
+                'groupName' => '國家&運費設定',
                 'permissions' => $this->getCountryAndShippingFee(),
             ],
             [
-                'groupName' => __('系統管理群組'),
+                'groupName' => '系統管理群組',
                 'permissions' => $this->getSystemItem(),
             ],
         ];
@@ -73,12 +73,12 @@ class PermissionService
     {
         return [
             [
-                'label' => __('會員等級'),
+                'label' => '會員等級',
                 'groupKey' => 'memberLevel',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
             [
-                'label' => __('會員管理'),
+                'label' => '會員管理',
                 'groupKey' => 'member',
                 'actions' => ['read', 'create', 'update', 'delete']
             ],
@@ -89,12 +89,12 @@ class PermissionService
     {
         return [
             [
-                'label' => __('商品分店'),
+                'label' => '商品分店',
                 'groupKey' => 'prodMall',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
             [
-                'label' => __('商品分館'),
+                'label' => '商品分館',
                 'groupKey' => 'prodLib',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
@@ -106,7 +106,7 @@ class PermissionService
     {
         return [
             [
-                'label' => __('語系管理'),
+                'label' => '語系管理',
                 'groupKey' => 'language',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
@@ -119,12 +119,12 @@ class PermissionService
     {
         return [
             [
-                'label' => __('群組管理'),
+                'label' => '群組管理',
                 'groupKey' => 'permissionGroup',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
             [
-                'label' => __('後台使用者管理'),
+                'label' => '後台使用者管理',
                 'groupKey' => 'user',
                 'actions' => ['read', 'create', 'update', 'delete']
             ],
