@@ -125,4 +125,14 @@ class User extends Authenticatable implements ValidatorInterface
         //
         return $ExportList;
     }
+    //判斷匯入的時候，新增或是更新
+    public function scopeImportPrimary($query,array $UpdateData){
+        if ( isset($UpdateData["id"]) ) {
+            $query->where("id",$UpdateData["id"]);
+        }else{
+            $query->where("id",0);
+        }
+        //
+        return $query;
+    }
 }

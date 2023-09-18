@@ -33,6 +33,7 @@
                         </div>
                     </div>
                     <div class="white_card_body">
+                        @include('/operate/components/alert/error_message')
                         {{-- 搜尋START --}}
                         <form>
                             <div class="row">

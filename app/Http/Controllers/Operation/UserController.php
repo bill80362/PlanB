@@ -11,6 +11,7 @@ use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -127,15 +128,82 @@ class UserController extends Controller
 
     }
     //匯入
-    public function import(){
-        Excel::import(new UsersImport, $this->request->file('file')->store('temp'));
 
+    /**
+     * @throws \Exception
+     */
+    public function import(){
+        //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
+        $subjects=Excel::toCollection(null,$this->request->file('file')->store('temp'));
+        //根據第一列標題判斷對應的欄位
+        $value_to_key = array_flip($this->oModel->Column_Title_Text);
+        $excelIndex = [];
+        foreach ((array)$subjects->toArray()[0] as $RowKey => $Row){
+            if($RowKey>0) break;//只跑第一行
+            foreach ($Row as $index => $columnTitle){
+                //匯入資料欄位標題異常
+                if(!isset($value_to_key[$columnTitle])){
+                    return view('alert_redirect', [
+                        'Alert' => __("匯入標題異常"),
+                        'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+                    ]);
+                }
+                //
+                $excelIndex[$index] = $value_to_key[$columnTitle];
+            }
+        }
+        //開始逐筆匯入
+        $AllMessage = [];
+        foreach ((array)$subjects->toArray()[0] as $RowKey => $Row){
+            //第一列標題，跳過
+            if($RowKey==0) continue;
+            //資料對應整理
+            $UpdateData = [];
+            foreach ($Row as $index => $columnValue){
+                //特殊處理欄位
+                if($excelIndex[$index]=="password"){
+                    $this->oModel->newPassword = $columnValue;
+                    $UpdateData[$excelIndex[$index]] =  Hash::make($columnValue);
+                }else{
+                    $UpdateData[$excelIndex[$index]] = $columnValue;
+                }
+            }
+            //驗證資料
+            $validator = Validator::make(
+                $UpdateData,
+                $this->oModel->getValidatorRules(),
+                $this->oModel->getValidatorMessage(),
+            );
+            //驗證有誤
+            if ($validator->fails()) {
+                //
+                $AllMessage[] = "第{$RowKey}列:".implode(",",$validator->messages()->all());
+                //
+                continue;
+            }
+            //開始新增或更新
+            $Data = $this->oModel->importPrimary($UpdateData)->first();
+            if($Data){
+                $this->oModel->find($Data->id)->update($UpdateData);
+            }else{
+                $this->oModel->create($UpdateData)->id;
+            }
+        }
+        //有錯誤
+        if($AllMessage){
+            return redirect()->back()->withErrors(['message' => implode(",",$AllMessage)]);
+        }
+        //
+        return view('alert_redirect', [
+            'Alert' => __("送出成功"),
+            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+        ]);
     }
     //匯出
     public function export(){
         //匯出的標題和內文
         $ExportList = $this->oModel->filter($this->request->all())->export();
         //匯出
-        return (new Collection($ExportList))->downloadExcel("member_data_".time().".xlsx");
+        return (new Collection($ExportList))->downloadExcel("user_data_".time().".xlsx");
     }
 }

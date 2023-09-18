@@ -37,15 +37,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 {{-- 錯誤訊息 --}}
-                                                @if ($errors->any())
-                                                    <div class="col-12 alert alert-danger">
-                                                        <ul>
-                                                            @foreach ($errors->all() as $error)
-                                                                <li>{{ $error }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                @endif
+                                                @include('/operate/components/alert/error_message')
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label>{{ __('是否啟用') }}</label>

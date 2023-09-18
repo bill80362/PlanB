@@ -36,7 +36,7 @@ class ImageTest extends TestCase
         Image::load(__DIR__ . '/images/example.jpg')
             ->width(250)
             ->height(250)
-            ->border(15, '007698', Manipulations::BORDER_EXPAND) // 邊框
+            ->border(15, '007698', Manipulations::CROP_RIGHT) // 邊框
             ->save($targetPath);
         $this->assertTrue(true);
     }
