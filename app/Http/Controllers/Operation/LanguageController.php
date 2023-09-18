@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CountryAndShippingFee\Language;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
 
 class LanguageController extends Controller
 {
@@ -102,6 +103,15 @@ class LanguageController extends Controller
             'Alert' => "刪除成功",
             'Redirect' => route('language_list') . '?' . $this->request->getQueryString(),
         ]);
+    }
+
+    //匯出
+    public function export()
+    {
+        //匯出的標題和內文
+        $ExportList = $this->oModel->filter($this->request->all())->export();
+        //匯出
+        return (new Collection($ExportList))->downloadExcel("language_data_" . time() . ".xlsx");
     }
 
     /**

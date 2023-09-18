@@ -33,6 +33,8 @@ Route::prefix('/operate')->group(function () {
 
         Route::post('/language/{id}', [\App\Http\Controllers\Operation\LanguageController::class, "update"])->whereNumber("id")->name("language_update");
         Route::post('/language/del', [\App\Http\Controllers\Operation\LanguageController::class, "delBatch"])->name("language_del");
+        Route::get('/language/export', [\App\Http\Controllers\Operation\LanguageController::class, 'export'])->name("language_export");
+        // Route::post('/language/import', [\App\Http\Controllers\Operation\LanguageController::class, 'import'])->name("language_import");
         Route::post('/language/make_file', [\App\Http\Controllers\Operation\LanguageController::class, "makeFile"])->name("language_makeFile");
     });
 

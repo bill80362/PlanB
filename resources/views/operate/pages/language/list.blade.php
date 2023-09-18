@@ -120,7 +120,7 @@
                                         <a class="btn btn-sm btn-secondary"
                                             href="{{ request()->url() }}">{{ __('取消') }}</a>
                                         <a class="btn btn-warning"
-                                            href="{{ route('user_export') }}?{{ request()->getQueryString() }}">{{ __('匯出') }}</a>
+                                            href="{{ route('language_export') }}?{{ request()->getQueryString() }}">{{ __('匯出') }}</a>
                                     </div>
                                 </div>
                             </div>
