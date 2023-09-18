@@ -22,7 +22,7 @@ class LanguageController extends Controller
     {
         $pageLimit = $this->request->get("pageLimit") ?: 10; //預設10
         //過濾條件
-        $Paginator = $this->oModel->paginate($pageLimit);
+        $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
         return view('operate/pages/language/list', [
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
@@ -38,8 +38,11 @@ class LanguageController extends Controller
             $Data = $this->oModel;
             //新增預設值
             $Data->id = 0;
-            $Data->name = "";
-            $Data->email = "";
+            $Data->type = '1';
+            $Data->lang_type = '1';
+            $Data->text = "";
+            $Data->tran_text = "";
+            $Data->memo = "";
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array)$this->request->old() as $key => $value) {
@@ -50,6 +53,7 @@ class LanguageController extends Controller
         //View
         return view('operate/pages/language/update', [
             'Data' => $Data,
+            'Model' => $this->oModel,
         ]);
     }
 
@@ -85,7 +89,25 @@ class LanguageController extends Controller
         ]);
     }
 
-    public function makeJsonFile()
+
+    //批次刪除
+    public function delBatch()
+    {
+        //刪除
+        foreach ((array)$this->request->post("id_array") as $id) {
+            $this->oModel->find($id)->delete();
+        }
+        //
+        return view('alert_redirect', [
+            'Alert' => "刪除成功",
+            'Redirect' => route('language_list') . '?' . $this->request->getQueryString(),
+        ]);
+    }
+
+    /**
+     * 產生語系檔
+     */
+    public function makeFile()
     {
         foreach ($this->oModel->langFileMap as $langType => $fileName) {
             $languageDatas = $this->oModel->select('text', 'tran_text')
@@ -100,5 +122,7 @@ class LanguageController extends Controller
             fwrite($fp, $jsonString);
             fclose($fp);
         }
+
+        return back();
     }
 }

@@ -20,6 +20,10 @@
                                     data-bs-target="#importModal">
                                     {{ __('匯入') }}
                                 </button>
+                                <button type="button" class="btn btn-sm btn-info mr-2" data-bs-toggle="modal"
+                                    data-bs-target="#makeFileModal">
+                                    {{ __('更新語系檔案') }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -40,25 +44,55 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>{{ $Model->Column_Title_Text['type'] }}</label>
+                                        <select name="filter_type[]" class="select2bs5" multiple="multiple"
+                                            style="width: 100%;">
+                                            @foreach ($Model->typeText as $key => $value)
+                                                <option value="{{ $key }}"
+                                                    {{ in_array($key, (array) request()->get('filter_type')) ? 'selected' : '' }}>
+                                                    {{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>{{ $Model->Column_Title_Text['lang_type'] }}</label>
+                                        <select name="filter_lang_type[]" class="select2bs5" multiple="multiple"
+                                            style="width: 100%;">
+                                            @foreach ($Model->langTypeText as $key => $value)
+                                                <option value="{{ $key }}"
+                                                    {{ in_array($key, (array) request()->get('filter_lang_type')) ? 'selected' : '' }}>
+                                                    {{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <label>文字搜尋</label>
+                                    <label>{{ __('文字搜尋') }}</label>
                                     <div class="form-group">
                                         <div class="input-group input-group">
                                             <div class="input-group-prepend">
                                                 <select class="form-control" name="filter_text_key">
-                                                    <option value="">不限制</option>
-                                                    <option value="name"
-                                                        {{ request()->get('filter_text_key') == 'name' ? 'selected' : '' }}>
-                                                        名稱
+                                                    <option value="">{{ __('不限制') }}</option>
+                                                    <option value="text"
+                                                        {{ request()->get('filter_text_key') == 'text' ? 'selected' : '' }}>
+                                                        {{ __('名稱') }}
                                                     </option>
-                                                    <option value="id"
-                                                        {{ request()->get('filter_text_key') == 'id' ? 'selected' : '' }}>ID
+                                                    <option value="tran_text"
+                                                        {{ request()->get('filter_text_key') == 'tran_text' ? 'selected' : '' }}>
+                                                        {{ __('翻譯後名稱') }}
                                                     </option>
-                                                    <option value="email"
-                                                        {{ request()->get('filter_text_key') == 'email' ? 'selected' : '' }}>
-                                                        Email</option>
+                                                    <option value="memo"
+                                                        {{ request()->get('filter_text_key') == 'memo' ? 'selected' : '' }}>
+                                                        {{ __('備註') }}</option>
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" name="filter_text_value"
@@ -172,20 +206,45 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="importModalLabel">匯入新增</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title" id="importModalLabel">{{ __('匯入新增') }}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h6 class="card-subtitle mb-2">請上傳Excel檔案</h6>
+                        <h6 class="card-subtitle mb-2">{{ __('請上傳Excel檔案') }}</h6>
                         <div class=" mb-0">
                             <input type="file" class="" name="file">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                        <button type="submit" class="btn btn-primary">送出</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('關閉') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('送出') }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="makeFileModal" tabindex="-1" data-toggle="makeFileModal" role="dialog" aria-labelledby="makeFileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('language_makeFile') }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="makeFileModalLabel">{{ __('更新語系檔案') }}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="card-subtitle mb-2">{{ __('是否要執行此操作？') }}</h6>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('關閉') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('確認') }}</button>
                     </div>
                 </div>
             </form>

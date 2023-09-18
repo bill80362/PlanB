@@ -64,11 +64,39 @@ class Language extends Model
             "lang_type" => ['required'],
             "text" => ['required'],
             "tran_text" => ['required'],
-            "memo" => ['required'],
+            "memo" => [''],
         ];
     }
     public function getValidatorMessage()
     {
         return [];
+    }
+
+
+    public function scopeFilter($query, array $Data)
+    {
+        //過濾選項
+        if (isset($Data["filter_status"])) {
+            $query->whereIn('status', (array)$Data["filter_status"]);
+        }
+
+        if (isset($Data["filter_type"])) {
+            $query->whereIn('type', (array)$Data["filter_type"]);
+        }
+
+        if (isset($Data["filter_lang_type"])) {
+            $query->whereIn('lang_type', (array)$Data["filter_lang_type"]);
+        }
+        //過濾文字條件
+        if (isset($Data["filter_text_key"])) {
+            $query->where($Data["filter_text_key"], 'like', '%' . $Data["filter_text_value"] . '%');
+        }
+        //排序
+        if (isset($Data["order_by"])) {
+            $order_by = explode(",", $Data["order_by"]);
+            $query->orderBy($order_by[0], $order_by[1]);
+        }
+        //
+        return $query;
     }
 }
