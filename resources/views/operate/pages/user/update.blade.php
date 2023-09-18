@@ -1,4 +1,4 @@
-@extends('admin.layout._Master')
+@extends('operate.layout._Master')
 
 @section('HeaderCSS')
 

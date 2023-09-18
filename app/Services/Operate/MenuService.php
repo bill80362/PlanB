@@ -39,7 +39,7 @@ class MenuService
                     [
                         'name' => __('語系管理'),
                         'href' => '/operate/language',
-                        'permission' => '' //user.read
+                        'permission' => 'language_read'
                     ],
                 ]
             ],
@@ -62,7 +62,7 @@ class MenuService
         ];
     }
 
-     /**
+    /**
      * 取得使用者有權限的選單
      */
     public function userMenu()
@@ -73,7 +73,7 @@ class MenuService
         $userMenus = [];
         foreach ($menus as $menu) {
             if ((array_key_exists('subMenu', $menu))) {
-                if ($this->checkSubMenuPermission($menu['subMenu'])) {
+                if ($this->checkSubMenuPermission($menu['subMenu'], $user)) {
                     // array_push($userMenus, $menu);
                     $userSubMenus = [];
                     foreach ($menu['subMenu'] as $subMenu) {
@@ -92,14 +92,13 @@ class MenuService
                 }
             }
         }
-
         return $userMenus;
     }
 
-    public function checkSubMenuPermission($subMenus)
+    public function checkSubMenuPermission($subMenus, $user)
     {
         foreach ($subMenus as $subMenu) {
-            if ($subMenu['permission'] == '' || Gate::allows($subMenu['permission'])) {
+            if ($subMenu['permission'] == '' || $user->can($subMenu['permission'])) {
                 return true;
             }
         }

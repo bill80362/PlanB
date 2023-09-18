@@ -13,13 +13,18 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <h2>{{ __('語系管理') }}</h2>
                             <div>
-                                <a class="btn btn-sm btn-primary mr-2"
-                                    href="{{ route('language_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
-                                    {{ __('新增') }} </a>
-                                <button type="button" class="btn btn-sm btn-warning mr-2" data-bs-toggle="modal"
-                                    data-bs-target="#importModal">
-                                    {{ __('匯入') }}
-                                </button>
+                                @can('language_create')
+                                    <a class="btn btn-sm btn-primary mr-2"
+                                        href="{{ route('language_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
+                                        {{ __('新增') }} </a>
+                                @endcan
+                                @can('language_import')
+                                    <button type="button" class="btn btn-sm btn-warning mr-2" data-bs-toggle="modal"
+                                        data-bs-target="#importModal">
+                                        {{ __('匯入') }}
+                                    </button>
+                                @endcan
+
                                 <button type="button" class="btn btn-sm btn-info mr-2" data-bs-toggle="modal"
                                     data-bs-target="#makeFileModal">
                                     {{ __('更新語系檔案') }}
@@ -131,14 +136,11 @@
                             <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <button id="btnDeleteBatch"
-                                            class="btn btn-sm btn-danger">{{ __('勾選刪除') }}</button>
-                                        {{-- <button class="btn btn-sm btn-warning">{{ __('更新排序') }}</button> --}}
+                                        @can('language_delete')
+                                            <button id="btnDeleteBatch"
+                                                class="btn btn-sm btn-danger">{{ __('勾選刪除') }}</button>
+                                        @endcan
                                     </div>
-                                    {{-- <div>
-                                        <a class="btn btn-sm btn-warning"
-                                            href="{{ route('user_export') }}?{{ request()->getQueryString() }}">{{ __('匯出') }}</a>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -173,14 +175,18 @@
                                                 <td>{{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-primary"
-                                                        href="/operate/language/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
-                                                    <button class="btn btn-sm btn-danger" type="button"
-                                                        onclick="postForm('/operate/language/del?{{ request()->getQueryString() }}',{
+                                                    @can('language_update')
+                                                        <a class="btn btn-sm btn-primary"
+                                                            href="/operate/language/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                    @endcan
+                                                    @can('language_delete')
+                                                        <button class="btn btn-sm btn-danger" type="button"
+                                                            onclick="postForm('/operate/language/del?{{ request()->getQueryString() }}',{
                                                                             'id_array[]':{{ $Item->id }},
                                                                             _token:'{{ csrf_token() }}'
                                                                             })">{{ __('刪除') }}
-                                                    </button>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -218,7 +224,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('關閉') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('關閉') }}</button>
                         <button type="submit" class="btn btn-primary">{{ __('送出') }}</button>
                     </div>
                 </div>
@@ -226,8 +233,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="makeFileModal" tabindex="-1" data-toggle="makeFileModal" role="dialog" aria-labelledby="makeFileModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="makeFileModal" tabindex="-1" data-toggle="makeFileModal" role="dialog"
+        aria-labelledby="makeFileModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('language_makeFile') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -240,10 +247,11 @@
                     </div>
                     <div class="modal-body">
                         <h6 class="card-subtitle mb-2">{{ __('是否要執行此操作？') }}</h6>
-                        
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('關閉') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('關閉') }}</button>
                         <button type="submit" class="btn btn-primary">{{ __('確認') }}</button>
                     </div>
                 </div>

@@ -133,6 +133,11 @@ return [
             'path' => storage_path('logs/api.log'),
             'channels' => ['daily'],
         ],
+        'erp_log' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/erp/erp.log'),
+            'channels' => ['daily'],
+        ],
     ],
 
 ];
