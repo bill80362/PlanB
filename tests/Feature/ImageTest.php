@@ -8,22 +8,23 @@ use Tests\TestCase;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
 
+/**
+ * @link https://spatie.be/docs/image/v1/introduction
+ */
 class ImageTest extends TestCase
 {
     /**
-     * 官網範例
-     * @link https://spatie.be/docs/image/v1/introduction
+     * 修改尺吋，補上邊框
      */
-    public function test_example(): void
+    public function test_fit(): void
     {
         $targetPath = __DIR__ . '/images/another.jpg';
         Image::load(__DIR__ . '/images/example.jpg')
-            ->sepia() // 棕褐色
-            // ->blur(50) //模糊-(速度會變慢)
+            ->fit(Manipulations::FIT_FILL, 500, 700)
             ->save($targetPath);
 
         $this->assertTrue(file_exists($targetPath));
-        unlink($targetPath);
+        // unlink($targetPath);
     }
 
     /**
