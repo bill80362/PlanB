@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,15 +17,15 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-//        $this->app->bind(SystemConfig::class, function ($app) {
-//            return new SystemConfig("register1");
-//        });
-//        $this->app->bind(SystemConfig::class, function ($app) {
-//            return new SystemConfig("register2");
-//        });
-//        $this->app->singleton(SystemConfig::class, function ($app) {
-//            return new SystemConfig();
-//        });
+        //        $this->app->bind(SystemConfig::class, function ($app) {
+        //            return new SystemConfig("register1");
+        //        });
+        //        $this->app->bind(SystemConfig::class, function ($app) {
+        //            return new SystemConfig("register2");
+        //        });
+        //        $this->app->singleton(SystemConfig::class, function ($app) {
+        //            return new SystemConfig();
+        //        });
     }
 
     /**
@@ -32,9 +33,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // 在測試環境中強制關閉 Lazy Loading
+        Model::preventLazyLoading(!app()->isProduction());
         //會蓋掉原本的
-//        $this->app->singleton(SystemConfig::class, function ($app) {
-//            return new SystemConfig("boot");
-//        });
+        //        $this->app->singleton(SystemConfig::class, function ($app) {
+        //            return new SystemConfig("boot");
+        //        });
     }
 }
