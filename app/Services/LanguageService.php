@@ -22,17 +22,17 @@ class LanguageService extends LaravelTranslator
         $check = Str::startsWith($key, $ignoreKey);
         if (!$check) {
             foreach (['1', '2', '3'] as $langType) {
-                Language::firstOrCreate([
-                    'type' => '4',
-                    'lang_type' => $langType,
-                    'text' => $key,
-                ], [
-                    'status' => 'Y',
-                    'type' => '4',
-                    'lang_type' => $langType,
-                    'text' => $key,
-                    'tran_text' => $key
-                ]);
+                // Language::firstOrCreate([
+                //     'type' => '4',
+                //     'lang_type' => $langType,
+                //     'text' => $key,
+                // ], [
+                //     'status' => 'Y',
+                //     'type' => '4',
+                //     'lang_type' => $langType,
+                //     'text' => $key,
+                //     'tran_text' => $key
+                // ]);
             }
         }
 
