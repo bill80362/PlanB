@@ -30,11 +30,10 @@ class LoginController extends \App\Http\Controllers\Controller
             return back()->withErrors([
                 'errors' => ['帳號或密碼有誤，請重新確認輸入']
             ]);
-
         }
 
         auth('operate')->login($user);
-        return redirect("/operate");
+        return redirect("/operate/dashboard");
     }
 
     public function logout()

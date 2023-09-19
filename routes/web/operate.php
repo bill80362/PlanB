@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\App;
 /**後台*/
 Route::prefix('/operate')->group(function () {
     //登入
+    Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, "index"]);
     Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, "loginHTML"]);
     Route::post('/login', [\App\Http\Controllers\Operation\LoginController::class, "login"]);
     Route::get('/logout', [\App\Http\Controllers\Operation\LoginController::class, "logout"]);
 
     Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
-        Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, "index"]);
+
 
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, "dashboard"]);
