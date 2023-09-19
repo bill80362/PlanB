@@ -61,13 +61,13 @@ class User extends Authenticatable implements Auditable
         // 'deleted' => xxx::class,
     ];
     /**
-     * Audit外掛 標記Tag
+     * Audit外掛 標記Tag 多筆資料逗號分隔
      */
     public function generateTags(): array
     {
         return [
-            $this->id,
-            $this->name,
+//            $this->id,
+//            $this->name,
         ];
     }
 

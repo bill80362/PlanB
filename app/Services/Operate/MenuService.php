@@ -44,18 +44,13 @@ class MenuService
                 ]
             ],
             [
-                'name' => __('會員管理'),
+                'name' => __('操作紀錄'),
                 'icon' => '',
                 'subMenu' => [
                     [
-                        'name' => __('會員資料'),
-                        'href' => '/operate/member_data',
+                        'name' => __('操作紀錄'),
+                        'href' => '/operate/audit',
                         'permission' => '' //member.read
-                    ],
-                    [
-                        'name' => __('會員等級'),
-                        'href' => '/operate/member_level',
-                        'permission' => 'memberLevel.read'
                     ],
                 ]
             ],
