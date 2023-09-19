@@ -61,7 +61,7 @@ class User extends Authenticatable implements Auditable
         // 'deleted' => xxx::class,
     ];
     /**
-     * 標記Tag
+     * Audit外掛 標記Tag
      */
     public function generateTags(): array
     {
