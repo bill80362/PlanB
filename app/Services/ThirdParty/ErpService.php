@@ -2,13 +2,10 @@
 
 namespace App\Services\ThirdParty;
 
-use App\Models;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Http;
 
 /**
- * 第三方串接範例
+ * 第三方串接範例，資料夾命名需確認
  */
 class ErpService
 {
