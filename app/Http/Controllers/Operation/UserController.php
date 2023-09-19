@@ -168,9 +168,20 @@ class UserController extends Controller
                     $UpdateData[$excelIndex[$index]] = $columnValue;
                 }
             }
+            //
+            $DataModel = $this->oModel->importPrimary($UpdateData)->first();
+            if(!$DataModel){
+                $DataModel = clone $this->oModel;
+            }
+            foreach ($UpdateData as $ColumnTitle => $value){
+                if($ColumnTitle=="password"){
+                    $DataModel->newPassword = $value;
+                }
+                $DataModel->$ColumnTitle = $value;
+            }
             //驗證資料
             $validator = Validator::make(
-                $UpdateData,
+                $DataModel->makeVisible("password")->toArray(),
                 $this->oModel->getValidatorRules(),
                 $this->oModel->getValidatorMessage(),
             );
@@ -181,13 +192,7 @@ class UserController extends Controller
                 //
                 continue;
             }
-            //開始新增或更新
-            $Data = $this->oModel->importPrimary($UpdateData)->first();
-            if($Data){
-                $this->oModel->find($Data->id)->update($UpdateData);
-            }else{
-                $this->oModel->create($UpdateData)->id;
-            }
+            $DataModel->save();
         }
         //有錯誤
         if($AllMessage){

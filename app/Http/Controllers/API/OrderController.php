@@ -12,6 +12,7 @@ class OrderController extends Controller
 
     public function queryOrder(Request $request)
     {
+        __("");
         $user = auth('erp')->user();
         // $test = User::where('id', 55)->firstOrFail(); //錯誤測試
         return [
