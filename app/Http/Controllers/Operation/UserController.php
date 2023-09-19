@@ -127,10 +127,9 @@ class UserController extends Controller
         $ID_Array = $this->request->post("sort");
 
     }
-    //匯入
 
     /**
-     * @throws \Exception
+     * 匯入
      */
     public function import(){
         //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
@@ -161,17 +160,19 @@ class UserController extends Controller
             $UpdateData = [];
             foreach ($Row as $index => $columnValue){
                 //特殊處理欄位
-                if($excelIndex[$index]=="password"){
+                if($excelIndex[$index]=="password") {
                     $this->oModel->newPassword = $columnValue;
-                    $UpdateData[$excelIndex[$index]] =  Hash::make($columnValue);
+                    $UpdateData[$excelIndex[$index]] = Hash::make($columnValue);
+                }elseif($excelIndex[$index]=="status"){
+                    $UpdateData[$excelIndex[$index]] = array_flip($this->oModel->statusText)[$columnValue];
                 }else{
                     $UpdateData[$excelIndex[$index]] = $columnValue;
                 }
             }
-            //
+            //整理要更新的資料
             $DataModel = $this->oModel->importPrimary($UpdateData)->first();
             if(!$DataModel){
-                $DataModel = clone $this->oModel;
+                $DataModel = clone $this->oModel;//沒有對應的資料，init一個
             }
             foreach ($UpdateData as $ColumnTitle => $value){
                 if($ColumnTitle=="password"){
