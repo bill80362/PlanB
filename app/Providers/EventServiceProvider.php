@@ -30,17 +30,17 @@ class EventServiceProvider extends ServiceProvider
             UserLoginListener::class
         ],
         Auth\Events\Logout::class => [],
-
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // ... other providers
             \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
+            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
+            \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
         ],
         //Model監聽事件
         MemberDataSavingEvent::class => [
             MemberDataSaving::class,
         ],
         //
-        DemoQueueEvent::class=> [
+        DemoQueueEvent::class => [
             DemoQueueListener::class,
         ]
     ];
@@ -55,10 +55,10 @@ class EventServiceProvider extends ServiceProvider
             PodcastProcessed::class,
             [SendPodcastNotification::class, 'handle']
         );
-//        //啟用監聽
-//        Event::listen(function (PodcastProcessed $event) {
-//
-//        });
+        //        //啟用監聽
+        //        Event::listen(function (PodcastProcessed $event) {
+        //
+        //        });
     }
 
     /**

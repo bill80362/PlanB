@@ -14,7 +14,7 @@ interface InvoiceContract
     public function cancelInvoice(array $input);
 
     // 發票折讓
-    public function InvoiceDiscount(array $input);
+    public function invoiceDiscount(array $input);
 
     // 發票查詢
     public function queryInvoice(string $no);
