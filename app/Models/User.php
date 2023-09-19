@@ -60,6 +60,16 @@ class User extends Authenticatable implements Auditable
         // 'updated' => xxx::class,
         // 'deleted' => xxx::class,
     ];
+    /**
+     * 標記Tag
+     */
+    public function generateTags(): array
+    {
+        return [
+            $this->id,
+            $this->name,
+        ];
+    }
 
     public function permissions()
     {
