@@ -16,7 +16,7 @@ class LanguageTest extends TestCase
     public function test_make_file(): void
     {
         $languageController = app(LanguageController::class);
-        $languageController->makeJsonFile();
+        $languageController->makeFile();
         $this->assertTrue(true);
     }
 }

@@ -30,19 +30,6 @@ class Language extends Model
         "memo" => "備註",
     ];
 
-    public array $statusText = [
-        "Y" => "啟用",
-        "N" => "停用",
-    ];
-
-    public array $typeText = [
-        "1" => "前台",
-        "2" => "系統",
-        "3" => "JS程式語系",
-        "4" => "PHP程式語系",
-        "5" => "共用",
-        "6" => "郵件語系",
-    ];
 
     public array $langTypeText = [
         "1" => "繁體中文",
@@ -59,8 +46,6 @@ class Language extends Model
     public function getValidatorRules()
     {
         return [
-            "status" => ['required'],
-            "type" => ['required'],
             "lang_type" => ['required'],
             "text" => ['required'],
             "tran_text" => ['required'],
@@ -76,18 +61,11 @@ class Language extends Model
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if (isset($Data["filter_status"])) {
-            $query->whereIn('status', (array)$Data["filter_status"]);
-        }
-
-        if (isset($Data["filter_type"])) {
-            $query->whereIn('type', (array)$Data["filter_type"]);
-        }
-
-        if (isset($Data["filter_lang_type"])) {
+        if (isset($Data["lang_type"])) {
             $query->whereIn('lang_type', (array)$Data["filter_lang_type"]);
         }
         //過濾文字條件
+        // dd($Data);
         if (isset($Data["filter_text_key"])) {
             $query->where($Data["filter_text_key"], 'like', '%' . $Data["filter_text_value"] . '%');
         }
