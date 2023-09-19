@@ -3,32 +3,31 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use App\Models\Permission\Permission;
-use App\Models\User;
 use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
-class UserController extends Controller
+class AuditController extends Controller
 {
     public function __construct(
         protected Request $request,
         protected SystemConfigService $oSystemConfigService,
-        protected User $oModel,
+        protected AuditLog $oModel,
     ){}
     public function listHTML(){
         //
         $pageLimit = $this->request->get("pageLimit")?:10;//預設10
         //過濾條件
-        $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
+        $Paginator = $this->oModel->filter($this->request->all())->with('user')->paginate($pageLimit);
         //
 //        dd($this->oModel->statusText);
-        return view('operate/pages/user/list', [
+        return view('operate/pages/audit/list', [
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
@@ -61,7 +60,7 @@ class UserController extends Controller
             ]);
         }
         //View
-        return view('operate/pages/user/update', [
+        return view('operate/pages/audit/update', [
             'Data' => $Data,
             'DataPermission' => $DataPermission,
             'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
@@ -105,7 +104,7 @@ class UserController extends Controller
         //
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
-            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+            'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
         ]);
     }
     //批次刪除
@@ -117,7 +116,7 @@ class UserController extends Controller
         //
         return view('alert_redirect', [
             'Alert' => "刪除成功",
-            'Redirect' => route('user_list').'?'.$this->request->getQueryString(),
+            'Redirect' => route('audit_list').'?'.$this->request->getQueryString(),
         ]);
     }
     //批次修改排序
@@ -142,7 +141,7 @@ class UserController extends Controller
                 if(!isset($value_to_key[$columnTitle])){
                     return view('alert_redirect', [
                         'Alert' => __("匯入標題異常"),
-                        'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+                        'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
                     ]);
                 }
                 //
@@ -200,7 +199,7 @@ class UserController extends Controller
         //
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
-            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+            'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
         ]);
     }
     //匯出
@@ -208,18 +207,6 @@ class UserController extends Controller
         //匯出的標題和內文
         $ExportList = $this->oModel->filter($this->request->all())->export();
         //匯出
-        return (new Collection($ExportList))->downloadExcel("user_data_".time().".xlsx");
-    }
-    //修改紀錄
-    public function audit($id){
-        //
-        $pageLimit = $this->request->get("pageLimit")?:10;//預設10
-        //
-        $Paginator = $this->oModel->findOrFail($id)->audits()->with('user')->orderBy("id","desc")->paginate($pageLimit);
-        return view('operate/pages/user/audit', [
-            'Paginator' => $Paginator,
-            //
-            'Model' => $this->oModel,
-        ]);
+        return (new Collection($ExportList))->downloadExcel("audit_data_".time().".xlsx");
     }
 }

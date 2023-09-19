@@ -17,7 +17,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | User Morph prefix & Guards
+    | User Morph prefix & Guards 操作人身分設定
     |--------------------------------------------------------------------------
     |
     | Define the morph prefix and authentication guards for the User resolver.
@@ -38,7 +38,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Audit Resolvers
+    | Audit Resolvers 要增加紀錄資料欄位，再這邊增加
     |--------------------------------------------------------------------------
     |
     | Define the IP Address, User Agent and URL resolver implementations.
@@ -52,7 +52,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Audit Events
+    | Audit Events 觸發事件
     |--------------------------------------------------------------------------
     |
     | The Eloquent events that trigger an Audit.
@@ -68,18 +68,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Strict Mode
+    | Strict Mode 開啟後，會參考hidden、visible設定不紀錄
     |--------------------------------------------------------------------------
     |
     | Enable the strict mode when auditing?
     |
     */
 
-    'strict' => false,
+    'strict' => true,
 
     /*
     |--------------------------------------------------------------------------
-    | Global exclude
+    | Global exclude 排除欄位名稱
     |--------------------------------------------------------------------------
     |
     | Have something you always want to exclude by default? - add it here.
@@ -122,7 +122,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Audit Threshold
+    | Audit Threshold 批次修改不紀錄的門檻
     |--------------------------------------------------------------------------
     |
     | Specify a threshold for the amount of Audit records a model can have.
@@ -145,7 +145,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Audit Driver Configurations
+    | Audit Driver Configurations 寫入的DB，看設定可以改成檔案型態和ElasticSearch(專門用於全文搜索用)
     |--------------------------------------------------------------------------
     |
     | Available audit drivers and respective configurations.

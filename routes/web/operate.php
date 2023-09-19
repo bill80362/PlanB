@@ -25,13 +25,22 @@ Route::prefix('/operate')->group(function () {
         Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("user_del");
         Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("user_export");
         Route::post('/user/import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("user_import");
+        Route::get('/user/{id}/audit', [\App\Http\Controllers\Operation\UserController::class, 'audit'])->whereNumber("id")->name("user_audit");
+
+        //操作紀錄
+        Route::get('/audit', [\App\Http\Controllers\Operation\AuditController::class, "listHTML"])->name("audit_list");
+        Route::get('/audit/{id}', [\App\Http\Controllers\Operation\AuditController::class, "updateHTML"])->whereNumber("id")->name("audit_update_html");
+        Route::post('/audit/{id}', [\App\Http\Controllers\Operation\AuditController::class, "update"])->whereNumber("id")->name("audit_update");
+        Route::post('/audit/del', [\App\Http\Controllers\Operation\AuditController::class, "delBatch"])->name("audit_del");
+        Route::get('/audit/export', [\App\Http\Controllers\Operation\AuditController::class, 'export'])->name("audit_export");
+        Route::post('/audit/import', [\App\Http\Controllers\Operation\AuditController::class, 'import'])->name("audit_import");
 
         //Member_Data
-        Route::get('/member_data', [\App\Http\Controllers\Operation\MemberDataController::class, "listHTML"]);
-        Route::get('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "updateHTML"])->whereNumber("id");
-        Route::post('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "update"])->whereNumber("id");
-        Route::post('/member_data/del', [\App\Http\Controllers\Operation\MemberDataController::class, "delBatch"]);
-        Route::get('/member_data/export', [\App\Http\Controllers\Operation\MemberDataController::class, 'export']);
+//        Route::get('/member_data', [\App\Http\Controllers\Operation\MemberDataController::class, "listHTML"]);
+//        Route::get('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "updateHTML"])->whereNumber("id");
+//        Route::post('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "update"])->whereNumber("id");
+//        Route::post('/member_data/del', [\App\Http\Controllers\Operation\MemberDataController::class, "delBatch"]);
+//        Route::get('/member_data/export', [\App\Http\Controllers\Operation\MemberDataController::class, 'export']);
 
         //語系
         Route::get('/language', [\App\Http\Controllers\Operation\LanguageController::class, "listHTML"])->name("language_list")
