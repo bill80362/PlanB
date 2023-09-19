@@ -11,23 +11,12 @@ class Member_Data extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'Member_Data';
-    protected $primaryKey = 'ID';
+    protected $table = 'member_data';
+    protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'int';
-    //
-    // public $timestamps = false;
-    // protected $dateFormat = 'U';
-    // const CREATED_AT = 'Build_Date';
-    // const UPDATED_AT = '';
-    //
-    protected $guarded = [];
 
-    //事件偵測 retrieved, creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored
-    protected $dispatchesEvents = [
-        'saving' => MemberDataSavingEvent::class,
-//        'deleted' => UserDeleted::class,
-    ];
+    protected $guarded = [];
 
     //狀態文字
     public array $Formal_Flag_Text = [
@@ -35,9 +24,8 @@ class Member_Data extends Authenticatable
         2 => "正式",
     ];
     public array $Column_Title_Text = [
-        "ID" => "編號",
-        "Name" => "姓名",
-        "MemberNum" => "會員編號",
+        "id" => "編號",
+        "name" => "姓名",
         "UUID" => "第三方編號",
         "Formal_Flag" => "狀態",
         "Email" => "Email",
@@ -48,10 +36,7 @@ class Member_Data extends Authenticatable
         "UID" => "FB_ID",
         "Member_Level_ID" => "會員等級",
     ];
-    public function formatMemberNum(int $number): string
-    {
-        return "M".str_pad($number,"8","0",STR_PAD_LEFT);
-    }
+
     public function getValidatorRules(){
         $Array = [
             "Name" => "required",
