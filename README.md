@@ -29,6 +29,7 @@
 ### 使用非官方套件
 - Excel https://docs.laravel-excel.com/
 - JS套件 select2
+- 修改紀錄套件 https://laravel-auditing.com/
 
 ### 針對非官方套件，如何評估風險
 - 套件風險等級評量表的基準為何?大廠、弱點掃描程式、授權...等等

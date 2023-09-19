@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements ValidatorInterface
+class User extends Authenticatable implements Auditable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use \OwenIt\Auditing\Auditable;
 
     protected $with = ['permissions'];
     /**
@@ -57,6 +60,16 @@ class User extends Authenticatable implements ValidatorInterface
         // 'updated' => xxx::class,
         // 'deleted' => xxx::class,
     ];
+    /**
+     * Audit外掛 標記Tag
+     */
+    public function generateTags(): array
+    {
+        return [
+            $this->id,
+            $this->name,
+        ];
+    }
 
     public function permissions()
     {
