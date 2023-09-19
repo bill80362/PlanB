@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\RouteLanguageService;
 use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
         //        $this->app->singleton(SystemConfig::class, function ($app) {
         //            return new SystemConfig();
         //        });
+        $this->app->singleton(RouteLanguageService::class, function () {
+            return new RouteLanguageService();
+        });
     }
 
     /**
