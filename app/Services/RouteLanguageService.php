@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class RouteLanguageService
 {
-    public function setLang(){
+    public function setLangNoRedirect(){
         $systemConfigService = app(SystemConfigService::class);
         $segment = request()->segment(1);
         if (!in_array($segment, $systemConfigService->locales)) {

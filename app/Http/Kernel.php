@@ -67,7 +67,6 @@ class Kernel extends HttpKernel
         'AdminLoginAuth' => \App\Http\Middleware\AdminLoginAuth::class,
         'lang' => \App\Http\Middleware\Language::class,
         //
-        'lang.setting' => \App\Http\Middleware\LanguageSetting::class,
         'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
     ];
 }
