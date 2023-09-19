@@ -24,12 +24,9 @@ class LanguageService extends LaravelTranslator
             if (!$check) {
                 foreach (['1', '2', '3'] as $langType) {
                     Language::firstOrCreate([
-                        'type' => '4',
                         'lang_type' => $langType,
                         'text' => $key,
                     ], [
-                        'status' => 'Y',
-                        'type' => '4',
                         'lang_type' => $langType,
                         'text' => $key,
                         'tran_text' => $key

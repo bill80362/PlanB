@@ -39,34 +39,6 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>{{ $Model->Column_Title_Text['status'] }}</label>
-                                        <select name="filter_status[]" class="select2bs5" multiple="multiple"
-                                            style="width: 100%;">
-                                            @foreach ($Model->statusText as $key => $value)
-                                                <option value="{{ $key }}"
-                                                    {{ in_array($key, (array) request()->get('filter_status')) ? 'selected' : '' }}>
-                                                    {{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>{{ $Model->Column_Title_Text['type'] }}</label>
-                                        <select name="filter_type[]" class="select2bs5" multiple="multiple"
-                                            style="width: 100%;">
-                                            @foreach ($Model->typeText as $key => $value)
-                                                <option value="{{ $key }}"
-                                                    {{ in_array($key, (array) request()->get('filter_type')) ? 'selected' : '' }}>
-                                                    {{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
                                         <label>{{ $Model->Column_Title_Text['lang_type'] }}</label>
                                         <select name="filter_lang_type[]" class="select2bs5" multiple="multiple"
                                             style="width: 100%;">
@@ -154,8 +126,6 @@
                                         <th>{{ __($Model->Column_Title_Text['id']) }}</th>
                                         <th>{{ __($Model->Column_Title_Text['text']) }}</th>
                                         <th>{{ __($Model->Column_Title_Text['tran_text']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['status']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['type']) }}</th>
                                         <th>{{ __($Model->Column_Title_Text['lang_type']) }}</th>
                                         <th>{{ __('操作') }}</th>
                                     </tr>
@@ -171,8 +141,6 @@
                                                 </td>
                                                 <td>{{ $Item->text }}</td>
                                                 <td>{{ $Item->tran_text }}</td>
-                                                <td>{{ __($Model->statusText[$Item->status] ?? $Item->status) }}</td>
-                                                <td>{{ __($Model->typeText[$Item->type] ?? $Item->type) }}</td>
                                                 <td>{{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
                                                 </td>
                                                 <td>

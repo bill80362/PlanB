@@ -83,7 +83,6 @@ class LanguageController extends Controller
         } else {
             $id = $this->oModel->create($UpdateData)->id;
         }
-
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
             'Redirect' => '/operate/language?' . $this->request->getQueryString(),
@@ -121,13 +120,12 @@ class LanguageController extends Controller
     {
         foreach ($this->oModel->langFileMap as $langType => $fileName) {
             $languageDatas = $this->oModel->select('text', 'tran_text')
-                ->where('status', 'Y')
                 ->where('lang_type', $langType)->get()
                 ->mapWithKeys(function ($item) {
                     return [$item['text'] => $item['tran_text']];
                 })->all();
             $filePath = lang_path($fileName);
-            $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT);
+            $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             $fp = fopen($filePath, 'w');
             fwrite($fp, $jsonString);
             fclose($fp);

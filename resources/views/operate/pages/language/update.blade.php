@@ -39,22 +39,7 @@
                                                 {{-- 錯誤訊息 --}}
                                                 @include('/operate/components/alert/error_message')
                                                 <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label>{{ __('是否啟用') }}</label>
-                                                        <div>
-                                                            {{-- $Data->lang_type --}}
-                                                            @foreach ($Model->statusText as $key => $item)
-                                                                <div class="form-check form-check-inline mb-3">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="status" id="{{ $item }}"
-                                                                        @checked($Data->status == $key)
-                                                                        value="{{ $key }}">
-                                                                    <label class="form-check-label"
-                                                                        for="{{ $item }}">{{ $item }}</label>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
+                                                   
 
                                                     <div class="form-group">
                                                         <label>{{ __('語系') }}</label>
@@ -72,26 +57,6 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>{{ __('類型') }}</label>
-                                                        <div>
-                                                            {{-- $Data->type --}}
-                                                            @foreach ($Model->typeText as $key => $item)
-                                                                <div class="form-check form-check-inline mb-3">
-                                                                    <input class="form-check-input" type="radio"
-                                                                        @checked($Data->type == $key) name="type"
-                                                                        id="{{ $item }}"
-                                                                        value="{{ $key }}">
-                                                                    <label class="form-check-label"
-                                                                        for="{{ $item }}">{{ $item }}</label>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-
-                                                    @php
-                                                        // dd($Data->toArray());
-                                                    @endphp
 
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('名稱') }}</label>
