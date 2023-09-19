@@ -13,7 +13,9 @@
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
         "predis/predis": "^2.2",
+        "socialiteproviders/facebook": "^4.1",
         "socialiteproviders/google": "^4.1",
+        "socialiteproviders/line": "^4.1",
         "spatie/image": "^2.2"
     },
     "require-dev": {

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use App\Services\LanguageService as Translator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->extend('translator', function ($command, $app) {
+            $loader = $app['translation.loader'];
+            $locale = $app->getLocale();
+            $trans = new Translator($loader, $locale);
+            $trans->setFallback($app->getFallbackLocale());
+            return $trans;
+        });
         //
         //        $this->app->bind(SystemConfig::class, function ($app) {
         //            return new SystemConfig("register1");
