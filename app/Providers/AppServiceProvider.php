@@ -21,13 +21,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
 
-//        $this->app->singleton(SystemConfigService::class, function () {
-//            return new SystemConfigService(new SystemConfig());
-//        });
         $this->app->singleton(RouteLanguageService::class, function () {
             return new RouteLanguageService();
         });
-
+        //這段要注意，太早觸發，導致SystemConfigService不能初始化拉DB
         if (!app()->runningInConsole()) {
             $systemConfigService = app(SystemConfigService::class);
             if ($systemConfigService->autoLangToDB) {
