@@ -17,7 +17,7 @@
                             @can('user_create')
                             <a class="btn btn-sm btn-primary mr-2" href="{{route("user_update",["id"=>0])}}?{{request()->getQueryString()}}"> {{__("新增")}} </a>
                             @endcan
-                            @can('user_read')
+                            @can('user_import')
                             <button type="button" class="btn btn-sm btn-warning mr-2" data-bs-toggle="modal" data-bs-target="#importModal">
                                 {{__("匯入")}}
                             </button>
