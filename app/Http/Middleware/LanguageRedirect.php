@@ -23,7 +23,7 @@ class LanguageRedirect
         $segment = $request->segment(1);
         if (!in_array($segment, $systemConfigService->locales)) {
             //網址開頭不是語系碼，則使用預設語系
-            return redirect("/" . config('app.fallback_locale') . "/" . $request->path(),307);
+            return redirect("/" . config('app.fallback_locale') . "/" . $request->path(),307);//導轉夾帶POS參數
         }
         //
 //        if ($request->method() === 'GET') {
