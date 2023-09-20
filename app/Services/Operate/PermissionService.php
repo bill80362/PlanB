@@ -124,9 +124,9 @@ class PermissionService
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
             [
-                'label' => '後台使用者管理',
+                'label' => '管理人管理',
                 'groupKey' => 'user',
-                'actions' => ['read', 'create', 'update', 'delete']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
         ];
     }

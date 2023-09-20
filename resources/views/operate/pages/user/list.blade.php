@@ -14,10 +14,14 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <h2>{{ __('管理人管理') }} {{ __('列表') }}</h2>
                         <div>
+                            @can('user_create')
                             <a class="btn btn-sm btn-primary mr-2" href="{{route("user_update",["id"=>0])}}?{{request()->getQueryString()}}"> {{__("新增")}} </a>
+                            @endcan
+                            @can('user_read')
                             <button type="button" class="btn btn-sm btn-warning mr-2" data-bs-toggle="modal" data-bs-target="#importModal">
                                 {{__("匯入")}}
                             </button>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -71,7 +75,6 @@
                                 <div class="form-group">
                                     <button class="btn btn-sm btn-primary">{{__("搜尋")}}</button>
                                     <a class="btn btn-sm btn-secondary" href="{{request()->url()}}">{{__("取消")}}</a>
-{{--                                    <a class="btn btn-warning" href="{{route("user_export")}}?{{request()->getQueryString()}}">{{__("匯出")}}</a>--}}
                                 </div>
                             </div>
                         </div>
@@ -82,12 +85,18 @@
                         <div class="col-12">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div>
+                                    @can('user_delete')
                                     <button id="btnDeleteBatch" class="btn btn-sm btn-danger">{{__("勾選刪除")}}</button>
+                                    @endcan
+                                    @can('user_update')
                                     <button class="btn btn-sm btn-warning">{{__("更新排序")}}</button>
+                                    @endcan
                                 </div>
+                                @can('user_export')
                                 <div>
                                     <a class="btn btn-sm btn-warning" href="{{route("user_export")}}?{{request()->getQueryString()}}">{{__("匯出")}}</a>
                                 </div>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -117,9 +126,12 @@
                                     <td>{{$Item->email}}</td>
                                     <td>{{__($Model->statusText[$Item->status]??$Item->status)}}</td>
                                     <td>
+                                        @can('user_update')
                                         <a class="btn btn-sm btn-primary"
                                            href="/operate/user/{{$Item->id}}?{{request()->getQueryString()}}"
                                         >{{__("編輯")}}</a>
+                                        @endcan
+                                        @can('user_delete')
                                         <button class="btn btn-sm btn-danger"
                                                 type="button"
                                                 onclick="postForm('/operate/user/del?{{request()->getQueryString()}}',{
@@ -128,6 +140,7 @@
                                                                             })"
                                         >{{__("刪除")}}
                                         </button>
+                                        @endcan
                                         <a target="_blank" class="btn btn-sm btn-outline-primary"
                                            href="/operate/user/{{$Item->id}}/audit?{{request()->getQueryString()}}"
                                         >{{__("紀錄")}}</a>
@@ -170,7 +183,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+{{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>--}}
                     <button type="submit" class="btn btn-primary">送出</button>
                 </div>
             </div>
