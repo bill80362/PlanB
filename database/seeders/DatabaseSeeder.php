@@ -17,11 +17,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::create([
+            'id' => '1',
             'name' => 'admin',
             'email' => 'test@gmail.com',
             'password' => Hash::make('admin'),
             'status' => "Y",
         ]);
+
+        \App\Models\Permission\Permission::create([
+            'user_id' => '1',
+            'perm_key' => 'user_read',
+        ]);
+//        \App\Models\Permission\Permission::create([
+//            'user_id' => '1',
+//            'perm_key' => 'user_update',
+//        ]);
 
         // Permission::create([
         //     'user_id' => 1,
