@@ -22,7 +22,7 @@ class SystemConfigService
                 $this->SystemConfigKeyValue[$value2["id"]] = "";
             }
         }
-        dd($this->oSystemConfig->all());
+//        dd($this->oSystemConfig->all());
         //
 //        $SystemConfigKeyValue = array_column($this->oSystemConfig->all()->toArray(),"content","id");
 //        foreach ($SystemConfigKeyValue as $key => $value){
