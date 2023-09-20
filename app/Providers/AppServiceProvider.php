@@ -7,6 +7,7 @@ use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\LanguageService as Translator;
+use App\Services\Operate\SystemConfigService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,23 +19,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->extend('translator', function ($command, $app) {
-            $loader = $app['translation.loader'];
-            $locale = $app->getLocale();
-            $trans = new Translator($loader, $locale);
-            $trans->setFallback($app->getFallbackLocale());
-            return $trans;
-        });
-        //
-        //        $this->app->bind(SystemConfig::class, function ($app) {
-        //            return new SystemConfig("register1");
-        //        });
-        //        $this->app->bind(SystemConfig::class, function ($app) {
-        //            return new SystemConfig("register2");
-        //        });
-        //        $this->app->singleton(SystemConfig::class, function ($app) {
-        //            return new SystemConfig();
-        //        });
+        if (!app()->runningInConsole()) {
+            $systemConfigService = app(SystemConfigService::class);
+            if ($systemConfigService->autoLangToDB) {
+                $this->app->extend('translator', function ($command, $app) {
+                    $loader = $app['translation.loader'];
+                    $locale = $app->getLocale();
+                    $trans = new Translator($loader, $locale);
+                    $trans->setFallback($app->getFallbackLocale());
+                    return $trans;
+                });
+            }
+        }
+
         $this->app->singleton(RouteLanguageService::class, function () {
             return new RouteLanguageService();
         });
