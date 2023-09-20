@@ -31,6 +31,12 @@ Route::prefix('/operate')->group(function () {
             Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber("id")->name("audit")->middleware(['can:user_read']);
         });
 
+        //系統設定
+        Route::get('/system', [\App\Http\Controllers\Operation\SystemController::class, "updateHTML"])->name("system_update_html")->middleware(['can:system_update']);
+        Route::post('/system', [\App\Http\Controllers\Operation\SystemController::class, "update"])->name("system_update")->middleware(['can:system_update']);
+
+
+
         //管理員
 //        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
 //        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id")->name("user_update_html");

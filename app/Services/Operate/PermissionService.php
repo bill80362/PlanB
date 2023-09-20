@@ -128,6 +128,11 @@ class PermissionService
                 'groupKey' => 'user',
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
             ],
+            [
+                'label' => '系統環境',
+                'groupKey' => 'system',
+                'actions' => ['update', ]
+            ],
         ];
     }
 

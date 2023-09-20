@@ -33,13 +33,18 @@ class MenuService
                 ]
             ],
             [
-                'name' => __('國家&運費設定'),
+                'name' => __('系統設定'),
                 'icon' => '/template/Salessa/img/menu-icon/5.svg',
                 'subMenu' => [
                     [
                         'name' => __('語系管理'),
                         'href' => '/operate/language',
                         'permission' => 'language_read'
+                    ],
+                    [
+                        'name' => __('系統環境設定'),
+                        'href' => '/operate/system',
+                        'permission' => 'system_update',
                     ],
                 ]
             ],
