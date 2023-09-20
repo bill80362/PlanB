@@ -28,10 +28,10 @@ class DatabaseSeeder extends Seeder
             'user_id' => '1',
             'perm_key' => 'user_read',
         ]);
-//        \App\Models\Permission\Permission::create([
-//            'user_id' => '1',
-//            'perm_key' => 'user_update',
-//        ]);
+        \App\Models\Permission\Permission::create([
+            'user_id' => '1',
+            'perm_key' => 'user_update',
+        ]);
 
         // Permission::create([
         //     'user_id' => 1,
