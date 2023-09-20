@@ -36,9 +36,9 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e)
     {
         // 第三方造成的錯誤
-        if (auth('erp')->check()) {
-            Log::channel('erp_log')->info('erp呼叫官網api，造成錯誤，錯誤訊息：' . $e->getMessage());
-        }
+        // if (auth('erp')->check()) {
+        //     Log::channel('erp_log')->info('erp呼叫官網api，造成錯誤，錯誤訊息：' . $e->getMessage());
+        // }
 
         // 後台登入
         if (auth('operate')->check()) {
@@ -66,9 +66,9 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if (auth('erp')->check()) {
-            //第三方造成的錯誤
-        }
+        // if (auth('erp')->check()) {
+        //     //第三方造成的錯誤
+        // }
 
         if (auth('operate')->check()) {
             // 後台登入
