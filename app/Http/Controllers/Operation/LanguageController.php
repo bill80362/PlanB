@@ -8,6 +8,7 @@ use App\Models\CountryAndShippingFee\Language;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Collection;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LanguageController extends Controller
 {
@@ -101,6 +102,76 @@ class LanguageController extends Controller
         return view('alert_redirect', [
             'Alert' => "刪除成功",
             'Redirect' => route('language_list') . '?' . $this->request->getQueryString(),
+        ]);
+    }
+
+    /**
+     * 匯入
+     */
+    public function import()
+    {
+        $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
+        $value_to_key = array_flip($this->oModel->Column_Title_Text);
+        $excelIndex = [];
+        foreach ((array)$subjects->toArray()[0] as $RowKey => $Row) {
+            if ($RowKey > 0) break; //只跑第一行
+            foreach ($Row as $index => $columnTitle) {
+                //匯入資料欄位標題異常
+                if (!isset($value_to_key[$columnTitle])) {
+                    return view('alert_redirect', [
+                        'Alert' => __("匯入標題異常"),
+                        'Redirect' => '/operate/language?' . $this->request->getQueryString(),
+                    ]);
+                }
+                //
+                $excelIndex[$index] = $value_to_key[$columnTitle];
+            }
+        }
+        $AllMessage = [];
+        foreach ((array)$subjects->toArray()[0] as $RowKey => $Row) {
+            //第一列標題，跳過
+            if ($RowKey == 0) continue;
+            //資料對應整理
+            $UpdateData = [];
+            foreach ($Row as $index => $columnValue) {
+                //特殊處理欄位
+                if ($excelIndex[$index] == "status") {
+                    $UpdateData[$excelIndex[$index]] = array_flip($this->oModel->statusText)[$columnValue];
+                } else {
+                    $UpdateData[$excelIndex[$index]] = $columnValue;
+                }
+            }
+            //整理要更新的資料
+            $DataModel = $this->oModel->importPrimary($UpdateData)->first();
+            if (!$DataModel) {
+                $DataModel = clone $this->oModel; //沒有對應的資料，init一個
+            }
+            foreach ($UpdateData as $ColumnTitle => $value) {
+                $DataModel->$ColumnTitle = $value;
+            }
+            //驗證資料
+            $validator = Validator::make(
+                $DataModel->toArray(),
+                $this->oModel->getValidatorRules(),
+                $this->oModel->getValidatorMessage(),
+            );
+            //驗證有誤
+            if ($validator->fails()) {
+                //
+                $AllMessage[] = "第{$RowKey}列:" . implode(",", $validator->messages()->all());
+                //
+                continue;
+            }
+            $DataModel->save();
+        }
+        //有錯誤
+        if ($AllMessage) {
+            return redirect()->back()->withErrors(['message' => implode(",", $AllMessage)]);
+        }
+        //
+        return view('alert_redirect', [
+            'Alert' => __("送出成功"),
+            'Redirect' => '/operate/user?' . $this->request->getQueryString(),
         ]);
     }
 

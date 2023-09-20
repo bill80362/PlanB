@@ -177,7 +177,7 @@
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('user_import') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('language_import') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-content">
                     <div class="modal-header">

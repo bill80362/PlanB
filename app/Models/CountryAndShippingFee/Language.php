@@ -22,8 +22,6 @@ class Language extends Model
 
     public array $Column_Title_Text = [
         "id" => "編號",
-        "status" => "狀態",
-        "type" => "類型",
         "lang_type" => "語系",
         "text" => "名稱",
         "tran_text" => "翻譯後名稱",
