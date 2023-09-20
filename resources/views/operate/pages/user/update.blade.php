@@ -53,7 +53,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-
+                                                    <div>
+                                                        <button class="btn btn-sm btn-primary m-2" type="button" onclick="$('input[type=\'checkbox\']').prop('checked', true);">全部打勾</button>
+                                                    </div>
                                                     @foreach($GroupItemPermission as $key => $value)
                                                     <div class="card card-outline mb-2">
                                                         <div class="card-header">
