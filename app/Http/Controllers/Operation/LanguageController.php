@@ -118,13 +118,13 @@ class LanguageController extends Controller
      */
     public function makeFile()
     {
-        foreach ($this->oModel->langFileMap as $langType => $fileName) {
+        foreach ($this->oModel->langCodeMap as $langType => $langCode) {
             $languageDatas = $this->oModel->select('text', 'tran_text')
                 ->where('lang_type', $langType)->get()
                 ->mapWithKeys(function ($item) {
                     return [$item['text'] => $item['tran_text']];
                 })->all();
-            $filePath = lang_path($fileName);
+            $filePath = lang_path($langCode . ".json");
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             $fp = fopen($filePath, 'w');
             fwrite($fp, $jsonString);

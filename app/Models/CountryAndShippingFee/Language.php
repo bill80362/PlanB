@@ -37,10 +37,10 @@ class Language extends Model
         "3" => "英文",
     ];
 
-    public array $langFileMap = [
-        "1" => "zh-tw.json",
-        "2" => "zh-cn.json",
-        "3" => "en.json",
+    public array $langCodeMap = [
+        "1" => "zh-tw",
+        // "2" => "zh-cn",
+        "3" => "en",
     ];
 
     public function getValidatorRules()
