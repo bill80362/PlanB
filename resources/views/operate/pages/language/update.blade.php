@@ -39,15 +39,15 @@
                                                 {{-- 錯誤訊息 --}}
                                                 @include('/operate/components/alert/error_message')
                                                 <div class="col-6">
-                                                   
+
 
                                                     <div class="form-group">
                                                         <label>{{ __('語系') }}</label>
                                                         <div>
-                                                            {{-- $Data->lang_type --}}
+                                                            {{-- disabled --}}
                                                             @foreach ($Model->langTypeText as $key => $item)
                                                                 <div class="form-check form-check-inline mb-3">
-                                                                    <input class="form-check-input" type="radio"
+                                                                    <input class="form-check-input" type="radio" 
                                                                         name="lang_type" id="{{ $item }}"
                                                                         @checked($Data->lang_type == $key)
                                                                         value="{{ $key }}">
@@ -60,21 +60,39 @@
 
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('名稱') }}</label>
-                                                        <textarea class="form-control" name="text" rows="3">{{ $Data->text }}</textarea>
-
+                                                        {{-- {{ $Data->id ? 'disabled' : '' }} --}}
+                                                        <textarea  class="form-control" name="text" rows="3">{{ $Data->text }}</textarea>
                                                     </div>
 
                                                     <div class="form-group mb-3">
-                                                        <label>{{ __('翻譯後名稱') }}</label>
+                                                        <label>{{ __('翻譯後名稱') }}({{ $LangTypeText[$Data->lang_type] }})</label>
                                                         <textarea class="form-control" name="tran_text" rows="3">{{ $Data->tran_text }}</textarea>
-
                                                     </div>
 
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('備註') }}</label>
                                                         <textarea class="form-control" name="memo" rows="3">{{ $Data->memo }}</textarea>
-
                                                     </div>
+
+
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <h3>{{ __('其他語系') }}</h3>
+                                                    @foreach ($OtherLangTypeText as $key => $value)
+                                                        <div class="form-group mb-3">
+                                                            <label>{{ __('翻譯後名稱') }}({{ $value }})</label>
+                                                            @php
+                                                                // dump($OtherLangTypeText);
+                                                                //     dd($ElseDatas);
+                                                            @endphp
+                                                            <input type="hidden" name="else_langTypes[]"
+                                                                value="{{ $ElseDatas[$key]['lang_type'] }}">
+
+                                                            <textarea class="form-control" name="else_trans[]" rows="3">{{ $ElseDatas[$key]['tran_text'] }}</textarea>
+                                                        </div>
+                                                    @endforeach
+
                                                 </div>
 
                                             </div>
@@ -93,9 +111,6 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection
 
 @section('BodyJavascript')

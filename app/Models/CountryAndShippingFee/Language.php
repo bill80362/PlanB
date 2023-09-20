@@ -4,6 +4,7 @@ namespace App\Models\CountryAndShippingFee;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 
 class Language extends Model
 {
@@ -22,14 +23,23 @@ class Language extends Model
 
     public array $Column_Title_Text = [
         "id" => "編號",
-        "status" => "狀態",
-        "type" => "類型",
         "lang_type" => "語系",
         "text" => "名稱",
         "tran_text" => "翻譯後名稱",
         "memo" => "備註",
     ];
 
+    public function getOtherLangs()
+    {
+        $newDict = [];
+        foreach ($this->langTypeText as $key => $value) {
+            if ($this->lang_type == $key) {
+                continue;
+            }
+            $newDict[$key] = $value;
+        }
+        return $newDict;
+    }
 
     public array $langTypeText = [
         "1" => "繁體中文",
@@ -39,7 +49,7 @@ class Language extends Model
 
     public array $langCodeMap = [
         "1" => "zh-tw",
-        // "2" => "zh-cn",
+        "2" => "zh-cn",
         "3" => "en",
     ];
 
@@ -52,6 +62,17 @@ class Language extends Model
             "memo" => [''],
         ];
     }
+
+    public function getValidatorRulesForUpdate()
+    {
+        return [
+            "tran_text" => ['required'],
+            "memo" => [''],
+            "else_langTypes.*" => ['array'],
+            "else_trans.*" => ['array', 'string'],
+        ];
+    }
+
     public function getValidatorMessage()
     {
         return [];

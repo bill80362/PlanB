@@ -11,7 +11,7 @@ class SystemConfigService
 
     public $useLangPrefix = true;
     public int $versionJS = 1;
-    public bool $autoLangToDB = false;
+    public bool $autoLangToDB = true;
 
     public $SystemConfigKeyValue = [];
     public function __construct(protected SystemConfig $oSystemConfig)
