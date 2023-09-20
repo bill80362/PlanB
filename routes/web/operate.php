@@ -14,18 +14,30 @@ Route::prefix('/operate')->group(function () {
 
     Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
 
-
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, "dashboard"]);
 
+        //管理人管理
+        Route::group([
+            "prefix" => "user",
+            "as" => "user_",
+        ],function () {
+            Route::get('', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("list");
+            Route::get('{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->name("update_html");
+            Route::post('{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->name("update");
+            Route::post('del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("del");
+            Route::get('export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("export");
+            Route::post('import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("import");
+            Route::get('{id}/audit', [\App\Http\Controllers\Operation\UserController::class, 'audit'])->name("audit");
+        });
         //管理員
-        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
-        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id")->name("user_update_html");
-        Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id")->name("user_update");
-        Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("user_del");
-        Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("user_export");
-        Route::post('/user/import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("user_import");
-        Route::get('/user/{id}/audit', [\App\Http\Controllers\Operation\UserController::class, 'audit'])->whereNumber("id")->name("user_audit");
+//        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
+//        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id")->name("user_update_html");
+//        Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id")->name("user_update");
+//        Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("user_del");
+//        Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("user_export");
+//        Route::post('/user/import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("user_import");
+//        Route::get('/user/{id}/audit', [\App\Http\Controllers\Operation\UserController::class, 'audit'])->whereNumber("id")->name("user_audit");
 
         //操作紀錄
         Route::get('/audit', [\App\Http\Controllers\Operation\AuditController::class, "listHTML"])->name("audit_list");
