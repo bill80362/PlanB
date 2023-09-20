@@ -53,5 +53,8 @@ class AppServiceProvider extends ServiceProvider
         //        $this->app->singleton(SystemConfig::class, function ($app) {
         //            return new SystemConfig("boot");
         //        });
+
+        //載入系統變數
+        app(SystemConfigService::class)->loadSystemConfigKeyValue();
     }
 }

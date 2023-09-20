@@ -13,8 +13,11 @@ class SystemConfigService
     public int $versionJS = 1;
     public bool $autoLangToDB = true;
 
-    public $SystemConfigKeyValue = [];
-    public function __construct(protected SystemConfig $oSystemConfig)
+    public array $SystemConfigKeyValue = [];
+    public function __construct(protected SystemConfig $oSystemConfig) {}
+
+    //這邊測試如果再初始化就載入，會ERROR，因為還不能拉DB
+    public function loadSystemConfigKeyValue(): void
     {
         //先將所有KEY建立好
         foreach ($this->oSystemConfig->SystemConfig as $key => $value){
@@ -22,11 +25,14 @@ class SystemConfigService
                 $this->SystemConfigKeyValue[$value2["id"]] = "";
             }
         }
-//        dd($this->oSystemConfig->all());
-        //
-//        $SystemConfigKeyValue = array_column($this->oSystemConfig->all()->toArray(),"content","id");
-//        foreach ($SystemConfigKeyValue as $key => $value){
-//
-//        }
+        //從DB載入資料
+        $SystemConfigKeyValue = array_column($this->oSystemConfig->all()->toArray(),"content","id");
+        foreach ($SystemConfigKeyValue as $key => $value){
+            $this->SystemConfigKeyValue[$key] = $value;
+        }
+    }
+    public function getSystemConfigKeyValue(){
+        $this->SystemConfigKeyValue || $this->loadSystemConfigKeyValue();
+        return $this->SystemConfigKeyValue;
     }
 }
