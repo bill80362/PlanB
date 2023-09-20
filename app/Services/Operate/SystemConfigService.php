@@ -9,7 +9,7 @@ class SystemConfigService
 
     public $useLangPrefix = true;
     public int $versionJS = 1;
-    public bool $autoLang = false;
+    public bool $autoLangToDB = false;
 
     public function __construct()
     {

@@ -19,22 +19,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // if (!app()->runningInConsole()) {
-        //     $systemConfigService = app(SystemConfigService::class);
-        //     if ($systemConfigService->autoLangToDB) {
-        //         $this->app->extend('translator', function ($command, $app) {
-        //             $loader = $app['translation.loader'];
-        //             $locale = $app->getLocale();
-        //             $trans = new Translator($loader, $locale);
-        //             $trans->setFallback($app->getFallbackLocale());
-        //             return $trans;
-        //         });
-        //     }
-        // }
+       
 
         $this->app->singleton(RouteLanguageService::class, function () {
             return new RouteLanguageService();
         });
+
+        if (!app()->runningInConsole()) {
+            $systemConfigService = app(SystemConfigService::class);
+            if ($systemConfigService->autoLangToDB) {
+                $this->app->extend('translator', function ($command, $app) {
+                    $loader = $app['translation.loader'];
+                    $locale = $app->getLocale();
+                    $trans = new Translator($loader, $locale);
+                    $trans->setFallback($app->getFallbackLocale());
+                    return $trans;
+                });
+            }
+        }
     }
 
     /**
