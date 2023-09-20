@@ -11,6 +11,12 @@
                     </div>
                 </div>
                 <div class="header_right d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="{{url('/en/')}}">【切換英文】</a>
+                    </div>
+                    <div>
+                        <a href="{{url("/zh-tw/")}}">【切換中文】</a>
+                    </div>
                     <div class="profile_info">
                         <i class="ti-shopping-cart"></i>
                         <div class="profile_info_iner">

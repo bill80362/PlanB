@@ -14,7 +14,10 @@
             </div>
         </div>
     </div>
-    <a href="{{route("about")}}">{{__("前往")}}{{__("關於我們")}}</a>
+    <div>
+        <a href="{{route("about")}}">{{__("前往")}}{{__("關於我們")}}</a>
+    </div>
+
 @endsection
 
 @section('Modal')
