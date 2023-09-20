@@ -9,6 +9,7 @@ use App\Services\Operate\SystemConfigService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Facades\Excel;
+use stdClass;
 
 class LanguageController extends Controller
 {
@@ -24,7 +25,8 @@ class LanguageController extends Controller
     {
         $pageLimit = $this->request->get("pageLimit") ?: 10; //預設10
         //過濾條件
-        $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
+        $Paginator = $this->oModel->filter($this->request->all())
+            ->paginate($pageLimit);
         return view('operate/pages/language/list', [
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
@@ -36,25 +38,40 @@ class LanguageController extends Controller
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
+            $elseDatas = $this->oModel->where('id', '!=', $Data->id)
+                ->where('text', $Data->text)->get()->mapWithKeys(function ($item) {
+                    return [$item['lang_type'] => $item];
+                })->toArray();
         } else {
             $Data = $this->oModel;
             //新增預設值
             $Data->id = 0;
-            $Data->type = '1';
             $Data->lang_type = '1';
             $Data->text = "";
             $Data->tran_text = "";
             $Data->memo = "";
+            $elseDatas = [];
+            foreach ($Data->getOtherLangs() as $key => $value) {
+                array_push($elseDatas, [
+                    'lang_type' => $key,
+                    'tran_text' => ''
+                ]);
+            }
+            $elseDatas = collect($elseDatas)->mapWithKeys(function ($item) {
+                return [$item['lang_type'] => $item];
+            })->all();
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array)$this->request->old() as $key => $value) {
             if (!$value) continue;
             $Data->$key = $value;
         }
-
         //View
         return view('operate/pages/language/update', [
             'Data' => $Data,
+            'ElseDatas' => $elseDatas,
+            'LangTypeText' => $this->oModel->langTypeText,
+            'OtherLangTypeText' => $Data->getOtherLangs(),
             'Model' => $this->oModel,
         ]);
     }
@@ -63,15 +80,28 @@ class LanguageController extends Controller
     // Post
     public function update($id)
     {
+        // dd($this->request->toArray());
         //過濾
-        $UpdateData = $this->request->only(["status", "type", "lang_type", "text", "tran_text", "memo"]);
+        if ($id) {
+            $UpdateData = $this->request->only(["tran_text", "memo", "text"]);
 
-        //驗證資料
-        $validator = Validator::make(
-            $UpdateData,
-            $this->oModel->getValidatorRules(),
-            $this->oModel->getValidatorMessage(),
-        );
+            //驗證資料
+            $validator = Validator::make(
+                $UpdateData,
+                $this->oModel->getValidatorRulesForUpdate(),
+                $this->oModel->getValidatorMessage(),
+            );
+        } else {
+            $UpdateData = $this->request->only(["lang_type", "text", "tran_text", "memo"]);
+
+            //驗證資料
+            $validator = Validator::make(
+                $UpdateData,
+                $this->oModel->getValidatorRules(),
+                $this->oModel->getValidatorMessage(),
+            );
+        }
+
 
         //驗證有誤
         if ($validator->fails()) {
@@ -80,9 +110,28 @@ class LanguageController extends Controller
                 ->withInput();
         }
         if ($id) {
+
+            foreach ($this->request->else_langTypes as $key => $else_langType) {
+                $trans = $this->request->else_trans[$key];
+                $this->oModel->where('text', $UpdateData['text'])
+                    ->where('lang_type', $else_langType)->update([
+                        'tran_text' => $trans
+                    ]);
+            }
+            unset($UpdateData['text']);
             $this->oModel->find($id)->update($UpdateData);
         } else {
             $id = $this->oModel->create($UpdateData)->id;
+            foreach ($this->request->else_langTypes as $key => $else_langType) {
+                $trans = $this->request->else_trans[$key];
+
+                $this->oModel->firstOrCreate([
+                    'text' => $UpdateData['text'],
+                    'lang_type' => $else_langType
+                ], [
+                    'tran_text' => $trans
+                ]);
+            }
         }
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
