@@ -1,3 +1,4 @@
+@inject('SystemConfigService', 'App\Services\Operate\SystemConfigService')
 <!DOCTYPE html>
 <html lang="en">
 

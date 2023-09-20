@@ -1,3 +1,4 @@
+@inject('SystemConfigService', 'App\Services\Operate\SystemConfigService')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +51,10 @@
 
 <section class="dashboard_part large_header_bg">
 
-    <div class="main_content_iner ">
+    @include('/front/include/_header')
+
+    <div class="main_content_iner overly_inner  ">
+
         @yield('Content')
     </div>
 
