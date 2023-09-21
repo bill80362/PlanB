@@ -88,7 +88,6 @@ class LanguageController extends Controller
     // Post
     public function update($id)
     {
-        // dd($this->request->toArray());
         //過濾
         if ($id) {
             $UpdateData = $this->request->only(["tran_text", "memo", "text"]);
@@ -141,6 +140,7 @@ class LanguageController extends Controller
                 ]);
             }
         }
+        $this->makeFile();
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
             'Redirect' => '/operate/language?' . $this->request->getQueryString(),

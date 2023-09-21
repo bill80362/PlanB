@@ -1,5 +1,5 @@
 {
-    "系統設定": "系統設定",
+    "系統設定": "系統設定1",
     "系統環境設定": "系統環境設定",
     "儀表板": "儀表板",
     "管理人管理": "管理人管理",
@@ -49,5 +49,22 @@
     "前往": "前往",
     "關於我們": "關於我們",
     "最後更新時間": "最後更新時間",
-    "其他語系": "其他語系"
+    "其他語系": "其他語系",
+    "4": "4",
+    "Pagination Navigation": "Pagination Navigation",
+    "pagination.previous": "pagination.previous",
+    "pagination.next": "pagination.next",
+    "Showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "Go to page :page": "Go to page :page",
+    "事件操作前": "事件操作前",
+    "事件操作後": "事件操作後",
+    "造訪網址": "造訪網址",
+    "事件": "事件",
+    "標籤": "標籤",
+    "IP位址": "IP位址",
+    "瀏覽器紀錄": "瀏覽器紀錄",
+    "修改人": "修改人"
 }
