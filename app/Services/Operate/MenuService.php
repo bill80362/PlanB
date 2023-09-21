@@ -49,6 +49,22 @@ class MenuService
                 ]
             ],
             [
+                'name' => __('公司管理'),
+                'icon' => '',
+                'subMenu' => [
+                    [
+                        'name' => __('隱私權聲明'),
+                        'href' => '/operate/company_manage/privacy_statement',
+                        'permission' => 'privacy_statement_read' //member.read
+                    ],
+                    [
+                        'name' => __('版權宣告'),
+                        'href' => '/operate/company_manage/copyright_notice',
+                        'permission' => 'copyright_notice_read' //member.read
+                    ],
+                ]
+            ],
+            [
                 'name' => __('操作紀錄'),
                 'icon' => '',
                 'subMenu' => [

@@ -1,3 +1,7 @@
-<div class="alert text-white bg-success" role="alert">
-    <div class="alert-text">{!!$message!!}</div>
-</div>
+@if (Session::has('message'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! Session::get('message') !!}</li>
+        </ul>
+    </div>
+@endif
