@@ -40,7 +40,7 @@ class SystemController extends Controller
             if( in_array($id,$this->oSystemConfigService->SystemConfigImageKey) ){
                 $content = "";
                 if($this->request->file($id)){
-                    $content = Storage::disk('public')->putFile('input_file', $this->request->file($id));
+                    $content = Storage::disk('public')->putFile('input_file', $this->request->file($id));                    
                 }
             }
             //

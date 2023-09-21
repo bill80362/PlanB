@@ -228,7 +228,7 @@ class LanguageController extends Controller
         //
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
-            'Redirect' => '/operate/user?' . $this->request->getQueryString(),
+            'Redirect' => '/operate/language?' . $this->request->getQueryString(),
         ]);
     }
 
