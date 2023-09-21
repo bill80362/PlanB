@@ -1,11 +1,11 @@
 
-$font_style_1:'Nunito', sans-serif;
-$font_style_2:'Nunito', sans-serif;
-$font_style_3:'Comfortaa', cursive;
+$font_style_1:'Nunito', 'Noto Sans TC', 'Helvetica', 'Arial', 'Apple LiGothic Medium', '微軟正黑體', 'Microsoft Jhenghei',sans-serif;
+$font_style_2:'Nunito', 'Noto Sans TC', 'Helvetica', 'Arial', 'Apple LiGothic Medium', '微軟正黑體', 'Microsoft Jhenghei',sans-serif;
+$font_style_3:'Comfortaa', 'Noto Sans TC', cursive;
 $white: #fff;
 $black: #000;
 $base_color: #2E4765;
-$body_bg: #FFFFFF;
+$body_bg: #fff;
 
 $section_bg: #fef1f2;
 $section_bg_1: #F5ECEC;
@@ -58,3 +58,77 @@ $mobile_device:'(max-width: 767.98px)';
 $min_1200px: '(min-width: 1201px)';
 
 $min_1680px: '(min-width: 1680px)';
+
+$black      : #000      !default;
+$gray-900   : #212529   !default;
+$gray-800   : #343a40   !default;
+$gray-700   : #495057   !default;
+$gray-600   : #6c757d   !default;
+$gray-500   : #adb5bd   !default;
+$gray-400   : #ced4da   !default;
+$gray-300   : #dee2e6   !default;
+$gray-200   : #e9ecef   !default;
+$gray-100   : #f8f9fa   !default;
+$white      : #fff      !default;
+
+$red        : #dc3545   !default;
+$pink       : #d63384   !default;
+$orange     : #fd7e14   !default;
+$yellow     : #ffc107   !default;
+$green      : #198754   !default;
+$teal       : #20c997   !default;
+$cyan       : #0dcaf0   !default;
+$blue       : #0d6efd   !default;
+$indigo     : #6610f2   !default;
+$purple     : #6f42c1   !default;
+$brown      : #804000   !default;
+
+// 自訂顏色
+
+$red        : #fa3f52;
+$pink       : #f5619a;
+$orange     : #ff8d2f;
+$yellow     : #ffd753;
+$green      : #99db2e;
+$teal       : #64C5B1;
+$cyan       : #67d6ec;
+$blue       : #6d99f7;
+$indigo     : #2D1967;
+$purple     : #936adf;
+$brown      : #773820;
+
+$colors : (
+    "red"       : $red,
+    "pink"      : $pink,
+    "orange"    : $orange,
+    "yellow"    : $yellow,
+    "green"     : $green,
+    "teal"      : $teal,
+    "cyan"      : $cyan,
+    "blue"      : $blue,
+    "indigo"    : $indigo,
+    "purple"    : $purple,
+    "brown"     : $brown  
+);
+
+$primary    : $indigo;
+$secondary  : $teal;
+$danger     : $pink;
+$warning    : $yellow;
+$success    : $green;
+$info       : $cyan;
+$muted      : $gray-500;
+$dark       : $gray-900;
+$light      : $gray-100;
+
+$theme_colors : (
+    "primary"   : $primary,
+    "secondary" : $secondary,
+    "danger"    : $danger,
+    "warning"   : $warning,
+    "success"   : $success,
+    "info"      : $info,
+    "muted"     : $muted,
+    "dark"      : $dark,
+    "light"     : $light      
+);
