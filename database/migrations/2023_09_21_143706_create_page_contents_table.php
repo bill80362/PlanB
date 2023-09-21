@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
+        Schema::create('page_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->nullable();
             $table->char('lang_type')->default("1")->comment('語系');
-            $table->text('text')->nullable()->comment('名稱');
-            $table->text('tran_text')->nullable()->comment('翻譯後名稱');
-            $table->text('memo')->nullable()->comment('備註');
+            $table->string('page_name')->nullable();
+            $table->string('content')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('page_contents');
     }
 };

@@ -39,6 +39,10 @@ class PermissionService
                 'permissions' => $this->getCountryAndShippingFee(),
             ],
             [
+                'groupName' => '公司管理',
+                'permissions' => $this->getCompanyManage(),
+            ],
+            [
                 'groupName' => '系統管理群組',
                 'permissions' => $this->getSystemItem(),
             ],
@@ -113,6 +117,25 @@ class PermissionService
         ];
     }
 
+    //公司管理
+    private function getCompanyManage()
+    {
+        return [
+            [
+                'label' => '隱私權聲明',
+                'groupKey' => 'privacy_statement',
+                'actions' => ['read', 'update']
+            ],
+            [
+                'label' => '版權宣告 ',
+                'groupKey' => 'copyright_notice',
+                'actions' => ['read', 'update']
+            ],
+
+            
+        ];
+    }
+
 
     // 系統管理群組
     private function getSystemItem()
@@ -131,7 +154,7 @@ class PermissionService
             [
                 'label' => '系統環境',
                 'groupKey' => 'system',
-                'actions' => ['update', ]
+                'actions' => ['update',]
             ],
         ];
     }
