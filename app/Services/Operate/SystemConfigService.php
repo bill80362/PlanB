@@ -13,7 +13,10 @@ class SystemConfigService
     public int $versionJS = 1;
     public bool $autoLangToDB = true;
 
-    public array $SystemConfigKeyValue = [];
+    //
+    public array $SystemConfigKeyValue = [];//所有變數KEY VALUE
+    public array $SystemConfigImageKey = [];//屬於圖片的KEY
+
     public function __construct(protected SystemConfig $oSystemConfig) {
         $this->loadSystemConfigKeyValue();
     }
@@ -25,6 +28,9 @@ class SystemConfigService
         foreach ($this->oSystemConfig->SystemConfig as $key => $value){
             foreach ($value as $value2){
                 $this->SystemConfigKeyValue[$value2["id"]] = "";
+                if($value2["input"]=="img"){
+                    $this->SystemConfigImageKey[] = $value2["id"];
+                }
             }
         }
         //從DB載入資料

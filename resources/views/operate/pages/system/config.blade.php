@@ -15,14 +15,14 @@
                             <div class="main-title">
                                 <h2>
                                     <a class="btn btn-primary mr-2" href="{{route("user_list")}}?{{request()->getQueryString()}}"> < </a>
-                                    {{ __('系統設定') }}
+                                    {{ __('系統環境設定') }}
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <div class="white_card_body">
                         @include('/operate/components/alert/error_message')
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                             @foreach($Model->SystemConfig as $groupTitle => $groupContent)
                             <div class="card card-outline mb-2">
@@ -44,6 +44,12 @@
                                                         <option value="{{$value}}" {{$SystemConfigKeyValue[$item["id"]]==$value?"selected":""}}>{{$option}}</option>
                                                         @endforeach
                                                     </select>
+                                                @elseif($item["input"]=="img")
+                                                    <label>{{$item["title"]}}</label>
+                                                    <div>
+                                                        <img src="{{asset('storage/'.$SystemConfigKeyValue[$item["id"]])}}" width="200">
+                                                    </div>
+                                                    <input type="file" class="form-control" name="{{$item["id"]}}" >
                                                 @endif
                                             </div>
                                         </div>

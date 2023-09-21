@@ -3,16 +3,11 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
-use App\Models\AuditLog;
-use App\Models\Permission\Permission;
 use App\Models\SystemConfig;
-use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+
 
 class SystemController extends Controller
 {
@@ -33,6 +28,7 @@ class SystemController extends Controller
     }
 
     public function update(){
+        //
         $all_id = [];
         foreach ($this->oModel->SystemConfig as $key => $value){
             foreach ($value as $key2 => $value2){
@@ -40,6 +36,14 @@ class SystemController extends Controller
             }
         }
         foreach ($this->request->only($all_id) as $id => $content){
+            //如果是圖片，則要先上傳，再將content改成檔案名稱
+            if( in_array($id,$this->oSystemConfigService->SystemConfigImageKey) ){
+                $content = "";
+                if($this->request->file($id)){
+                    $content = Storage::disk('public')->putFile('input_file', $this->request->file($id));
+                }
+            }
+            //
             $Model = $this->oModel->find($id);
             if(!$Model){
                 //新增
@@ -50,6 +54,9 @@ class SystemController extends Controller
             }elseif($Model->content!==$content){
                 //修改
                 $Model = $this->oModel->find($id);
+                //需要先刪除圖片
+
+                //
                 $Model->content = $content;
                 $Model->save();
             }
