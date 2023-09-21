@@ -55,6 +55,11 @@ class Language extends Model
         // "4" => "jp",
     ];
 
+    // public array $langCodeMap = [
+    //     "zh-tw" => "繁體中文",
+       
+    // ];
+
     public function getValidatorRules()
     {
         return [

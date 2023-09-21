@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-//            'name' => 'LOG的主機名稱',
+            //            'name' => 'LOG的主機名稱',
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
@@ -90,7 +90,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
@@ -138,6 +138,15 @@ return [
             'path' => storage_path('logs/erp/erp.log'),
             'channels' => ['daily'],
         ],
+
+        'mysql' => [
+            'driver' => 'monolog',
+            'handler' => App\Tools\Logging\MysqlHandler::class,
+            'handler_with' => [
+                'value1' => "test",
+            ],
+        ],
+
     ],
 
 ];
