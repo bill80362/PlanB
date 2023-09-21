@@ -23,13 +23,7 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class="col-12">
-                    @include('operate.components.editor.ckeditor', [
-                        'defaultValue' => '',
-                        'idName' => 'editor',
-                        'height' => '400px',
-                    ])
-                </div>
+               
 
             </div>
 
