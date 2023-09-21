@@ -24,12 +24,10 @@ class LanguageService extends LaravelTranslator
         $line = $this->loaded['*']['*'][$locale][$key] ?? null;
 
         if (!isset($line)) {
-            $ignoreKey = ['validation.', 'pagination.', 'auth.', 'common.', 'passwords.'];
+            $ignoreKey = ['validation.'];
             $check = Str::startsWith($key, $ignoreKey);
-            $language = new Language();
-            $langTypeKeys = $language->getCode();
             if (!$check) {
-                foreach ($langTypeKeys as $langType) {
+                foreach (['1', '2', '3'] as $langType) {
                     Language::firstOrCreate([
                         'lang_type' => $langType,
                         'text' => $key,

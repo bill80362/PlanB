@@ -8,7 +8,6 @@ use App\Models\Permission\Permission;
 use Database\Factories\Member\Member_DataFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\CompanyManage\PageContent;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,13 +33,6 @@ class DatabaseSeeder extends Seeder
             'perm_key' => 'user_update',
         ]);
 
-        PageContent::firstOrCreate([
-            'key' => 'privacyStatement'
-        ], [
-            'lang_type' => '1',
-            'page_name' => '隱私權聲明',
-        ]);
-
         // Permission::create([
         //     'user_id' => 1,
         //     'perm_key' => 'memberLevel.read'
@@ -50,8 +42,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         //目前數量
-        //        Member_DataFactory::$counter = Member_Data::max("ID") + 1;
+//        Member_DataFactory::$counter = Member_Data::max("ID") + 1;
         //製造
-        //        \App\Models\Member\Member_Data::factory(10)->create();
+//        \App\Models\Member\Member_Data::factory(10)->create();
     }
 }

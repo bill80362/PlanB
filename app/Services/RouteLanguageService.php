@@ -11,13 +11,11 @@ use Illuminate\Support\Str;
 
 class RouteLanguageService
 {
-    //前台開放的語系碼
-    public array $locales = ['en', 'zh-tw'];
-
     //這邊不能使用response
     public function setLangNoRedirect(){
+        $systemConfigService = app(SystemConfigService::class);
         $segment = request()->segment(1);
-        if (!in_array($segment, $this->locales)) {
+        if (!in_array($segment, $systemConfigService->locales)) {
             //
             //網址開頭不是語系碼，則使用預設語系
             App::setLocale(config('app.fallback_locale'));

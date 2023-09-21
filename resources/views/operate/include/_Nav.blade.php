@@ -1,4 +1,4 @@
-@inject('OnlineUserService', 'App\Services\Operate\OnlineUserService')
+
 <!-- menu  -->
 <div class="container-fluid g-0">
     <div class="row">
@@ -21,7 +21,6 @@
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
                         <li>
-                            <span>{{__("線上人數")}}:{{$OnlineUserService->getCount()}}</span>
                             <a class="bell_notification_clicker nav-link-notify" href="#"> <img src="/template/Salessa/img/icon/bell.svg" alt="">
 
                             </a>

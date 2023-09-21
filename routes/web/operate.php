@@ -5,16 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 
 /**後台*/
-Route::prefix('/operate')->middleware(['lang'])->group(function () {
+Route::prefix('/operate')->group(function () {
     //登入
     Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, "index"]);
     Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, "loginHTML"]);
     Route::post('/login', [\App\Http\Controllers\Operation\LoginController::class, "login"]);
     Route::get('/logout', [\App\Http\Controllers\Operation\LoginController::class, "logout"]);
 
-
-
-    Route::middleware(['auth:operate', "AdminLoginAuth","online.user"])->group(function () {
+    Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
 
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, "dashboard"]);
@@ -36,7 +34,6 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
         //系統設定
         Route::get('/system', [\App\Http\Controllers\Operation\SystemController::class, "updateHTML"])->name("system_update_html")->middleware(['can:system_update']);
         Route::post('/system', [\App\Http\Controllers\Operation\SystemController::class, "update"])->name("system_update")->middleware(['can:system_update']);
-        Route::post('/delete/image', [\App\Http\Controllers\Operation\SystemController::class, "deleteImage"])->name("system_delete_image")->middleware(['can:system_update']);
 
 
 
@@ -77,16 +74,5 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
             ->name("language_export");
         Route::post('/language/import', [\App\Http\Controllers\Operation\LanguageController::class, 'import'])->name("language_import");
         Route::post('/language/make_file', [\App\Http\Controllers\Operation\LanguageController::class, "makeFile"])->name("language_makeFile");
-
-
-        //公司管理
-        Route::get('/company_manage/{key}', [\App\Http\Controllers\Operation\CompanyManageController::class, "pageContentHtml"])->name("privacy_statement")
-            ->middleware([]);
-        Route::post('/company_manage/{key}', [\App\Http\Controllers\Operation\CompanyManageController::class, "pageContent"])->name("post_privacy_statement")
-            ->middleware([]);
-
-
-        Route::post('/upload_image', [\App\Http\Controllers\Operation\FileController::class, "uploadImage"])
-            ->name("upload_file");
     });
 });

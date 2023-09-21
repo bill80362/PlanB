@@ -5,24 +5,43 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Services\LanguageService as Translator;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use App\Services\Operate\SystemConfigService;
 
 class Language
 {
     /**
-     * 覆寫掉 Translator get功能
+     * 前台語系導轉功能 
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        app()->extend('translator', function ($command, $app) {
-            $loader = $app['translation.loader'];
-            $locale = $app->getLocale();
-            $trans = new Translator($loader, $locale);
-            $trans->setFallback($app->getFallbackLocale());
-            return $trans;
-        });
+        $systemConfigService = app(SystemConfigService::class);
+        $useLang = $systemConfigService->useLangPrefix;
+        if (!$useLang) {
+            return $next($request);
+        }
+
+        $param = $request->route()->parameter('lang');
+        $urlPath =  $request->path();
+
+        if (in_array($param, ['en', 'zh-tw'])) {
+            $locale = $param;
+        } else if (Session::has('locale')) {
+            $locale = Session::get('locale');
+            if ($request->method() == 'GET') {
+                return redirect("/{$locale}/{$urlPath}");
+            }
+        } else {
+            if ($request->method() == 'GET') {
+                return redirect("/zh-tw/{$urlPath}");
+            }
+            $locale = 'zh-tw';
+        }
+
+        App::setLocale($locale);
         return $next($request);
     }
 }

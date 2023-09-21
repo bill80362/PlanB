@@ -42,16 +42,16 @@ class Language extends Model
     }
 
     public array $langTypeText = [
-        "zh-tw" => "繁體中文",
-        "zh-cn" => "簡體中文",
-        "en" => "英文",
-        // "jp" => "日文",
+        "1" => "繁體中文",
+        "2" => "簡體中文",
+        "3" => "英文",
     ];
 
-    public function getCode()
-    {
-        return array_keys($this->langTypeText);
-    }
+    public array $langCodeMap = [
+        "1" => "zh-tw",
+        "2" => "zh-cn",
+        "3" => "en",
+    ];
 
     public function getValidatorRules()
     {
@@ -82,7 +82,7 @@ class Language extends Model
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if (isset($Data["filter_lang_type"])) {
+        if (isset($Data["lang_type"])) {
             $query->whereIn('lang_type', (array)$Data["filter_lang_type"]);
         }
         //過濾文字條件
@@ -119,17 +119,5 @@ class Language extends Model
         }
         //
         return $ExportList;
-    }
-
-    //判斷匯入的時候，新增或是更新
-    public function scopeImportPrimary($query, array $UpdateData)
-    {
-        if (isset($UpdateData["id"])) {
-            $query->where("id", $UpdateData["id"]);
-        } else {
-            $query->where("id", 0);
-        }
-        //
-        return $query;
     }
 }

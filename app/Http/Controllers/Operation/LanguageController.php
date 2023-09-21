@@ -38,14 +38,6 @@ class LanguageController extends Controller
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
-            foreach ($Data->getOtherLangs() as $key => $value) {
-                $this->oModel->firstOrCreate([
-                    'text' => $Data->text,
-                    'lang_type' => $key
-                ], [
-                    'tran_text' => $Data->text
-                ]);
-            }
             $elseDatas = $this->oModel->where('id', '!=', $Data->id)
                 ->where('text', $Data->text)->get()->mapWithKeys(function ($item) {
                     return [$item['lang_type'] => $item];
@@ -54,22 +46,20 @@ class LanguageController extends Controller
             $Data = $this->oModel;
             //新增預設值
             $Data->id = 0;
-            $Data->lang_type = 'zh-tw';
+            $Data->lang_type = '1';
             $Data->text = "";
             $Data->tran_text = "";
             $Data->memo = "";
             $elseDatas = [];
             foreach ($Data->getOtherLangs() as $key => $value) {
-                $elseDatas[$key] = [
+                array_push($elseDatas, [
                     'lang_type' => $key,
                     'tran_text' => ''
-                ];
+                ]);
             }
-            
             $elseDatas = collect($elseDatas)->mapWithKeys(function ($item) {
                 return [$item['lang_type'] => $item];
             })->all();
-            // dd($elseDatas);
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array)$this->request->old() as $key => $value) {
@@ -90,6 +80,7 @@ class LanguageController extends Controller
     // Post
     public function update($id)
     {
+        // dd($this->request->toArray());
         //過濾
         if ($id) {
             $UpdateData = $this->request->only(["tran_text", "memo", "text"]);
@@ -142,7 +133,6 @@ class LanguageController extends Controller
                 ]);
             }
         }
-        $this->makeFile();
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
             'Redirect' => '/operate/language?' . $this->request->getQueryString(),
@@ -230,7 +220,7 @@ class LanguageController extends Controller
         //
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
-            'Redirect' => '/operate/language?' . $this->request->getQueryString(),
+            'Redirect' => '/operate/user?' . $this->request->getQueryString(),
         ]);
     }
 
@@ -248,13 +238,13 @@ class LanguageController extends Controller
      */
     public function makeFile()
     {
-        foreach ($this->oModel->langTypeText as $langType => $langCode) {
+        foreach ($this->oModel->langCodeMap as $langType => $langCode) {
             $languageDatas = $this->oModel->select('text', 'tran_text')
                 ->where('lang_type', $langType)->get()
                 ->mapWithKeys(function ($item) {
                     return [$item['text'] => $item['tran_text']];
                 })->all();
-            $filePath = lang_path($langType . ".json");
+            $filePath = lang_path($langCode . ".json");
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             $fp = fopen($filePath, 'w');
             fwrite($fp, $jsonString);

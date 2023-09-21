@@ -7,7 +7,8 @@ use App\Services\RouteLanguageService;
 use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\Paginator;
+use App\Services\LanguageService as Translator;
+use App\Services\Operate\SystemConfigService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+
+//        $this->app->singleton(SystemConfigService::class, function () {
+//            return new SystemConfigService(new SystemConfig());
+//        });
+        $this->app->singleton(RouteLanguageService::class, function () {
+            return new RouteLanguageService();
+        });
+
+        if (!app()->runningInConsole()) {
+            $systemConfigService = app(SystemConfigService::class);
+            if ($systemConfigService->autoLangToDB) {
+                $this->app->extend('translator', function ($command, $app) {
+                    $loader = $app['translation.loader'];
+                    $locale = $app->getLocale();
+                    $trans = new Translator($loader, $locale);
+                    $trans->setFallback($app->getFallbackLocale());
+                    return $trans;
+                });
+            }
+        }
     }
 
     /**
@@ -28,10 +49,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // 在測試環境中強制關閉 Lazy Loading
         Model::preventLazyLoading(!app()->isProduction());
-        //路由使用，語言前置碼偵測
-        $this->app->singleton(RouteLanguageService::class, function () {
-            return new RouteLanguageService();
-        });
-        Paginator::useBootstrapFive();
+        //會蓋掉原本的
+        //        $this->app->singleton(SystemConfig::class, function ($app) {
+        //            return new SystemConfig("boot");
+        //        });
     }
 }

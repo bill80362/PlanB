@@ -15,14 +15,14 @@
                             <div class="main-title">
                                 <h2>
                                     <a class="btn btn-primary mr-2" href="{{route("user_list")}}?{{request()->getQueryString()}}"> < </a>
-                                    {{ __('系統環境設定') }}
+                                    {{ __('系統設定') }}
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <div class="white_card_body">
                         @include('/operate/components/alert/error_message')
-                        <form method="post" enctype="multipart/form-data">
+                        <form method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                             @foreach($Model->SystemConfig as $groupTitle => $groupContent)
                             <div class="card card-outline mb-2">
@@ -41,23 +41,9 @@
                                                     <label>{{$item["title"]}}</label>
                                                     <select class="form-control" name="{{$item["id"]}}">
                                                         @foreach($item["options"] as $value => $option)
-                                                        <option value="{{$value}}" {{$SystemConfigKeyValue[$item["id"]]==$value?"selected":""}}>{{$option}}</option>
+                                                        <option value="{{$value}}" selected>{{$option}}</option>
                                                         @endforeach
                                                     </select>
-                                                @elseif($item["input"]=="img")
-                                                    <label>{{$item["title"]}}</label>
-                                                    @if($SystemConfigKeyValue[$item["id"]])
-                                                        <div><img src="{{asset('storage/'.$SystemConfigKeyValue[$item["id"]])}}" width="200"></div>
-                                                        <button type="button" class="btn btn-xs btn-danger"
-                                                                onclick="postForm('/operate/delete/image',{
-                                                                            'id':'{{$item["id"]}}',
-                                                                            _token:'{{ csrf_token() }}'
-                                                                            })"
-                                                        >{{__("刪除圖片")}}</button>
-                                                    @else
-                                                        <input type="file" class="form-control" name="{{$item["id"]}}" >
-                                                    @endif
-
                                                 @endif
                                             </div>
                                         </div>

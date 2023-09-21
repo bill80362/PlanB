@@ -50,15 +50,6 @@ class SystemConfig extends Model
                 "options" => [],
             ],
         ],
-        "圖片設定" => [
-            [
-                "id" => "logo",
-                "title" => "後台系統LOGO",
-                "content" => "",
-                "input" => "img",
-                "options" => [],
-            ]
-        ],
     ];
 
 }

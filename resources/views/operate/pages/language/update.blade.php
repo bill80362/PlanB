@@ -41,22 +41,27 @@
                                                 <div class="col-6">
 
 
-                                                    <div class="form-group mb-3">
-                                                        <label>{{ __('語系') }}：{{ $LangTypeText[$Data->lang_type] }}</label>
+                                                    <div class="form-group">
+                                                        <label>{{ __('語系') }}</label>
                                                         <div>
-                                                            <input type="hidden" name="lang_type"
-                                                                value="{{ $Data->lang_type }}">
+                                                            {{-- disabled --}}
+                                                            @foreach ($Model->langTypeText as $key => $item)
+                                                                <div class="form-check form-check-inline mb-3">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                        name="lang_type" id="{{ $item }}"
+                                                                        @checked($Data->lang_type == $key)
+                                                                        value="{{ $key }}">
+                                                                    <label class="form-check-label"
+                                                                        for="{{ $item }}">{{ $item }}</label>
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('名稱') }}</label>
                                                         {{-- {{ $Data->id ? 'disabled' : '' }} --}}
-                                                        <textarea {{ $Data->id ? 'disabled' : '' }} class="form-control" name="text" rows="3">{{ $Data->text }}</textarea>
-                                                        @if ($Data->id)
-                                                            <input type="hidden" name="text"
-                                                                value="{{ $Data->text }}">
-                                                        @endif
+                                                        <textarea  class="form-control" name="text" rows="3">{{ $Data->text }}</textarea>
                                                     </div>
 
                                                     <div class="form-group mb-3">
@@ -77,6 +82,10 @@
                                                     @foreach ($OtherLangTypeText as $key => $value)
                                                         <div class="form-group mb-3">
                                                             <label>{{ __('翻譯後名稱') }}({{ $value }})</label>
+                                                            @php
+                                                                // dump($OtherLangTypeText);
+                                                                //     dd($ElseDatas);
+                                                            @endphp
                                                             <input type="hidden" name="else_langTypes[]"
                                                                 value="{{ $ElseDatas[$key]['lang_type'] }}">
 
@@ -89,7 +98,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">{{ __('送出') }}</button>
+                                            <button type="submit" class="btn btn-primary">送出</button>
                                         </div>
 
                                     </div>
