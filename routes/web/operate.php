@@ -12,8 +12,7 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
     Route::post('/login', [\App\Http\Controllers\Operation\LoginController::class, "login"]);
     Route::get('/logout', [\App\Http\Controllers\Operation\LoginController::class, "logout"]);
 
-    Route::post('/upload_image', [\App\Http\Controllers\Operation\FileController::class, "uploadImage"])
-        ->name("upload_file");
+
 
     Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
 
@@ -78,5 +77,8 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
             ->name("language_export");
         Route::post('/language/import', [\App\Http\Controllers\Operation\LanguageController::class, 'import'])->name("language_import");
         Route::post('/language/make_file', [\App\Http\Controllers\Operation\LanguageController::class, "makeFile"])->name("language_makeFile");
+
+        Route::post('/upload_image', [\App\Http\Controllers\Operation\FileController::class, "uploadImage"])
+            ->name("upload_file");
     });
 });

@@ -9,6 +9,7 @@ use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use App\Models\User;
 
 /**
  * @link https://spatie.be/docs/image/v1/introduction
@@ -60,12 +61,12 @@ class ImageTest extends TestCase
 
     public function test_uploadimage(): void
     {
-        $response = $this->json('POST', '/operate/upload_image', [
+        $user = User::find(1);
+        $active = $this->actingAs($user, 'operate');
+        $response = $active->json('POST', '/operate/upload_image', [
             'image' => UploadedFile::fake()->image('avatar.jpg'),
             'path' => 'editor'
         ]);
-
         $response->assertStatus(200);
-        // Storage::disk('public')->assertExists('editor/test.jpg');
     }
 }
