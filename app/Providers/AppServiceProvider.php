@@ -7,7 +7,7 @@ use App\Services\RouteLanguageService;
 use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\LanguageService as Translator;
+
 use App\Services\Operate\SystemConfigService;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,19 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
-
-        //這段要注意，太早觸發，導致SystemConfigService不能初始化拉DB
-        if (!app()->runningInConsole()) {
-
-            $this->app->extend('translator', function ($command, $app) {
-                $loader = $app['translation.loader'];
-                $locale = $app->getLocale();
-                $trans = new Translator($loader, $locale);
-                $trans->setFallback($app->getFallbackLocale());
-                return $trans;
-            });
-        }
     }
 
     /**
@@ -46,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         //        $this->app->singleton(SystemConfig::class, function ($app) {
         //            return new SystemConfig("boot");
         //        });
-        
+
         //載入系統變數
         if (!app()->runningInConsole()) {
             app(SystemConfigService::class)->loadSystemConfigKeyValue();
