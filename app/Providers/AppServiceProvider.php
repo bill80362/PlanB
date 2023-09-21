@@ -30,15 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // 在測試環境中強制關閉 Lazy Loading
         Model::preventLazyLoading(!app()->isProduction());
-        //會蓋掉原本的
-        //        $this->app->singleton(SystemConfig::class, function ($app) {
-        //            return new SystemConfig("boot");
-        //        });
-
-        //載入系統變數
-        if (!app()->runningInConsole()) {
-            app(SystemConfigService::class)->loadSystemConfigKeyValue();
-        }
+        //路由使用，語言前置碼偵測
         $this->app->singleton(RouteLanguageService::class, function () {
             return new RouteLanguageService();
         });

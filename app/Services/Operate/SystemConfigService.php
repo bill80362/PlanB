@@ -14,7 +14,9 @@ class SystemConfigService
     public bool $autoLangToDB = true;
 
     public array $SystemConfigKeyValue = [];
-    public function __construct(protected SystemConfig $oSystemConfig) {}
+    public function __construct(protected SystemConfig $oSystemConfig) {
+        $this->loadSystemConfigKeyValue();
+    }
 
     //這邊測試如果再初始化就載入，會ERROR，因為還不能拉DB
     public function loadSystemConfigKeyValue(): void
@@ -31,8 +33,8 @@ class SystemConfigService
             $this->SystemConfigKeyValue[$key] = $value;
         }
     }
-    public function getSystemConfigKeyValue(){
-        $this->SystemConfigKeyValue || $this->loadSystemConfigKeyValue();
-        return $this->SystemConfigKeyValue;
-    }
+//    public function getSystemConfigKeyValue(){
+//        $this->SystemConfigKeyValue || $this->loadSystemConfigKeyValue();
+//        return $this->SystemConfigKeyValue;
+//    }
 }
