@@ -9,8 +9,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 
-use App\Services\Operate\SystemConfigService;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
