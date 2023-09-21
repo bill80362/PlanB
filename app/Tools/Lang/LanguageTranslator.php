@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Tools\Lang;
 
 use Illuminate\Contracts\Translation\Loader;
 use Illuminate\Translation\Translator as LaravelTranslator;
 use App\Models\CountryAndShippingFee\Language;
 use Illuminate\Support\Str;
 
-class LanguageService extends LaravelTranslator
+class LanguageTranslator extends LaravelTranslator
 {
 
     public function __construct(Loader $loader, $locale)

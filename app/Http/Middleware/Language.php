@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Services\LanguageService as Translator;
+use App\Tools\Lang\LanguageTranslator as Translator;
 
 class Language
 {

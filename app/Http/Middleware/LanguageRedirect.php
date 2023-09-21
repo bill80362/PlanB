@@ -2,14 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\LanguageService;
 use App\Services\RouteLanguageService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
-use App\Services\Operate\SystemConfigService;
 
 class LanguageRedirect
 {
