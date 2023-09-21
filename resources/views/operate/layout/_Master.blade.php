@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Sales</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/template/Salessa/img/logo.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/template/Salessa/css/bootstrap.min.css?v={{$SystemConfigService->versionJS}}" />

@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @link https://spatie.be/docs/image/v1/introduction
@@ -54,5 +56,16 @@ class ImageTest extends TestCase
             ->save($outputPath);
         // ->watermarkOpacity(50);
         $this->assertTrue(true);
+    }
+
+    public function test_uploadimage(): void
+    {
+        $response = $this->json('POST', '/operate/upload_image', [
+            'image' => UploadedFile::fake()->image('avatar.jpg'),
+            'path' => 'editor'
+        ]);
+
+        $response->assertStatus(200);
+        // Storage::disk('public')->assertExists('editor/test.jpg');
     }
 }
