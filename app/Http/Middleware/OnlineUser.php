@@ -22,7 +22,6 @@ class OnlineUser
         $key = session()->getId();
         $value = $request->url();
         app(OnlineUserService::class)->setOnline($key,$value);
-
         //
         return $next($request);
     }
