@@ -38,6 +38,14 @@ class LanguageController extends Controller
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
+            foreach ($Data->getOtherLangs() as $key => $value) {
+                $this->oModel->firstOrCreate([
+                    'text' => $Data->text,
+                    'lang_type' => $key
+                ], [
+                    'tran_text' => $Data->text
+                ]);
+            }
             $elseDatas = $this->oModel->where('id', '!=', $Data->id)
                 ->where('text', $Data->text)->get()->mapWithKeys(function ($item) {
                     return [$item['lang_type'] => $item];
@@ -80,7 +88,6 @@ class LanguageController extends Controller
     // Post
     public function update($id)
     {
-        // dd($this->request->toArray());
         //過濾
         if ($id) {
             $UpdateData = $this->request->only(["tran_text", "memo", "text"]);
@@ -133,6 +140,7 @@ class LanguageController extends Controller
                 ]);
             }
         }
+        $this->makeFile();
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
             'Redirect' => '/operate/language?' . $this->request->getQueryString(),

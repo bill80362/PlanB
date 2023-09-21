@@ -7,6 +7,7 @@ use App\Services\RouteLanguageService;
 use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 
 use App\Services\Operate\SystemConfigService;
 
@@ -33,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(RouteLanguageService::class, function () {
             return new RouteLanguageService();
         });
+        Paginator::useBootstrapFive();
     }
 }
