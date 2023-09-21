@@ -10,7 +10,7 @@ use App\Services\LanguageService as Translator;
 class Language
 {
     /**
-     * 前台語系導轉功能 
+     * 覆寫掉 Translator get功能
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
