@@ -45,12 +45,14 @@ class Language extends Model
         "1" => "繁體中文",
         "2" => "簡體中文",
         "3" => "英文",
+        // "4" => "日文",
     ];
 
     public array $langCodeMap = [
         "1" => "zh-tw",
         "2" => "zh-cn",
         "3" => "en",
+        // "4" => "jp",
     ];
 
     public function getValidatorRules()
@@ -82,7 +84,7 @@ class Language extends Model
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if (isset($Data["lang_type"])) {
+        if (isset($Data["filter_lang_type"])) {
             $query->whereIn('lang_type', (array)$Data["filter_lang_type"]);
         }
         //過濾文字條件

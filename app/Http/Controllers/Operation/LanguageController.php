@@ -38,6 +38,14 @@ class LanguageController extends Controller
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
+            foreach ($Data->getOtherLangs() as $key => $value) {
+                $this->oModel->firstOrCreate([
+                    'text' => $Data->text,
+                    'lang_type' => $key
+                ], [
+                    'tran_text' => $Data->text
+                ]);
+            }
             $elseDatas = $this->oModel->where('id', '!=', $Data->id)
                 ->where('text', $Data->text)->get()->mapWithKeys(function ($item) {
                     return [$item['lang_type'] => $item];
