@@ -27,7 +27,7 @@ class LanguageService extends LaravelTranslator
             $ignoreKey = ['validation.', 'pagination.', 'auth.', 'common.', 'passwords.'];
             $check = Str::startsWith($key, $ignoreKey);
             $language = new Language();
-            $langTypeKeys = array_keys($language->langTypeText);
+            $langTypeKeys = $language->getCode();
             if (!$check) {
                 foreach ($langTypeKeys as $langType) {
                     Language::firstOrCreate([

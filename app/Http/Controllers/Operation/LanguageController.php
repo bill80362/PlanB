@@ -54,20 +54,22 @@ class LanguageController extends Controller
             $Data = $this->oModel;
             //新增預設值
             $Data->id = 0;
-            $Data->lang_type = '1';
+            $Data->lang_type = 'zh-tw';
             $Data->text = "";
             $Data->tran_text = "";
             $Data->memo = "";
             $elseDatas = [];
             foreach ($Data->getOtherLangs() as $key => $value) {
-                array_push($elseDatas, [
+                $elseDatas[$key] = [
                     'lang_type' => $key,
                     'tran_text' => ''
-                ]);
+                ];
             }
+            
             $elseDatas = collect($elseDatas)->mapWithKeys(function ($item) {
                 return [$item['lang_type'] => $item];
             })->all();
+            // dd($elseDatas);
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array)$this->request->old() as $key => $value) {
@@ -246,13 +248,13 @@ class LanguageController extends Controller
      */
     public function makeFile()
     {
-        foreach ($this->oModel->langCodeMap as $langType => $langCode) {
+        foreach ($this->oModel->langTypeText as $langType => $langCode) {
             $languageDatas = $this->oModel->select('text', 'tran_text')
                 ->where('lang_type', $langType)->get()
                 ->mapWithKeys(function ($item) {
                     return [$item['text'] => $item['tran_text']];
                 })->all();
-            $filePath = lang_path($langCode . ".json");
+            $filePath = lang_path($langType . ".json");
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             $fp = fopen($filePath, 'w');
             fwrite($fp, $jsonString);

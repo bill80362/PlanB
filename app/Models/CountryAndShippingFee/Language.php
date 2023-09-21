@@ -42,23 +42,16 @@ class Language extends Model
     }
 
     public array $langTypeText = [
-        "1" => "繁體中文",
-        "2" => "簡體中文",
-        "3" => "英文",
-        // "4" => "日文",
+        "zh-tw" => "繁體中文",
+        "zh-cn" => "簡體中文",
+        "en" => "英文",
+        // "jp" => "日文",
     ];
 
-    public array $langCodeMap = [
-        "1" => "zh-tw",
-        "2" => "zh-cn",
-        "3" => "en",
-        // "4" => "jp",
-    ];
-
-    // public array $langCodeMap = [
-    //     "zh-tw" => "繁體中文",
-       
-    // ];
+    public function getCode()
+    {
+        return array_keys($this->langTypeText);
+    }
 
     public function getValidatorRules()
     {
