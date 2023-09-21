@@ -15,7 +15,7 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
     Route::post('/upload_image', [\App\Http\Controllers\Operation\FileController::class, "uploadImage"])
         ->name("upload_file");
 
-    Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
+    Route::middleware(['auth:operate', "AdminLoginAuth","online.user"])->group(function () {
 
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, "dashboard"]);
