@@ -18,30 +18,16 @@ class Language
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $systemConfigService = app(SystemConfigService::class);
-        $useLang = $systemConfigService->useLangPrefix;
-        if (!$useLang) {
-            return $next($request);
-        }
-
-        $param = $request->route()->parameter('lang');
-        $urlPath =  $request->path();
-
-        if (in_array($param, ['en', 'zh-tw'])) {
-            $locale = $param;
-        } else if (Session::has('locale')) {
-            $locale = Session::get('locale');
-            if ($request->method() == 'GET') {
-                return redirect("/{$locale}/{$urlPath}");
-            }
-        } else {
-            if ($request->method() == 'GET') {
-                return redirect("/zh-tw/{$urlPath}");
-            }
-            $locale = 'zh-tw';
-        }
-
-        App::setLocale($locale);
+        // app()->singleton(RouteLanguageService::class, function () {
+        //     return new RouteLanguageService();
+        // });
+        // $this->app->extend('translator', function ($command, $app) {
+        //     $loader = $app['translation.loader'];
+        //     $locale = $app->getLocale();
+        //     $trans = new Translator($loader, $locale);
+        //     $trans->setFallback($app->getFallbackLocale());
+        //     return $trans;
+        // });
         return $next($request);
     }
 }
