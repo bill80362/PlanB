@@ -54,12 +54,25 @@ class SystemController extends Controller
             }elseif($Model->content!==$content){
                 //修改
                 $Model = $this->oModel->find($id);
-                //需要先刪除圖片
-
                 //
                 $Model->content = $content;
                 $Model->save();
             }
+        }
+        //
+        return view('alert_redirect', [
+            'Alert' => __("送出成功"),
+            'Redirect' => '/operate/system',
+        ]);
+    }
+    public function deleteImage(){
+        $Model = $this->oModel->find($this->request->string("id"));
+        if($Model){
+            //需要先刪除原本就存在的圖片
+            Storage::disk('public')->delete($Model->content);
+            //
+            $Model->content = "";
+            $Model->save();
         }
         //
         return view('alert_redirect', [

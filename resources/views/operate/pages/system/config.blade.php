@@ -46,10 +46,18 @@
                                                     </select>
                                                 @elseif($item["input"]=="img")
                                                     <label>{{$item["title"]}}</label>
-                                                    <div>
-                                                        <img src="{{asset('storage/'.$SystemConfigKeyValue[$item["id"]])}}" width="200">
-                                                    </div>
-                                                    <input type="file" class="form-control" name="{{$item["id"]}}" >
+                                                    @if($SystemConfigKeyValue[$item["id"]])
+                                                        <div><img src="{{asset('storage/'.$SystemConfigKeyValue[$item["id"]])}}" width="200"></div>
+                                                        <button type="button" class="btn btn-xs btn-danger"
+                                                                onclick="postForm('/operate/delete/image',{
+                                                                            'id':'{{$item["id"]}}',
+                                                                            _token:'{{ csrf_token() }}'
+                                                                            })"
+                                                        >{{__("刪除圖片")}}</button>
+                                                    @else
+                                                        <input type="file" class="form-control" name="{{$item["id"]}}" >
+                                                    @endif
+
                                                 @endif
                                             </div>
                                         </div>

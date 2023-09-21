@@ -34,6 +34,7 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
         //系統設定
         Route::get('/system', [\App\Http\Controllers\Operation\SystemController::class, "updateHTML"])->name("system_update_html")->middleware(['can:system_update']);
         Route::post('/system', [\App\Http\Controllers\Operation\SystemController::class, "update"])->name("system_update")->middleware(['can:system_update']);
+        Route::post('/delete/image', [\App\Http\Controllers\Operation\SystemController::class, "deleteImage"])->name("system_delete_image")->middleware(['can:system_update']);
 
 
 
