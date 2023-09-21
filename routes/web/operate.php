@@ -14,7 +14,7 @@ Route::prefix('/operate')->middleware(['lang'])->group(function () {
 
 
 
-    Route::middleware(['auth:operate', "AdminLoginAuth"])->group(function () {
+    Route::middleware(['auth:operate', "AdminLoginAuth","online.user"])->group(function () {
 
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, "dashboard"]);

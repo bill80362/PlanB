@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\OnlineUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'lang' => \App\Http\Middleware\Language::class,
         //
         'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
+        'online.user' => \App\Http\Middleware\OnlineUser::class,
     ];
 }
