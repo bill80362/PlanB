@@ -41,7 +41,7 @@
                                                     <label>{{$item["title"]}}</label>
                                                     <select class="form-control" name="{{$item["id"]}}">
                                                         @foreach($item["options"] as $value => $option)
-                                                        <option value="{{$value}}" selected>{{$option}}</option>
+                                                        <option value="{{$value}}" {{$SystemConfigKeyValue[$item["id"]]==$value?"selected":""}}>{{$option}}</option>
                                                         @endforeach
                                                     </select>
                                                 @endif
