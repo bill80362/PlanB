@@ -28,9 +28,9 @@ class LogResponseInfo
         } elseif (auth('operate')->check()) {
             //紀錄 getContent 會有全部HTML，只記錄Code
             Log::channel('operate_access')->info($response->getStatusCode());
-        } elseif (auth('front')->check()) {
-            //前台登入
-            Log::channel('front_access')->info($response->getStatusCode());
+//        } elseif (auth('front')->check()) {
+//            //前台登入
+//            Log::channel('front_access')->info($response->getStatusCode());
         } else {
             //未登入
             Log::channel('others_access')->info($response->getStatusCode());

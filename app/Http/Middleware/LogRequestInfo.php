@@ -26,8 +26,8 @@ class LogRequestInfo
 //            Log::channel('api_access')->info($request->all());
         } elseif (auth('operate')->check()) {
             Log::channel('operate_access')->info($request->all());
-        } elseif (auth('front')->check()) {
-            Log::channel('front_access')->info($request->all());
+//        } elseif (auth('front')->check()) {
+//            Log::channel('front_access')->info($request->all());
         } else {
             Log::channel('others_access')->info($request->all());
         }

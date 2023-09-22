@@ -40,8 +40,8 @@ class Handler extends ExceptionHandler
 //            Log::channel('api_exceptions')->error($e->getMessage());
         } elseif (auth('operate')->check()) {
             Log::channel('operate_exceptions')->error($e->getMessage());
-        } elseif (auth('front')->check()) {
-            Log::channel('front_exceptions')->error($e->getMessage());
+//        } elseif (auth('front')->check()) {
+//            Log::channel('front_exceptions')->error($e->getMessage());
         } else {
             Log::channel('others_exceptions')->error($e->getMessage());
         }
@@ -65,9 +65,9 @@ class Handler extends ExceptionHandler
         } elseif (auth('operate')->check()) {
             //使用管理端 /views/operate/errors/404.blade.php
             return view('operate/errors/404');
-        } elseif (auth('front')->check()) {
-            //使用外網統一頁面 /views/errors/404.blade.php
-            return parent::render($request, $e);
+//        } elseif (auth('front')->check()) {
+//            //使用外網統一頁面 /views/errors/404.blade.php
+//            return parent::render($request, $e);
         }
         //
         return parent::render($request, $e);
