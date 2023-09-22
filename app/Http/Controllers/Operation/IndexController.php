@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Operation;
 
-use Illuminate\Http\Request;
-
 class IndexController extends \App\Http\Controllers\Controller
 {
     public function dashboard()
@@ -13,6 +11,6 @@ class IndexController extends \App\Http\Controllers\Controller
 
     public function index()
     {
-        return redirect("/operate/login");
+        return redirect('/operate/login');
     }
 }

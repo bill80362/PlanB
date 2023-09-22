@@ -18,9 +18,9 @@ class LanguageRedirect
     {
         //
         $segment = $request->segment(1);
-        if (!in_array($segment, app(RouteLanguageService::class)->locales)) {
+        if (! in_array($segment, app(RouteLanguageService::class)->locales)) {
             //網址開頭不是語系碼，則使用預設語系
-            return redirect("/" . config('app.fallback_locale') . "/" . $request->path(),307);//導轉夾帶POS參數
+            return redirect('/'.config('app.fallback_locale').'/'.$request->path(), 307); //導轉夾帶POS參數
         }
 
         return $next($request);

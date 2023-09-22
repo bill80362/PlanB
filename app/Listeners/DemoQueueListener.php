@@ -4,11 +4,6 @@ namespace App\Listeners;
 
 use App\Events\DemoQueueEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Bus\Queueable;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\SerializesModels;
-
 
 class DemoQueueListener implements ShouldQueue
 {
@@ -18,6 +13,6 @@ class DemoQueueListener implements ShouldQueue
     public function handle(DemoQueueEvent $event): void
     {
         //
-        app('log')->info("delay9999988888");
+        app('log')->info('delay9999988888');
     }
 }

@@ -9,8 +9,8 @@ use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AuditController extends Controller
@@ -19,46 +19,55 @@ class AuditController extends Controller
         protected Request $request,
         protected SystemConfigService $oSystemConfigService,
         protected AuditLog $oModel,
-    ){}
-    public function listHTML(){
+    ) {
+    }
+
+    public function listHTML()
+    {
         //
-        $pageLimit = $this->request->get("pageLimit")?:10;//預設10
+        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())->with('user')->paginate($pageLimit);
+
         //
-//        dd($this->oModel->statusText);
+        //        dd($this->oModel->statusText);
         return view('operate/pages/audit/list', [
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
         ]);
     }
-    public function updateHTML($id){
-        if($id){
+
+    public function updateHTML($id)
+    {
+        if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
-        }else{
+        } else {
             $Data = $this->oModel;
             //新增預設值
             $Data->id = 0;
-            $Data->name = "";
-            $Data->email = "";
+            $Data->name = '';
+            $Data->email = '';
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
-        foreach ((array)$this->request->old() as $key => $value){
-            if(!$value) continue;
+        foreach ((array) $this->request->old() as $key => $value) {
+            if (! $value) {
+                continue;
+            }
             $Data->$key = $value;
         }
         //整理權限
-        if($id){
-            $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function($item){
+        if ($id) {
+            $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function ($item) {
                 return $item->perm_key;
             });
-        }else{
+        } else {
             $DataPermission = collect([
-                "items" => "",
+                'items' => '',
             ]);
         }
+
         //View
         return view('operate/pages/audit/update', [
             'Data' => $Data,
@@ -66,13 +75,15 @@ class AuditController extends Controller
             'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
         ]);
     }
-    public function update($id){
+
+    public function update($id)
+    {
         //過濾
-        $UpdateData = $this->request->only(["name","email","password"]);
-        if(!$UpdateData["password"]){
-            unset($UpdateData["password"]);
-        }else{
-            $this->oModel->newPassword = $UpdateData["password"];
+        $UpdateData = $this->request->only(['name', 'email', 'password']);
+        if (! $UpdateData['password']) {
+            unset($UpdateData['password']);
+        } else {
+            $this->oModel->newPassword = $UpdateData['password'];
         }
         //驗證資料
         $validator = Validator::make(
@@ -81,8 +92,8 @@ class AuditController extends Controller
             $this->oModel->getValidatorMessage(),
         );
         //密碼處理
-        if(isset($UpdateData["password"])){
-            $UpdateData["password"] = Hash::make($UpdateData["password"]);
+        if (isset($UpdateData['password'])) {
+            $UpdateData['password'] = Hash::make($UpdateData['password']);
         }
         //驗證有誤
         if ($validator->fails()) {
@@ -90,57 +101,68 @@ class AuditController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        if($id){
+        if ($id) {
             $this->oModel->find($id)->update($UpdateData);
-        }else{
+        } else {
             $id = $this->oModel->create($UpdateData)->id;
         }
         //寫入權限
-        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function($item){return $item["key"];});
-        $PermissionArray = collect($this->request->only($allPermissionsKey->toArray()))->map(function ($item,$key){
-            return new Permission(["perm_key" => $key]);
+        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function ($item) {
+            return $item['key'];
+        });
+        $PermissionArray = collect($this->request->only($allPermissionsKey->toArray()))->map(function ($item, $key) {
+            return new Permission(['perm_key' => $key]);
         });
         $this->oModel->find($id)->permissions()->saveMany($PermissionArray);
+
         //
         return view('alert_redirect', [
-            'Alert' => __("送出成功"),
+            'Alert' => __('送出成功'),
             'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
         ]);
     }
+
     //批次刪除
-    public function delBatch(){
+    public function delBatch()
+    {
         //刪除
-        foreach ((array)$this->request->post("id_array") as $id){
+        foreach ((array) $this->request->post('id_array') as $id) {
             $this->oModel->find($id)->delete();
         }
+
         //
         return view('alert_redirect', [
-            'Alert' => "刪除成功",
+            'Alert' => '刪除成功',
             'Redirect' => route('audit_list').'?'.$this->request->getQueryString(),
         ]);
     }
+
     //批次修改排序
-    public function sortBatch(){
-        $ID_Array = $this->request->post("sort");
+    public function sortBatch()
+    {
+        $ID_Array = $this->request->post('sort');
 
     }
 
     /**
      * 匯入
      */
-    public function import(){
+    public function import()
+    {
         //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
-        $subjects=Excel::toCollection(null,$this->request->file('file')->store('temp'));
+        $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
         //根據第一列標題判斷對應的欄位
         $value_to_key = array_flip($this->oModel->Column_Title_Text);
         $excelIndex = [];
-        foreach ((array)$subjects->toArray()[0] as $RowKey => $Row){
-            if($RowKey>0) break;//只跑第一行
-            foreach ($Row as $index => $columnTitle){
+        foreach ((array) $subjects->toArray()[0] as $RowKey => $Row) {
+            if ($RowKey > 0) {
+                break;
+            }//只跑第一行
+            foreach ($Row as $index => $columnTitle) {
                 //匯入資料欄位標題異常
-                if(!isset($value_to_key[$columnTitle])){
+                if (! isset($value_to_key[$columnTitle])) {
                     return view('alert_redirect', [
-                        'Alert' => __("匯入標題異常"),
+                        'Alert' => __('匯入標題異常'),
                         'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
                     ]);
                 }
@@ -150,63 +172,70 @@ class AuditController extends Controller
         }
         //開始逐筆匯入
         $AllMessage = [];
-        foreach ((array)$subjects->toArray()[0] as $RowKey => $Row){
+        foreach ((array) $subjects->toArray()[0] as $RowKey => $Row) {
             //第一列標題，跳過
-            if($RowKey==0) continue;
+            if ($RowKey == 0) {
+                continue;
+            }
             //資料對應整理
             $UpdateData = [];
-            foreach ($Row as $index => $columnValue){
+            foreach ($Row as $index => $columnValue) {
                 //特殊處理欄位
-                if($excelIndex[$index]=="password") {
+                if ($excelIndex[$index] == 'password') {
                     $this->oModel->newPassword = $columnValue;
                     $UpdateData[$excelIndex[$index]] = Hash::make($columnValue);
-                }elseif($excelIndex[$index]=="status"){
+                } elseif ($excelIndex[$index] == 'status') {
                     $UpdateData[$excelIndex[$index]] = array_flip($this->oModel->statusText)[$columnValue];
-                }else{
+                } else {
                     $UpdateData[$excelIndex[$index]] = $columnValue;
                 }
             }
             //整理要更新的資料
             $DataModel = $this->oModel->importPrimary($UpdateData)->first();
-            if(!$DataModel){
-                $DataModel = clone $this->oModel;//沒有對應的資料，init一個
+            if (! $DataModel) {
+                $DataModel = clone $this->oModel; //沒有對應的資料，init一個
             }
-            foreach ($UpdateData as $ColumnTitle => $value){
-                if($ColumnTitle=="password"){
+            foreach ($UpdateData as $ColumnTitle => $value) {
+                if ($ColumnTitle == 'password') {
                     $DataModel->newPassword = $value;
                 }
                 $DataModel->$ColumnTitle = $value;
             }
             //驗證資料
             $validator = Validator::make(
-                $DataModel->makeVisible("password")->toArray(),
+                $DataModel->makeVisible('password')->toArray(),
                 $this->oModel->getValidatorRules(),
                 $this->oModel->getValidatorMessage(),
             );
             //驗證有誤
             if ($validator->fails()) {
                 //
-                $AllMessage[] = "第{$RowKey}列:".implode(",",$validator->messages()->all());
+                $AllMessage[] = "第{$RowKey}列:".implode(',', $validator->messages()->all());
+
                 //
                 continue;
             }
             $DataModel->save();
         }
         //有錯誤
-        if($AllMessage){
-            return redirect()->back()->withErrors(['message' => implode(",",$AllMessage)]);
+        if ($AllMessage) {
+            return redirect()->back()->withErrors(['message' => implode(',', $AllMessage)]);
         }
+
         //
         return view('alert_redirect', [
-            'Alert' => __("送出成功"),
+            'Alert' => __('送出成功'),
             'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
         ]);
     }
+
     //匯出
-    public function export(){
+    public function export()
+    {
         //匯出的標題和內文
         $ExportList = $this->oModel->filter($this->request->all())->export();
+
         //匯出
-        return (new Collection($ExportList))->downloadExcel("audit_data_".time().".xlsx");
+        return (new Collection($ExportList))->downloadExcel('audit_data_'.time().'.xlsx');
     }
 }

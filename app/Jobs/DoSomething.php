@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,6 +26,6 @@ class DoSomething implements ShouldQueue
     public function handle(): void
     {
         //
-        echo "我是 DoSomething新的122";
+        echo '我是 DoSomething新的122';
     }
 }

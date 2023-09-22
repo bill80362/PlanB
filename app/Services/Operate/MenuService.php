@@ -2,11 +2,8 @@
 
 namespace App\Services\Operate;
 
-use Illuminate\Support\Facades\Gate;
-
 class MenuService
 {
-
     public function getMenu()
     {
         return [
@@ -14,7 +11,7 @@ class MenuService
                 'name' => __('儀表板'),
                 'href' => '/operate/dashboard',
                 'icon' => '/template/Salessa/img/menu-icon/dashboard.svg',
-                'permission' => ''
+                'permission' => '',
             ],
             [
                 'name' => __('管理人管理'),
@@ -23,14 +20,14 @@ class MenuService
                     [
                         'name' => __('管理人管理'),
                         'href' => '/operate/user',
-                        'permission' => '' //user.read
+                        'permission' => '', //user.read
                     ],
                     [
                         'name' => __('群組管理'),
                         'href' => '/operate/permission_group',
-                        'permission' => '' //permissionGroup.read
+                        'permission' => '', //permissionGroup.read
                     ],
-                ]
+                ],
             ],
             [
                 'name' => __('系統設定'),
@@ -39,14 +36,14 @@ class MenuService
                     [
                         'name' => __('語系管理'),
                         'href' => '/operate/language',
-                        'permission' => 'language_read'
+                        'permission' => 'language_read',
                     ],
                     [
                         'name' => __('系統環境設定'),
                         'href' => '/operate/system',
                         'permission' => 'system_update',
                     ],
-                ]
+                ],
             ],
             [
                 'name' => __('公司管理'),
@@ -55,14 +52,14 @@ class MenuService
                     [
                         'name' => __('隱私權聲明'),
                         'href' => '/operate/company_manage/privacy_statement',
-                        'permission' => 'privacy_statement_read' //member.read
+                        'permission' => 'privacy_statement_read', //member.read
                     ],
                     [
                         'name' => __('版權宣告'),
                         'href' => '/operate/company_manage/copyright_notice',
-                        'permission' => 'copyright_notice_read' //member.read
+                        'permission' => 'copyright_notice_read', //member.read
                     ],
-                ]
+                ],
             ],
             [
                 'name' => __('Log'),
@@ -71,9 +68,9 @@ class MenuService
                     [
                         'name' => __('abc公司串接Log'),
                         'href' => '/operate/http_log',
-                        'permission' => ''
-                    ]
-                ]
+                        'permission' => '',
+                    ],
+                ],
             ],
             [
                 'name' => __('操作紀錄'),
@@ -82,9 +79,9 @@ class MenuService
                     [
                         'name' => __('操作紀錄'),
                         'href' => '/operate/audit',
-                        'permission' => '' //member.read
+                        'permission' => '', //member.read
                     ],
-                ]
+                ],
             ],
         ];
     }
@@ -96,7 +93,7 @@ class MenuService
     {
         $user = auth('operate')->user();
         $menus = $this->getMenu();
-        $defaultIcon =  $this->getDefaultMenuIcon();
+        $defaultIcon = $this->getDefaultMenuIcon();
         $userMenus = [];
         foreach ($menus as $menu) {
             if ((array_key_exists('subMenu', $menu))) {
@@ -119,6 +116,7 @@ class MenuService
                 }
             }
         }
+
         return $userMenus;
     }
 
@@ -129,11 +127,12 @@ class MenuService
                 return true;
             }
         }
+
         return false;
     }
 
     public function getDefaultMenuIcon()
     {
-        return "/template/Salessa/img/menu-icon/dashboard.svg";
+        return '/template/Salessa/img/menu-icon/dashboard.svg';
     }
 }

@@ -2,13 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Illuminate\Support\Facades\Log;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\Log;
 
 class HttpLog
 {
@@ -23,6 +20,7 @@ class HttpLog
             return function (Request $request, array $options) use ($channel, $context, $config, $handler): PromiseInterface {
                 $start = microtime(true);
                 $promise = $handler($request, $options);
+
                 return $promise->then(
                     function (Response $response) use ($channel, $context, $config, $request, $start) {
                         $sec = microtime(true) - $start;

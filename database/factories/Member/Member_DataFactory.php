@@ -2,9 +2,7 @@
 
 namespace Database\Factories\Member;
 
-use App\Models\Member\Member_Data;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -18,18 +16,20 @@ class Member_DataFactory extends Factory
      * @return array<string, mixed>
      */
     public static int $counter = 1;
+
     public function definition(): array
     {
         $Email = fake()->unique()->safeEmail();
-        $Cellphone = "0921".rand(111111,999999);
+        $Cellphone = '0921'.rand(111111, 999999);
         //
         $MemberNum = self::$counter++;
-        $MemberNum = "M".str_pad($MemberNum,"8","0",STR_PAD_LEFT);//formatting
+        $MemberNum = 'M'.str_pad($MemberNum, '8', '0', STR_PAD_LEFT); //formatting
+
         //
         return [
             //
             'MemberNum' => $MemberNum,
-            "Login_Email" => $Cellphone,
+            'Login_Email' => $Cellphone,
             'Name' => fake()->name(),
             'Login_Password' => Hash::make('123'),
             'Member_Level_ID' => 1,
@@ -39,16 +39,16 @@ class Member_DataFactory extends Factory
             'Email' => $Email,
             'Formal_Flag' => 1,
             'Sex' => 1,
-            'Birthday' => "1900-01-01",
+            'Birthday' => '1900-01-01',
             'Country_ID' => 1,
             'City_ID' => 1,
             'Area_ID' => 1,
             'Area_No1' => 111,
             'Area_No2' => 122,
-            'Address' => "測試地址",
+            'Address' => '測試地址',
             'Tel' => $Cellphone,
-            'Remark_Item' => "",
-            'Remark' => "",
+            'Remark_Item' => '',
+            'Remark' => '',
 
         ];
     }

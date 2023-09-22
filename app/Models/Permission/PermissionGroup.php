@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PermissionGroup extends Model
 {
     use HasFactory;
-    
+
     public $incrementing = true;
+
     protected $keyType = 'int';
+
     // protected $table = 'table name';
     protected $guarded = [];
 

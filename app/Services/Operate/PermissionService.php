@@ -79,12 +79,12 @@ class PermissionService
             [
                 'label' => '會員等級',
                 'groupKey' => 'memberLevel',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
             [
                 'label' => '會員管理',
                 'groupKey' => 'member',
-                'actions' => ['read', 'create', 'update', 'delete']
+                'actions' => ['read', 'create', 'update', 'delete'],
             ],
         ];
     }
@@ -95,12 +95,12 @@ class PermissionService
             [
                 'label' => '商品分店',
                 'groupKey' => 'prodMall',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
             [
                 'label' => '商品分館',
                 'groupKey' => 'prodLib',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
         ];
     }
@@ -112,7 +112,7 @@ class PermissionService
             [
                 'label' => '語系管理',
                 'groupKey' => 'language',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
         ];
     }
@@ -124,18 +124,16 @@ class PermissionService
             [
                 'label' => '隱私權聲明',
                 'groupKey' => 'privacy_statement',
-                'actions' => ['read', 'update']
+                'actions' => ['read', 'update'],
             ],
             [
                 'label' => '版權宣告 ',
                 'groupKey' => 'copyright_notice',
-                'actions' => ['read', 'update']
+                'actions' => ['read', 'update'],
             ],
 
-            
         ];
     }
-
 
     // 系統管理群組
     private function getSystemItem()
@@ -144,21 +142,20 @@ class PermissionService
             [
                 'label' => '群組管理',
                 'groupKey' => 'permissionGroup',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
             [
                 'label' => '管理人管理',
                 'groupKey' => 'user',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import']
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
             [
                 'label' => '系統環境',
                 'groupKey' => 'system',
-                'actions' => ['update',]
+                'actions' => ['update'],
             ],
         ];
     }
-
 
     private function changeActions($permGroup)
     {
@@ -168,7 +165,7 @@ class PermissionService
             $details = collect($perm['actions'])->map(function ($act) use ($perm, $defineAction) {
                 return [
                     'label' => $defineAction[$act],
-                    'key' => $perm['groupKey'] . '_' . $act,
+                    'key' => $perm['groupKey'].'_'.$act,
                 ];
             })->all();
             $permList[$key]['actions'] = [];

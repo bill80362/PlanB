@@ -25,7 +25,6 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
 
-
         $this->reportable(function (Throwable $e) {
             //
         });
@@ -36,12 +35,12 @@ class Handler extends ExceptionHandler
         //透過guard區分log
         if (auth('erp')->check()) {
             Log::channel('erp_exceptions')->error($e->getMessage());
-//        } elseif (auth('api')->check()) {
-//            Log::channel('api_exceptions')->error($e->getMessage());
+            //        } elseif (auth('api')->check()) {
+            //            Log::channel('api_exceptions')->error($e->getMessage());
         } elseif (auth('operate')->check()) {
             Log::channel('operate_exceptions')->error($e->getMessage());
-//        } elseif (auth('front')->check()) {
-//            Log::channel('front_exceptions')->error($e->getMessage());
+            //        } elseif (auth('front')->check()) {
+            //            Log::channel('front_exceptions')->error($e->getMessage());
         } else {
             Log::channel('others_exceptions')->error($e->getMessage());
         }
@@ -52,7 +51,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         //APP_DEBUG開啟狀態，直接離開
-        if(env("APP_DEBUG")){
+        if (env('APP_DEBUG')) {
             return parent::render($request, $e);
         }
         //透過guard區分log
@@ -61,18 +60,19 @@ class Handler extends ExceptionHandler
                 'code' => 400,
                 'message' => $e->getMessage(),
             ], $e->getStatusCode());
-//        } elseif (auth('api')->check()) {
-//            return response()->json([
-//                'code' => 400,
-//                'message' => $e->getMessage(),
-//            ], 400);
+            //        } elseif (auth('api')->check()) {
+            //            return response()->json([
+            //                'code' => 400,
+            //                'message' => $e->getMessage(),
+            //            ], 400);
         } elseif (auth('operate')->check()) {
             //使用管理端 /views/operate/errors/404.blade.php
             return view('operate/errors/404');
-//        } elseif (auth('front')->check()) {
-//            //使用外網統一頁面 /views/errors/404.blade.php
-//            return parent::render($request, $e);
+            //        } elseif (auth('front')->check()) {
+            //            //使用外網統一頁面 /views/errors/404.blade.php
+            //            return parent::render($request, $e);
         }
+
         //
         return parent::render($request, $e);
     }

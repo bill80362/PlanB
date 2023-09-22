@@ -2,13 +2,12 @@
 
 namespace App\Providers;
 
-use App\Services\RouteLanguageService;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Http\Client\PendingRequest;
 use App\Http\Middleware\HttpLog;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // 在測試環境中強制關閉 Lazy Loading
-        Model::preventLazyLoading(!app()->isProduction());
+        Model::preventLazyLoading(! app()->isProduction());
         Paginator::useBootstrapFive();
         //
         PendingRequest::macro('log', function (

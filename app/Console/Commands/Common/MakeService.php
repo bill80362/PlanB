@@ -3,18 +3,15 @@
 namespace App\Console\Commands\Common;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Foundation\Console\ModelMakeCommand;
 
 class MakeService extends GeneratorCommand
 {
-
     /**
      * @example php artisan make:service Payment/LinePayService
+     *
      * @var string
      */
     protected $signature = 'make:service {name}';
-
-
 
     /**
      * The console command description.
@@ -23,7 +20,7 @@ class MakeService extends GeneratorCommand
      */
     protected $description = '指令建立 service class';
 
-     /**
+    /**
      * The type of class being generated.
      *
      * @var string
@@ -41,7 +38,7 @@ class MakeService extends GeneratorCommand
         return class_exists($rawName);
     }
 
-     /**
+    /**
      * Get the stub file for the generator.
      *
      * @return string
@@ -51,15 +48,14 @@ class MakeService extends GeneratorCommand
         return __DIR__.'/stubs/service.stub';
     }
 
-     /**
+    /**
      * Get the default namespace for the class.
      *
-     * @param string $rootNamespace
+     * @param  string  $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
         return is_dir(app_path('Services')) ? $rootNamespace.'\\Services' : $rootNamespace;
     }
-
 }

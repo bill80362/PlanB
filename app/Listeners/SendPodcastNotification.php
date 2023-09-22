@@ -2,16 +2,15 @@
 
 namespace App\Listeners;
 
-use App\Events\MemberDataSavingEvent;
 use App\Events\PodcastProcessed;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 class SendPodcastNotification implements ShouldQueue
 {
-//    use InteractsWithQueue;
+    //    use InteractsWithQueue;
 
-//    public $afterCommit = true;
+    //    public $afterCommit = true;
 
     /**
      * Handle the event.
@@ -19,11 +18,12 @@ class SendPodcastNotification implements ShouldQueue
     public function handle(PodcastProcessed $event): void
     {
         //
-//        var_dump($event->getModel());
+        //        var_dump($event->getModel());
     }
+
     public function subscribe(PodcastProcessed $events): void
     {
-//        app('log')->info("subscribe");
+        //        app('log')->info("subscribe");
 
     }
 }

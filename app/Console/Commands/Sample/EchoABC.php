@@ -26,6 +26,6 @@ class EchoABC extends Command
     public function handle()
     {
         //
-        echo "ABC go!go!go!";
+        echo 'ABC go!go!go!';
     }
 }

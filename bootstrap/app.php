@@ -20,7 +20,6 @@ $app = new Illuminate\Foundation\Application(
 //修改.env檔案名稱
 //$app->loadEnvironmentFrom(".abc");
 
-
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

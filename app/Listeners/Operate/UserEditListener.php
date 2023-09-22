@@ -3,8 +3,6 @@
 namespace App\Listeners\Operate;
 
 use App\Events\Operate\UserEditEvent;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
 class UserEditListener

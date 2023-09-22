@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Member\Member_Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
-use Illuminate\Support\Facades\Config;
-use Exception;
 
 class OauthController extends Controller
 {
@@ -43,7 +42,6 @@ class OauthController extends Controller
         // return redirect('/');
     }
 
-
     public function lineRedirect()
     {
         return Socialite::driver('line')->redirect();
@@ -57,8 +55,6 @@ class OauthController extends Controller
             dd('發生錯誤請重新登入');
         }
     }
-
-
 
     public function facebookRedirect()
     {

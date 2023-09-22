@@ -2,15 +2,11 @@
 
 namespace App\Providers;
 
-use App\Events\DemoQueueEvent;
-use App\Events\MemberDataSavingEvent;
 use App\Events\PodcastProcessed;
-use App\Listeners\DemoQueueListener;
-use App\Listeners\MemberDataSaving;
 use App\Listeners\SendPodcastNotification;
 use App\Listeners\UserLoginListener;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -27,14 +23,14 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         Auth\Events\Login::class => [
-            UserLoginListener::class
+            UserLoginListener::class,
         ],
         Auth\Events\Logout::class => [],
-//        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-//            \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
-//            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
-//            \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
-//        ],
+        //        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+        //            \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
+        //            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
+        //            \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
+        //        ],
 
         /** 排程事件監聽 START **/
         'Illuminate\Console\Events\ScheduledTaskStarting' => [
@@ -43,23 +39,21 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Console\Events\ScheduledTaskFinished' => [
             'App\Listeners\Schedule\LogScheduledTaskFinished',
         ],
-//        'Illuminate\Console\Events\ScheduledBackgroundTaskFinished' => [
-//            'App\Listeners\LogScheduledBackgroundTaskFinished',
-//        ],
-//        'Illuminate\Console\Events\ScheduledTaskSkipped' => [
-//            'App\Listeners\LogScheduledTaskSkipped',
-//        ],
+        //        'Illuminate\Console\Events\ScheduledBackgroundTaskFinished' => [
+        //            'App\Listeners\LogScheduledBackgroundTaskFinished',
+        //        ],
+        //        'Illuminate\Console\Events\ScheduledTaskSkipped' => [
+        //            'App\Listeners\LogScheduledTaskSkipped',
+        //        ],
         'Illuminate\Console\Events\ScheduledTaskFailed' => [
             'App\Listeners\Schedule\LogScheduledTaskFailed',
         ],
         /** 排程事件監聽 END **/
 
-
         /**發送訊息通知事件*/
         \App\Events\Operate\UserEditEvent::class => [
             \App\Listeners\Operate\UserEditListener::class,
         ],
-
 
     ];
 
@@ -69,10 +63,10 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //啟用監聽
-//        Event::listen(
-//            PodcastProcessed::class,
-//            [SendPodcastNotification::class, 'handle']
-//        );
+        //        Event::listen(
+        //            PodcastProcessed::class,
+        //            [SendPodcastNotification::class, 'handle']
+        //        );
         //        //啟用監聽
         //        Event::listen(function (PodcastProcessed $event) {
         //

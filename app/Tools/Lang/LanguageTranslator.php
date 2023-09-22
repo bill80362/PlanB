@@ -2,19 +2,17 @@
 
 namespace App\Tools\Lang;
 
-use Illuminate\Contracts\Translation\Loader;
-use Illuminate\Translation\Translator as LaravelTranslator;
 use App\Models\CountryAndShippingFee\Language;
+use Illuminate\Contracts\Translation\Loader;
 use Illuminate\Support\Str;
+use Illuminate\Translation\Translator as LaravelTranslator;
 
 class LanguageTranslator extends LaravelTranslator
 {
-
     public function __construct(Loader $loader, $locale)
     {
         parent::__construct($loader, $locale);
     }
-
 
     public function get($key, array $replace = [], $locale = null, $fallback = true)
     {
@@ -23,12 +21,12 @@ class LanguageTranslator extends LaravelTranslator
         $this->load('*', '*', $locale);
         $line = $this->loaded['*']['*'][$locale][$key] ?? null;
 
-        if (!isset($line)) {
+        if (! isset($line)) {
             $ignoreKey = ['validation.', 'pagination.', 'auth.', 'common.', 'passwords.'];
             $check = Str::startsWith($key, $ignoreKey);
             $language = new Language();
             $langTypeKeys = $language->getCode();
-            if (!$check) {
+            if (! $check) {
                 foreach ($langTypeKeys as $langType) {
                     Language::firstOrCreate([
                         'lang_type' => $langType,
@@ -36,12 +34,11 @@ class LanguageTranslator extends LaravelTranslator
                     ], [
                         'lang_type' => $langType,
                         'text' => $key,
-                        'tran_text' => $key
+                        'tran_text' => $key,
                     ]);
                 }
             }
         }
-
 
         return parent::get($key, $replace, $locale, $fallback);
     }

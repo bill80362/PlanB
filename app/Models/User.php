@@ -6,19 +6,21 @@ namespace App\Models;
 
 use App\Models\Permission\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class User extends Authenticatable implements Auditable
 {
+    //操作紀錄
+    use exportTrait;
     use HasApiTokens, HasFactory, Notifiable;
-    use \OwenIt\Auditing\Auditable;//操作紀錄
-    use exportTrait;//匯出
+    use \OwenIt\Auditing\Auditable; //匯出
 
     protected $with = ['permissions'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -61,14 +63,15 @@ class User extends Authenticatable implements Auditable
         // 'updated' => xxx::class,
         // 'deleted' => xxx::class,
     ];
+
     /**
      * Audit外掛 標記Tag 多筆資料逗號分隔
      */
     public function generateTags(): array
     {
         return [
-//            $this->id,
-//            $this->name,
+            //            $this->id,
+            //            $this->name,
         ];
     }
 
@@ -76,56 +79,68 @@ class User extends Authenticatable implements Auditable
     {
         return $this->hasMany(Permission::class);
     }
+
     //欄位名稱
     public array $Column_Title_Text = [
-        "id" => "編號",
-        "name" => "姓名",
-        "email" => "Email",
-        "password" => "密碼",
-        "status" => "狀態",
+        'id' => '編號',
+        'name' => '姓名',
+        'email' => 'Email',
+        'password' => '密碼',
+        'status' => '狀態',
     ];
+
     public array $statusText = [
-        "Y" => "啟用",
-        "N" => "停用",
+        'Y' => '啟用',
+        'N' => '停用',
     ];
+
     //
-    public String $newPassword="";
-    public function getValidatorRules(){
+    public String $newPassword = '';
+
+    public function getValidatorRules()
+    {
         return [
-            "name" => "required",
-            "password" => $this->newPassword?"required":"",
-            "email" => "required|email",
+            'name' => 'required',
+            'password' => $this->newPassword ? 'required' : '',
+            'email' => 'required|email',
         ];
     }
-    public function getValidatorMessage(){
+
+    public function getValidatorMessage()
+    {
         return [];
     }
+
     //
-    public function scopeFilter($query,Array $Data)
+    public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if ( isset($Data["filter_status"]) ) {
-            $query->whereIn('status',(array)$Data["filter_status"]);
+        if (isset($Data['filter_status'])) {
+            $query->whereIn('status', (array) $Data['filter_status']);
         }
         //過濾文字條件
-        if ( isset($Data["filter_text_key"]) ) {
-            $query->where($Data["filter_text_key"],'like', '%'.$Data["filter_text_value"].'%');
+        if (isset($Data['filter_text_key'])) {
+            $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
         }
         //排序
-        if ( isset($Data["order_by"]) ) {
-            $order_by = explode(",", $Data["order_by"]);
+        if (isset($Data['order_by'])) {
+            $order_by = explode(',', $Data['order_by']);
             $query->orderBy($order_by[0], $order_by[1]);
         }
+
         //
         return $query;
     }
+
     //判斷匯入的時候，新增或是更新
-    public function scopeImportPrimary($query,array $UpdateData){
-        if ( isset($UpdateData["id"]) ) {
-            $query->where("id",$UpdateData["id"]);
-        }else{
-            $query->where("id",0);
+    public function scopeImportPrimary($query, array $UpdateData)
+    {
+        if (isset($UpdateData['id'])) {
+            $query->where('id', $UpdateData['id']);
+        } else {
+            $query->where('id', 0);
         }
+
         //
         return $query;
     }

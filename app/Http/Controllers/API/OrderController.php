@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Services\ThirdParty\Main\AbcService;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-
     public function __construct(
         protected Request $request,
         protected AbcService $abcService
@@ -24,7 +23,7 @@ class OrderController extends Controller
         return [
             // 'userinfo' => $user,
             'msg' => 'test run...',
-            'result' => $result->json()
+            'result' => $result->json(),
         ];
     }
 }

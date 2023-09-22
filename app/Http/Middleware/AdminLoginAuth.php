@@ -17,9 +17,10 @@ class AdminLoginAuth
     {
         //
 
-        if (!auth('operate')->check()) {
+        if (! auth('operate')->check()) {
             return redirect('/operate/login');
         }
+
         //
         return $next($request);
     }

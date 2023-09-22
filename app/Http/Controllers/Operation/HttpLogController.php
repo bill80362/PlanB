@@ -18,8 +18,9 @@ class HttpLogController extends Controller
 
     public function listHTML()
     {
-        $pageLimit = $this->request->get("pageLimit") ?: 10; //預設10
-        $Paginator = $this->oModel->filter($this->request->all())->orderBy("created_at", "desc")->paginate($pageLimit);
+        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
+        $Paginator = $this->oModel->filter($this->request->all())->orderBy('created_at', 'desc')->paginate($pageLimit);
+
         return view('operate/pages/http_log/list', [
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
@@ -31,7 +32,7 @@ class HttpLogController extends Controller
         $Data = $this->oModel->findOrFail($id);
 
         if ($Data->request) {
-            $Data->request =  json_encode(json_decode($Data->request), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $Data->request = json_encode(json_decode($Data->request), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         }
 
         if ($Data->response) {
@@ -39,7 +40,7 @@ class HttpLogController extends Controller
         }
 
         return view('operate/pages/http_log/update', [
-            'Data' => $Data
+            'Data' => $Data,
         ]);
     }
 }

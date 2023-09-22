@@ -2,12 +2,8 @@
 
 namespace App\Services\Operate;
 
-use App\Models\CompanyManage\PageContent;
-
-
 class PageContentService
 {
-
     public function __construct()
     {
     }
@@ -19,7 +15,7 @@ class PageContentService
     {
         return [
             'privacy_statement', // 隱私權聲明
-            'copyright_notice', // 版權宣告 
+            'copyright_notice', // 版權宣告
         ];
     }
 

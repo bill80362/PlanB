@@ -3,11 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\MemberDataSavingEvent;
-use App\Events\PodcastProcessed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Validation\ValidationException;
 use App\Models\Member\Member_Data;
+use Illuminate\Validation\ValidationException;
 
 class MemberDataSaving
 {
@@ -20,24 +17,23 @@ class MemberDataSaving
     /**
      * Handle the event.
      *
-     * @param  \App\Events\MemberDataSavingEvent $event
      * @return mixed
      */
     public function handle(MemberDataSavingEvent $event)
     {
         //
-        echo "我是 MemberDataSaving";
+        echo '我是 MemberDataSaving';
 
         /**
          * 實作時間差更新問題，這邊先使用laravel原本的欄位updated_at實作
          */
         if ($event->oMember_Data->ID ?? null) {
             $dirty = $event->oMember_Data->getDirty();
-            // $dirtyKey = array_keys($dirty);            
-            
+            // $dirtyKey = array_keys($dirty);
+
             // 如果$updateFiledCheck為空，就是檢查全部
             $check = true;
-            if(count($this->updateFiledCheck) != 0){
+            if (count($this->updateFiledCheck) != 0) {
                 $check = collect($dirty)->hasAny($this->updateFiledCheck);
             }
 
@@ -45,7 +41,7 @@ class MemberDataSaving
                 $memberData = Member_Data::whereId($event->oMember_Data->ID)->first();
                 if ($memberData->updated_at > $event->oMember_Data->updated_at) {
                     throw ValidationException::withMessages([
-                        'message' => '你慢了一步，此資料已更新，請重新整理'
+                        'message' => '你慢了一步，此資料已更新，請重新整理',
                     ]);
                 }
             }

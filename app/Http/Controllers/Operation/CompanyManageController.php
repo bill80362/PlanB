@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Services\Operate\PageContentService;
-use Illuminate\Validation\ValidationException;
-use App\Models\CountryAndShippingFee\Language;
 use App\Models\CompanyManage\PageContent;
+use App\Models\CountryAndShippingFee\Language;
+use App\Services\Operate\PageContentService;
+use Illuminate\Http\Request;
 
 class CompanyManageController extends Controller
 {
@@ -21,11 +20,11 @@ class CompanyManageController extends Controller
     public function pageContentHtml($key)
     {
         $check = $this->pageContentService->checkKey($key);
-        if (!$check) {
+        if (! $check) {
             return abort(404);
         }
 
-        if (!auth('operate')->user()->can($key . "_read")) {
+        if (! auth('operate')->user()->can($key.'_read')) {
             return abort(403);
         }
 
@@ -40,21 +39,22 @@ class CompanyManageController extends Controller
             ]);
         }
         $datas = $this->oModel->where('key', $key)->get();
+
         return view('operate/pages/company_manage/page_content', [
             'langTypeText' => $language->langTypeText,
             'datas' => $datas,
-            'key' => $key
+            'key' => $key,
         ]);
     }
 
     public function pageContent($key)
     {
         $check = $this->pageContentService->checkKey($key);
-        if (!$check) {
+        if (! $check) {
             return abort(404);
         }
 
-        if (!auth('operate')->user()->can($key . "_update")) {
+        if (! auth('operate')->user()->can($key.'_update')) {
             return abort(403);
         }
 
@@ -62,7 +62,7 @@ class CompanyManageController extends Controller
         $editors = $this->request->get('editors');
         foreach ($ids as $key => $id) {
             $this->oModel->where('id', $id)->update([
-                'content' => $editors[$key]
+                'content' => $editors[$key],
             ]);
         }
 

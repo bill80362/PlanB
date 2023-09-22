@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Tools\Lang\LanguageTranslator as Translator;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Tools\Lang\LanguageTranslator as Translator;
 
 class Language
 {
@@ -21,8 +21,10 @@ class Language
             $locale = $app->getLocale();
             $trans = new Translator($loader, $locale);
             $trans->setFallback($app->getFallbackLocale());
+
             return $trans;
         });
+
         return $next($request);
     }
 }

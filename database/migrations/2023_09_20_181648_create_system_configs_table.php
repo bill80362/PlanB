@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('system_configs', function (Blueprint $table) {
-            $table->string("id",60)->primary();
+            $table->string('id', 60)->primary();
             $table->string('content');
             $table->timestamps();
         });

@@ -18,7 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::middleware('auth:erp')->group(function () {
-    Route::get('/order-query', [\App\Http\Controllers\API\OrderController::class, "queryOrder"])->name("adminLogin");
+    Route::get('/order-query', [\App\Http\Controllers\API\OrderController::class, 'queryOrder'])->name('adminLogin');
 });

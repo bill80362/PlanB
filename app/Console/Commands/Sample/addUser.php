@@ -28,12 +28,12 @@ class addUser extends Command
     {
         //
         \App\Models\User::create([
-            'name' => 'admin'.rand(1,1000000),
-            'email' => 'test'.rand(1,1000000).'@gmail.com',
+            'name' => 'admin'.rand(1, 1000000),
+            'email' => 'test'.rand(1, 1000000).'@gmail.com',
             'password' => Hash::make('admin'),
-            'status' => "Y",
+            'status' => 'Y',
         ]);
 
-//        dd(123);
+        //        dd(123);
     }
 }

@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\CompanyManage\PageContent;
 use App\Models\Member\Member_Data;
 use App\Models\Permission\Permission;
 use Database\Factories\Member\Member_DataFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\CompanyManage\PageContent;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'test@gmail.com',
             'password' => Hash::make('admin'),
-            'status' => "Y",
+            'status' => 'Y',
         ]);
 
         \App\Models\Permission\Permission::create([
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         PageContent::firstOrCreate([
-            'key' => 'privacyStatement'
+            'key' => 'privacyStatement',
         ], [
             'lang_type' => '1',
             'page_name' => '隱私權聲明',

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 
 class IndexController extends Controller
@@ -17,7 +16,7 @@ class IndexController extends Controller
             // ->withBasicAuth('username','password')
             // ->timeout(1000)
             ->withHeaders([
-                'X-Example' => 'example'
+                'X-Example' => 'example',
             ])
             ->get('https://jsonplaceholder.typicode.com/todos/1', []);
 
@@ -28,7 +27,7 @@ class IndexController extends Controller
             'client error' => $response->clientError(), // 400 區間
             'server error' => $response->serverError(), // 500 區間
             'status' => $status,
-            'json' => $json
+            'json' => $json,
         ]);
 
         // 預設為json
@@ -48,10 +47,11 @@ class IndexController extends Controller
     public function changeLang(Request $request)
     {
         $locale = $request->query('lang', 'en');
-        if (!in_array($locale, ['en', 'zh-tw'])) {
+        if (! in_array($locale, ['en', 'zh-tw'])) {
             $locale = 'zh-tw';
         }
-        $request->session()->put("locale", $locale);
-        return redirect($locale . '/');
+        $request->session()->put('locale', $locale);
+
+        return redirect($locale.'/');
     }
 }
