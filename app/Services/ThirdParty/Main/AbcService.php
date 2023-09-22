@@ -5,7 +5,7 @@ namespace App\Services\ThirdParty\Main;
 use Illuminate\Support\Facades\Http;
 
 /**
- * @example 此為範例class
+ * 此為範例class
  * 
  * 規範：
  * 檔名以公司名稱命名
@@ -19,17 +19,32 @@ class AbcService
     {
     }
 
-    /**
-     * 取出串接設定
-     */
-    public function getSetting()
+
+    public function getTodoData($id)
     {
+        return Http::log('abc_http', [
+            'type' => 'todoData',
+            'primary_key' => $id
+        ])->retry(2, 100)
+            ->connectTimeout(60)
+            ->timeout(1000)
+            ->withHeaders([
+                'X-Example' => 'example'
+            ])
+            ->get('https://jsonplaceholder.typicode.com/todos/' . $id, []);
     }
 
-    /**
-     * 寫入log
-     */
-    public function writeLog(string $message)
+    public function getPostData($id)
     {
+        return Http::log('abc_http', [
+            'type' => 'postData',
+            'primary_key' => $id
+        ])->retry(2, 100)
+            ->connectTimeout(60)
+            ->timeout(1000)
+            ->withHeaders([
+                'X-Example' => 'example'
+            ])
+            ->get('https://jsonplaceholder.typicode.com/posts/' . $id, []);
     }
 }

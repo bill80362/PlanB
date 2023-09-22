@@ -72,12 +72,12 @@
 
                                                     <div class="form-group mb-3">
                                                         <label>Request</label>
-                                                        <textarea disabled class="form-control" name="text" rows="3">{{ $Data->request }}</textarea>
+                                                        <textarea disabled class="form-control" name="text" rows="7">{{ $Data->request }}</textarea>
                                                     </div>
 
                                                     <div class="form-group mb-3">
                                                         <label>Response</label>
-                                                        <textarea disabled class="form-control" name="text" rows="3">{{ $Data->response }}</textarea>
+                                                        <textarea disabled class="form-control" name="text" rows="7">{{ $Data->response }}</textarea>
                                                     </div>
 
                                                 </div>

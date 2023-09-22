@@ -3,11 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use App\Models\User;
 
@@ -16,6 +14,13 @@ use App\Models\User;
  */
 class ImageTest extends TestCase
 {
+
+    use RefreshDatabase;
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
     /**
      * 修改尺吋，補上邊框
      */
@@ -62,8 +67,8 @@ class ImageTest extends TestCase
     public function test_uploadimage(): void
     {
         $user = User::find(1);
-        $active = $this->actingAs($user, 'operate');
-        $response = $active->json('POST', '/operate/upload_image', [
+        $this->actingAs($user, 'operate');
+        $response = $this->json('POST', '/operate/upload_image', [
             'image' => UploadedFile::fake()->image('avatar.jpg'),
             'path' => 'editor'
         ]);

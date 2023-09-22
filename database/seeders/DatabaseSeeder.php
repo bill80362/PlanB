@@ -34,6 +34,11 @@ class DatabaseSeeder extends Seeder
             'perm_key' => 'user_update',
         ]);
 
+        \App\Models\Permission\Permission::create([
+            'user_id' => '1',
+            'perm_key' => 'user_delete',
+        ]);
+
         PageContent::firstOrCreate([
             'key' => 'privacyStatement'
         ], [

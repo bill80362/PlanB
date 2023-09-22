@@ -7,6 +7,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Services\Operate\PermissionService;
 // test command: php artisan test --filter=PermTest
+
+/**
+ * 測試service範例
+ */
 class PermTest extends TestCase
 {
     /**

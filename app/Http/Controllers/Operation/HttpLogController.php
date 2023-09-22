@@ -29,6 +29,15 @@ class HttpLogController extends Controller
     public function updateHTML($id)
     {
         $Data = $this->oModel->findOrFail($id);
+
+        if ($Data->request) {
+            $Data->request =  json_encode(json_decode($Data->request), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        }
+
+        if ($Data->response) {
+            $Data->response = json_encode(json_decode($Data->response), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        }
+
         return view('operate/pages/http_log/update', [
             'Data' => $Data
         ]);

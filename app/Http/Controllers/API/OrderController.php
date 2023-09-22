@@ -4,33 +4,27 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Client\Response;
+use App\Services\ThirdParty\Main\AbcService;
 
 class OrderController extends Controller
 {
 
+    public function __construct(
+        protected Request $request,
+        protected AbcService $abcService
+    ) {
+    }
 
     public function queryOrder(Request $request)
     {
         // $user = auth('erp')->user();
-        Http::log('abc_http', [
-            'type' => 'login',
-            'primary_key' => 'test-user-id'
-        ])->retry(1, 100)
-            ->connectTimeout(60)
-            ->timeout(1000)
-            ->withHeaders([
-                'X-Example' => 'example'
-            ])
-            ->get('https://jsonplaceholder.typicode.com/todos/1', []);
-
+        $id = $this->request->query('id', 1);
+        $result = $this->abcService->getPostData($id);
 
         return [
             // 'userinfo' => $user,
-            'msg' => 'test run...'
+            'msg' => 'test run...',
+            'result' => $result->json()
         ];
     }
 }
