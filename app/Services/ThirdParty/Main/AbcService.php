@@ -19,9 +19,9 @@ class AbcService
     {
     }
 
-    public function getTodoData($id)
+    public function getTodoData($id = 1)
     {
-        return Http::log('abc_http', [
+        $result = Http::log('abc_http', [
             'type' => 'todoData',
             'primary_key' => $id,
         ])->retry(2, 100)
@@ -30,12 +30,13 @@ class AbcService
             ->withHeaders([
                 'X-Example' => 'example',
             ])
-            ->get('https://jsonplaceholder.typicode.com/todos/'.$id, []);
+            ->get('https://jsonplaceholder.typicode.com/todos/' . $id, []);
+        return $result->json();
     }
 
     public function getPostData($id)
     {
-        return Http::log('abc_http', [
+        $result = Http::log('abc_http', [
             'type' => 'postData',
             'primary_key' => $id,
         ])->retry(2, 100)
@@ -44,6 +45,8 @@ class AbcService
             ->withHeaders([
                 'X-Example' => 'example',
             ])
-            ->get('https://jsonplaceholder.typicode.com/posts/'.$id, []);
+            ->get('https://jsonplaceholder.typicode.com/posts/' . $id, []);
+
+        return $result->json();
     }
 }

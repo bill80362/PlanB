@@ -23,7 +23,7 @@ class OrderController extends Controller
         return [
             // 'userinfo' => $user,
             'msg' => 'test run...',
-            'result' => $result->json(),
+            'result' => $result,
         ];
     }
 }
