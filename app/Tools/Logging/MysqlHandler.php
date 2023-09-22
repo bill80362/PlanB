@@ -2,14 +2,10 @@
 
 namespace App\Tools\Logging;
 
-use Carbon\Carbon;
-use GuzzleHttp\Client;
 use Monolog\Handler\AbstractProcessingHandler;
 use Exception;
 use Monolog\LogRecord;
 use Monolog\Level;
-use App\Models\HttpLog;
-use Illuminate\Http\Client\Response;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -31,15 +27,13 @@ class MysqlHandler extends AbstractProcessingHandler
         try {
             $model = new $this->modalClass();
             $data = $record->toArray();
-            // dd($data['context']);
             if ($model instanceof Model) {
-
                 $statusCode = $data['context']['statusCode'];
                 $isSuccess = in_array($statusCode, [200, 201]);
                 $input = [
                     'type' => $data['context']['context']['type'] ?? '',
                     'primary_key' => $data['context']['context']['primary_key'] ?? '',
-                    'status' => '', //串接成功或失敗
+                    'status' =>  $isSuccess ? "串接成功" : "串接失敗", //串接成功或失敗
                     'status_code' => $statusCode,
                     'connect_time' => $data['context']['sec'],
                     'proccess_time' => '',
@@ -53,7 +47,7 @@ class MysqlHandler extends AbstractProcessingHandler
                 echo "log error";
             }
         } catch (Exception $exception) {
-            dd('error: ' . $exception->getMessage());
+            // dd('error: ' . $exception->getMessage());
             return;
         }
     }

@@ -179,11 +179,11 @@ return [
         ],
         /**** Guard分類 END *******/
         //
-        'mysql' => [
+        'abc_http' => [
             'driver' => 'monolog',
             'handler' => App\Tools\Logging\MysqlHandler::class,
             'handler_with' => [
-                'modal_class' => App\Models\HttpLog::class,
+                'modal_class' => App\Models\Log\HttpLog::class,
             ],
         ],
 

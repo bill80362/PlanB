@@ -16,19 +16,18 @@ class OrderController extends Controller
     public function queryOrder(Request $request)
     {
         // $user = auth('erp')->user();
-        $response = Http::log('mysql', [
+        Http::log('abc_http', [
             'type' => 'login',
-            'type2' => 'login',
             'primary_key' => 'test-user-id'
         ])->retry(1, 100)
-            // ->connectTimeout(60)
-            // ->withToken('faketoken','Bearer')
-            // ->withBasicAuth('username','password')
-            // ->timeout(1000)
+            ->connectTimeout(60)
+            ->timeout(1000)
             ->withHeaders([
                 'X-Example' => 'example'
             ])
             ->get('https://jsonplaceholder.typicode.com/todos/1', []);
+
+
         return [
             // 'userinfo' => $user,
             'msg' => 'test run...'
