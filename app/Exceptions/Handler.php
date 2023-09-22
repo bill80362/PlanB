@@ -51,12 +51,16 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
+        //APP_DEBUG開啟狀態，直接離開
+        if(env("APP_DEBUG")){
+            return parent::render($request, $e);
+        }
         //透過guard區分log
         if (auth('erp')->check()) {
             return response()->json([
                 'code' => 400,
                 'message' => $e->getMessage(),
-            ], 400);
+            ], $e->getStatusCode());
 //        } elseif (auth('api')->check()) {
 //            return response()->json([
 //                'code' => 400,
