@@ -48,7 +48,7 @@ class UserTest extends TestCase
      */
     public function test_user_update(): void
     {
-        $name = 'admin12345678910'; 
+        $name = 'admin12345678910';
         $model = User::where('id', '!=', 1)->first();
         $response =  $this->post('/operate/user/' . $model->id, [
             "name" => $name,
@@ -58,7 +58,7 @@ class UserTest extends TestCase
         $checkUser = User::whereId($model->id)->first();
 
         $response->assertStatus(200);
-        $this->assertTrue($checkUser->name == $name); //驗證姓名是否有正確寫入資料庫
+        $this->assertSame($name, $checkUser->name); //驗證姓名是否有正確寫入資料庫
     }
 
     /**
