@@ -183,7 +183,7 @@ return [
             'driver' => 'monolog',
             'handler' => App\Tools\Logging\MysqlHandler::class,
             'handler_with' => [
-                'value1' => "test",
+                'modal_class' => App\Models\HttpLog::class,
             ],
         ],
 
