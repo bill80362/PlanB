@@ -65,6 +65,17 @@ class MenuService
                 ]
             ],
             [
+                'name' => __('Log'),
+                'icon' => '',
+                'subMenu' => [
+                    [
+                        'name' => __('abc公司串接Log'),
+                        'href' => '/operate/http_log',
+                        'permission' => ''
+                    ]
+                ]
+            ],
+            [
                 'name' => __('操作紀錄'),
                 'icon' => '',
                 'subMenu' => [

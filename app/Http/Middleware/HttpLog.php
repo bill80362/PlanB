@@ -7,6 +7,8 @@ use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Request;
 
 class HttpLog
 {
@@ -18,13 +20,11 @@ class HttpLog
     public function __invoke($channel, $context = [], $config = []): callable
     {
         return function (callable $handler) use ($channel, $context, $config): callable {
-            return function (RequestInterface $request, array $options) use ($channel, $context, $config, $handler): PromiseInterface {
+            return function (Request $request, array $options) use ($channel, $context, $config, $handler): PromiseInterface {
                 $start = microtime(true);
-
                 $promise = $handler($request, $options);
-
                 return $promise->then(
-                    function (ResponseInterface $response) use ($channel, $context, $config, $request, $start) {
+                    function (Response $response) use ($channel, $context, $config, $request, $start) {
                         $sec = microtime(true) - $start;
                         Log::channel($channel)->info('', [
                             'uri' => $request->getUri()->__toString(),

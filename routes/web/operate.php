@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 /**後台*/
-Route::prefix('/operate')->middleware(['lang','log.request','log.response'])->group(function () {
+Route::prefix('/operate')->middleware(['lang', 'log.request', 'log.response'])->group(function () {
     //登入
     Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, "index"]);
     Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, "loginHTML"]);
@@ -14,7 +14,7 @@ Route::prefix('/operate')->middleware(['lang','log.request','log.response'])->gr
 
 
 
-    Route::middleware(['auth:operate', "AdminLoginAuth","online.user"])->group(function () {
+    Route::middleware(['auth:operate', "AdminLoginAuth", "online.user"])->group(function () {
 
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, "dashboard"]);
@@ -38,7 +38,8 @@ Route::prefix('/operate')->middleware(['lang','log.request','log.response'])->gr
         Route::post('/system', [\App\Http\Controllers\Operation\SystemController::class, "update"])->name("system_update")->middleware(['can:system_update']);
         Route::post('/delete/image', [\App\Http\Controllers\Operation\SystemController::class, "deleteImage"])->name("system_delete_image")->middleware(['can:system_update']);
 
-
+        Route::get('/http_log', [\App\Http\Controllers\Operation\HttpLogController::class, "listHTML"])->name("http_log_list");
+        Route::get('/http_log/{id}', [\App\Http\Controllers\Operation\HttpLogController::class, "updateHTML"])->whereNumber("id")->name("http_log_update");
 
         //管理員
         //        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
@@ -49,6 +50,9 @@ Route::prefix('/operate')->middleware(['lang','log.request','log.response'])->gr
         //        Route::post('/user/import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("user_import");
         //        Route::get('/user/{id}/audit', [\App\Http\Controllers\Operation\UserController::class, 'audit'])->whereNumber("id")->name("user_audit");
 
+
+
+
         //操作紀錄
         Route::get('/audit', [\App\Http\Controllers\Operation\AuditController::class, "listHTML"])->name("audit_list");
         Route::get('/audit/{id}', [\App\Http\Controllers\Operation\AuditController::class, "updateHTML"])->whereNumber("id")->name("audit_update_html");
@@ -56,6 +60,7 @@ Route::prefix('/operate')->middleware(['lang','log.request','log.response'])->gr
         Route::post('/audit/del', [\App\Http\Controllers\Operation\AuditController::class, "delBatch"])->name("audit_del");
         Route::get('/audit/export', [\App\Http\Controllers\Operation\AuditController::class, 'export'])->name("audit_export");
         Route::post('/audit/import', [\App\Http\Controllers\Operation\AuditController::class, 'import'])->name("audit_import");
+
 
         //Member_Data
         //        Route::get('/member_data', [\App\Http\Controllers\Operation\MemberDataController::class, "listHTML"]);
