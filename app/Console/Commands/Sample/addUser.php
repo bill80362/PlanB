@@ -26,7 +26,6 @@ class addUser extends Command
      */
     public function handle()
     {
-        sleep(120);
         //
         \App\Models\User::create([
             'name' => 'admin'.rand(1,1000000),
