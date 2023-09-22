@@ -43,6 +43,22 @@ class EventServiceProvider extends ServiceProvider
 //        DemoQueueEvent::class => [
 //            DemoQueueListener::class,
 //        ]
+        //排程事件監聽
+        'Illuminate\Console\Events\ScheduledTaskStarting' => [
+            'App\Listeners\Schedule\LogScheduledTaskStarting',
+        ],
+        'Illuminate\Console\Events\ScheduledTaskFinished' => [
+            'App\Listeners\Schedule\LogScheduledTaskFinished',
+        ],
+//        'Illuminate\Console\Events\ScheduledBackgroundTaskFinished' => [
+//            'App\Listeners\LogScheduledBackgroundTaskFinished',
+//        ],
+//        'Illuminate\Console\Events\ScheduledTaskSkipped' => [
+//            'App\Listeners\LogScheduledTaskSkipped',
+//        ],
+        'Illuminate\Console\Events\ScheduledTaskFailed' => [
+            'App\Listeners\Schedule\LogScheduledTaskFailed',
+        ],
     ];
 
     /**

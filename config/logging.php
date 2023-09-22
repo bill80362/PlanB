@@ -178,6 +178,20 @@ return [
             'channels' => ['daily'],
         ],
         /**** Guard分類 END *******/
+
+        /**** 排程 START *******/
+        'schedule_run' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/schedule/run.log'),
+            'channels' => ['daily'],
+        ],
+        'schedule_error' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/schedule/error.log'),
+            'channels' => ['daily'],
+        ],
+        /**** 排程 END *******/
+
         //
         'abc_http' => [
             'driver' => 'monolog',
