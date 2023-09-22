@@ -35,15 +35,8 @@ class EventServiceProvider extends ServiceProvider
 //            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
 //            \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
 //        ],
-        //Model監聽事件
-//        MemberDataSavingEvent::class => [
-//            MemberDataSaving::class,
-//        ],
-        //
-//        DemoQueueEvent::class => [
-//            DemoQueueListener::class,
-//        ]
-        //排程事件監聽
+
+        /** 排程事件監聽 START **/
         'Illuminate\Console\Events\ScheduledTaskStarting' => [
             'App\Listeners\Schedule\LogScheduledTaskStarting',
         ],
@@ -59,6 +52,15 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Console\Events\ScheduledTaskFailed' => [
             'App\Listeners\Schedule\LogScheduledTaskFailed',
         ],
+        /** 排程事件監聽 END **/
+
+
+        /**發送訊息通知事件*/
+        \App\Events\Operate\UserEditEvent::class => [
+            \App\Listeners\Operate\UserEditListener::class,
+        ],
+
+
     ];
 
     /**

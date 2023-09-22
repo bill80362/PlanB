@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Operation;
 
+use App\Events\Operate\UserEditEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Permission\Permission;
 use App\Models\User;
@@ -102,6 +103,8 @@ class UserController extends Controller
             return new Permission(["perm_key" => $key]);
         });
         $this->oModel->find($id)->permissions()->saveMany($PermissionArray);
+        //寄發郵件通知使用者資料變更訊息
+        UserEditEvent::dispatch($this->oModel);
         //
         return view('alert_redirect', [
             'Alert' => __("送出成功"),
