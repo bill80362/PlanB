@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 /**後台*/
-Route::prefix('/operate')->middleware(['lang'])->group(function () {
+Route::prefix('/operate')->middleware(['lang','log.request','log.response'])->group(function () {
     //登入
     Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, "index"]);
     Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, "loginHTML"]);

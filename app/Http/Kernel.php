@@ -70,5 +70,8 @@ class Kernel extends HttpKernel
         //
         'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
         'online.user' => \App\Http\Middleware\OnlineUser::class,
+        //紀錄Log
+        'log.request' => \App\Http\Middleware\LogRequestInfo::class,
+        'log.response' => \App\Http\Middleware\LogResponseInfo::class,
     ];
 }
