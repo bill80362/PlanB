@@ -143,7 +143,7 @@ return [
             'driver' => 'monolog',
             'handler' => App\Tools\Logging\MysqlHandler::class,
             'handler_with' => [
-                'value1' => "test",
+                // 'value1' => "test",
             ],
         ],
 
