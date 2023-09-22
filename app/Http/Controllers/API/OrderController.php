@@ -18,6 +18,7 @@ class OrderController extends Controller
         // $user = auth('erp')->user();
         $response = Http::log('mysql', [
             'type' => 'login',
+            'type2' => 'login',
             'primary_key' => 'test-user-id'
         ])->retry(1, 100)
             // ->connectTimeout(60)

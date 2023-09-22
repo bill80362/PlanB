@@ -29,11 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // 在測試環境中強制關閉 Lazy Loading
         Model::preventLazyLoading(!app()->isProduction());
-        //路由使用，語言前置碼偵測
-        $this->app->singleton(RouteLanguageService::class, function () {
-            return new RouteLanguageService();
-        });
         Paginator::useBootstrapFive();
+        //
         PendingRequest::macro('log', function (
             $channel = '',
             $context = [],
