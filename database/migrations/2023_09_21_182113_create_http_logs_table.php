@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('primary_key')->nullable();
             $table->string('status')->nullable();
             $table->string('status_code')->nullable();
+            $table->string('method')->nullable();
 
             $table->string('connect_time')->nullable();
             $table->string('proccess_time')->nullable();

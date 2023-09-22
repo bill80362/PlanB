@@ -2,12 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\SystemConfig;
 use App\Services\RouteLanguageService;
-use App\View\Components\paginator\pageList;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Http\Client\PendingRequest;
+use App\Http\Middleware\HttpLog;
+use Illuminate\Support\Facades\Http;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,12 @@ class AppServiceProvider extends ServiceProvider
             return new RouteLanguageService();
         });
         Paginator::useBootstrapFive();
+        PendingRequest::macro('log', function (
+            $channel = '',
+            $context = [],
+            $config = []
+        ): PendingRequest {
+            return Http::withMiddleware((new HttpLog())->__invoke($channel, $context, $config));
+        });
     }
 }

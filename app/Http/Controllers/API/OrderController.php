@@ -15,8 +15,11 @@ class OrderController extends Controller
 
     public function queryOrder(Request $request)
     {
-
-        $response = Http::retry(3, 100)
+        // $user = auth('erp')->user();
+        $response = Http::log('mysql', [
+            'type' => 'login',
+            'primary_key' => 'test-user-id'
+        ])->retry(1, 100)
             // ->connectTimeout(60)
             // ->withToken('faketoken','Bearer')
             // ->withBasicAuth('username','password')
@@ -25,20 +28,6 @@ class OrderController extends Controller
                 'X-Example' => 'example'
             ])
             ->get('https://jsonplaceholder.typicode.com/todos/1', []);
-
-     
-
-        // dd([
-        //     'client error' => $response->clientError(), // 400 區間
-        //     'server error' => $response->serverError(), // 500 區間
-        //     'status' => $status,
-        //     'json' => $json
-        // ]);
-        Log::channel('mysql')->info('test-test', [
-            'response' => $response
-        ]);
-        // $user = auth('erp')->user();
-        // $test = User::where('id', 55)->firstOrFail(); //錯誤測試
         return [
             // 'userinfo' => $user,
             'msg' => 'test run...'
