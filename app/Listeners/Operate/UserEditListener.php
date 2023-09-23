@@ -34,4 +34,8 @@ class UserEditListener implements ShouldQueue
         //通知先使用LOG表達
         Log::channel('daily')->info($event->oUser->toJson());
     }
+
+    public function failed(){
+
+    }
 }

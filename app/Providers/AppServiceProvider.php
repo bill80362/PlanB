@@ -6,7 +6,9 @@ use App\Http\Middleware\HttpLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
             $config = []
         ): PendingRequest {
             return Http::withMiddleware((new HttpLog())->__invoke($channel, $context, $config));
+        });
+        //Queue的Job失敗會觸發
+        Queue::failing(function (JobFailed $event) {
+            // $event->connectionName
+            // $event->job
+            // $event->exception
         });
     }
 }
