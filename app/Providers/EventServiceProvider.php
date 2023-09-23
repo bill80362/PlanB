@@ -55,8 +55,8 @@ class EventServiceProvider extends ServiceProvider
         /** 排程事件監聽 END **/
 
         /**發送訊息通知事件*/
-        \App\Events\Operate\UserEditEvent::class => [
-            \App\Listeners\Operate\UserEditListener::class,
+        \App\Events\Operate\UserEditEvent::class => [//管理人資料修改
+            \App\Listeners\Operate\UserEditListener::class,//掛載不同的通知
         ],
 
     ];
