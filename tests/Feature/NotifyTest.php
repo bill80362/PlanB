@@ -10,6 +10,8 @@ use Mockery\MockInterface;
 use App\Services\Notify\MailService;
 use App\Services\Notify\LineNotifyService;
 use App\Services\Notify\SMSService;
+use Illuminate\Support\Facades\Event;
+use App\Listeners;
 
 /**
  * 通知測試程式
@@ -20,6 +22,13 @@ class NotifyTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+    }
+
+    /**
+     * 測試建立訂單時應該要發哪些通知及發送出數
+     */
+    public function test_create_new_order(): void
+    {
 
         // 寄mail
         $this->instance(
@@ -47,18 +56,43 @@ class NotifyTest extends TestCase
                     ->times(0); // 應該被執行幾次
             })
         );
-    }
 
-    /**
-     * 測試建立訂單時應該要發哪些通知？
-     */
-    public function test_create_new_order(): void
-    {
         NewOrderEvent::dispatch([
             'order_num' => '12345',
             'price' => 999,
             'mail' => 'bcs@gmail.com'
         ]);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * 測試Event與Listener 關聯
+     */
+    public function test_event_listener()
+    {
+        Event::fake();
+
+        NewOrderEvent::dispatch([
+            'order_num' => '12345',
+            'price' => 999,
+            'mail' => 'bcs@gmail.com'
+        ]);
+        Event::assertDispatched(NewOrderEvent::class);
+        Event::assertListening(
+            NewOrderEvent::class,
+            Listeners\Notify\MailNotify::class,
+        );
+        Event::assertListening(
+            NewOrderEvent::class,
+            Listeners\Notify\LineNotify::class,
+        );
+
+        // Event::assertListening(
+        //     NewOrderEvent::class,
+        //     Listeners\Notify\SMSNotify::class,
+        // );
+        
 
         $this->assertTrue(true);
     }
