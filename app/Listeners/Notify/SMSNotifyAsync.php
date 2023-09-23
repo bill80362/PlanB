@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
+use App\Services\Notify\SMSService;
 
 class SMSNotifyAsync implements ShouldQueue
 {
@@ -14,8 +15,9 @@ class SMSNotifyAsync implements ShouldQueue
     /**
      * Create the event listener.
      */
-    public function __construct()
-    {
+    public function __construct(
+        protected SMSService $smsService
+    ) {
         //
     }
 

@@ -4,6 +4,7 @@ namespace App\Listeners\Notify;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Services\Notify\LineNotifyService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -14,7 +15,9 @@ class LineNotifyAsync implements ShouldQueue
     /**
      * Create the event listener.
      */
-    public function __construct()
+    public function __construct(
+        protected LineNotifyService $lineNotifyService
+    )
     {
         //
     }

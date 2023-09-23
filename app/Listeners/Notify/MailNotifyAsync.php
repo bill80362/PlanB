@@ -4,7 +4,7 @@ namespace App\Listeners\Notify;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Services\MailService;
+use App\Services\Notify\MailService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
