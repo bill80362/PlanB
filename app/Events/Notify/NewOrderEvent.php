@@ -26,23 +26,22 @@ class NewOrderEvent
     {
         $this->mailData = [
             'mailKey' => 'new_order',
+            'userMail' => $Data['mail'],
             'values' => [
                 'price' => $Data['price'],
                 'orderNum' => $Data['order_num'],
-            ],
-            'userMail' => $Data['mail']
+            ]
         ];
-    }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
-    {
-        return [
-            new PrivateChannel('channel-name'),
+        $this->lineNotifyData = [
+            'message' => '通知訊息寫這裡'
         ];
+
+        // $this->smsData = [
+        //     'type' => $Data['type'],
+        //     'name' => $Data['name'],
+        //     'cellphone' => $Data['cellphone'],
+        //     'content' => $Data['content'],
+        // ];
     }
 }

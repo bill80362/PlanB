@@ -90,7 +90,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
@@ -192,7 +192,16 @@ return [
         ],
         /**** 排程 END *******/
 
-        //
+        /**** 通知 START *******/
+        'notify_error' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/notify/error.log'),
+            'channels' => ['daily'],
+        ],
+        /**** 通知 END *******/
+
+
+        /**** 第三方串接 START *******/
         'abc_http' => [
             'driver' => 'monolog',
             'handler' => App\Tools\Logging\MysqlHandler::class,
@@ -200,6 +209,9 @@ return [
                 'modal_class' => App\Models\Log\HttpLog::class,
             ],
         ],
+        /**** 第三方串接 END *******/
+
+
 
     ],
 

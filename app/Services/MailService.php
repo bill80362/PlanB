@@ -48,25 +48,19 @@ class MailService
                 'name' => '新訂單通知',
                 'subject' => '訂單 - 新訂單通知',
                 'blade' => 'emails.orders.new_order',
-                'defaultValue' => [
-                    'price' => 0
-                ],
+                'defaultValue' => ['price' => 0],
             ],
             'order_shipped' => [
                 'name' => '到貨通知',
                 'subject' => '貨到通知信件',
                 'blade' => 'emails.orders.shipped',
-                'defaultValue' => [
-                    'price' => 0
-                ],
+                'defaultValue' => [],
             ],
             'refund' => [
                 'name' => '退款通知',
                 'subject' => '退款通知信件',
                 'blade' => 'emails.orders.shipped',
-                'defaultValue' => [
-                    'price' => 0
-                ],
+                'defaultValue' => [],
             ]
         ];
     }

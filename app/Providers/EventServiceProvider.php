@@ -37,9 +37,10 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         Events\Notify\NewOrderEvent::class => [
+            Listeners\Notify\SMSNotify::class,
             Listeners\Notify\MailNotify::class,
             Listeners\Notify\LineNotify::class,
-            // Listeners\Notify\SMSNotify::class,
+
         ],
 
         Events\Notify\RefundEvent::class => [
