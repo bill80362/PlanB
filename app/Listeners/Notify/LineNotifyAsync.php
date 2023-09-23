@@ -12,13 +12,14 @@ use Throwable;
 class LineNotifyAsync implements ShouldQueue
 {
     use InteractsWithQueue;
+    public $connection = 'database'; //sync database
+    public $queue = 'default';
     /**
      * Create the event listener.
      */
     public function __construct(
         protected LineNotifyService $lineNotifyService
-    )
-    {
+    ) {
         //
     }
 
@@ -27,9 +28,14 @@ class LineNotifyAsync implements ShouldQueue
      */
     public function handle(object $event): void
     {
+        if (!($event->lineNotifyData && is_array($event->lineNotifyData) && count($event->lineNotifyData) > 0)) {
+            throw new Exception("格式錯誤");
+        }
+        
         /**
          * @todo line notify 串接               
          */
+        $this->lineNotifyService->send();
     }
 
 
@@ -38,5 +44,6 @@ class LineNotifyAsync implements ShouldQueue
      */
     public function failed(object $event, Throwable $exception): void
     {
+        Log::channel('notify_error')->error($this::class . " Async: " . $exception->getMessage());
     }
 }
