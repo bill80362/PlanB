@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events;
-use App\Listeners\SendPodcastNotification;
+use App\Listeners;
 use App\Listeners\Operate;
 use Illuminate\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -36,6 +36,18 @@ class EventServiceProvider extends ServiceProvider
             \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
         ],
 
+        Events\Notify\NewOrderEvent::class => [
+            Listeners\Notify\MailNotify::class,
+            Listeners\Notify\LineNotify::class,
+            // Listeners\Notify\SMSNotify::class,
+        ],
+
+        Events\Notify\RefundEvent::class => [
+            Listeners\Notify\MailNotify::class,
+            // Listeners\Notify\LineNotify::class,
+            Listeners\Notify\SMSNotify::class,
+        ],
+
         /** 排程事件監聽 START **/
         'Illuminate\Console\Events\ScheduledTaskStarting' => [
             'App\Listeners\Schedule\LogScheduledTaskStarting',
@@ -55,8 +67,8 @@ class EventServiceProvider extends ServiceProvider
         /** 排程事件監聽 END **/
 
         /**發送訊息通知事件*/
-        \App\Events\Operate\UserEditEvent::class => [//管理人資料修改
-            \App\Listeners\Operate\UserEditListener::class,//掛載不同的通知
+        \App\Events\Operate\UserEditEvent::class => [ //管理人資料修改
+            \App\Listeners\Operate\UserEditListener::class, //掛載不同的通知
         ],
 
     ];
