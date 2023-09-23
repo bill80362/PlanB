@@ -6,14 +6,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use App\Services\Notify\LineNotifyService;
 
 class LineNotify
 {
     /**
      * Create the event listener.
      */
-    public function __construct()
-    {
+    public function __construct(
+        protected LineNotifyService $lineNotifyService
+    ) {
         //
     }
 
@@ -30,6 +32,7 @@ class LineNotify
             /**
              * @todo line notify 串接               
              */
+            $this->lineNotifyService->send();
         } catch (Exception $e) {
             Log::channel('notify_error')->error($this::class . ": " . $e->getMessage());
         }

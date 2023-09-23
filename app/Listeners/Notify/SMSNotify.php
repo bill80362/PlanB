@@ -6,14 +6,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use App\Services\Notify\SMSService;
 
 class SMSNotify
 {
     /**
      * Create the event listener.
      */
-    public function __construct()
-    {
+    public function __construct(
+        protected SMSService $smsService
+    ) {
         //
     }
 
@@ -30,6 +32,7 @@ class SMSNotify
             /**
              * @todo sms 串接               
              */
+            $this->smsService->send();
         } catch (Exception $e) {
             Log::channel('notify_error')->error($this::class . ": " . $e->getMessage());
         }

@@ -36,13 +36,14 @@ class EventServiceProvider extends ServiceProvider
             \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
         ],
 
+        // 新訂單通知
         Events\Notify\NewOrderEvent::class => [
             Listeners\Notify\SMSNotify::class,
             Listeners\Notify\MailNotify::class,
             Listeners\Notify\LineNotify::class,
-
         ],
 
+        // 退款成功通知
         Events\Notify\RefundEvent::class => [
             Listeners\Notify\MailNotify::class,
             // Listeners\Notify\LineNotify::class,
