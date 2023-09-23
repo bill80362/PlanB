@@ -30,7 +30,6 @@ class UserEditListener implements ShouldQueue
     {
         //
 
-
     }
 
     /**
