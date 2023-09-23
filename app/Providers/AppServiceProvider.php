@@ -8,6 +8,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
@@ -39,11 +40,12 @@ class AppServiceProvider extends ServiceProvider
         ): PendingRequest {
             return Http::withMiddleware((new HttpLog())->__invoke($channel, $context, $config));
         });
-        //Queue的Job失敗會觸發
-        Queue::failing(function (JobFailed $event) {
-            // $event->connectionName
-            // $event->job
-            // $event->exception
-        });
+        //全域Queue的Job失敗會觸發
+//        Queue::failing(function (JobFailed $event) {
+//            Log::channel('daily')->error("我來了");
+//            // $event->connectionName
+//            // $event->job
+//            // $event->exception
+//        });
     }
 }
