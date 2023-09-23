@@ -12,6 +12,8 @@ use App\Services\Notify\SMSService;
 class SMSNotifyAsync implements ShouldQueue
 {
     use InteractsWithQueue;
+    public $connection = 'database'; //sync database
+    public $queue = 'default';
     /**
      * Create the event listener.
      */
@@ -26,9 +28,14 @@ class SMSNotifyAsync implements ShouldQueue
      */
     public function handle(object $event): void
     {
+        if (!($event->smsData && is_array($event->smsData) && count($event->smsData) > 0)) {
+            throw new Exception("格式錯誤");
+        }
+
         /**
          * @todo sms 串接               
          */
+        $this->smsService->send();
     }
 
     /**
@@ -36,5 +43,6 @@ class SMSNotifyAsync implements ShouldQueue
      */
     public function failed(object $event, Throwable $exception): void
     {
+        Log::channel('notify_error')->error($this::class . " Async: " . $exception->getMessage());
     }
 }
