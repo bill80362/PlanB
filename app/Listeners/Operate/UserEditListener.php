@@ -20,7 +20,7 @@ class UserEditListener implements ShouldQueue
     public $connection = 'database';//sync database
     public $queue = 'default';
 //    public $delay = 3;
-//    public $tries = 1;
+//    public $tries = 1;//錯誤後，重新嘗試次數
 
 
     /**
@@ -36,10 +36,7 @@ class UserEditListener implements ShouldQueue
      */
     public function handle(UserEditEvent $event): void
     {
-        throw new \Exception("error go");
-//        $this->fail("error go");
-        //通知先使用LOG表達
-        Log::channel('daily')->info($event->oUser->toJson());
+        Log::channel('daily')->info("AAA",$event->Data);
     }
 
     /**
@@ -47,7 +44,8 @@ class UserEditListener implements ShouldQueue
      */
     public function failed(UserEditEvent $event, Throwable $exception): void
     {
+        Log::channel('daily')->error("全域Queue的Job失敗會觸發AAAAAAAA");
         //通知先使用LOG表達
-        Log::channel('daily')->info("在Listener拿到失敗了");
+//        Log::channel('daily')->info("在Listener拿到失敗了".$exception->getMessage());
     }
 }

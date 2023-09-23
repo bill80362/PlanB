@@ -15,7 +15,7 @@ class UserEditEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public User $oUser)
+    public function __construct(public array $Data)
     {
         //
     }

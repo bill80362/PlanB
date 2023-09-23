@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         });
         //全域Queue的Job失敗會觸發
 //        Queue::failing(function (JobFailed $event) {
-//            Log::channel('daily')->error("我來了");
+//            Log::channel('daily')->error("全域Queue的Job失敗會觸發BBBB");
 //            // $event->connectionName
 //            // $event->job
 //            // $event->exception
