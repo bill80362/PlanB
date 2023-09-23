@@ -24,6 +24,6 @@ class SendPodcastNotification implements ShouldQueue
     public function subscribe(PodcastProcessed $events): void
     {
         //        app('log')->info("subscribe");
-
+        
     }
 }

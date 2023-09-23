@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Events\PodcastProcessed;
 use App\Listeners\SendPodcastNotification;
-use App\Listeners\UserLoginListener;
+use App\Listeners\Operate;
 use Illuminate\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,15 +22,19 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        Auth\Events\Registered::class => [],
         Auth\Events\Login::class => [
-            UserLoginListener::class,
+            Operate\UserLoginListener::class,
+        ],
+        Auth\Events\Failed::class => [
+            Operate\UserLogoutFailListener::class,
         ],
         Auth\Events\Logout::class => [],
-        //        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-        //            \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
-        //            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
-        //            \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
-        //        ],
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
+            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
+            \SocialiteProviders\Line\LineExtendSocialite::class . '@handle',
+        ],
 
         /** 排程事件監聽 START **/
         'Illuminate\Console\Events\ScheduledTaskStarting' => [
