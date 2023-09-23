@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('key')->nullable();
             $table->char('lang_type')->default('1')->comment('語系');
             $table->string('page_name')->nullable();
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
         });
