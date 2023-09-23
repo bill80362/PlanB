@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Auth;
-use Illuminate\Console\Scheduling\Event;
+use App\Events\Operate\UserLoginFailEvent;
 
 class LoginController extends \App\Http\Controllers\Controller
 {
@@ -27,33 +27,15 @@ class LoginController extends \App\Http\Controllers\Controller
             'Account' => ['required', Rule::exists('users', 'name')],
             'Password' => ['required'],
         ]);
-
         $user = User::where('name', $request->get('Account'))->first();
-        $check = auth('operate')->attempt([
-            'id' => $user->id,
-            'name' => $request->get('Account'),
-            'password' => $request->get('Password')
-        ]);
-        if ($check) {
-            $request->session()->regenerate();
-            return redirect('/operate/dashboard');
-        } else {
+        if (!Hash::check($request->get('Password'), $user->password)) {
+            UserLoginFailEvent::dispatch($user->toArray());
             return back()->withErrors([
                 'errors' => ['帳號或密碼有誤，請重新確認輸入'],
             ]);
         }
-        // $user = User::where('name', $request->get('Account'))->first();
-        // if (!Hash::check($request->get('Password'), $user->password)) {
-
-        //     return back()->withErrors([
-        //         'errors' => ['帳號或密碼有誤，請重新確認輸入'],
-        //     ]);
-        // }
-
-
-        // auth('operate')->login($user);
-
-        // return redirect('/operate/dashboard');
+        auth('operate')->login($user);
+        return redirect('/operate/dashboard');
     }
 
     public function logout()

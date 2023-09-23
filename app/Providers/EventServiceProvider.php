@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\PodcastProcessed;
+use App\Events;
 use App\Listeners\SendPodcastNotification;
 use App\Listeners\Operate;
 use Illuminate\Auth;
@@ -26,8 +26,8 @@ class EventServiceProvider extends ServiceProvider
         Auth\Events\Login::class => [
             Operate\UserLoginListener::class,
         ],
-        Auth\Events\Failed::class => [
-            Operate\UserLogoutFailListener::class,
+        Events\Operate\UserLoginFailEvent::class => [
+            Operate\UserLoginFailListener::class,
         ],
         Auth\Events\Logout::class => [],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [

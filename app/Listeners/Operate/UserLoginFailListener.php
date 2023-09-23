@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
-class UserLogoutFailListener
+class UserLoginFailListener
 {
     /**
      * Create the event listener.
@@ -21,7 +21,7 @@ class UserLogoutFailListener
      */
     public function handle(object $event): void
     {
-        Log::info($event->user->name . " 登入失敗！");
+        Log::info($event->Data['name'] . " 登入失敗！");
     }
 
     public function failed()
