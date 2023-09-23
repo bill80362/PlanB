@@ -29,6 +29,7 @@ class UserEditListener implements ShouldQueue
     public function __construct()
     {
         //
+
     }
 
     /**
