@@ -118,11 +118,12 @@ class UserController extends Controller
         //寄發郵件通知使用者資料變更訊息
         UserEditEvent::dispatch($this->oModel->find($id)->toArray());
 
+        return redirect("/operate/user?".$this->request->getQueryString())->with(['success' => '送出成功']);
         //
-        return view('alert_redirect', [
-            'Alert' => __('送出成功'),
-            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
-        ]);
+//        return view('alert_redirect', [
+//            'Alert' => __('送出成功'),
+//            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+//        ]);
     }
 
     //批次刪除
@@ -134,10 +135,11 @@ class UserController extends Controller
         }
 
         //
-        return view('alert_redirect', [
-            'Alert' => '刪除成功',
-            'Redirect' => route('user_list').'?'.$this->request->getQueryString(),
-        ]);
+        return redirect("/operate/user?".$this->request->getQueryString())->with(['success' => '刪除成功']);
+//        return view('alert_redirect', [
+//            'Alert' => '刪除成功',
+//            'Redirect' => route('user_list').'?'.$this->request->getQueryString(),
+//        ]);
     }
 
     //批次修改排序
@@ -164,10 +166,11 @@ class UserController extends Controller
             foreach ($Row as $index => $columnTitle) {
                 //匯入資料欄位標題異常
                 if (! isset($value_to_key[$columnTitle])) {
-                    return view('alert_redirect', [
-                        'Alert' => __('匯入標題異常'),
-                        'Redirect' => '/operate/user?'.$this->request->getQueryString(),
-                    ]);
+                    return redirect("/operate/user?".$this->request->getQueryString())->with(['error' => '匯入標題異常']);
+//                    return view('alert_redirect', [
+//                        'Alert' => __('匯入標題異常'),
+//                        'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+//                    ]);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
@@ -226,10 +229,11 @@ class UserController extends Controller
         }
 
         //
-        return view('alert_redirect', [
-            'Alert' => __('送出成功'),
-            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
-        ]);
+        return redirect("/operate/user?".$this->request->getQueryString())->with(['success' => '送出成功']);
+//        return view('alert_redirect', [
+//            'Alert' => __('送出成功'),
+//            'Redirect' => '/operate/user?'.$this->request->getQueryString(),
+//        ]);
     }
 
     //匯出
