@@ -32,7 +32,7 @@ class LoginController extends \App\Http\Controllers\Controller
         $check = auth('operate')->attempt([
             'id' => $user->id,
             'name' => $request->get('Account'),
-            'password' => Hash::make($request->get('Password'))
+            'password' => $request->get('Password')
         ]);
         if ($check) {
             $request->session()->regenerate();
