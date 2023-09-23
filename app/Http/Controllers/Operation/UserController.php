@@ -116,7 +116,7 @@ class UserController extends Controller
         });
         $this->oModel->find($id)->permissions()->saveMany($PermissionArray);
         //寄發郵件通知使用者資料變更訊息
-        UserEditEvent::dispatch($this->oModel);
+        UserEditEvent::dispatch($this->oModel->find($id));
 
         //
         return view('alert_redirect', [

@@ -13,14 +13,10 @@ class UserEditListener implements ShouldQueue
      *
      * @var string|null
      */
-//    public $connection = 'database';
+    public $connection = 'database';//sync database
+    public $queue = 'default';
+    public $delay = 3;
 
-    /**
-     * The time (seconds) before the job should be processed.
-     *
-     * @var int
-     */
-//    public $delay = 3;
 
     /**
      * Create the event listener.
@@ -36,8 +32,6 @@ class UserEditListener implements ShouldQueue
     public function handle(UserEditEvent $event): void
     {
         //通知先使用LOG表達
-        Log::channel('daily')->info(json_encode($event));
-//        echo 123;
-
+        Log::channel('daily')->info($event->oUser->toJson());
     }
 }

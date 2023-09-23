@@ -1,3 +1,4 @@
+@extends('errors::minimal')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,7 +18,12 @@
     </head>
     <body>
         <div>
-            <h1>我是404錯誤</h1>
+            <h1>http錯誤碼:{{$exception->getStatusCode()}}</h1>
+            @if($exception->getMessage())
+                @section('message', $exception->getMessage())
+            @else
+                @section('message', __('Not Found'))
+            @endif
         </div>
     </body>
 </html>

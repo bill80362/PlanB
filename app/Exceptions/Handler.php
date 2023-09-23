@@ -50,7 +50,11 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        //APP_DEBUG開啟狀態，直接離開
+        if (app()->runningInConsole()) {
+            // 运行在命令行下
+            return parent::render($request, $e);
+        }
+        //APP_DEBUG開啟狀態
         if (env('APP_DEBUG')) {
             return parent::render($request, $e);
         }
@@ -71,9 +75,12 @@ class Handler extends ExceptionHandler
             //        } elseif (auth('front')->check()) {
             //            //使用外網統一頁面 /views/errors/404.blade.php
             //            return parent::render($request, $e);
+        }else{
+            //不顯示錯誤訊息的404頁面
+
         }
 
-        //
+        //不顯示錯誤訊息的404頁面
         return parent::render($request, $e);
     }
 }
