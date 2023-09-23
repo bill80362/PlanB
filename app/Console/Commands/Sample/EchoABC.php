@@ -3,7 +3,6 @@
 namespace App\Console\Commands\Sample;
 
 use Illuminate\Console\Command;
-use App\Events\Notify\NewOrderEvent;
 
 class EchoABC extends Command
 {
@@ -28,11 +27,6 @@ class EchoABC extends Command
     {
         //
         echo 'ABC go!go!go!';
-
-        NewOrderEvent::dispatch([
-            'order_num' => '12345',
-            'price' => 999,
-            'mail' => 'bcs@gmail.com'
-        ]);
+        
     }
 }
