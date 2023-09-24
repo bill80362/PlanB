@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Permission\Permission;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,11 +16,9 @@ use OwenIt\Auditing\Contracts\Auditable;
 class User extends Authenticatable implements Auditable
 {
     //操作紀錄
-    use exportTrait;
     use HasApiTokens, HasFactory, Notifiable;
-    use \OwenIt\Auditing\Auditable; //匯出
-
-    protected $with = ['permissions'];
+    use \OwenIt\Auditing\Auditable; //操作Log
+    use exportTrait; //匯出
 
     /**
      * The attributes that are mass assignable.
@@ -31,7 +30,6 @@ class User extends Authenticatable implements Auditable
         'email',
         'password',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -42,27 +40,8 @@ class User extends Authenticatable implements Auditable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
-
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
-    protected $dispatchesEvents = [
-        // 'saved' => UserSaved::class,
-        // 'created' => xxx::class,
-        // 'updated' => xxx::class,
-        // 'deleted' => xxx::class,
-    ];
+    //更新密碼 新密碼
+    public String $newPassword = '';
 
     /**
      * Audit外掛 標記Tag 多筆資料逗號分隔
@@ -74,13 +53,18 @@ class User extends Authenticatable implements Auditable
             //            $this->name,
         ];
     }
-
+    /**
+     * 資料表關聯設定
+     */
+    protected $with = ['permissions'];
     public function permissions()
     {
         return $this->hasMany(Permission::class);
     }
 
-    //欄位名稱
+    /**
+     * 資料表欄位名稱對應
+     */
     public array $Column_Title_Text = [
         'id' => '編號',
         'name' => '姓名',
@@ -89,14 +73,32 @@ class User extends Authenticatable implements Auditable
         'status' => '狀態',
     ];
 
+    /**
+     * 欄位強制轉型
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * model的key-value對轉，考慮excel匯入匯出可以使用
+     */
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
     ];
-
-    //
-    public String $newPassword = '';
-
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => $this->statusText[$value]??$value,
+            set: fn (string $value) => array_flip($this->statusText)[$value]??$value,
+        );
+    }
+    /**
+     * 後台操作測定
+     */
     public function getValidatorRules()
     {
         return [
@@ -105,12 +107,7 @@ class User extends Authenticatable implements Auditable
             'email' => 'required|email',
         ];
     }
-
-    public function getValidatorMessage()
-    {
-        return [];
-    }
-
+    public function getValidatorMessage(){return [];}
     //
     public function scopeFilter($query, array $Data)
     {
@@ -127,11 +124,9 @@ class User extends Authenticatable implements Auditable
             $order_by = explode(',', $Data['order_by']);
             $query->orderBy($order_by[0], $order_by[1]);
         }
-
         //
         return $query;
     }
-
     //判斷匯入的時候，新增或是更新
     public function scopeImportPrimary($query, array $UpdateData)
     {
@@ -140,7 +135,6 @@ class User extends Authenticatable implements Auditable
         } else {
             $query->where('id', 0);
         }
-
         //
         return $query;
     }

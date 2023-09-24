@@ -20,9 +20,9 @@ trait exportTrait
             $Temp = [];
             foreach ($Column_Title_Text as $key => $value) {
                 //將key轉value
-                if ($key == 'status') {
-                    $model->$key = $this->statusText[$model->$key];
-                }
+//                if ($key == 'status') {
+//                    $model->$key = $this->statusText[$model->$key];
+//                }
                 //放入標題對應的資料
                 $Temp[] = $model->$key ?? '';
             }
