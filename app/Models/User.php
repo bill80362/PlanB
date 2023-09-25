@@ -92,6 +92,15 @@ class User extends Authenticatable implements Auditable
         'Y' => '啟用',
         'N' => '停用',
     ];
+
+    public array $lvText = [
+        1 => '超級使用者',
+        2 => '工程師',
+        3 => 'PM',
+        4 => '網址管理者',
+        5 => '使用者',
+    ];
+
     protected function status(): Attribute
     {
         return Attribute::make(

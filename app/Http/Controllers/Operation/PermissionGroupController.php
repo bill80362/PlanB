@@ -40,6 +40,8 @@ class PermissionGroupController extends Controller
 
     public function updateHTML($id)
     {
+        $user = auth('operate')->user();
+
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
@@ -72,13 +74,15 @@ class PermissionGroupController extends Controller
         return view('operate/pages/permission_group/update', [
             'Data' => $Data,
             'DataPermission' => $DataPermission,
-            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
+            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
             'Model' => $this->oModel,
         ]);
     }
 
     public function update($id)
     {
+        $user = auth('operate')->user();
+
         //過濾
         $UpdateData = $this->request->only(['name', 'show_flag']);
 
@@ -101,8 +105,8 @@ class PermissionGroupController extends Controller
             $id = $this->oModel->create($UpdateData)->id;
         }
         /***寫入權限 START **/
-        //全部KEY的名稱
-        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function ($item) {
+        //使用者lv權限
+        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions($user->lv))->map(function ($item) {
             return $item['key'];
         });
         //這次打勾的
@@ -113,12 +117,12 @@ class PermissionGroupController extends Controller
         $DataPermission = $this->oModel->findOrFail($id)->permissionGrouopItems()->get()->map(function ($item) {
             return $item->perm_key;
         });
-        //差異比對，要移除的 = 原本打勾的 - 這次打勾的
-        collect($DataPermission)->diff($PermissionArray)->map(function ($item) use ($id) {
+        //差異比對，要移除的 = (原本打勾的+使用者lv權限 聯集) - 這次打勾的
+        collect($DataPermission)->intersect($allPermissionsKey)->diff($PermissionArray)->map(function ($item) use ($id) {
             PermissionGroupItem::where("perm_key", $item)->first()->delete();
         });
-        // //差異比對，要新增的 = 這次打勾的 - 原本打勾的
-        $PermissionAdd = collect($PermissionArray)->diff($DataPermission)->map(function ($item) {
+        //差異比對，要新增的 = (這次打勾的+使用者lv權限 聯集)  - 原本打勾的
+        $PermissionAdd = collect($PermissionArray)->intersect($allPermissionsKey)->diff($DataPermission)->map(function ($item) {
             return new PermissionGroupItem(['perm_key' => $item]);
         });
         $this->oModel->find($id)->permissionGrouopItems()->saveMany($PermissionAdd);
