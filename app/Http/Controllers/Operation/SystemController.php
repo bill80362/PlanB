@@ -20,7 +20,7 @@ class SystemController extends Controller
     public function updateHTML()
     {
         //
-        $SystemConfigKeyValue = array_column($this->oModel->all()->toArray(), 'content', 'id');
+//        $SystemConfigKeyValue = array_column($this->oModel->all()->toArray(), 'content', 'id');
 
         //
         return view('operate/pages/system/config', [
@@ -52,7 +52,7 @@ class SystemController extends Controller
                 //新增
                 $this->oModel->create([
                     'id' => $id,
-                    'content' => $content??"",
+                    'content' => $content,
                 ]);
             } elseif ($Model->content !== $content) {
                 //修改
