@@ -27,7 +27,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $guarded = [];
     /**
-     * The attributes that should be hidden for serialization.
+     * 欄位不顯示，通常用於密碼
      *
      * @var array<int, string>
      */
