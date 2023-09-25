@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+// php artisan make:controller PhotoController
+class {{ class }} extends Controller
+{
+    //
+}
