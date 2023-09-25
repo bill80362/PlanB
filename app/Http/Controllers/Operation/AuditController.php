@@ -117,10 +117,6 @@ class AuditController extends Controller
 
         //
         return redirect("/operate/audit?".$this->request->getQueryString())->with(['success' => '送出成功']);
-//        return view('alert_redirect', [
-//            'Alert' => __('送出成功'),
-//            'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
-//        ]);
     }
 
     //批次刪除
@@ -130,13 +126,8 @@ class AuditController extends Controller
         foreach ((array) $this->request->post('id_array') as $id) {
             $this->oModel->find($id)->delete();
         }
-
         //
         return redirect("/operate/audit?".$this->request->getQueryString())->with(['success' => '刪除成功']);
-//        return view('alert_redirect', [
-//            'Alert' => '刪除成功',
-//            'Redirect' => route('audit_list').'?'.$this->request->getQueryString(),
-//        ]);
     }
 
     //批次修改排序
@@ -162,6 +153,9 @@ class AuditController extends Controller
                 if($Data->auditable_type=="App\Models\User"){
                     $Data->old_values = array_merge($Data->old_values,["password"=>"admin"]);
                 }
+                //重新新增，id一樣看起來沒有問題
+//                unset($Data->old_values["id"]);
+                //
                 $object->create($Data->old_values);
             }elseif($Data->event=="updated"){
                 //修改，
@@ -254,13 +248,8 @@ class AuditController extends Controller
         if ($AllMessage) {
             return redirect()->back()->withErrors(['message' => implode(',', $AllMessage)]);
         }
-
         //
         return redirect("/operate/audit?".$this->request->getQueryString())->with(['success' => '送出成功']);
-//        return view('alert_redirect', [
-//            'Alert' => __('送出成功'),
-//            'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
-//        ]);
     }
 
     //匯出
