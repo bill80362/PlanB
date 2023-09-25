@@ -55,13 +55,6 @@ Route::prefix('/operate')->middleware(['lang', 'log.request', 'log.response'])->
         Route::get('/audit/export', [\App\Http\Controllers\Operation\AuditController::class, 'export'])->name('audit_export');
         Route::post('/audit/import', [\App\Http\Controllers\Operation\AuditController::class, 'import'])->name('audit_import');
 
-        //Member_Data
-        //        Route::get('/member_data', [\App\Http\Controllers\Operation\MemberDataController::class, "listHTML"]);
-        //        Route::get('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "updateHTML"])->whereNumber("id");
-        //        Route::post('/member_data/{id}', [\App\Http\Controllers\Operation\MemberDataController::class, "update"])->whereNumber("id");
-        //        Route::post('/member_data/del', [\App\Http\Controllers\Operation\MemberDataController::class, "delBatch"]);
-        //        Route::get('/member_data/export', [\App\Http\Controllers\Operation\MemberDataController::class, 'export']);
-
         //語系
         Route::get('/language', [\App\Http\Controllers\Operation\LanguageController::class, 'listHTML'])->name('language_list')
             ->middleware(['can:language_read']);

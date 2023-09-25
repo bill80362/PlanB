@@ -20,7 +20,7 @@ class SystemController extends Controller
     public function updateHTML()
     {
         //
-        $SystemConfigKeyValue = array_column($this->oModel->all()->toArray(), 'content', 'id');
+//        $SystemConfigKeyValue = array_column($this->oModel->all()->toArray(), 'content', 'id');
 
         //
         return view('operate/pages/system/config', [
@@ -64,10 +64,11 @@ class SystemController extends Controller
         }
 
         //
-        return view('alert_redirect', [
-            'Alert' => __('送出成功'),
-            'Redirect' => '/operate/system',
-        ]);
+        return redirect("/operate/system")->with(['success' => '送出成功']);
+//        return view('alert_redirect', [
+//            'Alert' => __('送出成功'),
+//            'Redirect' => '/operate/system',
+//        ]);
     }
 
     public function deleteImage()
@@ -82,9 +83,10 @@ class SystemController extends Controller
         }
 
         //
-        return view('alert_redirect', [
-            'Alert' => __('送出成功'),
-            'Redirect' => '/operate/system',
-        ]);
+        return redirect("/operate/system")->with(['success' => '送出成功']);
+//        return view('alert_redirect', [
+//            'Alert' => __('送出成功'),
+//            'Redirect' => '/operate/system',
+//        ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\AsStringable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +16,19 @@ class SystemConfig extends Model
     protected $keyType = 'string';
 
     protected $guarded = [];
+
+    /**
+     * 強制資料轉換
+     *
+     * @return Attribute
+     */
+    protected function content(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => (string)$value,
+        );
+    }
+
 
     //DB儲存的資料
     public array $SystemConfig = [
