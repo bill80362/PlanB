@@ -146,6 +146,36 @@ class AuditController extends Controller
 
     }
 
+    //批次還原
+    public function reverseBatch()
+    {
+        foreach ((array) $this->request->post('id_array') as $id) {
+            $Data = $this->oModel->find($id);
+            if($Data->event=="created"){
+                //新增反向，就是要刪除
+                $object = new $Data->auditable_type;
+                $object->find($Data->new_values["id"])->delete();
+            }elseif($Data->event=="deleted"){
+                //刪除 => 新增
+                $object = new $Data->auditable_type;
+                //特殊表，要進行處裡
+                if($Data->auditable_type=="App\Models\User"){
+                    $Data->old_values = array_merge($Data->old_values,["password"=>"admin"]);
+                }
+                $object->create($Data->old_values);
+            }elseif($Data->event=="updated"){
+                //修改，
+                $object = $Data->auditable_type::find($Data->auditable_id);
+                foreach ($Data->old_values as $key => $value){
+                    $object->$key = $value;
+                }
+                $object->save();
+            }
+        }
+        //
+        return redirect("/operate/audit?".$this->request->getQueryString())->with(['success' => '還原成功']);
+    }
+
     /**
      * 匯入
      */

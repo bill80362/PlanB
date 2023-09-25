@@ -58,6 +58,7 @@ Route::prefix('/operate')->middleware(['lang', 'log.request', 'log.response'])->
         Route::post('/audit/del', [Operation\AuditController::class, 'delBatch'])->name('audit_del');
         Route::get('/audit/export', [Operation\AuditController::class, 'export'])->name('audit_export');
         Route::post('/audit/import', [Operation\AuditController::class, 'import'])->name('audit_import');
+        Route::post('/audit/reverse', [Operation\AuditController::class, 'reverseBatch'])->name('reverse');
 
         //語系
         Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')

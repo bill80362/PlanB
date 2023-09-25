@@ -88,6 +88,7 @@
                                 <th>{{__($Model->Column_Title_Text["user_agent"])}}</th>
                                 <th>{{__($Model->Column_Title_Text["created_at"])}}</th>
                                 <th>{{__("修改人")}}</th>
+                                <th>{{__("操作")}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -103,6 +104,16 @@
                                         <td>{{$Item->user_agent}}</td>
                                         <td>{{$Item->created_at->toDateTimeString()}}</td>
                                         <td>{{$Item->user->name}}</td>
+                                        <td>
+                                                <button class="btn btn-sm btn-danger"
+                                                        type="button"
+                                                        onclick="postForm('/operate/audit/reverse?{{request()->getQueryString()}}',{
+                                                                            'id_array[]':{{$Item->id}},
+                                                                            _token:'{{ csrf_token() }}'
+                                                                            })"
+                                                >{{__("還原")}}
+                                                </button>
+                                        </td>
                                     </tr>
                             @endforeach
                             </tbody>
