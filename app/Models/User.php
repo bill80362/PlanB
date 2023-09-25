@@ -20,15 +20,12 @@ class User extends Authenticatable implements Auditable
     use ExportTrait; //匯出
 
     /**
-     * The attributes that are mass assignable.
+     * 欄位新增修改的黑名單，注意 create()會吃到，save（）不會吃到
+     * 如果create()想要先關閉guarded，可以使用  Model::unguard(); ，通常用於seed的時候
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for serialization.
      *
