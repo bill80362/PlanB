@@ -105,15 +105,30 @@ class UserController extends Controller
         } else {
             $id = $this->oModel->create($UpdateData)->id;
         }
-        //寫入權限
+        /***寫入權限 START **/
+        //全部KEY的名稱
         $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function ($item) {
             return $item['key'];
         });
+        //這次打勾的
         $PermissionArray = collect($this->request->only($allPermissionsKey->toArray()))->map(function ($item, $key) {
-            return new Permission(['perm_key' => $key]);
+            return $key;
         });
-        $this->oModel->find($id)->permissions()->delete();//先刪除舊的
-        $this->oModel->find($id)->permissions()->saveMany($PermissionArray);//再重新放入
+        //原本打勾的
+        $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function ($item) {
+            return $item->perm_key;
+        });
+        //差異比對，要移除的 = 原本打勾的 - 這次打勾的
+        collect($DataPermission)->diff($PermissionArray)->map(function($item) use ($id){
+            Permission::where("perm_key",$item)->first()->delete();
+        });
+        //差異比對，要新增的 = 這次打勾的 - 原本打勾的
+        $PermissionAdd = collect($PermissionArray)->diff($DataPermission)->map(function($item){
+            return new Permission(['perm_key' => $item]);
+        });
+        $this->oModel->find($id)->permissions()->saveMany($PermissionAdd);
+        /***寫入權限 END **/
+
         //寄發郵件通知使用者資料變更訊息
         UserEditEvent::dispatch($this->oModel->find($id)->toArray());
 
