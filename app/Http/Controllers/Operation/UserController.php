@@ -253,7 +253,7 @@ class UserController extends Controller
     //匯出
     public function export($Type)
     {
-        //匯出的標題和內文
+        //匯出的內文是否使用變異器
         $useMutator = true;
         if($Type=="key"){
             $useMutator = false;
