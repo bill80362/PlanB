@@ -31,7 +31,7 @@ class PermissionGroupController extends Controller
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
         //
-        return view('operate/pages/user/list', [
+        return view('operate/pages/permission_group/list', [
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
@@ -48,7 +48,7 @@ class PermissionGroupController extends Controller
             //新增預設值
             $Data->id = 0;
             $Data->name = '';
-            $Data->email = '';
+            $Data->show_flag = 'Y';
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array) $this->request->old() as $key => $value) {
@@ -59,7 +59,7 @@ class PermissionGroupController extends Controller
         }
         //整理權限
         if ($id) {
-            $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function ($item) {
+            $DataPermission = $this->oModel->findOrFail($id)->permissionGrouopItems()->get()->map(function ($item) {
                 return $item->perm_key;
             });
         } else {
@@ -69,32 +69,26 @@ class PermissionGroupController extends Controller
         }
 
         //View
-        return view('operate/pages/user/update', [
+        return view('operate/pages/permission_group/update', [
             'Data' => $Data,
             'DataPermission' => $DataPermission,
             'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
+            'Model' => $this->oModel,
         ]);
     }
 
     public function update($id)
     {
         //過濾
-        $UpdateData = $this->request->only(['name', 'email', 'password']);
-        if (!$UpdateData['password']) {
-            unset($UpdateData['password']);
-        } else {
-            $this->oModel->newPassword = $UpdateData['password'];
-        }
+        $UpdateData = $this->request->only(['name', 'show_flag']);
+
         //驗證資料
         $validator = Validator::make(
             $UpdateData,
             $this->oModel->getValidatorRules(),
             $this->oModel->getValidatorMessage(),
         );
-        //密碼處理
-        if (isset($UpdateData['password'])) {
-            $UpdateData['password'] = Hash::make($UpdateData['password']);
-        }
+
         //驗證有誤
         if ($validator->fails()) {
             return redirect()->back()
@@ -116,25 +110,20 @@ class PermissionGroupController extends Controller
             return $key;
         });
         //原本打勾的
-        $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function ($item) {
+        $DataPermission = $this->oModel->findOrFail($id)->permissionGrouopItems()->get()->map(function ($item) {
             return $item->perm_key;
         });
         //差異比對，要移除的 = 原本打勾的 - 這次打勾的
-        // collect($DataPermission)->diff($PermissionArray)->map(function ($item) use ($id) {
-        //     Permission::where("perm_key", $item)->first()->delete();
-        // });
+        collect($DataPermission)->diff($PermissionArray)->map(function ($item) use ($id) {
+            PermissionGroupItem::where("perm_key", $item)->first()->delete();
+        });
         // //差異比對，要新增的 = 這次打勾的 - 原本打勾的
-        // $PermissionAdd = collect($PermissionArray)->diff($DataPermission)->map(function ($item) {
-        //     return new Permission(['perm_key' => $item]);
-        // });
-        // $this->oModel->find($id)->permissions()->saveMany($PermissionAdd);
+        $PermissionAdd = collect($PermissionArray)->diff($DataPermission)->map(function ($item) {
+            return new PermissionGroupItem(['perm_key' => $item]);
+        });
+        $this->oModel->find($id)->permissionGrouopItems()->saveMany($PermissionAdd);
         /***寫入權限 END **/
-
-        //寄發郵件通知使用者資料變更訊息
-        UserEditEvent::dispatch($this->oModel->find($id)->toArray());
-
-        return redirect("/operate/user?" . $this->request->getQueryString())->with(['success' => '送出成功']);
-        //
+        return redirect("/operate/permission_group?" . $this->request->getQueryString())->with(['success' => '送出成功']);
     }
 
     //批次刪除
@@ -146,7 +135,7 @@ class PermissionGroupController extends Controller
         }
 
         //
-        return redirect("/operate/user?" . $this->request->getQueryString())->with(['success' => '刪除成功']);
+        return redirect("/operate/permission_group?" . $this->request->getQueryString())->with(['success' => '刪除成功']);
     }
 
     //批次修改排序
@@ -172,7 +161,7 @@ class PermissionGroupController extends Controller
             foreach ($Row as $index => $columnTitle) {
                 //匯入資料欄位標題異常
                 if (!isset($value_to_key[$columnTitle])) {
-                    return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
+                    return redirect("/operate/permission_group?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
@@ -231,7 +220,7 @@ class PermissionGroupController extends Controller
         }
 
         //
-        return redirect("/operate/user?" . $this->request->getQueryString())->with(['success' => '送出成功']);
+        return redirect("/operate/permission_group?" . $this->request->getQueryString())->with(['success' => '送出成功']);
     }
 
     //匯出
@@ -241,6 +230,6 @@ class PermissionGroupController extends Controller
         $ExportList = $this->oModel->filter($this->request->all())->export();
 
         //匯出
-        return (new Collection($ExportList))->downloadExcel('user_data_' . time() . '.xlsx');
+        return (new Collection($ExportList))->downloadExcel('permission_group_data_' . time() . '.xlsx');
     }
 }
