@@ -22,6 +22,7 @@ class AuditLog extends Audit
         'ip_address' => 'IP位址',
         'user_agent' => '瀏覽器紀錄',
         'tags' => '標籤',
+        'version' => '版本號',
         'created_at' => '建立時間',
     ];
 

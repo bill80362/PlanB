@@ -86,6 +86,7 @@
                                 <th>{{__($Model->Column_Title_Text["new_values"])}}</th>
                                 <th>{{__($Model->Column_Title_Text["ip_address"])}}</th>
                                 <th>{{__($Model->Column_Title_Text["user_agent"])}}</th>
+                                <th>{{__($Model->Column_Title_Text["version"])}}</th>
                                 <th>{{__($Model->Column_Title_Text["created_at"])}}</th>
                                 <th>{{__("修改人")}}</th>
                                 <th>{{__("操作")}}</th>
@@ -102,6 +103,7 @@
                                         <td>{{collect($Item->new_values)->toJson()}}</td>
                                         <td>{{$Item->ip_address}}</td>
                                         <td>{{$Item->user_agent}}</td>
+                                        <td>{{$Item->version}}</td>
                                         <td>{{$Item->created_at->toDateTimeString()}}</td>
                                         <td>{{$Item->user->name}}</td>
                                         <td>
