@@ -94,7 +94,8 @@
                                 </div>
                                 @can('user_export')
                                 <div>
-                                    <a class="btn btn-sm btn-warning" href="{{route("user_export")}}?{{request()->getQueryString()}}">{{__("匯出")}}</a>
+                                    <a class="btn btn-sm btn-warning" href="{{route("user_export",["type"=>"key"])}}?{{request()->getQueryString()}}">{{__("匯出參數版")}}</a>
+                                    <a class="btn btn-sm btn-warning" href="{{route("user_export",["type"=>"value"])}}?{{request()->getQueryString()}}">{{__("匯出文字版")}}</a>
                                 </div>
                                 @endcan
                             </div>

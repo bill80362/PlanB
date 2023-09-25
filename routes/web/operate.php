@@ -26,7 +26,7 @@ Route::prefix('/operate')->middleware(['lang', 'log.request', 'log.response'])->
             Route::get('/{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->middleware(['can:user_read']);
             Route::post('/{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->middleware(['can:user_update']);
             Route::post('/del', [UserController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
-            Route::get('/export', [UserController::class, 'export'])->name('export')->middleware(['can:user_export']);
+            Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type",'[key|value]+')->middleware(['can:user_export']);
             Route::post('/import', [UserController::class, 'import'])->name('import')->middleware(['can:user_import']);
             Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->middleware(['can:user_read']);
         });
