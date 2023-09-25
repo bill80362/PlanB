@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Member\Member_Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Laravel\Socialite\Facades\Socialite;
