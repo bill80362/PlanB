@@ -6,9 +6,16 @@ use App\Tools\Lang\LanguageTranslator as Translator;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Services\Operate\SystemConfigService;
 
 class Language
 {
+
+    public function __construct(
+        protected SystemConfigService $oSystemConfigService
+    ) {
+    }
+
     /**
      * 覆寫掉 Translator get功能
      *
@@ -19,7 +26,8 @@ class Language
         app()->extend('translator', function ($command, $app) {
             $loader = $app['translation.loader'];
             $locale = $app->getLocale();
-            $trans = new Translator($loader, $locale);
+            $values = $this->oSystemConfigService->SystemConfigKeyValue;
+            $trans = new Translator($loader, $locale, $values['use_url_map'] == 'Y');
             $trans->setFallback($app->getFallbackLocale());
 
             return $trans;

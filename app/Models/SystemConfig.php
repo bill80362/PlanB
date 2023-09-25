@@ -43,6 +43,16 @@ class SystemConfig extends Model
                     'N' => '關',
                 ],
             ],
+            [
+                'id' => 'use_url_map',
+                'title' => '是否啟用語系url收集',
+                'content' => '', //DB抓取後會覆蓋這個職
+                'input' => 'select', //後臺操作的模式
+                'options' => [
+                    'Y' => '開',
+                    'N' => '關',
+                ],
+            ],
         ],
         '商品設定' => [
             [

@@ -42,7 +42,7 @@
 
 
                                                     <div class="form-group mb-3">
-                                                        <label>{{ __('語系') }}：{{ $LangTypeText[$Data->lang_type] }}</label>
+                                                        {{-- <label>{{ __('語系') }}：{{ $LangTypeText[$Data->lang_type] }}</label> --}}
                                                         <div>
                                                             <input type="hidden" name="lang_type"
                                                                 value="{{ $Data->lang_type }}">
@@ -92,6 +92,24 @@
                                             <button type="submit" class="btn btn-primary">{{ __('送出') }}</button>
                                         </div>
 
+                                    </div>
+
+
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div>{{ __('使用頁面網址') }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                @foreach ($UrlMaps as $urlMaps)
+                                                    <div>
+                                                        {{ $urlMaps['url'] }}
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
