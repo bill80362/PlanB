@@ -85,11 +85,20 @@ class User extends Authenticatable implements Auditable
         'Y' => '啟用',
         'N' => '停用',
     ];
+
+    public array $lvText = [
+        1 => '超級使用者',
+        2 => '工程師',
+        3 => 'PM',
+        4 => '網址管理者',
+        5 => '使用者',
+    ];
+
     protected function status(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $this->statusText[$value]??$value,
-            set: fn (string $value) => array_flip($this->statusText)[$value]??$value,
+            get: fn (string $value) => $this->statusText[$value] ?? $value,
+            set: fn (string $value) => array_flip($this->statusText)[$value] ?? $value,
         );
     }
     /**
@@ -103,7 +112,10 @@ class User extends Authenticatable implements Auditable
             'email' => 'required|email',
         ];
     }
-    public function getValidatorMessage(){return [];}
+    public function getValidatorMessage()
+    {
+        return [];
+    }
     //
     public function scopeFilter($query, array $Data)
     {
@@ -113,7 +125,7 @@ class User extends Authenticatable implements Auditable
         }
         //過濾文字條件
         if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
+            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
         }
         //排序
         if (isset($Data['order_by'])) {

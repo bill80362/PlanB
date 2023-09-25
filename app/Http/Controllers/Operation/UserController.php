@@ -40,6 +40,8 @@ class UserController extends Controller
 
     public function updateHTML($id)
     {
+        $user = auth('operate')->user();
+
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
@@ -52,7 +54,7 @@ class UserController extends Controller
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array) $this->request->old() as $key => $value) {
-            if (! $value) {
+            if (!$value) {
                 continue;
             }
             $Data->$key = $value;
@@ -72,15 +74,16 @@ class UserController extends Controller
         return view('operate/pages/user/update', [
             'Data' => $Data,
             'DataPermission' => $DataPermission,
-            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission(),
+            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
         ]);
     }
 
     public function update($id)
     {
+        $user = auth('operate')->user();
         //過濾
         $UpdateData = $this->request->only(['name', 'email', 'password']);
-        if (! $UpdateData['password']) {
+        if (!$UpdateData['password']) {
             unset($UpdateData['password']);
         } else {
             $this->oModel->newPassword = $UpdateData['password'];
@@ -107,8 +110,9 @@ class UserController extends Controller
             $id = $this->oModel->create($UpdateData)->id;
         }
         /***寫入權限 START **/
-        //全部KEY的名稱
-        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions())->map(function ($item) {
+
+        //使用者lv權限
+        $allPermissionsKey = collect(app(PermissionService::class)->getPermissions($user->lv))->map(function ($item) {
             return $item['key'];
         });
         //這次打勾的
@@ -119,12 +123,12 @@ class UserController extends Controller
         $DataPermission = $this->oModel->findOrFail($id)->permissions()->get()->map(function ($item) {
             return $item->perm_key;
         });
-        //差異比對，要移除的 = 原本打勾的 - 這次打勾的
-        collect($DataPermission)->diff($PermissionArray)->map(function($item) use ($id){
-            Permission::where("perm_key",$item)->where("user_id",$id)->first()->delete();
+        //差異比對，要移除的 = (原本打勾的+使用者lv權限 聯集) - 這次打勾的
+        collect($DataPermission)->intersect($allPermissionsKey)->diff($PermissionArray)->map(function ($item) use ($id) {
+            Permission::where("perm_key", $item)->where("user_id", $id)->first()->delete();
         });
-        //差異比對，要新增的 = 這次打勾的 - 原本打勾的
-        $PermissionAdd = collect($PermissionArray)->diff($DataPermission)->map(function($item){
+        //差異比對，要新增的 = (這次打勾的+使用者lv權限 聯集)  - 原本打勾的
+        $PermissionAdd = collect($PermissionArray)->intersect($allPermissionsKey)->diff($DataPermission)->map(function ($item) {
             return new Permission(['perm_key' => $item]);
         });
         $this->oModel->find($id)->permissions()->saveMany($PermissionAdd);
@@ -133,7 +137,7 @@ class UserController extends Controller
         //寄發郵件通知使用者資料變更訊息
         UserEditEvent::dispatch($this->oModel->find($id)->toArray());
 
-        return redirect("/operate/user?".$this->request->getQueryString())->with(['success' => '送出成功']);
+        return redirect("/operate/user?" . $this->request->getQueryString())->with(['success' => '送出成功']);
         //
     }
 
@@ -146,14 +150,13 @@ class UserController extends Controller
         }
 
         //
-        return redirect("/operate/user?".$this->request->getQueryString())->with(['success' => '刪除成功']);
+        return redirect("/operate/user?" . $this->request->getQueryString())->with(['success' => '刪除成功']);
     }
 
     //批次修改排序
     public function sortBatch()
     {
         $ID_Array = $this->request->post('sort');
-
     }
 
     /**
@@ -169,11 +172,11 @@ class UserController extends Controller
         foreach ((array) $subjects->toArray()[0] as $RowKey => $Row) {
             if ($RowKey > 0) {
                 break;
-            }//只跑第一行
+            } //只跑第一行
             foreach ($Row as $index => $columnTitle) {
                 //匯入資料欄位標題異常
-                if (! isset($value_to_key[$columnTitle])) {
-                    return redirect("/operate/user?".$this->request->getQueryString())->with(['error' => '匯入標題異常']);
+                if (!isset($value_to_key[$columnTitle])) {
+                    return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
@@ -201,7 +204,7 @@ class UserController extends Controller
             }
             //整理要更新的資料
             $DataModel = $this->oModel->importPrimary($UpdateData)->first();
-            if (! $DataModel) {
+            if (!$DataModel) {
                 $DataModel = clone $this->oModel; //沒有對應的資料，init一個
             }
             foreach ($UpdateData as $ColumnTitle => $value) {
@@ -219,7 +222,7 @@ class UserController extends Controller
             //驗證有誤
             if ($validator->fails()) {
                 //
-                $AllMessage[] = "第{$RowKey}列:".implode(',', $validator->messages()->all());
+                $AllMessage[] = "第{$RowKey}列:" . implode(',', $validator->messages()->all());
 
                 //
                 continue;
@@ -232,7 +235,7 @@ class UserController extends Controller
         }
 
         //
-        return redirect("/operate/user?".$this->request->getQueryString())->with(['success' => '送出成功']);
+        return redirect("/operate/user?" . $this->request->getQueryString())->with(['success' => '送出成功']);
     }
 
     //匯出
@@ -242,7 +245,7 @@ class UserController extends Controller
         $ExportList = $this->oModel->filter($this->request->all())->export();
 
         //匯出
-        return (new Collection($ExportList))->downloadExcel('user_data_'.time().'.xlsx');
+        return (new Collection($ExportList))->downloadExcel('user_data_' . time() . '.xlsx');
     }
 
     //修改紀錄

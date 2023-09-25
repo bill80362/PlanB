@@ -17,9 +17,19 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::create([
             'id' => '1',
+            'name' => 'superuser',
+            'email' => 'superuser@test.com',
+            'password' => Hash::make('superuser'),
+            'lv' => '1',
+            'status' => 'Y',
+        ]);
+
+        \App\Models\User::create([
+            'id' => '2',
             'name' => 'admin',
-            'email' => 'test@gmail.com',
+            'email' => 'admin@test.com',
             'password' => Hash::make('admin'),
+            'lv' => '2',
             'status' => 'Y',
         ]);
 
@@ -34,6 +44,20 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Permission\Permission::create([
             'user_id' => '1',
+            'perm_key' => 'user_delete',
+        ]);
+
+        \App\Models\Permission\Permission::create([
+            'user_id' => '2',
+            'perm_key' => 'user_read',
+        ]);
+        \App\Models\Permission\Permission::create([
+            'user_id' => '2',
+            'perm_key' => 'user_update',
+        ]);
+
+        \App\Models\Permission\Permission::create([
+            'user_id' => '2',
             'perm_key' => 'user_delete',
         ]);
 

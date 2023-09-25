@@ -20,47 +20,69 @@ class PermissionService
         ];
     }
 
+    public array $lvText = [
+        1 => '超級使用者',
+        2 => '工程師',
+        3 => 'PM',
+        4 => '網址管理者',
+        5 => '使用者',
+    ];
+
+
     /**
      * 定義權限群組，要加權限或刪除在此處修改。
      */
-    public function getGroupItemPermission()
+    public function getGroupItemPermission($lv = null)
     {
+        $newGroup = [];
         $groups = [
             [
                 'groupName' => '會員管理群組',
+                'allowLv' => [1, 2, 3, 4, 5],
                 'permissions' => $this->getMemberItem(),
             ],
             [
                 'groupName' => '商品管理群組',
+                'allowLv' => [1, 2, 3, 4],
                 'permissions' => $this->getProductItem(),
             ],
             [
                 'groupName' => '國家&運費設定',
+                'allowLv' => [1, 2, 3, 4],
                 'permissions' => $this->getCountryAndShippingFee(),
             ],
             [
                 'groupName' => '公司管理',
+                'allowLv' => [1, 2, 3, 4],
                 'permissions' => $this->getCompanyManage(),
             ],
             [
                 'groupName' => '系統管理群組',
+                'allowLv' => [1, 2, 3],
                 'permissions' => $this->getSystemItem(),
             ],
         ];
 
         foreach ($groups as $key => $group) {
             $groups[$key]['permissions'] = $this->changeActions($group['permissions']);
+            if ($lv) {
+                if (in_array($lv, $group['allowLv'])) {
+                    $newGroup[$key] =  $groups[$key];
+                }
+            } else {
+                $newGroup[$key] =  $groups[$key];
+            }
         }
 
-        return $groups;
+        return $newGroup;
     }
 
     /**
      * 取得所有權限
      */
-    public function getPermissions()
+    public function getPermissions($lv = null)
     {
-        $permList = $this->getGroupItemPermission();
+        $permList = $this->getGroupItemPermission($lv);
         $actions = collect($permList)->map(function ($item) {
             return $item['permissions'];
         })->flatten(1)
@@ -165,7 +187,7 @@ class PermissionService
             $details = collect($perm['actions'])->map(function ($act) use ($perm, $defineAction) {
                 return [
                     'label' => $defineAction[$act],
-                    'key' => $perm['groupKey'].'_'.$act,
+                    'key' => $perm['groupKey'] . '_' . $act,
                 ];
             })->all();
             $permList[$key]['actions'] = [];
