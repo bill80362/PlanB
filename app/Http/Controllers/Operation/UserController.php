@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -120,7 +121,7 @@ class UserController extends Controller
         });
         //差異比對，要移除的 = 原本打勾的 - 這次打勾的
         collect($DataPermission)->diff($PermissionArray)->map(function($item) use ($id){
-            Permission::where("perm_key",$item)->first()->delete();
+            Permission::where("perm_key",$item)->where("user_id",$id)->first()->delete();
         });
         //差異比對，要新增的 = 這次打勾的 - 原本打勾的
         $PermissionAdd = collect($PermissionArray)->diff($DataPermission)->map(function($item){
