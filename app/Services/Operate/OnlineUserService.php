@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Redis;
 
 class OnlineUserService
 {
+    public $enable = false;
     protected int $ttl = 15;
-
     protected $redis;
 
     public function __construct()
     {
+        if(!$this->enable) return;
         $this->ttl = env('ONLINE_TTL', 15); //存活時間(多久不操作算是離線)
         $this->redis = Redis::connection('online'); //使用config database的redis連線
     }
@@ -26,6 +27,7 @@ class OnlineUserService
      */
     public function setOnline(string $key, string $value)
     {
+        if(!$this->enable) return false;
         //上線設定
         return $this->redis->setEx($key, $this->ttl, $value);
     }
@@ -33,6 +35,7 @@ class OnlineUserService
     //取得線上人數
     public function getCount()
     {
+        if(!$this->enable) return false;
         return $this->redis->command('dbSize');
     }
 }

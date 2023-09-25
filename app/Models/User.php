@@ -89,13 +89,7 @@ class User extends Authenticatable implements Auditable
     /**
      * model的key-value對轉，考慮excel匯入匯出可以使用
      */
-    public static bool $useMutator = true;//是否使用資料變異器
-    //判斷匯入的時候，新增或是更新
-//    public function setUseMutator(bool $bool): static
-//    {
-//        $this->useMutator = $bool;
-//        return $this;
-//    }
+    public bool $useMutator = true;//是否使用資料變異器
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
@@ -103,8 +97,8 @@ class User extends Authenticatable implements Auditable
     protected function status(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => self::$useMutator?($this->statusText[$value]??$value):$value,
-            set: fn (string $value) => self::$useMutator?(array_flip($this->statusText)[$value]??$value):$value,
+            get: fn (string $value) => $this->useMutator?($this->statusText[$value]??$value):$value,
+            set: fn (string $value) => $this->useMutator?(array_flip($this->statusText)[$value]??$value):$value,
         );
     }
     /**

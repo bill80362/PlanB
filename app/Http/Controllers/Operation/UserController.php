@@ -164,6 +164,8 @@ class UserController extends Controller
      */
     public function import()
     {
+        //
+        $Column_Title_Text_Attach = $this->oModel->getTitleAttach();
         //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
         $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
         //根據第一列標題判斷對應的欄位
@@ -174,6 +176,10 @@ class UserController extends Controller
                 break;
             } //只跑第一行
             foreach ($Row as $index => $columnTitle) {
+                //先移除狀態說明尾部 ex: 【狀態Y.啟用,N.停用】，只能夠輪巡方式全部跑過一遍，將尾部移除
+                foreach ($Column_Title_Text_Attach as $value){
+                    $columnTitle = str_replace($value,"",$columnTitle);
+                }
                 //匯入資料欄位標題異常
                 if (!isset($value_to_key[$columnTitle])) {
                     return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
@@ -242,10 +248,11 @@ class UserController extends Controller
     public function export($Type)
     {
         //匯出的標題和內文
+        $useMutator = true;
         if($Type=="key"){
-            $this->oModel::$useMutator = false;
+            $useMutator = false;
         }
-        $ExportList = $this->oModel->filter($this->request->all())->export();
+        $ExportList = $this->oModel->filter($this->request->all())->export($useMutator);
 
         //匯出
         return (new Collection($ExportList))->downloadExcel('user_data_' . time() . '.xlsx');
