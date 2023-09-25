@@ -32,7 +32,9 @@ class AbcTest extends TestCase
             })
         );
 
-        $response = $this->getJson(action([OrderController::class, 'queryOrder']), []);
+        $response = $this->getJson(action([OrderController::class, 'queryOrder']), [
+            'token' => 'pass123'
+        ]);
         $response->assertStatus(200);
     }
 }

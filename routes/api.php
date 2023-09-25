@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/order-query', [\App\Http\Controllers\API\OrderController::class, 'queryOrder'])->name('queryOrder');
-// Route::middleware('auth:erp')->group(function () {
-//     Route::get('/order-query', [\App\Http\Controllers\API\OrderController::class, 'queryOrder'])->name('adminLogin');
-// });
+// Route::get('/order-query', [\App\Http\Controllers\API\OrderController::class, 'queryOrder'])->name('queryOrder');
+Route::middleware('auth:erp')->group(function () {
+    Route::get('/order-query', [\App\Http\Controllers\API\OrderController::class, 'queryOrder'])->name('queryOrder');
+});
