@@ -5,7 +5,7 @@ namespace App\Models;
 /**
  * 匯出
  */
-trait exportTrait
+trait ExportTrait
 {
     public function scopeExport($query)
     {

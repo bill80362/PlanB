@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Models\Permission\Permission;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,7 +17,7 @@ class User extends Authenticatable implements Auditable
     //操作紀錄
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable; //操作Log
-    use exportTrait; //匯出
+    use ExportTrait; //匯出
 
     /**
      * The attributes that are mass assignable.
