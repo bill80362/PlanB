@@ -1,12 +1,12 @@
 <?php
 
-namespace DummyNamespace;
+namespace {{ namespace }};
 
 use App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 
-class DummyClass
+class {{ class }}
 {
     public function __construct()
     {
