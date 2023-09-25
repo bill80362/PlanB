@@ -45,7 +45,7 @@ class MakeService extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/stubs/service.stub';
+        return base_path('stubs/service.stub');
     }
 
     /**
@@ -56,6 +56,6 @@ class MakeService extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return is_dir(app_path('Services')) ? $rootNamespace.'\\Services' : $rootNamespace;
+        return is_dir(app_path('Services')) ? $rootNamespace . '\\Services' : $rootNamespace;
     }
 }
