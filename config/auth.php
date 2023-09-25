@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web_front',
-        'passwords' => 'memberDatas',
+        'guard' => 'operate',
+        'passwords' => 'users',
     ],
 
     /*
@@ -41,10 +41,10 @@ return [
             'provider' => 'users',
         ],
 
-        'web_front' => [
-            'driver' => 'session',
-            'provider' => 'memberDatas',
-        ],
+        // 'web_front' => [
+        //     'driver' => 'session',
+        //     'provider' => 'memberDatas',
+        // ],
 
         'erp' => [
             'driver' => 'custom-token',
@@ -73,10 +73,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-//        'memberDatas' => [
-//            'driver' => 'eloquent',
-//            'model' => App\Models\Member\Member_Data::class,
-//        ],
+        // 'memberDatas' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Member\MemberData::class,  //尚未建立
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -111,12 +111,12 @@ return [
             'throttle' => 60,
         ],
 
-//        'memberDatas' => [
-//            'provider' => 'memberDatas',
-//            'table' => 'password_reset_tokens',
-//            'expire' => 60,
-//            'throttle' => 60,
-//        ],
+        //        'memberDatas' => [
+        //            'provider' => 'memberDatas',
+        //            'table' => 'password_reset_tokens',
+        //            'expire' => 60,
+        //            'throttle' => 60,
+        //        ],
     ],
 
     /*

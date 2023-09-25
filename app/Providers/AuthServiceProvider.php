@@ -43,9 +43,6 @@ class AuthServiceProvider extends ServiceProvider
             // return User::where('token', (string) $request->token)->first();
         });
 
-        // if (auth('operate')->check()) {
-
-        // }
         $actions = $permissionService->getPermissions();
         foreach ($actions as $action) {
             Gate::define($action['key'], function (User $user) use ($action) {

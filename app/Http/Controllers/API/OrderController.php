@@ -14,7 +14,7 @@ class OrderController extends Controller
     ) {
     }
 
-    public function queryOrder(Request $request)
+    public function queryOrder()
     {
         // $user = auth('erp')->user();
         $id = $this->request->query('id', 1);

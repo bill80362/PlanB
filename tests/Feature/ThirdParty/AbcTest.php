@@ -24,13 +24,10 @@ class AbcTest extends TestCase
                     ->with(1)  //應該要帶什麼參數
                     ->times(1) // 應該被執行幾次
                     ->andReturn([  // 模擬對方回傳
-                        "msg" => "test run...",
-                        "result" => [
-                            "userId" => 1,
-                            "id" => 1,
-                            "title" => 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-                            "body" => 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
-                        ]
+                        "userId" => 1,
+                        "id" => 1,
+                        "title" => 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+                        "body" => 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
                     ]);
             })
         );
