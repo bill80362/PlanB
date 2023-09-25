@@ -30,8 +30,9 @@
                                                 <option value="old_values" {{request()->get("filter_text_key")=="old_values"?"selected":""}}>{{__($Model->Column_Title_Text["old_values"])}}</option>
                                                 <option value="new_values" {{request()->get("filter_text_key")=="new_values"?"selected":""}}>{{__($Model->Column_Title_Text["new_values"])}}</option>
                                                 <option value="url" {{request()->get("filter_text_key")=="url"?"selected":""}}>{{__($Model->Column_Title_Text["url"])}}</option>
-                                                <option value="event" {{request()->get("filter_text_key")=="url"?"selected":""}}>{{__($Model->Column_Title_Text["event"])}}</option>
-                                                <option value="tags" {{request()->get("filter_text_key")=="url"?"selected":""}}>{{__($Model->Column_Title_Text["tags"])}}</option>
+                                                <option value="event" {{request()->get("filter_text_key")=="event"?"selected":""}}>{{__($Model->Column_Title_Text["event"])}}</option>
+                                                <option value="tags" {{request()->get("filter_text_key")=="tags"?"selected":""}}>{{__($Model->Column_Title_Text["tags"])}}</option>
+                                                <option value="version" {{request()->get("filter_text_key")=="version"?"selected":""}}>{{__($Model->Column_Title_Text["version"])}}</option>
                                             </select>
                                         </div>
                                         <input type="text" class="form-control" name="filter_text_value" value="{{request()->get("filter_text_value")}}">
