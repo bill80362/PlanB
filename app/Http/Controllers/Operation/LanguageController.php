@@ -34,9 +34,11 @@ class LanguageController extends Controller
 
     public function updateHTML($id)
     {
+        $urlMaps = [];
         if ($id) {
             //修改
             $Data = $this->oModel->findOrFail($id);
+            $urlMaps = $Data->langUrlMaps()->get()->toArray();
             foreach ($Data->getOtherLangs() as $key => $value) {
                 $this->oModel->firstOrCreate([
                     'text' => $Data->text,
@@ -72,11 +74,13 @@ class LanguageController extends Controller
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array) $this->request->old() as $key => $value) {
-            if (! $value) {
+            if (!$value) {
                 continue;
             }
             $Data->$key = $value;
         }
+
+
 
         //View
         return view('operate/pages/language/update', [
@@ -85,6 +89,7 @@ class LanguageController extends Controller
             'LangTypeText' => $this->oModel->langTypeText,
             'OtherLangTypeText' => $Data->getOtherLangs(),
             'Model' => $this->oModel,
+            'UrlMaps' => $urlMaps
         ]);
     }
 
@@ -145,11 +150,11 @@ class LanguageController extends Controller
         $this->makeFile();
 
         //
-        return redirect("/operate/language?".$this->request->getQueryString())->with(['success' => '送出成功']);
-//        return view('alert_redirect', [
-//            'Alert' => __('送出成功'),
-//            'Redirect' => '/operate/language?'.$this->request->getQueryString(),
-//        ]);
+        return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '送出成功']);
+        //        return view('alert_redirect', [
+        //            'Alert' => __('送出成功'),
+        //            'Redirect' => '/operate/language?'.$this->request->getQueryString(),
+        //        ]);
     }
 
     //批次刪除
@@ -161,11 +166,11 @@ class LanguageController extends Controller
         }
 
         //
-        return redirect("/operate/language?".$this->request->getQueryString())->with(['success' => '刪除成功']);
-//        return view('alert_redirect', [
-//            'Alert' => '刪除成功',
-//            'Redirect' => route('language_list').'?'.$this->request->getQueryString(),
-//        ]);
+        return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '刪除成功']);
+        //        return view('alert_redirect', [
+        //            'Alert' => '刪除成功',
+        //            'Redirect' => route('language_list').'?'.$this->request->getQueryString(),
+        //        ]);
     }
 
     /**
@@ -182,12 +187,12 @@ class LanguageController extends Controller
             } //只跑第一行
             foreach ($Row as $index => $columnTitle) {
                 //匯入資料欄位標題異常
-                if (! isset($value_to_key[$columnTitle])) {
-                    return redirect("/operate/language?".$this->request->getQueryString())->with(['error' => '匯入標題異常']);
-//                    return view('alert_redirect', [
-//                        'Alert' => __('匯入標題異常'),
-//                        'Redirect' => '/operate/language?'.$this->request->getQueryString(),
-//                    ]);
+                if (!isset($value_to_key[$columnTitle])) {
+                    return redirect("/operate/language?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
+                    //                    return view('alert_redirect', [
+                    //                        'Alert' => __('匯入標題異常'),
+                    //                        'Redirect' => '/operate/language?'.$this->request->getQueryString(),
+                    //                    ]);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
@@ -211,7 +216,7 @@ class LanguageController extends Controller
             }
             //整理要更新的資料
             $DataModel = $this->oModel->importPrimary($UpdateData)->first();
-            if (! $DataModel) {
+            if (!$DataModel) {
                 $DataModel = clone $this->oModel; //沒有對應的資料，init一個
             }
             foreach ($UpdateData as $ColumnTitle => $value) {
@@ -226,7 +231,7 @@ class LanguageController extends Controller
             //驗證有誤
             if ($validator->fails()) {
                 //
-                $AllMessage[] = "第{$RowKey}列:".implode(',', $validator->messages()->all());
+                $AllMessage[] = "第{$RowKey}列:" . implode(',', $validator->messages()->all());
 
                 //
                 continue;
@@ -239,11 +244,11 @@ class LanguageController extends Controller
         }
 
         //
-        return redirect("/operate/language?".$this->request->getQueryString())->with(['success' => '送出成功']);
-//        return view('alert_redirect', [
-//            'Alert' => __('送出成功'),
-//            'Redirect' => '/operate/language?'.$this->request->getQueryString(),
-//        ]);
+        return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '送出成功']);
+        //        return view('alert_redirect', [
+        //            'Alert' => __('送出成功'),
+        //            'Redirect' => '/operate/language?'.$this->request->getQueryString(),
+        //        ]);
     }
 
     //匯出
@@ -253,7 +258,7 @@ class LanguageController extends Controller
         $ExportList = $this->oModel->filter($this->request->all())->export();
 
         //匯出
-        return (new Collection($ExportList))->downloadExcel('language_data_'.time().'.xlsx');
+        return (new Collection($ExportList))->downloadExcel('language_data_' . time() . '.xlsx');
     }
 
     /**
@@ -267,7 +272,7 @@ class LanguageController extends Controller
                 ->mapWithKeys(function ($item) {
                     return [$item['text'] => $item['tran_text']];
                 })->all();
-            $filePath = lang_path($langType.'.json');
+            $filePath = lang_path($langType . '.json');
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             $fp = fopen($filePath, 'w');
             fwrite($fp, $jsonString);

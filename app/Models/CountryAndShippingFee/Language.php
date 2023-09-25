@@ -22,12 +22,22 @@ class Language extends Model
         // 'updated' => '',
     ];
 
+    /**
+     * 資料表關聯設定
+     */
+    public function langUrlMaps()
+    {
+        return $this->hasMany(LangUrlMap::class, 'language_key', 'text');
+    }
+
     public array $Column_Title_Text = [
         'id' => '編號',
         'lang_type' => '語系',
         'text' => '名稱',
         'tran_text' => '翻譯後名稱',
         'memo' => '備註',
+        'created_at' => '建置日期',
+        'updated_at' => '修改時間',
     ];
 
     public function getOtherLangs()
@@ -48,6 +58,11 @@ class Language extends Model
         'zh-cn' => '簡體中文',
         'en' => '英文',
         // "jp" => "日文",
+    ];
+
+    public array $isChangeText = [
+        'Y' => '是',
+        'N' => '否',
     ];
 
     public function getCode()
@@ -86,10 +101,29 @@ class Language extends Model
         if (isset($Data['filter_lang_type'])) {
             $query->whereIn('lang_type', (array) $Data['filter_lang_type']);
         }
+
+        if (isset($Data['filter_is_change'])) {
+            $isChanges = (array)$Data['filter_is_change'];
+            $query->where(function ($subQuery) use ($isChanges) {
+                foreach ($isChanges as $isChange) {
+                    if ($isChange == 'Y') {
+                        $subQuery->orWhereColumn('text', '!=', 'tran_text');
+                    } else {
+                        $subQuery->orWhereColumn('text',  'tran_text');
+                    }
+                }
+            });
+        }
+
         //過濾文字條件
-        // dd($Data);
         if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
+            if ($Data['filter_text_key'] == 'lang_url_map') {
+                $query->whereHas('langUrlMaps', function ($subQuery) use ($Data) {
+                    $subQuery->where('url', 'like', '%' . $Data['filter_text_value'] . '%');
+                });
+            } else {
+                $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
+            }
         }
         //排序
         if (isset($Data['order_by'])) {

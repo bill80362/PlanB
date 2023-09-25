@@ -51,6 +51,20 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>{{ __('是否已修改') }}</label>
+                                        <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
+                                            style="width: 100%;">
+                                            @foreach ($Model->isChangeText as $key => $value)
+                                                <option value="{{ $key }}"
+                                                    {{ in_array($key, (array) request()->get('filter_is_change')) ? 'selected' : '' }}>
+                                                    {{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -71,6 +85,9 @@
                                                     <option value="memo"
                                                         {{ request()->get('filter_text_key') == 'memo' ? 'selected' : '' }}>
                                                         {{ __('備註') }}</option>
+                                                    <option value="lang_url_map"
+                                                        {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
+                                                        {{ __('相關網址') }}</option>
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" name="filter_text_value"
@@ -129,6 +146,10 @@
                                         <th>{{ __($Model->Column_Title_Text['text']) }}</th>
                                         <th>{{ __($Model->Column_Title_Text['tran_text']) }}</th>
                                         <th>{{ __($Model->Column_Title_Text['lang_type']) }}</th>
+                                        <th>{{ __('是否已修改') }}</th>
+                                        <th>{{ __($Model->Column_Title_Text['updated_at']) }}</th>
+                                        <th>{{ __($Model->Column_Title_Text['created_at']) }}</th>
+
                                         <th>{{ __('操作') }}</th>
                                     </tr>
                                 </thead>
@@ -143,8 +164,14 @@
                                                 </td>
                                                 <td>{{ $Item->text }}</td>
                                                 <td>{{ $Item->tran_text }}</td>
+
+
                                                 <td>{{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
                                                 </td>
+                                                <td>{{ $Item->text == $Item->tran_text ? 'Ⅹ' : '√' }}</td>
+                                                <td>{{ $Item->updated_at }}</td>
+                                                <td>{{ $Item->created_at }}</td>
+
                                                 <td>
                                                     @can('language_update')
                                                         <a class="btn btn-sm btn-primary"
