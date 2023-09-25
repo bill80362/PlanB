@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Operation;
 use App\Events\Operate\UserEditEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Permission\Permission;
+use App\Models\Permission\PermissionGroup;
 use App\Models\User;
 use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
@@ -12,7 +13,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -70,11 +70,14 @@ class UserController extends Controller
             ]);
         }
 
+        $permissionGroups = PermissionGroup::where('show_flag', 'Y')->with(['permissionGrouopItems'])
+            ->get()->toArray();
         //View
         return view('operate/pages/user/update', [
             'Data' => $Data,
             'DataPermission' => $DataPermission,
             'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
+            'PermissionGroups' => $permissionGroups
         ]);
     }
 
