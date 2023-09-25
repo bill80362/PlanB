@@ -188,10 +188,6 @@ class AuditController extends Controller
                 //匯入資料欄位標題異常
                 if (! isset($value_to_key[$columnTitle])) {
                     return redirect("/operate/audit?".$this->request->getQueryString())->with(['error' => '匯入標題異常']);
-//                    return view('alert_redirect', [
-//                        'Alert' => __('匯入標題異常'),
-//                        'Redirect' => '/operate/audit?'.$this->request->getQueryString(),
-//                    ]);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
