@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Operation;
 use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,52 +31,55 @@ Route::prefix('/operate')->middleware(['lang', 'log.request', 'log.response'])->
             Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->middleware(['can:user_read']);
         });
 
+        Route::group([
+            'prefix' => 'permission_group',
+            'as' => 'permission_group_',
+        ], function () {
+            Route::get('/', [Operation\PermissionGroupController::class, 'listHTML'])->name('list')->middleware(['can:user_read']);
+            Route::get('/{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->middleware(['can:user_read']);
+            Route::post('/{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->middleware(['can:user_update']);
+            Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
+            Route::get('/export', [Operation\PermissionGroupController::class, 'export'])->name('export')->middleware(['can:user_export']);
+            Route::post('/import', [Operation\PermissionGroupController::class, 'import'])->name('import')->middleware(['can:user_import']);
+        });
+
         //系統設定
-        Route::get('/system', [\App\Http\Controllers\Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->middleware(['can:system_update']);
-        Route::post('/system', [\App\Http\Controllers\Operation\SystemController::class, 'update'])->name('system_update')->middleware(['can:system_update']);
-        Route::post('/delete/image', [\App\Http\Controllers\Operation\SystemController::class, 'deleteImage'])->name('system_delete_image')->middleware(['can:system_update']);
+        Route::get('/system', [Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->middleware(['can:system_update']);
+        Route::post('/system', [Operation\SystemController::class, 'update'])->name('system_update')->middleware(['can:system_update']);
+        Route::post('/delete/image', [Operation\SystemController::class, 'deleteImage'])->name('system_delete_image')->middleware(['can:system_update']);
 
-        Route::get('/http_log', [\App\Http\Controllers\Operation\HttpLogController::class, 'listHTML'])->name('http_log_list');
-        Route::get('/http_log/{id}', [\App\Http\Controllers\Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
-
-        //管理員
-        //        Route::get('/user', [\App\Http\Controllers\Operation\UserController::class, "listHTML"])->name("user_list");
-        //        Route::get('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "updateHTML"])->whereNumber("id")->name("user_update_html");
-        //        Route::post('/user/{id}', [\App\Http\Controllers\Operation\UserController::class, "update"])->whereNumber("id")->name("user_update");
-        //        Route::post('/user/del', [\App\Http\Controllers\Operation\UserController::class, "delBatch"])->name("user_del");
-        //        Route::get('/user/export', [\App\Http\Controllers\Operation\UserController::class, 'export'])->name("user_export");
-        //        Route::post('/user/import', [\App\Http\Controllers\Operation\UserController::class, 'import'])->name("user_import");
-        //        Route::get('/user/{id}/audit', [\App\Http\Controllers\Operation\UserController::class, 'audit'])->whereNumber("id")->name("user_audit");
+        Route::get('/http_log', [Operation\HttpLogController::class, 'listHTML'])->name('http_log_list');
+        Route::get('/http_log/{id}', [Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
 
         //操作紀錄
-        Route::get('/audit', [\App\Http\Controllers\Operation\AuditController::class, 'listHTML'])->name('audit_list');
-        Route::get('/audit/{id}', [\App\Http\Controllers\Operation\AuditController::class, 'updateHTML'])->whereNumber('id')->name('audit_update_html');
-        Route::post('/audit/{id}', [\App\Http\Controllers\Operation\AuditController::class, 'update'])->whereNumber('id')->name('audit_update');
-        Route::post('/audit/del', [\App\Http\Controllers\Operation\AuditController::class, 'delBatch'])->name('audit_del');
-        Route::get('/audit/export', [\App\Http\Controllers\Operation\AuditController::class, 'export'])->name('audit_export');
-        Route::post('/audit/import', [\App\Http\Controllers\Operation\AuditController::class, 'import'])->name('audit_import');
+        Route::get('/audit', [Operation\AuditController::class, 'listHTML'])->name('audit_list');
+        Route::get('/audit/{id}', [Operation\AuditController::class, 'updateHTML'])->whereNumber('id')->name('audit_update_html');
+        Route::post('/audit/{id}', [Operation\AuditController::class, 'update'])->whereNumber('id')->name('audit_update');
+        Route::post('/audit/del', [Operation\AuditController::class, 'delBatch'])->name('audit_del');
+        Route::get('/audit/export', [Operation\AuditController::class, 'export'])->name('audit_export');
+        Route::post('/audit/import', [Operation\AuditController::class, 'import'])->name('audit_import');
 
         //語系
-        Route::get('/language', [\App\Http\Controllers\Operation\LanguageController::class, 'listHTML'])->name('language_list')
+        Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')
             ->middleware(['can:language_read']);
-        Route::get('/language/{id}', [\App\Http\Controllers\Operation\LanguageController::class, 'updateHTML'])->whereNumber('id')
+        Route::get('/language/{id}', [Operation\LanguageController::class, 'updateHTML'])->whereNumber('id')
             ->name('language_update_html')->middleware(['can:language_read']);
-        Route::post('/language/{id}', [\App\Http\Controllers\Operation\LanguageController::class, 'update'])
+        Route::post('/language/{id}', [Operation\LanguageController::class, 'update'])
             ->whereNumber('id')->name('language_update')->middleware(['can:language_update']);
-        Route::post('/language/del', [\App\Http\Controllers\Operation\LanguageController::class, 'delBatch'])
+        Route::post('/language/del', [Operation\LanguageController::class, 'delBatch'])
             ->name('language_del')->middleware(['can:language_delete']);
-        Route::get('/language/export', [\App\Http\Controllers\Operation\LanguageController::class, 'export'])
+        Route::get('/language/export', [Operation\LanguageController::class, 'export'])
             ->name('language_export');
-        Route::post('/language/import', [\App\Http\Controllers\Operation\LanguageController::class, 'import'])->name('language_import');
-        Route::post('/language/make_file', [\App\Http\Controllers\Operation\LanguageController::class, 'makeFile'])->name('language_makeFile');
+        Route::post('/language/import', [Operation\LanguageController::class, 'import'])->name('language_import');
+        Route::post('/language/make_file', [Operation\LanguageController::class, 'makeFile'])->name('language_makeFile');
 
         //公司管理
-        Route::get('/company_manage/{key}', [\App\Http\Controllers\Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement')
+        Route::get('/company_manage/{key}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement')
             ->middleware([]);
-        Route::post('/company_manage/{key}', [\App\Http\Controllers\Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement')
+        Route::post('/company_manage/{key}', [Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement')
             ->middleware([]);
 
-        Route::post('/upload_image', [\App\Http\Controllers\Operation\FileController::class, 'uploadImage'])
+        Route::post('/upload_image', [Operation\FileController::class, 'uploadImage'])
             ->name('upload_file');
     });
 });
