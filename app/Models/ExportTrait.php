@@ -9,16 +9,15 @@ trait ExportTrait
 {
     public function scopeExport($query,$useMutator=true)
     {
+        //
+        $Column_Title_Text_Attach = $this->getTitleAttach();
         //整理匯出資料
         $ExportList = [];
         //要匯出的欄位
         $Column_Title_Text = $this->Column_Title_Text;
         //
         foreach ($this->Column_Title_Text as $key => $value){
-            if( property_exists($this,$key."Text") ){
-                $Title_Tail = collect($this->{$key."Text"})->map(fn($value,$key) => ($key.".".$value))->implode(",");
-                $Column_Title_Text[$key] .= $Title_Tail;
-            }
+            $Column_Title_Text[$key] .= $Column_Title_Text_Attach[$key]??"";
         }
         //放入標題
         $ExportList[] = array_values($Column_Title_Text);
@@ -34,22 +33,25 @@ trait ExportTrait
 //                    $model->$key = $this->statusText[$model->$key];
 //                }
                 //放入標題對應的資料
-                $Temp[] = $model->$key ?? '';
+                $Text = $model->$key ?? '';
+                //經過語系
+                $Temp[] = __($Text);
             }
             //放入前先經過語系
             $ExportList[] = $Temp;
-//            $ExportList[] = __($Temp);
         }
 
         //
         return $ExportList;
     }
 
+    //匯入匯出的標題參數尾部 ex: 【狀態Y.啟用,N.停用】 "Y.啟用,N.停用"
     public function getTitleAttach(){
         $Column_Title_Text_Attach = [];
         foreach ($this->Column_Title_Text as $key => $value){
             if( property_exists($this,$key."Text") ){
-                $Title_Tail = collect($this->{$key."Text"})->map(fn($value,$key) => ($key.".".$value))->implode(",");
+                //要經過語系
+                $Title_Tail = collect($this->{$key."Text"})->map(fn($Text,$key) => ($key.".".__($Text)))->implode(",");
                 $Column_Title_Text_Attach[$key] = $Title_Tail;
             }
         }

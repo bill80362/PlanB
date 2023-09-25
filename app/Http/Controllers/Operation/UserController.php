@@ -183,6 +183,8 @@ class UserController extends Controller
                 foreach ($Column_Title_Text_Attach as $value){
                     $columnTitle = str_replace($value,"",$columnTitle);
                 }
+                //經過語系
+                $columnTitle = __($columnTitle);
                 //匯入資料欄位標題異常
                 if (!isset($value_to_key[$columnTitle])) {
                     return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
@@ -203,7 +205,7 @@ class UserController extends Controller
             foreach ($Row as $index => $columnValue) {
                 //特殊處理欄位
                 if ($excelIndex[$index] == 'password') {
-                    $this->oModel->newPassword = $columnValue;
+                    $this->oModel->newPassword = (string)$columnValue;
                     $UpdateData[$excelIndex[$index]] = Hash::make($columnValue);
 //                } elseif ($excelIndex[$index] == 'status') {
 //                    $UpdateData[$excelIndex[$index]] = array_flip($this->oModel->statusText)[$columnValue];
@@ -220,6 +222,7 @@ class UserController extends Controller
                 if ($ColumnTitle == 'password') {
                     $DataModel->newPassword = $value;
                 }
+                //經過語系
                 $DataModel->$ColumnTitle = $value;
             }
             //驗證資料
