@@ -52,7 +52,7 @@ class SystemController extends Controller
                 //新增
                 $this->oModel->create([
                     'id' => $id,
-                    'content' => $content,
+                    'content' => $content??"",
                 ]);
             } elseif ($Model->content !== $content) {
                 //修改
@@ -64,10 +64,11 @@ class SystemController extends Controller
         }
 
         //
-        return view('alert_redirect', [
-            'Alert' => __('送出成功'),
-            'Redirect' => '/operate/system',
-        ]);
+        return redirect("/operate/system")->with(['success' => '送出成功']);
+//        return view('alert_redirect', [
+//            'Alert' => __('送出成功'),
+//            'Redirect' => '/operate/system',
+//        ]);
     }
 
     public function deleteImage()
@@ -82,9 +83,10 @@ class SystemController extends Controller
         }
 
         //
-        return view('alert_redirect', [
-            'Alert' => __('送出成功'),
-            'Redirect' => '/operate/system',
-        ]);
+        return redirect("/operate/system")->with(['success' => '送出成功']);
+//        return view('alert_redirect', [
+//            'Alert' => __('送出成功'),
+//            'Redirect' => '/operate/system',
+//        ]);
     }
 }
