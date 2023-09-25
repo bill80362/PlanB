@@ -98,7 +98,7 @@
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <div>{{ __('使用頁面網址') }}</div>
+                                                <div>{{ __('相關網址') }}</div>
                                             </div>
                                         </div>
                                         <div class="card-body">
