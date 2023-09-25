@@ -112,7 +112,8 @@ class UserController extends Controller
         $PermissionArray = collect($this->request->only($allPermissionsKey->toArray()))->map(function ($item, $key) {
             return new Permission(['perm_key' => $key]);
         });
-        $this->oModel->find($id)->permissions()->saveMany($PermissionArray);
+        $this->oModel->find($id)->permissions()->delete();//先刪除舊的
+        $this->oModel->find($id)->permissions()->saveMany($PermissionArray);//再重新放入
         //寄發郵件通知使用者資料變更訊息
         UserEditEvent::dispatch($this->oModel->find($id)->toArray());
 
