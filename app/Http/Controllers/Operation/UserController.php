@@ -199,8 +199,8 @@ class UserController extends Controller
                 if ($excelIndex[$index] == 'password') {
                     $this->oModel->newPassword = $columnValue;
                     $UpdateData[$excelIndex[$index]] = Hash::make($columnValue);
-                } elseif ($excelIndex[$index] == 'status') {
-                    $UpdateData[$excelIndex[$index]] = array_flip($this->oModel->statusText)[$columnValue];
+//                } elseif ($excelIndex[$index] == 'status') {
+//                    $UpdateData[$excelIndex[$index]] = array_flip($this->oModel->statusText)[$columnValue];
                 } else {
                     $UpdateData[$excelIndex[$index]] = $columnValue;
                 }
@@ -242,9 +242,12 @@ class UserController extends Controller
     }
 
     //匯出
-    public function export()
+    public function export($Type)
     {
         //匯出的標題和內文
+        if($Type=="key"){
+            $this->oModel::$useMutator = false;
+        }
         $ExportList = $this->oModel->filter($this->request->all())->export();
 
         //匯出

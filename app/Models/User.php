@@ -39,6 +39,14 @@ class User extends Authenticatable implements Auditable
     //更新密碼 新密碼
     public String $newPassword = '';
 
+    public array $lvText = [
+        1 => '超級使用者',
+        2 => '工程師',
+        3 => 'PM',
+        4 => '網址管理者',
+        5 => '使用者',
+    ];
+
     /**
      * Audit外掛 標記Tag 多筆資料逗號分隔
      */
@@ -81,24 +89,22 @@ class User extends Authenticatable implements Auditable
     /**
      * model的key-value對轉，考慮excel匯入匯出可以使用
      */
+    public static bool $useMutator = true;//是否使用資料變異器
+    //判斷匯入的時候，新增或是更新
+//    public function setUseMutator(bool $bool): static
+//    {
+//        $this->useMutator = $bool;
+//        return $this;
+//    }
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
     ];
-
-    public array $lvText = [
-        1 => '超級使用者',
-        2 => '工程師',
-        3 => 'PM',
-        4 => '網址管理者',
-        5 => '使用者',
-    ];
-
     protected function status(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $this->statusText[$value] ?? $value,
-            set: fn (string $value) => array_flip($this->statusText)[$value] ?? $value,
+            get: fn (string $value) => self::$useMutator?($this->statusText[$value]??$value):$value,
+            set: fn (string $value) => self::$useMutator?(array_flip($this->statusText)[$value]??$value):$value,
         );
     }
     /**
@@ -112,10 +118,7 @@ class User extends Authenticatable implements Auditable
             'email' => 'required|email',
         ];
     }
-    public function getValidatorMessage()
-    {
-        return [];
-    }
+    public function getValidatorMessage(){return [];}
     //
     public function scopeFilter($query, array $Data)
     {
@@ -125,7 +128,7 @@ class User extends Authenticatable implements Auditable
         }
         //過濾文字條件
         if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
+            $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
         }
         //排序
         if (isset($Data['order_by'])) {
