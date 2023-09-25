@@ -64,7 +64,7 @@ class UserTest extends TestCase
         $checkUser = User::whereId($model->id)->first();
 
         $permission = Permission::where('perm_key', 'memberLevel_read')->where('user_id', $model->id)->first();
-        $response->assertStatus(200);
+        $response->assertStatus(302);
         $this->assertSame($name, $checkUser->name, '名字更新失敗'); //驗證姓名是否有正確寫入資料庫
         $this->assertNotNull($permission, '權限沒有被加上');
     }
@@ -88,7 +88,7 @@ class UserTest extends TestCase
         ]);
 
         $permission = Permission::where('perm_key', 'memberLevel_read')->where('user_id', $model->id)->first();
-        $response->assertStatus(200);
+        $response->assertStatus(302);
         $this->assertNull($permission, '權限沒有被移除');
     }
 
@@ -110,7 +110,7 @@ class UserTest extends TestCase
     {
         $model = User::where('id', '!=', 1)->first();
         $response = $this->post('/operate/user/del', ['id_array' => [$model->id]]);
-        $response->assertStatus(200);
+        $response->assertStatus(302);
 
         $this->assertModelMissing($model);
     }
