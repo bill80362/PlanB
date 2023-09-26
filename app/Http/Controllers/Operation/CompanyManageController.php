@@ -7,6 +7,7 @@ use App\Models\CompanyManage\PageContent;
 use App\Models\CountryAndShippingFee\Language;
 use App\Services\Operate\PageContentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CompanyManageController extends Controller
 {
@@ -20,11 +21,12 @@ class CompanyManageController extends Controller
     public function pageContentHtml($key)
     {
         $check = $this->pageContentService->checkKey($key);
+        $permKey = Str::of($key)->camel();
         if (! $check) {
             return abort(404);
         }
 
-        if (! auth('operate')->user()->can($key.'_read')) {
+        if (! auth('operate')->user()->can($permKey.'_read')) {
             return abort(403);
         }
 
@@ -43,7 +45,7 @@ class CompanyManageController extends Controller
         return view('operate/pages/company_manage/page_content', [
             'langTypeText' => $language->langTypeText,
             'datas' => $datas,
-            'key' => $key,
+            'key' => $permKey,
         ]);
     }
 
@@ -54,7 +56,8 @@ class CompanyManageController extends Controller
             return abort(404);
         }
 
-        if (! auth('operate')->user()->can($key.'_update')) {
+        $permKey = Str::of($key)->camel();
+        if (! auth('operate')->user()->can($permKey.'_update')) {
             return abort(403);
         }
 

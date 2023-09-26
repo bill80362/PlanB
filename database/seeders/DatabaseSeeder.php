@@ -61,12 +61,12 @@ class DatabaseSeeder extends Seeder
             'perm_key' => 'user_delete',
         ]);
 
-        PageContent::firstOrCreate([
-            'key' => 'privacyStatement',
-        ], [
-            'lang_type' => '1',
-            'page_name' => '隱私權聲明',
-        ]);
+        // PageContent::firstOrCreate([
+        //     'key' => 'privacyStatement',
+        // ], [
+        //     'lang_type' => '1',
+        //     'page_name' => '隱私權聲明',
+        // ]);
 
         // Permission::create([
         //     'user_id' => 1,
