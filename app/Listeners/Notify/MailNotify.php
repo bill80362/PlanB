@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Services\Notify\MailService;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class MailNotify
 {
@@ -26,14 +27,21 @@ class MailNotify
     {
         try {
 
-            if (!($event->mailData && is_array($event->mailData) && count($event->mailData) > 0)) {
+            $validator = Validator::make((array)$event, [
+                'mailData.mailKey' => ['string', 'required'],
+                'mailData.values' => ['array'],
+                'mailData.fromMail' => ['email', 'required'],
+                'mailData.userMail' => ['email', 'required'],
+            ]);
+
+            if ($validator->fails()) {
                 throw new Exception("格式錯誤");
             }
 
             $this->mailService->send(
                 $event->mailData['mailKey'],
                 $event->mailData['values'],
-                'sender_address@gmail.com',  // 需從configService取出設定
+                $event->mailData['fromMail'],  // 需從configService取出設定
                 $event->mailData['userMail']
             );
         } catch (Exception $e) {

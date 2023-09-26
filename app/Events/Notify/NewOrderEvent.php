@@ -27,14 +27,15 @@ class NewOrderEvent
         $this->mailData = [
             'mailKey' => 'new_order',
             'userMail' => $Data['mail'],
+            'fromMail' => $Data['fromMail'],
             'values' => [
                 'price' => $Data['price'],
-                'orderNum' => $Data['order_num'],
+                'orderNum' => $Data['orderNum'],
             ]
         ];
 
         $this->lineNotifyData = [
-            'message' => '通知訊息寫這裡'
+            'message' => $Data['lineNotifyMessage']
         ];
 
         // $this->smsData = [

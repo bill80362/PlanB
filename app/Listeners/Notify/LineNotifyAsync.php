@@ -8,6 +8,7 @@ use App\Services\Notify\LineNotifyService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
+use Illuminate\Support\Facades\Validator;
 
 class LineNotifyAsync implements ShouldQueue
 {
@@ -28,10 +29,14 @@ class LineNotifyAsync implements ShouldQueue
      */
     public function handle(object $event): void
     {
-        if (!($event->lineNotifyData && is_array($event->lineNotifyData) && count($event->lineNotifyData) > 0)) {
+        $validator = Validator::make((array)$event, [
+            'lineNotifyData.message' => ['string', 'required'],
+        ]);
+
+        if ($validator->fails()) {
             throw new Exception("格式錯誤");
         }
-        
+
         /**
          * @todo line notify 串接               
          */

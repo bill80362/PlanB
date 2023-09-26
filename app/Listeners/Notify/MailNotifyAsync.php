@@ -8,6 +8,7 @@ use App\Services\Notify\MailService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
+use Illuminate\Support\Facades\Validator;
 
 class MailNotifyAsync implements ShouldQueue
 {
@@ -28,7 +29,14 @@ class MailNotifyAsync implements ShouldQueue
      */
     public function handle(object $event): void
     {
-        if (!($event->mailData && is_array($event->mailData) && count($event->mailData) > 0)) {
+        $validator = Validator::make((array)$event, [
+            'mailData.mailKey' => ['string', 'required'],
+            'mailData.values' => ['array'],
+            'mailData.fromMail' => ['mail', 'required'],
+            'mailData.userMail' => ['mail', 'required'],
+        ]);
+
+        if ($validator->fails()) {
             throw new Exception("格式錯誤");
         }
         // $this->mailService->send(
