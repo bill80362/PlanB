@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         //後台權限控管
         'OperateLoginAuth' => \App\Http\Middleware\OperateLoginAuth::class,
+        //
         'lang' => \App\Http\Middleware\Language::class,
         //
         'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,

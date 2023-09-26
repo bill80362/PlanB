@@ -23,6 +23,7 @@ class Language
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //覆寫 __(語系文字) 功能 需要寫入DB
         app()->extend('translator', function ($command, $app) {
             $loader = $app['translation.loader'];
             $locale = $app->getLocale();
