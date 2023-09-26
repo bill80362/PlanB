@@ -130,7 +130,7 @@ class User extends Authenticatable implements Auditable
     {
         return [
             'name' => ['required', Rule::unique(User::class, 'name')->ignore($id)],
-            'password' => $this->newPassword ? 'required' : '',
+            'password' => (!$id || $this->newPassword) ? 'required' : '',//新增或是更新有密碼，就是必填
             'email' => ['required', 'email', Rule::unique(User::class, 'email')->ignore($id)],
             'status' => [Rule::in(['Y', 'N'])],
         ];
