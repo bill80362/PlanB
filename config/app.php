@@ -74,7 +74,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Locale Configuration
+    | Application Locale Configuration 預設語系從這邊切換
     |--------------------------------------------------------------------------
     |
     | The application locale determines the default locale that will be used
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'zh-tw',
+    'locale' => 'zh-tw',//預設語系從這邊切換 zh-tw、en
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +96,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'en',//這是備用語系，請設定locale即可
 
     /*
     |--------------------------------------------------------------------------

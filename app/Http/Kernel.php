@@ -66,13 +66,14 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         //後台權限控管
         'OperateLoginAuth' => \App\Http\Middleware\OperateLoginAuth::class,
-        //
-        'lang' => \App\Http\Middleware\Language::class,
-        //
+        //覆寫語系轉換function
+        'lang.extend' => \App\Http\Middleware\LanguageExtend::class,
+        //語系強制導轉
         'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
+        //線上人數統計工具
         'online.user' => \App\Http\Middleware\OnlineUser::class,
         //紀錄Log
-        'log.request' => \App\Http\Middleware\LogRequestInfo::class,
-        'log.response' => \App\Http\Middleware\LogResponseInfo::class,
+        'log.request' => \App\Http\Middleware\LogRequestInfo::class,//紀錄request
+        'log.response' => \App\Http\Middleware\LogResponseInfo::class,//紀錄response
     ];
 }
