@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Services\Operate\SystemConfigService;
 
-class Language
+class LanguageExtend
 {
 
     public function __construct(
