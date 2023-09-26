@@ -130,9 +130,9 @@ class User extends Authenticatable implements Auditable
     public function getValidatorRules($id)
     {
         return [
-            'name' => ['required', Rule::unique(User::class)->ignore($id)],
+            'name' => ['required', Rule::unique(User::class, 'name')->ignore($id)],
             'password' => $this->newPassword ? 'required' : '',
-            'email' => "required|email|unique:App\Models\User,email,{$id}",
+            'email' => ['required', 'email', Rule::unique(User::class, 'email')->ignore($id)],
         ];
     }
     public function getValidatorMessage()
