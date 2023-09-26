@@ -4,10 +4,12 @@ namespace App\Models\CountryAndShippingFee;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ExportImportTrait;
 
 class Language extends Model
 {
     use HasFactory;
+    use ExportImportTrait; //匯出
 
     public $incrementing = true;
 
@@ -156,6 +158,7 @@ class Language extends Model
         //
         return $ExportList;
     }
+
 
     //判斷匯入的時候，新增或是更新
     public function scopeImportPrimary($query, array $UpdateData)
