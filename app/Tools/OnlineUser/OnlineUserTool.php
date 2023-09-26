@@ -2,6 +2,7 @@
 
 namespace App\Tools\OnlineUser;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class OnlineUserTool
@@ -15,6 +16,7 @@ class OnlineUserTool
         try{
             $this->redis = Redis::connection('online'); //使用config database的redis連線
         }catch(\Exception $e){
+            Log::channel('daily')->error($e->getMessage());
             $this->redis = false;
         }
 
@@ -28,7 +30,7 @@ class OnlineUserTool
      * @param $value string
      * @return bool
      */
-    public function setOnline(string $key, string $value)
+    public function setOnline(string $key, string $value): bool
     {
         if(!$this->redis) return false;
         //上線設定
@@ -40,5 +42,11 @@ class OnlineUserTool
     {
         if(!$this->redis) return 0;
         return $this->redis->command('dbSize');
+    }
+
+    public function viewCounter(){
+        return view("tools.online_user.counter",[
+            "Count" => $this->getCount(),
+        ]);
     }
 }
