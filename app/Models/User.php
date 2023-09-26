@@ -69,7 +69,18 @@ class User extends Authenticatable implements Auditable
         'email' => 'Email',
         'password' => '密碼',
         'status' => '狀態',
-
+    ];
+    /**
+     * 匯入匯出的欄位，
+     * 1.請注意匯入也會考慮必填欄位，沒有會擋下。
+     * 2.要有PrimaryKey
+     */
+    public array $Batch_Title_Text = [
+        'id' => '編號',
+        'name' => '姓名',
+        'email' => 'Email',
+        'password' => '密碼',
+        'status' => '狀態',
     ];
 
     /**
@@ -84,7 +95,7 @@ class User extends Authenticatable implements Auditable
     /**
      * model的key-value對轉，考慮excel匯入匯出可以使用
      */
-    public bool $useMutator = true; //是否使用資料變異器
+    public bool $useMutator = true;//是否使用資料變異器
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
@@ -105,7 +116,7 @@ class User extends Authenticatable implements Auditable
     protected function lv(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $value,
+            get: fn (mixed $value) => $value,
             set: fn (string $value) => $this->useMutator ? (collect($this->lvText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
         );
     }
@@ -116,7 +127,7 @@ class User extends Authenticatable implements Auditable
     public function getValidatorRules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:App\Models\User,name',
             'password' => $this->newPassword ? 'required' : '',
             'email' => 'required|email',
         ];
@@ -125,7 +136,9 @@ class User extends Authenticatable implements Auditable
     {
         return [];
     }
-    //
+    /**
+     * 後台操作 列表 匯出
+     */
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
@@ -144,15 +157,5 @@ class User extends Authenticatable implements Auditable
         //
         return $query;
     }
-    //判斷匯入的時候，新增或是更新
-    public function scopeImportPrimary($query, array $UpdateData)
-    {
-        if (isset($UpdateData['id'])) {
-            $query->where('id', $UpdateData['id']);
-        } else {
-            $query->where('id', 0);
-        }
-        //
-        return $query;
-    }
+
 }
