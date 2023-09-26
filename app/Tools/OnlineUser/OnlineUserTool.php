@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Services\Operate;
+namespace App\Tools\OnlineUser;
 
 use Illuminate\Support\Facades\Redis;
 
-class OnlineUserService
+class OnlineUserTool
 {
-    public $enable = true;
     protected int $ttl = 15;
     protected $redis;
 
     public function __construct()
     {
-        if(!$this->enable) return;
         $this->ttl = env('ONLINE_TTL', 15); //存活時間(多久不操作算是離線)
-        $this->redis = Redis::connection('online'); //使用config database的redis連線
+        try{
+            $this->redis = Redis::connection('online'); //使用config database的redis連線
+        }catch(\Exception $e){
+            $this->redis = false;
+        }
+
     }
 
     //放在middleware，$key不重複則算1，重複則不重複統計
@@ -27,7 +30,7 @@ class OnlineUserService
      */
     public function setOnline(string $key, string $value)
     {
-        if(!$this->enable) return false;
+        if(!$this->redis) return false;
         //上線設定
         return $this->redis->setEx($key, $this->ttl, $value);
     }
@@ -35,7 +38,7 @@ class OnlineUserService
     //取得線上人數
     public function getCount()
     {
-        if(!$this->enable) return false;
+        if(!$this->redis) return 0;
         return $this->redis->command('dbSize');
     }
 }
