@@ -20,7 +20,7 @@ trait ExportImportTrait
         //整理匯出資料
         $ExportList = [];
         //要匯出的欄位
-        $Column_Title_Text = $this->Column_Title_Text;
+        $Column_Title_Text = $this->Batch_Title_Text;
         //要匯出的欄位，後面補上參數
         foreach ($Column_Title_Text as $key => $value){
             //轉語系 + 尾巴字串
@@ -56,8 +56,7 @@ trait ExportImportTrait
         //匯入匯出的標題參數尾部
         $Column_Title_Text_Attach = $this->getTitleAttach();
         //根據第一列標題判斷對應的欄位
-        $value_to_key = collect($this->Column_Title_Text)->mapWithKeys(fn($Text,$key) => [__($Text) => $key]);
-//        $value_to_key = array_flip($this->Column_Title_Text);
+        $value_to_key = collect($this->Batch_Title_Text)->mapWithKeys(fn($Text,$key) => [__($Text) => $key]);
         $excelIndex = [];
         foreach ($DataArray[0] as $RowKey => $Row) {
             //只跑第一行
@@ -140,7 +139,7 @@ trait ExportImportTrait
     */
     public function getTitleAttach(){
         $Column_Title_Text_Attach = [];
-        foreach ($this->Column_Title_Text as $key => $value){
+        foreach ($this->Batch_Title_Text as $key => $value){
             if( property_exists($this,$key."Text") ){
                 //要經過語系
                 $Title_Tail = collect($this->{$key."Text"})->map(fn($Text,$key) => ($key.".".__($Text)))->implode(",");
@@ -148,5 +147,18 @@ trait ExportImportTrait
             }
         }
         return $Column_Title_Text_Attach;
+    }
+    /**
+     * 判斷匯入的時候，新增或是更新
+     */
+    public function scopeImportPrimary($query, array $UpdateData)
+    {
+        if (isset($UpdateData['id'])) {
+            $query->where('id', $UpdateData['id']);
+        } else {
+            $query->where('id', 0);
+        }
+        //
+        return $query;
     }
 }

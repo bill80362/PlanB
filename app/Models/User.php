@@ -70,6 +70,18 @@ class User extends Authenticatable implements Auditable
         'password' => '密碼',
         'status' => '狀態',
     ];
+    /**
+     * 匯入匯出的欄位，
+     * 1.請注意匯入也會考慮必填欄位，沒有會擋下。
+     * 2.要有PrimaryKey
+     */
+    public array $Batch_Title_Text = [
+        'id' => '編號',
+        'name' => '姓名',
+        'email' => 'Email',
+        'password' => '密碼',
+        'status' => '狀態',
+    ];
 
     /**
      * 欄位強制轉型
@@ -114,7 +126,9 @@ class User extends Authenticatable implements Auditable
         ];
     }
     public function getValidatorMessage(){return [];}
-    //
+    /**
+     * 後台操作 列表 匯出
+     */
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
@@ -133,15 +147,5 @@ class User extends Authenticatable implements Auditable
         //
         return $query;
     }
-    //判斷匯入的時候，新增或是更新
-    public function scopeImportPrimary($query, array $UpdateData)
-    {
-        if (isset($UpdateData['id'])) {
-            $query->where('id', $UpdateData['id']);
-        } else {
-            $query->where('id', 0);
-        }
-        //
-        return $query;
-    }
+
 }
