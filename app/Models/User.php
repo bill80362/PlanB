@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Validation\Rule;
 
 class User extends Authenticatable implements Auditable
 {
@@ -95,7 +96,7 @@ class User extends Authenticatable implements Auditable
     /**
      * model的key-value對轉，考慮excel匯入匯出可以使用
      */
-    public bool $useMutator = true;//是否使用資料變異器
+    public bool $useMutator = true; //是否使用資料變異器
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
@@ -129,7 +130,7 @@ class User extends Authenticatable implements Auditable
     public function getValidatorRules($id)
     {
         return [
-            'name' => "required|unique:App\Models\User,name,{$id}",
+            'name' => ['required', Rule::unique(User::class)->ignore($id)],
             'password' => $this->newPassword ? 'required' : '',
             'email' => 'required|email',
         ];
@@ -159,5 +160,4 @@ class User extends Authenticatable implements Auditable
         //
         return $query;
     }
-
 }
