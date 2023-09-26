@@ -45,6 +45,7 @@ class OnlineUserTool
     }
 
     public function viewCounter(){
+        if(!$this->redis) return false;
         return view("tools.online_user.counter",[
             "Count" => $this->getCount(),
         ]);
