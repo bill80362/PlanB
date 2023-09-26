@@ -1,4 +1,5 @@
 @inject('OnlineUserTool', 'App\Tools\OnlineUser\OnlineUserTool')
+@inject('RouteLanguageService', 'App\Services\Route\RouteLanguageService')
 <!-- menu  -->
 <div class="container-fluid g-0">
     <div class="row">
@@ -21,8 +22,10 @@
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
                         <li>
-                            @if(!App::isLocale("en"))<a href="{{route("locale_config",["locale"=>"en"])}}">切換英文</a>@endif
-                            @if(!App::isLocale("zh-tw"))<a href="{{route("locale_config",["locale"=>"zh-tw"])}}">切換繁體中文</a>@endif
+                            {{--語系切換選項--}}
+                            @foreach($RouteLanguageService->localesOperate as $key => $value)
+                                @if(!App::isLocale($value))<a href="{{route("locale_config",["locale"=>$value])}}">{{__("切換")}}{{__($value)}}</a>@endif
+                            @endforeach
                             {{$OnlineUserTool->viewCounter()}}
                             <a class="bell_notification_clicker nav-link-notify" href="#"> <img src="/template/Salessa/img/icon/bell.svg" alt="">
 

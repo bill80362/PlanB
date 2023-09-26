@@ -9,7 +9,7 @@ class LocaleController extends Controller
 {
     public function set($locale)
     {
-        app(RouteLanguageService::class)->setLangNoRedirect(4);
+        app(RouteLanguageService::class)->setLangNoRedirectOperate(4);
         return redirect()->back()->with('locale', $locale);
     }
 }

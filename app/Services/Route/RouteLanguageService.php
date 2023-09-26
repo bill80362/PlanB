@@ -25,4 +25,19 @@ class RouteLanguageService
             return $segment;
         }
     }
+    //後台
+    public array $localesOperate = ['en', 'zh-tw'];
+    public function setLangNoRedirectOperate($seqSegment){
+        $segment = request()->segment($seqSegment);
+        if (! in_array($segment, $this->localesOperate)) {
+            //網址開頭不是語系碼，則使用預設語系
+            App::setLocale(config('app.locale'));
+            return '';
+        } else {
+            //網址開頭是語系碼
+            App::setLocale($segment);
+
+            return $segment;
+        }
+    }
 }
