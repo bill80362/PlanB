@@ -131,7 +131,7 @@ class User extends Authenticatable implements Auditable
         return [
             'name' => "required|unique:App\Models\User,name,{$id}",
             'password' => $this->newPassword ? 'required' : '',
-            'email' => 'required|email',
+            'email' => "required|email|unique:App\Models\User,email,{$id}",
         ];
     }
     public function getValidatorMessage()
