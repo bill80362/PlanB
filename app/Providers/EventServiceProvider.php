@@ -80,15 +80,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //啟用監聽
-        //        Event::listen(
-        //            PodcastProcessed::class,
-        //            [SendPodcastNotification::class, 'handle']
-        //        );
-        //        //啟用監聽
-        //        Event::listen(function (PodcastProcessed $event) {
-        //
-        //        });
+
     }
 
     /**
