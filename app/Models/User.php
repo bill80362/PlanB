@@ -116,7 +116,7 @@ class User extends Authenticatable implements Auditable
     protected function lv(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $value,
+            get: fn (mixed $value) => $value,
             set: fn (string $value) => $this->useMutator ? (collect($this->lvText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
         );
     }
@@ -127,7 +127,7 @@ class User extends Authenticatable implements Auditable
     public function getValidatorRules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:App\Models\User,name',
             'password' => $this->newPassword ? 'required' : '',
             'email' => 'required|email',
         ];
