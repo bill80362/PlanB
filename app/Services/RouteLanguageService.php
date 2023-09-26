@@ -16,7 +16,7 @@ class RouteLanguageService
         if (! in_array($segment, $this->locales)) {
             //
             //網址開頭不是語系碼，則使用預設語系
-            App::setLocale(config('app.fallback_locale'));
+            App::setLocale(config('app.locale'));
 
             return '';
         } else {
