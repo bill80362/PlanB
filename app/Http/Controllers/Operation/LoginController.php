@@ -6,8 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Illuminate\Auth;
+// use Illuminate\Auth;
 use App\Events\Operate\UserLoginFailEvent;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends \App\Http\Controllers\Controller
 {
@@ -18,7 +19,7 @@ class LoginController extends \App\Http\Controllers\Controller
 
     public function loginHTML()
     {
-        return view('operate/pages/login', ['name' => 'Bill']);
+        return view('operate/pages/login');
     }
 
     public function login(Request $request)
@@ -41,7 +42,8 @@ class LoginController extends \App\Http\Controllers\Controller
     public function logout()
     {
         auth('operate')->logout();
-
+        $this->request->session()->invalidate();
+        $this->request->session()->regenerateToken();
         return redirect('/operate/login');
     }
 }
