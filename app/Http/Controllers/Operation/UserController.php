@@ -170,7 +170,11 @@ class UserController extends Controller
         //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
         $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
         //開始逐筆匯入
-        $AllMessage = $this->oModel->importData($subjects->toArray());
+        try{
+            $AllMessage = $this->oModel->importData($subjects->toArray());
+        }catch(\Exception $e){
+            return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => $e->getMessage()]);
+        }
         //有錯誤
         if ($AllMessage) {
             return redirect()->back()->withErrors(['message' => implode(',', $AllMessage)]);

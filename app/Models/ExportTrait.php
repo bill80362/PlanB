@@ -19,8 +19,9 @@ trait ExportTrait
         //要匯出的欄位
         $Column_Title_Text = $this->Column_Title_Text;
         //要匯出的欄位，後面補上參數
-        foreach ($this->Column_Title_Text as $key => $value){
-            $Column_Title_Text[$key] .= $Column_Title_Text_Attach[$key]??"";
+        foreach ($Column_Title_Text as $key => $value){
+            //轉語系 + 尾巴字串
+            $Column_Title_Text[$key] = __($value).($Column_Title_Text_Attach[$key]??"");
         }
         //放入標題
         $ExportList[] = array_values($Column_Title_Text);
@@ -56,7 +57,8 @@ trait ExportTrait
         //匯入匯出的標題參數尾部
         $Column_Title_Text_Attach = $this->getTitleAttach();
         //根據第一列標題判斷對應的欄位
-        $value_to_key = array_flip($this->Column_Title_Text);
+        $value_to_key = collect($this->Column_Title_Text)->mapWithKeys(fn($Text,$key) => [__($Text) => $key]);
+//        $value_to_key = array_flip($this->Column_Title_Text);
         $excelIndex = [];
         foreach ($DataArray[0] as $RowKey => $Row) {
             //只跑第一行
@@ -68,11 +70,10 @@ trait ExportTrait
                 foreach ($Column_Title_Text_Attach as $value){
                     $columnTitle = str_replace($value,"",$columnTitle);
                 }
-                //經過語系
-                $columnTitle = __($columnTitle);
                 //匯入資料欄位標題異常
                 if (!isset($value_to_key[$columnTitle])) {
-                    return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
+                    throw new \Exception("匯入標題異常");
+//                    return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
