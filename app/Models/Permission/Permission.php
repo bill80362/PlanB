@@ -2,6 +2,7 @@
 
 namespace App\Models\Permission;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -34,5 +35,10 @@ class Permission extends Model implements Auditable
             //            $this->id,
             //            $this->name,
         ];
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

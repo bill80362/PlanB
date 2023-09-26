@@ -41,8 +41,9 @@ class MailNotify
             $this->mailService->send(
                 $event->mailData['mailKey'],
                 $event->mailData['values'],
+                $event->mailData['userMail'],
                 $event->mailData['fromMail'],  // 需從configService取出設定
-                $event->mailData['userMail']
+
             );
         } catch (Exception $e) {
             Log::channel('notify_error')->error($this::class . ": " . $e->getMessage());
