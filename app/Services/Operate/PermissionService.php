@@ -17,6 +17,13 @@ class PermissionService
             'export' => '匯出',
             'import' => '匯入',
             'print' => '列印',
+
+            // ---------收信權限---------
+            'newOrder' => '新訂單通知',
+            'orderShipped' => '到貨通知',
+            'refund' => '退款通知',
+            'register' => '會員註冊',
+
         ];
     }
 
@@ -61,6 +68,13 @@ class PermissionService
                 'allowLv' => [1, 2, 3],
                 'permissions' => $this->getSystemItem(),
             ],
+            [
+                'groupName' => '收信功能',
+                'allowLv' => [1, 2, 3, 4, 5],
+                'permissions' => $this->getReciveMail(),
+            ],
+
+
         ];
 
         foreach ($groups as $key => $group) {
@@ -176,6 +190,22 @@ class PermissionService
                 'groupKey' => 'system',
                 'actions' => ['update'],
             ],
+        ];
+    }
+
+    private function getReciveMail()
+    {
+        return [
+            [
+                'label' => '訂單信件',
+                'groupKey' => 'mailOrder',
+                'actions' => ['newOrder', 'orderShipped', 'refund'],
+            ],
+            [
+                'label' => '會員信件',
+                'groupKey' => 'mailMember',
+                'actions' => ['register'],
+            ]
         ];
     }
 

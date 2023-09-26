@@ -25,7 +25,7 @@ class NewOrderEvent
     public function __construct(public array $Data)
     {
         $this->mailData = [
-            'mailKey' => 'new_order',
+            'mailKey' => 'newOrder',
             'userMail' => $Data['mail'],
             'fromMail' => $Data['fromMail'],
             'values' => [

@@ -61,6 +61,16 @@ class DatabaseSeeder extends Seeder
             'perm_key' => 'user_delete',
         ]);
 
+        \App\Models\Permission\Permission::create([
+            'user_id' => '2',
+            'perm_key' => 'mailOrder.newOrder',
+        ]);
+
+        // \App\Models\Permission\Permission::create([
+        //     'user_id' => '1',
+        //     'perm_key' => 'mailOrder.newOrder',
+        // ]);
+
         // PageContent::firstOrCreate([
         //     'key' => 'privacyStatement',
         // ], [
