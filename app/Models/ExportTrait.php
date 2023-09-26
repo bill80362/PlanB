@@ -32,12 +32,8 @@ trait ExportTrait
             //
             $Temp = [];
             foreach ($Column_Title_Text as $key => $value) {
-                //將key轉value
-//                if ($key == 'status') {
-//                    $model->$key = $this->statusText[$model->$key];
-//                }
-                //放入標題對應的資料
-                $Text = $model->$key ?? '';
+                //放入標題對應的資料，使用->$key會抓到hidden例如密碼
+                $Text = $model->toArray()[$key] ?? '';
                 //經過語系
                 $Temp[] = __($Text);
             }
