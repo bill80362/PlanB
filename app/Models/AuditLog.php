@@ -6,7 +6,7 @@ use OwenIt\Auditing\Models\Audit;
 
 class AuditLog extends Audit
 {
-    use ExportTrait;
+    use ExportImportTrait;
 
     //欄位名稱
     public array $Column_Title_Text = [

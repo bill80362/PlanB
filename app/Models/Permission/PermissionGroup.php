@@ -5,12 +5,12 @@ namespace App\Models\Permission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Models\ExportTrait;
+use App\Models\ExportImportTrait;
 
 class PermissionGroup extends Model
 {
     use HasFactory;
-    use ExportTrait; //匯出
+    use ExportImportTrait; //匯出
 
     public $incrementing = true;
 

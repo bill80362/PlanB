@@ -6,10 +6,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * 匯出
+ * 匯出 匯入
  */
-trait ExportTrait
+trait ExportImportTrait
 {
+    /**
+     * 匯出
+    */
     public function scopeExport($query,$useMutator=true)
     {
         //
@@ -82,7 +85,6 @@ trait ExportTrait
      * 匯入資料
      *
      * @param array $DataArray 匯入的資料，三層陣列 sheet -> row -> column ，這邊只處裡第一個sheet
-     *
      * @return array 匯入被驗證器擋下的資料
     */
     public function importData(array $DataArray){
@@ -133,7 +135,9 @@ trait ExportTrait
         return $AllMessage;
     }
 
-    //匯入匯出的標題參數尾部 ex: 【狀態Y.啟用,N.停用】 "Y.啟用,N.停用"
+    /**
+     * 匯入匯出的標題參數尾部 ex: 【狀態Y.啟用,N.停用】 "Y.啟用,N.停用"
+    */
     public function getTitleAttach(){
         $Column_Title_Text_Attach = [];
         foreach ($this->Column_Title_Text as $key => $value){

@@ -17,7 +17,7 @@ class User extends Authenticatable implements Auditable
     //操作紀錄
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable; //操作Log
-    use ExportTrait; //匯出
+    use ExportImportTrait; //匯出
 
     /**
      * 欄位新增修改的黑名單，注意 create()會吃到，save（）不會吃到
