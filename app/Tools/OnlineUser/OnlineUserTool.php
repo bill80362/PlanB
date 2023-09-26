@@ -30,7 +30,7 @@ class OnlineUserTool
      * @param $value string
      * @return bool
      */
-    public function setOnline(string $key, string $value): bool
+    public function setOnline(string $key, string $value)
     {
         if(!$this->redis) return false;
         //上線設定
