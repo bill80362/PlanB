@@ -21,7 +21,7 @@ class LanguageTranslator extends LaravelTranslator
 
     public function get($key, array $replace = [], $locale = null, $fallback = true)
     {
-
+        // dd($key);
         $locale = $locale ?: $this->locale;
         $this->load('*', '*', $locale);
         $line = $this->loaded['*']['*'][$locale][$key] ?? null;

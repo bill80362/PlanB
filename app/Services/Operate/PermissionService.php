@@ -145,12 +145,12 @@ class PermissionService
         return [
             [
                 'label' => '隱私權聲明',
-                'groupKey' => 'privacy_statement',
+                'groupKey' => 'privacyStatement',
                 'actions' => ['read', 'update'],
             ],
             [
                 'label' => '版權宣告 ',
-                'groupKey' => 'copyright_notice',
+                'groupKey' => 'copyrightNotice',
                 'actions' => ['read', 'update'],
             ],
 
