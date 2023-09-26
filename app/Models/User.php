@@ -123,11 +123,13 @@ class User extends Authenticatable implements Auditable
 
     /**
      * 後台操作測定
+     *
+     * @param mixed $id 自己的id
      */
-    public function getValidatorRules()
+    public function getValidatorRules($id)
     {
         return [
-            'name' => 'required|unique:App\Models\User,name',
+            'name' => "required|unique:App\Models\User,name,{$id}",
             'password' => $this->newPassword ? 'required' : '',
             'email' => 'required|email',
         ];

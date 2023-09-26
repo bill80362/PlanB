@@ -94,7 +94,7 @@ class UserController extends Controller
         //驗證資料
         $validator = Validator::make(
             $UpdateData,
-            $this->oModel->getValidatorRules(),
+            $this->oModel->getValidatorRules($id),
             $this->oModel->getValidatorMessage(),
         );
         //密碼處理
