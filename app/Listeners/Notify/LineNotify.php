@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use App\Services\Notify\LineNotifyService;
+use Illuminate\Support\Facades\Validator;
 
 class LineNotify
 {
@@ -25,7 +26,11 @@ class LineNotify
     public function handle(object $event): void
     {
         try {
-            if (!($event->lineNotifyData && is_array($event->lineNotifyData) && count($event->lineNotifyData) > 0)) {
+            $validator = Validator::make((array)$event, [
+                'lineNotifyData.message' => ['string', 'required'],
+            ]);
+
+            if ($validator->fails()) {
                 throw new Exception("格式錯誤");
             }
 

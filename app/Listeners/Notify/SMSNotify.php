@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use App\Services\Notify\SMSService;
+use Illuminate\Support\Facades\Validator;
 
 class SMSNotify
 {
@@ -25,9 +26,12 @@ class SMSNotify
     public function handle(object $event): void
     {
         try {
-            if (!($event->smsData && is_array($event->smsData) && count($event->smsData) > 0)) {
-                throw new Exception("格式錯誤");
-            }
+            // $validator = Validator::make((array)$event, [
+            // ]);
+
+            // if ($validator->fails()) {
+            //     throw new Exception("格式錯誤");
+            // }
 
             /**
              * @todo sms 串接               

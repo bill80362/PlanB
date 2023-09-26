@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 use App\Services\Notify\SMSService;
+use Illuminate\Support\Facades\Validator;
 
 class SMSNotifyAsync implements ShouldQueue
 {
@@ -28,9 +29,12 @@ class SMSNotifyAsync implements ShouldQueue
      */
     public function handle(object $event): void
     {
-        if (!($event->smsData && is_array($event->smsData) && count($event->smsData) > 0)) {
-            throw new Exception("格式錯誤");
-        }
+        // $validator = Validator::make((array)$event, [
+        // ]);
+
+        // if ($validator->fails()) {
+        //     throw new Exception("格式錯誤");
+        // }
 
         /**
          * @todo sms 串接               

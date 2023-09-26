@@ -58,9 +58,11 @@ class NotifyTest extends TestCase
         );
 
         NewOrderEvent::dispatch([
-            'order_num' => '12345',
+            'orderNum' => '12345',
             'price' => 999,
-            'mail' => 'bcs@gmail.com'
+            'mail' => 'bcs@test.com',
+            'fromMail' => 'sys@test.com',
+            'lineNotifyMessage' => 'line notify message test...'
         ]);
 
         $this->assertTrue(true);
@@ -74,9 +76,11 @@ class NotifyTest extends TestCase
         Event::fake();
 
         NewOrderEvent::dispatch([
-            'order_num' => '12345',
+            'orderNum' => '12345',
             'price' => 999,
-            'mail' => 'bcs@gmail.com'
+            'mail' => 'bcs@test.com',
+            'fromMail' => 'sys@test.com',
+            'lineNotifyMessage' => 'line notify message test...'
         ]);
         Event::assertDispatched(NewOrderEvent::class);
         Event::assertListening(
@@ -92,7 +96,7 @@ class NotifyTest extends TestCase
         //     NewOrderEvent::class,
         //     Listeners\Notify\SMSNotify::class,
         // );
-        
+
 
         $this->assertTrue(true);
     }
