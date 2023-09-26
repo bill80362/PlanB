@@ -26,16 +26,7 @@ class PermissionService
 
         ];
     }
-
-    public array $lvText = [
-        1 => '超級使用者',
-        2 => '工程師',
-        3 => 'PM',
-        4 => '網址管理者',
-        5 => '使用者',
-    ];
-
-
+    
     /**
      * 定義權限群組，要加權限或刪除在此處修改。
      */
@@ -45,7 +36,7 @@ class PermissionService
         $groups = [
             [
                 'groupName' => '會員管理群組',
-                'allowLv' => [1, 2, 3, 4, 5],
+                'allowLv' => [1, 2, 3, 4],
                 'permissions' => $this->getMemberItem(),
             ],
             [
@@ -70,7 +61,7 @@ class PermissionService
             ],
             [
                 'groupName' => '收信功能',
-                'allowLv' => [1, 2, 3, 4, 5],
+                'allowLv' => [1, 2, 3, 4],
                 'permissions' => $this->getReciveMail(),
             ],
 
@@ -107,6 +98,7 @@ class PermissionService
 
         return $actions;
     }
+    
 
     // 會員管理群組
     private function getMemberItem()

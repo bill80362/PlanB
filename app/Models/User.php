@@ -103,17 +103,24 @@ class User extends Authenticatable implements Auditable
     protected function status(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $this->useMutator?(isset($this->statusText[$value])?__($this->statusText[$value]):$value):$value,
-            set: fn (string $value) => $this->useMutator?(collect($this->statusText)->mapWithKeys(fn($value,$key)=>([__($value) => $key]))[$value]??$value):$value,
+            get: fn (string $value) => $this->useMutator ? (isset($this->statusText[$value]) ? __($this->statusText[$value]) : $value) : $value,
+            set: fn (string $value) => $this->useMutator ? (collect($this->statusText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
         );
     }
     public array $lvText = [
         1 => '超級使用者',
         2 => '工程師',
         3 => 'PM',
-        4 => '網址管理者',
-        5 => '使用者',
+        4 => '網站管理者',
     ];
+    protected function lv(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => $value,
+            set: fn (string $value) => $this->useMutator ? (collect($this->lvText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
+        );
+    }
+
     /**
      * 後台操作測定
      */
@@ -125,7 +132,10 @@ class User extends Authenticatable implements Auditable
             'email' => 'required|email',
         ];
     }
-    public function getValidatorMessage(){return [];}
+    public function getValidatorMessage()
+    {
+        return [];
+    }
     /**
      * 後台操作 列表 匯出
      */
@@ -137,7 +147,7 @@ class User extends Authenticatable implements Auditable
         }
         //過濾文字條件
         if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
+            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
         }
         //排序
         if (isset($Data['order_by'])) {
