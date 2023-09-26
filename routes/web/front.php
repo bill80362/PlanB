@@ -6,7 +6,7 @@ Route::group([
     //開啟語系偵測，如果開頭有語系就吃語系，如果開頭不是語系，就使用預設語系，但不強迫導轉
     'prefix' => app(\App\Services\Route\RouteLanguageService::class)->setLangNoRedirect(), //開啟語系偵測
     'middleware' => [
-        'lang',
+        'lang.extend',
         // "lang.redirect", //開啟強迫導轉
     ],
 ], function () {
