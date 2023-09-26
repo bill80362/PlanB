@@ -22,7 +22,6 @@ class OnlineUserTool
 
     }
 
-    //放在middleware，$key不重複則算1，重複則不重複統計
     /**
      * 建議放在middleware
      *
