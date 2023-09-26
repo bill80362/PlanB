@@ -10,9 +10,10 @@ class RouteLanguageService
     public array $locales = ['en', 'zh-tw'];
 
     //這邊不能使用response
-    public function setLangNoRedirect()
+    //$seqSegment為 根據"/"第幾個為語系
+    public function setLangNoRedirect($seqSegment=1)
     {
-        $segment = request()->segment(1);
+        $segment = request()->segment($seqSegment);
         if (! in_array($segment, $this->locales)) {
             //網址開頭不是語系碼，則使用預設語系
             App::setLocale(config('app.locale'));

@@ -21,6 +21,8 @@
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
                         <li>
+                            @if(!App::isLocale("en"))<a href="{{route("locale_config",["locale"=>"en"])}}">切換英文</a>@endif
+                            @if(!App::isLocale("zh-tw"))<a href="{{route("locale_config",["locale"=>"zh-tw"])}}">切換繁體中文</a>@endif
                             {{$OnlineUserTool->viewCounter()}}
                             <a class="bell_notification_clicker nav-link-notify" href="#"> <img src="/template/Salessa/img/icon/bell.svg" alt="">
 
