@@ -5,7 +5,10 @@ use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
 /**後台*/
-Route::prefix('/operate')->middleware(['lang.extend', 'log.request', 'log.response'])->group(function () {
+Route::prefix('operate')->middleware(['lang.extend','lang.detect', 'log.request', 'log.response'])->group(function () {
+    //切換後台版面語言
+    Route::get('/locale/config/{locale}', [\App\Http\Controllers\Operation\LocaleController::class, 'set'])->name('locale_config');
+
     //登入
     Route::get('/', [\App\Http\Controllers\Operation\IndexController::class, 'index']);
     Route::get('/login', [\App\Http\Controllers\Operation\LoginController::class, 'loginHTML']);

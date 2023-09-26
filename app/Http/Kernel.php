@@ -64,16 +64,25 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        //後台權限控管
-        'OperateLoginAuth' => \App\Http\Middleware\OperateLoginAuth::class,
+
+        /**全站都可用*/
         //覆寫語系轉換function
         'lang.extend' => \App\Http\Middleware\LanguageExtend::class,
-        //語系強制導轉
-        'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
-        //線上人數統計工具
-        'online.user' => \App\Http\Middleware\OnlineUser::class,
         //紀錄Log
         'log.request' => \App\Http\Middleware\LogRequestInfo::class,//紀錄request
         'log.response' => \App\Http\Middleware\LogResponseInfo::class,//紀錄response
+
+        /**專屬後台**/
+        //後台權限控管
+        'OperateLoginAuth' => \App\Http\Middleware\OperateLoginAuth::class,
+        //後台切換語系
+        'lang.detect' => \App\Http\Middleware\LanguageDetect::class,
+        /**專屬前台*/
+        //前台語系強制導轉
+        'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
+        //線上人數統計工具
+        'online.user' => \App\Http\Middleware\OnlineUser::class,
+
+
     ];
 }
