@@ -88,13 +88,6 @@ class User extends Authenticatable implements Auditable
         'Y' => '啟用',
         'N' => '停用',
     ];
-    public array $lvText = [
-        1 => '超級使用者',
-        2 => '工程師',
-        3 => 'PM',
-        4 => '網址管理者',
-        5 => '使用者',
-    ];
     protected function status(): Attribute
     {
         return Attribute::make(
@@ -102,6 +95,13 @@ class User extends Authenticatable implements Auditable
             set: fn (string $value) => $this->useMutator?(collect($this->statusText)->mapWithKeys(fn($value,$key)=>([__($value) => $key]))[$value]??$value):$value,
         );
     }
+    public array $lvText = [
+        1 => '超級使用者',
+        2 => '工程師',
+        3 => 'PM',
+        4 => '網址管理者',
+        5 => '使用者',
+    ];
     /**
      * 後台操作測定
      */
