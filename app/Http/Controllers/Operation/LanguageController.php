@@ -70,7 +70,6 @@ class LanguageController extends Controller
             $elseDatas = collect($elseDatas)->mapWithKeys(function ($item) {
                 return [$item['lang_type'] => $item];
             })->all();
-            // dd($elseDatas);
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array) $this->request->old() as $key => $value) {
@@ -148,13 +147,7 @@ class LanguageController extends Controller
             }
         }
         $this->makeFile();
-
-        //
         return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '送出成功']);
-        //        return view('alert_redirect', [
-        //            'Alert' => __('送出成功'),
-        //            'Redirect' => '/operate/language?'.$this->request->getQueryString(),
-        //        ]);
     }
 
     //批次刪除
@@ -165,12 +158,7 @@ class LanguageController extends Controller
             $this->oModel->find($id)->delete();
         }
 
-        //
         return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '刪除成功']);
-        //        return view('alert_redirect', [
-        //            'Alert' => '刪除成功',
-        //            'Redirect' => route('language_list').'?'.$this->request->getQueryString(),
-        //        ]);
     }
 
     /**
@@ -189,10 +177,6 @@ class LanguageController extends Controller
                 //匯入資料欄位標題異常
                 if (!isset($value_to_key[$columnTitle])) {
                     return redirect("/operate/language?" . $this->request->getQueryString())->with(['error' => '匯入標題異常']);
-                    //                    return view('alert_redirect', [
-                    //                        'Alert' => __('匯入標題異常'),
-                    //                        'Redirect' => '/operate/language?'.$this->request->getQueryString(),
-                    //                    ]);
                 }
                 //
                 $excelIndex[$index] = $value_to_key[$columnTitle];
@@ -243,12 +227,7 @@ class LanguageController extends Controller
             return redirect()->back()->withErrors(['message' => implode(',', $AllMessage)]);
         }
 
-        //
         return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '送出成功']);
-        //        return view('alert_redirect', [
-        //            'Alert' => __('送出成功'),
-        //            'Redirect' => '/operate/language?'.$this->request->getQueryString(),
-        //        ]);
     }
 
     //匯出

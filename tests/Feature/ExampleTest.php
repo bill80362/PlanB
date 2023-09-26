@@ -12,14 +12,14 @@ class ExampleTest extends TestCase
 {
     public function test_example(): void
     {
-        $converted = Str::of('privacy_statement')->camel();
-        dd($converted);
-        // $validator = Validator::make([
-        //     'phone' => '0910585824'
-        // ], [
-        //     'phone' => ['required', new TwPhone()],
-        // ]);
-        // $check = $validator->passes();
-        // $this->assertTrue($check);
+        // $converted = Str::of('privacy_statement')->camel();
+        // dd($converted);
+        $validator = Validator::make([
+            'phone' => '0910585824'
+        ], [
+            'phone' => ['required', new TwPhone()],
+        ]);
+        $check = $validator->passes();
+        $this->assertTrue($check);
     }
 }

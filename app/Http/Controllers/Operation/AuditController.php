@@ -30,8 +30,6 @@ class AuditController extends Controller
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())->with('user')->paginate($pageLimit);
 
-        //
-        //        dd($this->oModel->statusText);
         return view('operate/pages/audit/list', [
             'Paginator' => $Paginator,
             //
@@ -154,8 +152,6 @@ class AuditController extends Controller
                     $Data->old_values = array_merge($Data->old_values, ["password" => "admin"]);
                 }
                 //重新新增，id一樣看起來沒有問題
-                //                unset($Data->old_values["id"]);
-                //
                 $object->create($Data->old_values);
             } elseif ($Data->event == "updated") {
                 //修改，
