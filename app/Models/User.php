@@ -124,7 +124,7 @@ class User extends Authenticatable implements Auditable
     /**
      * 後台操作測定
      *
-     * @param mixed $id 自己的id
+     * @param mixed $id 自己的id(要忽略檢查唯一值的id)
      */
     public function getValidatorRules($id)
     {
