@@ -53,6 +53,14 @@
                                                         <input type="text" class="form-control" name="email"
                                                             value="{{ $Data->email }}">
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label>狀態</label>
+                                                        <select class="form-control" name="status">
+                                                            @foreach($Data->statusText as $key => $value)
+                                                            <option value="{{$key}}" {{ $Data->status==$value?"selected":"" }} >{{__($value)}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div>
@@ -139,7 +147,7 @@
             $('input[type=\'checkbox\']').prop('checked', '');
             item.permission_grouop_items.forEach(element => {
                 $('input[name="' + element.perm_key + '"]').prop('checked', true);
-                // 
+                //
             });
         }
     </script>

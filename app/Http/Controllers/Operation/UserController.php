@@ -84,8 +84,8 @@ class UserController extends Controller
     public function update($id)
     {
         $user = auth('operate')->user();
-        //過濾
-        $UpdateData = $this->request->only(['name', 'email', 'password']);
+        //過濾，重要model在設定這個，其他都直接all()即可
+        $UpdateData = $this->request->only(['name', 'email', 'password','status']);
         if (!$UpdateData['password']) {
             unset($UpdateData['password']);
         } else {
