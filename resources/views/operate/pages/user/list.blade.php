@@ -128,8 +128,8 @@
                                     <td>{{$Item->name}}</td>
                                     <td>{{$Item->email}}</td>
                                     <td>{{__($Model->statusText[$Item->status]??$Item->status)}}</td>
-                                    <td>{{$Item->audits()->latest()->first()->user->name}}</td>
-                                    <td>{{$Item->audits()->latest()->first()->created_at}}</td>
+                                    <td>{{$Item->audits()->latest()->first()->user?$Item->audits()->latest()->first()->user->name:""}}</td>
+                                    <td>{{$Item->updated_at}}</td>
                                     <td>
                                         @can('user_update')
                                         <a class="btn btn-sm btn-primary"
