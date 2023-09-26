@@ -106,7 +106,7 @@
                                         <td>{{$Item->user_agent}}</td>
                                         <td>{{$Item->version}}</td>
                                         <td>{{$Item->created_at->toDateTimeString()}}</td>
-                                        <td>{{$Item->user?$Item->user->name:""}}</td>
+                                        <td>{{$Item->user?->name}}</td>
                                         <td>
                                                 <button class="btn btn-sm btn-danger"
                                                         type="button"

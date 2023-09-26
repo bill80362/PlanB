@@ -103,8 +103,8 @@ class User extends Authenticatable implements Auditable
     protected function status(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => $this->useMutator ? (isset($this->statusText[$value]) ? __($this->statusText[$value]) : $value) : $value,
-            set: fn (string $value) => $this->useMutator ? (collect($this->statusText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
+            get: fn (string|null $value) => $this->useMutator ? (isset($this->statusText[$value]) ? __($this->statusText[$value]) : $value) : $value,
+            set: fn (string|null $value) => $this->useMutator ? (collect($this->statusText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
         );
     }
     public array $lvText = [
