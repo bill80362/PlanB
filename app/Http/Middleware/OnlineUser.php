@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\Operate\OnlineUserService;
+use App\Tools\OnlineUser\OnlineUserTool;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class OnlineUser
         //線上人數
         $key = session()->getId();
         $value = $request->url();
-        app(OnlineUserService::class)->setOnline($key, $value);
+        app(OnlineUserTool::class)->setOnline($key, $value);
 
         //
         return $next($request);

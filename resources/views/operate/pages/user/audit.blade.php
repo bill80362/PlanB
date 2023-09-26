@@ -53,7 +53,7 @@
                                     <td>{{$Item->ip_address}}</td>
                                     <td>{{$Item->user_agent}}</td>
                                     <td>{{$Item->created_at->toDateTimeString()}}</td>
-                                    <td>{{$Item->user->name}}</td>
+                                    <td>{{$Item->user?$Item->user->name:""}}</td>
                                 </tr>
                             @endforeach
                             </form>
