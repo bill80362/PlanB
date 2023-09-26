@@ -19,10 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->char('status', 1)->default('Y');
             $table->integer('lv')->default(5)->comment('1.超級使用者, 2.工程師, 3.PM, 4.網址管理者, 5.使用者');
-            $table->rememberToken();
-
-            $table->string('updated_by_type')->nullable();
-            $table->unsignedBigInteger('updated_by_id')->nullable();
+            $table->rememberToken();        
             $table->timestamps();
         });
     }
