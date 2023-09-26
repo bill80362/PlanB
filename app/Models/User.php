@@ -39,13 +39,7 @@ class User extends Authenticatable implements Auditable
     //更新密碼 新密碼
     public String $newPassword = '';
 
-    public array $lvText = [
-        1 => '超級使用者',
-        2 => '工程師',
-        3 => 'PM',
-        4 => '網址管理者',
-        5 => '使用者',
-    ];
+
 
     /**
      * Audit外掛 標記Tag 多筆資料逗號分隔
@@ -93,6 +87,13 @@ class User extends Authenticatable implements Auditable
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
+    ];
+    public array $lvText = [
+        1 => '超級使用者',
+        2 => '工程師',
+        3 => 'PM',
+        4 => '網址管理者',
+        5 => '使用者',
     ];
     protected function status(): Attribute
     {
