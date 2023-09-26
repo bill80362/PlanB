@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Redis;
 
 class OnlineUserService
 {
-    public $enable = false;
+    public $enable = true;
     protected int $ttl = 15;
     protected $redis;
 
