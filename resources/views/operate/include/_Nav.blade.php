@@ -26,7 +26,10 @@
                             @foreach($RouteLanguageService->localesOperate as $key => $value)
                                 @if(!App::isLocale($value))<a href="{{route("locale_config",["locale"=>$value])}}">{{__("切換")}}{{__($value)}}</a>@endif
                             @endforeach
+
+                            {{--線上人數--}}
                             {{$OnlineUserTool->viewCounter()}}
+
                             <a class="bell_notification_clicker nav-link-notify" href="#"> <img src="/template/Salessa/img/icon/bell.svg" alt="">
 
                             </a>
