@@ -2,14 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\HttpLog;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Queue\Events\JobFailed;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,23 +21,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 在測試環境中強制關閉 Lazy Loading
-        Model::preventLazyLoading(! app()->isProduction());
-        Paginator::useBootstrapFive();
-        //
-        PendingRequest::macro('log', function (
-            $channel = '',
-            $context = [],
-            $config = []
-        ): PendingRequest {
-            return Http::withMiddleware((new HttpLog())->__invoke($channel, $context, $config));
-        });
-        //全域Queue的Job失敗會觸發
-//        Queue::failing(function (JobFailed $event) {
-//            Log::channel('daily')->error("全域Queue的Job失敗會觸發BBBB");
-//            // $event->connectionName
-//            // $event->job
-//            // $event->exception
-//        });
     }
 }
