@@ -29,7 +29,7 @@ class UserController extends Controller
         //
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
-        $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
+        $Paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
         //
         return view('operate/pages/user/list', [
             'Paginator' => $Paginator,

@@ -41,7 +41,6 @@ class User extends Authenticatable implements Auditable
     public String $newPassword = '';
 
 
-
     /**
      * Audit外掛 標記Tag 多筆資料逗號分隔
      */
@@ -55,7 +54,7 @@ class User extends Authenticatable implements Auditable
     /**
      * 資料表關聯設定
      */
-    protected $with = ['permissions'];
+//    protected $with = ['permissions'];
     public function permissions()
     {
         return $this->hasMany(Permission::class);
