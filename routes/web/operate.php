@@ -12,7 +12,7 @@ Route::prefix('/operate')->middleware(['lang', 'log.request', 'log.response'])->
     Route::post('/login', [\App\Http\Controllers\Operation\LoginController::class, 'login']);
     Route::get('/logout', [\App\Http\Controllers\Operation\LoginController::class, 'logout']);
 
-    Route::middleware(['auth:operate', 'AdminLoginAuth', 'online.user'])->group(function () {
+    Route::middleware(['auth:operate', 'OperateLoginAuth', 'online.user'])->group(function () {
 
         //Dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Operation\IndexController::class, 'dashboard']);

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminLoginAuth
+class OperateLoginAuth
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,7 @@ class AdminLoginAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //
-
+        //後台權限控管
         if (! auth('operate')->check()) {
             return redirect('/operate/login');
         }
