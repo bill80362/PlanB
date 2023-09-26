@@ -128,7 +128,7 @@ trait ExportTrait
             );
             //驗證有誤
             if ($validator->fails()) {
-                $AllMessage[] = __("第 :KEY1 列",["KEY1"=>$RowKey]). ":" . implode(',', $validator->messages()->all());
+                $AllMessage[] = __("第:KEY1列",["KEY1"=>$RowKey]). ":" . implode(',', $validator->messages()->all());
                 continue;
             }
             $DataModel->save();
