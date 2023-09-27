@@ -168,7 +168,7 @@
 
                                                 <td>{{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
                                                 </td>
-                                                <td>{{ $Item->text == $Item->tran_text ? 'Ⅹ' : '√' }}</td>
+                                                <td>{{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
                                                 <td>{{ $Item->updated_at }}</td>
                                                 <td>{{ $Item->created_at }}</td>
 

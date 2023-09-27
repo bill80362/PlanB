@@ -5,6 +5,7 @@ namespace App\Models\CountryAndShippingFee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ExportImportTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Language extends Model
 {
@@ -72,6 +73,13 @@ class Language extends Model
         return array_keys($this->langTypeText);
     }
 
+    protected function isUpdated(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this['updated_at']->equalTo($this['created_at']),
+        );
+    }
+
     public function getValidatorRules()
     {
         return [
@@ -109,9 +117,9 @@ class Language extends Model
             $query->where(function ($subQuery) use ($isChanges) {
                 foreach ($isChanges as $isChange) {
                     if ($isChange == 'Y') {
-                        $subQuery->orWhereColumn('text', '!=', 'tran_text');
+                        $subQuery->orWhereColumn('updated_at', '!=', 'created_at');
                     } else {
-                        $subQuery->orWhereColumn('text',  'tran_text');
+                        $subQuery->orWhereColumn('updated_at',  'created_at');
                     }
                 }
             });

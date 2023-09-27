@@ -123,7 +123,6 @@ class LanguageController extends Controller
                 ->withInput();
         }
         if ($id) {
-
             foreach ($this->request->else_langTypes as $key => $else_langType) {
                 $trans = $this->request->else_trans[$key];
                 $this->oModel->where('text', $UpdateData['text'])
@@ -131,8 +130,9 @@ class LanguageController extends Controller
                         'tran_text' => $trans,
                     ]);
             }
-            unset($UpdateData['text']);
-            $this->oModel->find($id)->update($UpdateData);
+            $this->oModel->whereId($id)->update([
+                'tran_text' => $UpdateData['tran_text']
+            ]);
         } else {
             $id = $this->oModel->create($UpdateData)->id;
             foreach ($this->request->else_langTypes as $key => $else_langType) {

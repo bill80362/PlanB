@@ -26,7 +26,8 @@ class FileController extends Controller
         $image = $this->request->file('image');
         $path = $this->request->get('path');
         $uuid = Str::uuid();
-        $filePath = $path."/{$uuid}.jpg";
+        $ext = $image->extension();
+        $filePath = $path . "/{$uuid}.{$ext}";
         Storage::disk('public')->put($filePath, file_get_contents($image));
 
         return response([
