@@ -19,7 +19,7 @@ class MailService
         //收信權限
         if ($content['recivePermission'] != '') {
             $permissions = Permission::where('perm_key', $content['recivePermission'])
-                ->whereHas('user')
+                ->has('user')
                 ->with('user')
                 ->get();
 

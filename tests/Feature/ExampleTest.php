@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Models\Permission\Permission;
 use Tests\TestCase;
 use App\Rules\TwPhone;
 use Illuminate\Support\Facades\Validator;
@@ -10,12 +12,20 @@ use Illuminate\Support\Str;
 
 class ExampleTest extends TestCase
 {
+    // use RefreshDatabase;
+
+    public function setUp(): void
+    {
+
+        parent::setUp();
+        // $this->seed();
+    }
+
     /**
      * 測試客製化驗證
      */
     public function test_rule(): void
     {
-
         $validator = Validator::make([
             'phone' => '0910585824'
         ], [
