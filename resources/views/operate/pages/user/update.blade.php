@@ -57,7 +57,7 @@
                                                         <label>狀態</label>
                                                         <select class="form-control" name="status">
                                                             @foreach($Data->statusText as $key => $value)
-                                                            <option value="{{$key}}" {{ $Data->status==$value?"selected":"" }} >{{__($value)}}</option>
+                                                            <option value="{{$key}}" {{ $Data->status==$key?"selected":"" }} >{{__($value)}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

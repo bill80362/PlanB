@@ -13,7 +13,7 @@ trait ExportImportTrait
     /**
      * 匯出
     */
-    public function scopeExport($query,$useMutator=true)
+    public function scopeExport($query,$useMutator=false)
     {
         //
         $Column_Title_Text_Attach = $this->getTitleAttach();
@@ -121,7 +121,7 @@ trait ExportImportTrait
             //驗證資料
             $validator = Validator::make(
                 $DataModel->makeVisible('password')->toArray(),
-                $this->getValidatorRules(),
+                $this->getValidatorRules($DataModel->id??0),
                 $this->getValidatorMessage(),
             );
             //驗證有誤
