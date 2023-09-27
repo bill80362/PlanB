@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
 use App\Models\SystemConfig;
 use App\Services\Operate\SystemConfigService;
+use App\Services\Operate\UploadImageLimit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class SystemController extends Controller
 {
@@ -19,6 +21,7 @@ class SystemController extends Controller
 
     public function updateHTML()
     {
+//        app(UploadImageLimit::class)->viewTips($this->oModel,"logo");
         //
         return view('operate/pages/system/config', [
             'SystemConfigKeyValue' => $this->oSystemConfigService->SystemConfigKeyValue,
@@ -35,6 +38,16 @@ class SystemController extends Controller
                 $all_id[] = $value2['id'];
             }
         }
+        //驗證
+        foreach ($this->request->only($all_id) as $id => $content) {
+            //如果是圖片，則要先上傳，再將content改成檔案名稱
+            if (in_array($id, $this->oSystemConfigService->SystemConfigImageKey)) {
+                $this->request->validate([
+                    $id => ['required', 'mimes:jpeg,png,jpg,gif','dimensions:width=100,height=200','max:1024'],
+                ]);
+            }
+        }
+        //
         foreach ($this->request->only($all_id) as $id => $content) {
             //如果是圖片，則要先上傳，再將content改成檔案名稱
             if (in_array($id, $this->oSystemConfigService->SystemConfigImageKey)) {
