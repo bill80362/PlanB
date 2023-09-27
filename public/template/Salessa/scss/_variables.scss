@@ -334,9 +334,9 @@ $text_color: $gray-600;
 $text_color_2: $gray-900;
 $text_color_3: $gray-600;
 
-$text_color_4: $gray-600;
-$text_color_5: $gray-500;
-$text_color_1: $gray-600;
+$text_color_4: $gray-700;
+$text_color_5: $gray-600;
+$text_color_1: $gray-700;
 $border_color: $gray-600;
 $border_color_1: $gray-500;
 $border_color_2: $gray-100;
@@ -373,3 +373,11 @@ $min_1200px: '(min-width: 1201px)';
 
 $min_1680px: '(min-width: 1680px)';
 
+$sizes : (
+    'xs': .65,
+    'sm': .875,
+    'md': 1,
+    'lg': 1.25,
+    'xl': 1.5,
+    '2l': 2
+)

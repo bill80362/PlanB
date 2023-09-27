@@ -410,5 +410,20 @@
       var thisVal = $(ele).val();
       $(target).val(thisVal);
     });
+  }); // product collapse list
+
+  $('.collapse-btn').on('click', function (e) {
+    e.preventDefault();
+    $(this).parent('.with-child').toggleClass('in-extand');
+  }); // slide Func box
+
+  $('.slideFunc-toggle').on('click', function (e) {
+    e.preventDefault();
+    var thisTarget = $(this).attr('data-target');
+    $(thisTarget).toggleClass('in-active');
+  });
+  $('.slideFunc-box').on('click', '.btn-close', function (e) {
+    e.preventDefault();
+    $(this).parents('.slideFunc-box').removeClass('in-active');
   });
 })(jQuery);
