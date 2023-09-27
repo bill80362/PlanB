@@ -27,8 +27,8 @@ class ImageTest extends TestCase
      */
     public function test_fit(): void
     {
-        $targetPath = __DIR__.'/images/another.jpg';
-        Image::load(__DIR__.'/images/example.jpg')
+        $targetPath = __DIR__ . '/images/another.jpg';
+        Image::load(__DIR__ . '/images/example.jpg')
             ->fit(Manipulations::FIT_FILL, 500, 700)
             ->save($targetPath);
 
@@ -41,8 +41,8 @@ class ImageTest extends TestCase
      */
     public function test_resize(): void
     {
-        $targetPath = __DIR__.'/images/resize.jpg';
-        Image::load(__DIR__.'/images/example.jpg')
+        $targetPath = __DIR__ . '/images/resize.jpg';
+        Image::load(__DIR__ . '/images/example.jpg')
             ->width(250)
             ->height(250)
             ->border(15, '007698', Manipulations::BORDER_OVERLAY) // 邊框
@@ -55,9 +55,9 @@ class ImageTest extends TestCase
      */
     public function test_watermarks(): void
     {
-        $watermarksPath = __DIR__.'/images/watermark.png';
-        $outputPath = __DIR__.'/images/wateroutput.jpg';
-        Image::load(__DIR__.'/images/example.jpg')
+        $watermarksPath = __DIR__ . '/images/watermark.png';
+        $outputPath = __DIR__ . '/images/wateroutput.jpg';
+        Image::load(__DIR__ . '/images/example.jpg')
             ->watermark($watermarksPath)
             ->watermarkPosition(Manipulations::POSITION_CENTER)
             ->save($outputPath);
@@ -73,6 +73,10 @@ class ImageTest extends TestCase
             'image' => UploadedFile::fake()->image('avatar.jpg'),
             'path' => 'editor',
         ]);
+        $json = $response->json();
+
+        $this->assertFileExists(public_path($json['url']));        
         $response->assertStatus(200);
+        unlink(public_path($json['url']));
     }
 }
