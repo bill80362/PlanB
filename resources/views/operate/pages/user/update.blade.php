@@ -39,25 +39,25 @@
                                                 @include('/operate/components/alert/error_message')
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label>名稱</label>
+                                                        <label>{{__($Data->Column_Title_Text["name"])}}</label>
                                                         <input type="text" class="form-control" name="name"
                                                             value="{{ $Data->name }}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>密碼</label>
+                                                        <label>{{__($Data->Column_Title_Text["password"])}}</label>
                                                         <input type="password" class="form-control" name="password"
                                                             value="">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Email</label>
+                                                        <label>{{__($Data->Column_Title_Text["email"])}}</label>
                                                         <input type="text" class="form-control" name="email"
                                                             value="{{ $Data->email }}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>狀態</label>
+                                                        <label>{{__($Data->Column_Title_Text["status"])}}</label>
                                                         <select class="form-control" name="status">
                                                             @foreach($Data->statusText as $key => $value)
-                                                            <option value="{{$key}}" {{ $Data->status==$value?"selected":"" }} >{{__($value)}}</option>
+                                                            <option value="{{$key}}" {{ $Data->status==$key?"selected":"" }} >{{__($value)}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -65,7 +65,7 @@
                                                 <div class="col-6">
                                                     <div>
                                                         <button class="btn btn-sm btn-primary m-2" type="button"
-                                                            onclick="$('input[type=\'checkbox\']').prop('checked', true);">全部打勾</button>
+                                                            onclick="$('input[type=\'checkbox\']').prop('checked', true);">{{__("全部打勾")}}</button>
                                                     </div>
                                                     <div>
                                                         {{ __('選擇群組') }}：
@@ -126,7 +126,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">送出</button>
+                                            <button type="submit" class="btn btn-primary">{{__("送出")}}</button>
                                         </div>
 
                                     </div>

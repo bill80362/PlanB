@@ -95,7 +95,7 @@ class User extends Authenticatable implements Auditable
     /**
      * model的key-value對轉，考慮excel匯入匯出可以使用
      */
-    public bool $useMutator = true; //是否使用資料變異器
+    public bool $useMutator = false; //是否使用資料變異器
     public array $statusText = [
         'Y' => '啟用',
         'N' => '停用',
@@ -104,7 +104,7 @@ class User extends Authenticatable implements Auditable
     {
         return Attribute::make(
             get: fn (string|null $value) => $this->useMutator ? (isset($this->statusText[$value]) ? __($this->statusText[$value]) : $value) : $value,
-            set: fn (string|null $value) => $this->useMutator ? (collect($this->statusText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
+//            set: fn (string|null $value) => $this->useMutator ? (collect($this->statusText)->mapWithKeys(fn ($value, $key) => ([__($value) => $key]))[$value] ?? $value) : $value,
         );
     }
     public array $lvText = [

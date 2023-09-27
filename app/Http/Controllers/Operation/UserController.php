@@ -187,9 +187,9 @@ class UserController extends Controller
     public function export($Type)
     {
         //匯出的內文是否使用變異器
-        $useMutator = true;
-        if($Type=="key"){
-            $useMutator = false;
+        $useMutator = false;
+        if($Type=="value"){
+            $useMutator = true;
         }
         $ExportList = $this->oModel->filter($this->request->all())->export($useMutator);
 
