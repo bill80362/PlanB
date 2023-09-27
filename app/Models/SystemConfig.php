@@ -29,6 +29,22 @@ class SystemConfig extends Model
         );
     }
 
+    //圖片上傳限制格式
+    use UploadImageLimitTrait;
+    public array $UploadImageLimit = [
+        "logo" => [
+            "mimes" => ["jpeg","png","jpg","gif","svg"],//檔案類型限制
+            "max" => "1024",//檔案大小，1MB=1024
+            "dimensions" => [//上傳圖片限制寬高
+//                "width" => 100,
+//                "height" => 100,
+//                "min_width" => 100,
+//                "min_height" => 100,
+                "max_width" => 100,
+                "max_height" => 100,
+            ],
+        ],
+    ];
 
     //DB儲存的資料
     public array $SystemConfig = [

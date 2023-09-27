@@ -43,7 +43,11 @@ class SystemController extends Controller
             //如果是圖片，則要先上傳，再將content改成檔案名稱
             if (in_array($id, $this->oSystemConfigService->SystemConfigImageKey)) {
                 $this->request->validate([
-                    $id => ['required', 'mimes:jpeg,png,jpg,gif','dimensions:width=100,height=200','max:1024'],
+                    $id => [
+                        $this->oModel->getUploadImageLimitMine($id),
+                        $this->oModel->getUploadImageLimitDimensions($id),
+                        $this->oModel->getUploadImageLimitMax($id),
+                    ],
                 ]);
             }
         }
