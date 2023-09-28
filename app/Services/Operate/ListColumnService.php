@@ -40,8 +40,17 @@ class ListColumnService
                 return $values;
             }
         }
-
         return false;
+    }
+
+    public function parseSetting(Model $model, $input = [])
+    {
+        $tableSetting = $this->getTableSetting($model);
+
+        $lockTitles = collect($input)->only($tableSetting['lockColumn']);
+        $titles = collect($input)->only($tableSetting['canUseColumn']);
+
+        return [$lockTitles, $titles];
     }
 
 
