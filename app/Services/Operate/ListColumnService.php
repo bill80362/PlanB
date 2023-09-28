@@ -13,7 +13,7 @@ class ListColumnService
 
     private $defines = [
         User::class => [
-            "allColumn" => [
+            "canUseColumn" => [
                 'id', 'name', 'email', 'status'
             ],
             "lockColumn" => [
@@ -23,13 +23,11 @@ class ListColumnService
 
 
         Language::class => [
-            "allColumn" => [
-                'default_serial_number',
-                'text', 'tran_text', 'lang_type', 'isUpdated', 'updated_at', 'created_at',
-                'default_action'
+            "canUseColumn" => [
+                'text', 'tran_text', 'isUpdated', 'updated_at', 'created_at'
             ],
             "lockColumn" => [
-                'default_serial_number', 'default_action'
+                'lang_type', 'default_serial_number'
             ],
         ],
     ];
@@ -56,9 +54,9 @@ class ListColumnService
             })->toArray();
         $setting = $this->getTableSetting($model);
 
-        if (count($datas) == 0) return $setting['allColumn'];
+        if (count($datas) == 0) return $setting['canUseColumn'];
         else {
-            $checkColumn = collect($datas)->intersect($setting['allColumn'])->toArray();
+            $checkColumn = collect($datas)->intersect($setting['canUseColumn'])->toArray();
             return array_merge($checkColumn, $setting['lockColumn']);
         }
     }
@@ -67,7 +65,7 @@ class ListColumnService
      * 
      */
     public function renewListColumn(Model $model, $list = [], $userId)
-    {        
+    {
         ListColumnSetting::where('list_model_type', $model::class)
             ->where('user_id', $userId)->delete();
         $list = array_reverse($list);

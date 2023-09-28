@@ -21,45 +21,30 @@ class LanguageController extends Controller
     ) {
     }
 
-    public function listHTMLV2(ListColumnService $listColumnService)
+    public function listHTML(ListColumnService $listColumnService)
     {
         $user = auth('operate')->user();
-        $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        $lockTitles = [
+
+        // table原設定
+        $tableSetting = $listColumnService->getTableSetting($this->oModel);
+        $componentTitles = [
             'default_serial_number' => '流水號',
-        ];
-        $titles = [
+            'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
             'text' => $this->oModel->Column_Title_Text['text'],
             'tran_text' => $this->oModel->Column_Title_Text['tran_text'],
-            'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
             'isUpdated' => '是否已修改',
             'updated_at' => $this->oModel->Column_Title_Text['updated_at'],
             'created_at' => $this->oModel->Column_Title_Text['created_at'],
         ];
+        $lockTitles = collect($componentTitles)->only($tableSetting['lockColumn']);
+        $titles = collect($componentTitles)->only($tableSetting['canUseColumn']);
 
+        // 使用者設定
+        $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
         $titles = collect($titles)->sortBy(function ($item, $key) use ($columns) {
             return array_search($key, $columns);
         })->toArray();
 
-
-        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
-        //過濾條件
-        $Paginator = $this->oModel->filter($this->request->all())
-            ->paginate($pageLimit);
-        return view('operate/pages/language/listv2', [
-            'Paginator' => $Paginator,
-            'Model' => $this->oModel,
-            'columns' => $columns,
-            'titles' => $titles,
-            'lockTitles' => $lockTitles
-        ]);
-    }
-
-    public function listHTML(ListColumnService $listColumnService)
-    {
-        $user = auth('operate')->user();
-        $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        // dump($columns);
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())
@@ -68,8 +53,12 @@ class LanguageController extends Controller
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
             'columns' => $columns,
+            'titles' => $titles,
+            'lockTitles' => $lockTitles,
+            'allkeys' => array_keys($titles)
         ]);
     }
+
 
     public function updateHTML($id)
     {
@@ -205,6 +194,9 @@ class LanguageController extends Controller
      */
     public function import()
     {
+        $this->request->validate([
+            'file' => ['required']
+        ]);
         $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
 
         //開始逐筆匯入

@@ -71,8 +71,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         //語系
         Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')
             ->middleware(['can:language_read']);
-        Route::get('/language_v2', [Operation\LanguageController::class, 'listHTMLV2'])->name('language_list_v2')
-            ->middleware(['can:language_read']);
+       
 
         Route::get('/language/{id}', [Operation\LanguageController::class, 'updateHTML'])->whereNumber('id')
             ->name('language_update_html')->middleware(['can:language_read']);

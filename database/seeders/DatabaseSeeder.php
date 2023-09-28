@@ -68,26 +68,26 @@ class DatabaseSeeder extends Seeder
             'perm_key' => 'mailOrder.newOrder',
         ]);
 
-        ListColumnSetting::create([
-            'list_model_type' => Language::class,
-            'user_id' => 2,
-            'column_name' => 'text',
-            'sort' => 1,
-        ]);
+        // ListColumnSetting::create([
+        //     'list_model_type' => Language::class,
+        //     'user_id' => 2,
+        //     'column_name' => 'text',
+        //     'sort' => 1,
+        // ]);
 
-        ListColumnSetting::create([
-            'list_model_type' => Language::class,
-            'user_id' => 2,
-            'column_name' => 'tran_text',
-            'sort' => 2,
-        ]);
+        // ListColumnSetting::create([
+        //     'list_model_type' => Language::class,
+        //     'user_id' => 2,
+        //     'column_name' => 'tran_text',
+        //     'sort' => 2,
+        // ]);
 
-        ListColumnSetting::create([
-            'list_model_type' => Language::class,
-            'user_id' => 2,
-            'column_name' => 'isUpdated',
-            'sort' => 3,
-        ]);
+        // ListColumnSetting::create([
+        //     'list_model_type' => Language::class,
+        //     'user_id' => 2,
+        //     'column_name' => 'isUpdated',
+        //     'sort' => 3,
+        // ]);
 
         // \App\Models\Permission\Permission::create([
         //     'user_id' => '1',
