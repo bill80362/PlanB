@@ -119,56 +119,40 @@
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr id="sortList">
-                                                    @if (in_array('default_serial_number', $columns))
-                                                        <th class="sortStyle ascStyle">{{ __('流水號') }}</th>
-                                                    @endif
+                                                    <th class="sortStyle ascStyle">{{ __('流水號') }}</th>
 
-                                                    @if (in_array('text', $columns))
-                                                        <th class="sortStyle unsortStyle"
-                                                            data-sort="{{ array_search('text', $columns) }}">
-                                                            {{ __($Model->Column_Title_Text['text']) }}</th>
-                                                    @endif
+                                                    <th class="sortStyle unsortStyle text_column" 
+                                                        data-sort="{{ array_search('text', $columns) }}">
+                                                        {{ __($Model->Column_Title_Text['text']) }}</th>
 
-                                                    @if (in_array('tran_text', $columns))
-                                                        <th class="sortStyle unsortStyle"
-                                                            data-sort="{{ array_search('tran_text', $columns) }}">
-                                                            {{ __($Model->Column_Title_Text['tran_text']) }}</th>
-                                                    @endif
+                                                    <th class="sortStyle unsortStyle tran_text_column"
+                                                        data-sort="{{ array_search('tran_text', $columns) }}">
+                                                        {{ __($Model->Column_Title_Text['tran_text']) }}</th>
 
-                                                    @if (in_array('lang_type', $columns))
-                                                        <th class="sortStyle unsortStyle"
-                                                            data-sort="{{ array_search('lang_type', $columns) }}">
-                                                            {{ __($Model->Column_Title_Text['lang_type']) }}</th>
-                                                    @endif
+                                                    <th class="sortStyle unsortStyle lang_type_column" 
+                                                        data-sort="{{ array_search('lang_type', $columns) }}">
+                                                        {{ __($Model->Column_Title_Text['lang_type']) }}</th>
 
-                                                    @if (in_array('isUpdated', $columns))
-                                                        <th class="sortStyle unsortStyle"
-                                                            data-sort="{{ array_search('isUpdated', $columns) }}">
-                                                            {{ __('是否已修改') }}
-                                                        </th>
-                                                    @endif
+                                                    <th class="sortStyle unsortStyle isUpdated_column" 
+                                                        data-sort="{{ array_search('isUpdated', $columns) }}">
+                                                        {{ __('是否已修改') }}
+                                                    </th>
 
-                                                    @if (in_array('updated_at', $columns))
-                                                        <th class="sortStyle unsortStyle"
-                                                            data-sort="{{ array_search('updated_at', $columns) }}">
-                                                            {{ __($Model->Column_Title_Text['updated_at']) }}</th>
-                                                    @endif
+                                                    <th class="sortStyle unsortStyle updated_at_column" 
+                                                        data-sort="{{ array_search('updated_at', $columns) }}">
+                                                        {{ __($Model->Column_Title_Text['updated_at']) }}</th>
 
-                                                    @if (in_array('created_at', $columns))
-                                                        <th class="sortStyle unsortStyle"
-                                                            data-sort="{{ array_search('created_at', $columns) }}">
-                                                            {{ __($Model->Column_Title_Text['created_at']) }}</th>
-                                                    @endif
+                                                    <th class="sortStyle unsortStyle created_at_column" 
+                                                        data-sort="{{ array_search('created_at', $columns) }}">
+                                                        {{ __($Model->Column_Title_Text['created_at']) }}</th>
 
 
-                                                    @if (in_array('default_action', $columns))
-                                                        <th class="text-end">
-                                                            <button onclick="openToggle(this)"
-                                                                class="btn btn-link slideFunc-toggle text-muted"
-                                                                data-target="#listSetting"><i
-                                                                    class="ti-settings"></i></button>
-                                                        </th>
-                                                    @endif
+
+                                                    <th class="text-end">
+                                                        <button onclick="openToggle(this)"
+                                                            class="btn btn-link slideFunc-toggle text-muted"
+                                                            data-target="#listSetting"><i class="ti-settings"></i></button>
+                                                    </th>
 
 
                                                 </tr>
@@ -183,38 +167,31 @@
                                                                 {{ $key + 1 + ($Paginator->currentPage() - 1) * $Paginator->perPage() }}
                                                             </td>
 
-                                                            @if (in_array('text', $columns))
-                                                                <td data-sort="{{ array_search('text', $columns) }}">
-                                                                    {{ $Item->text }}</td>
-                                                            @endif
+                                                            <td class="text_column" 
+                                                                data-sort="{{ array_search('text', $columns) }}">
+                                                                {{ $Item->text }}</td>
 
-                                                            @if (in_array('tran_text', $columns))
-                                                                <td data-sort="{{ array_search('tran_text', $columns) }}">
-                                                                    {{ $Item->tran_text }}</td>
-                                                            @endif
+                                                            <td class="tran_text_column"
+                                                                data-sort="{{ array_search('tran_text', $columns) }}">
+                                                                {{ $Item->tran_text }}</td>
 
-                                                            @if (in_array('lang_type', $columns))
-                                                                <td data-sort="{{ array_search('lang_type', $columns) }}">
-                                                                    {{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
-                                                                </td>
-                                                            @endif
+                                                            <td class="lang_type_column" 
+                                                                data-sort="{{ array_search('lang_type', $columns) }}">
+                                                                {{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
+                                                            </td>
 
-                                                            @if (in_array('isUpdated', $columns))
-                                                                <td data-sort="{{ array_search('isUpdated', $columns) }}">
-                                                                    {{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
-                                                            @endif
+                                                            <td class="isUpdated_column"
+                                                                data-sort="{{ array_search('isUpdated', $columns) }}">
+                                                                {{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
 
-                                                            @if (in_array('updated_at', $columns))
-                                                                <td
-                                                                    data-sort="{{ array_search('updated_at', $columns) }}">
-                                                                    {{ $Item->updated_at }}</td>
-                                                            @endif
+                                                            <td class="updated_at_column"
+                                                                data-sort="{{ array_search('updated_at', $columns) }}">
+                                                                {{ $Item->updated_at }}</td>
 
-                                                            @if (in_array('created_at', $columns))
-                                                                <td
-                                                                    data-sort="{{ array_search('created_at', $columns) }}">
-                                                                    {{ $Item->created_at }}</td>
-                                                            @endif
+                                                            <td class="created_at_column"
+                                                                data-sort="{{ array_search('created_at', $columns) }}">
+                                                                {{ $Item->created_at }}</td>
+                                                                
                                                             <td class="text-end">
                                                                 <div class="btn-group">
                                                                     <button type="button"
@@ -458,7 +435,15 @@
             $(data).toggleClass('in-active')
         }
         // tableSort
-        // console.log(@json($columns))
+        let columns = @json($columns);
+        let allColumn = @json($allkeys);
+        allColumn.forEach(element => {
+            $("." + element + "_column").hide();
+        });
+
+        columns.forEach(element => {
+            $("." + element + "_column").show();
+        });
 
         // 處理排序
         $(document).ready(function() {

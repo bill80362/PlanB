@@ -51,7 +51,8 @@ class LanguageController extends Controller
             'Model' => $this->oModel,
             'columns' => $columns,
             'titles' => $titles,
-            'lockTitles' => $lockTitles
+            'lockTitles' => $lockTitles,
+            'allkeys' => array_keys($titles)
         ]);
     }
 
