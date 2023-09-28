@@ -88,7 +88,7 @@
                                     <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon
                                             name="funnel-outline"></ion-icon>
                                         {{__("篩選器")}}</button>
-                                    <button class="btn btn-muted">{{__("重置查詢")}}</button>
+                                    <a class="btn btn-muted" href="{{request()->url()}}">{{__("重置查詢")}}</a>
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
@@ -191,34 +191,34 @@
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="http://127.0.0.1/operate/user/import" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG" />
+            <form action="{{route("user_import")}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="importModalLabel">匯入新增</h5>
+                        <h5 class="modal-title" id="importModalLabel">{{__("匯入新增")}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h6 class="card-subtitle mb-2">請上傳Excel檔案</h6>
+                        <h6 class="card-subtitle mb-2">{{__("請上傳Excel檔案")}}</h6>
                         <div class=" mb-0">
                             <input type="file" class="" name="file">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">送出</button>
+                        <button type="submit" class="btn btn-primary">{{__("送出")}}</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
+    <form>
     <!-- Modal -->
     <div class="slideFunc-box" id="prodFilter">
         <div class="slideFunc-content">
             <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
-                <h5 class="slideFunc-title" id="prodFilterTitle">商品篩選器</h5>
+                <h5 class="slideFunc-title" id="prodFilterTitle">{{__("篩選器")}}</h5>
                 <button type="button" class="btn-close" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
@@ -226,320 +226,29 @@
             <div class="slideFunc-body px-3 py-3">
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">編修狀態</label>
-                            <div class="form-check-wrap">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio1">
-                                    <label class="form-check-label" for="FlexRadio1">
-                                        不限制
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio2">
-                                    <label class="form-check-label" for="FlexRadio2">
-                                        完稿
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        草稿
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">上架狀態</label>
-                            <div class="form-check-wrap">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio1">
-                                    <label class="form-check-label" for="FlexRadio1">
-                                        不限制
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio2">
-                                    <label class="form-check-label" for="FlexRadio2">
-                                        上架
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        下架
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">上架期間狀態</label>
-                            <div class="form-check-wrap">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio1">
-                                    <label class="form-check-label" for="FlexRadio1">
-                                        不限制
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio2">
-                                    <label class="form-check-label" for="FlexRadio2">
-                                        未開始
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        進行中
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        已結束
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">熱銷品牌狀態</label>
-                            <div class="form-check-wrap">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio1">
-                                    <label class="form-check-label" for="FlexRadio1">
-                                        不限制
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio2">
-                                    <label class="form-check-label" for="FlexRadio2">
-                                        是
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        否
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">新品狀態</label>
-                            <div class="form-check-wrap">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio1">
-                                    <label class="form-check-label" for="FlexRadio1">
-                                        不限制
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio2">
-                                    <label class="form-check-label" for="FlexRadio2">
-                                        是
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        否
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">串接狀態</label>
-                            <div class="form-check-wrap">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio1">
-                                    <label class="form-check-label" for="FlexRadio1">
-                                        不限制
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio2">
-                                    <label class="form-check-label" for="FlexRadio2">
-                                        未串接
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        串接成功
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="FlexRadio" value=""
-                                        id="FlexRadio3">
-                                    <label class="form-check-label" for="FlexRadio3">
-                                        串接失敗
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品分店</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
+
+                        <div class="form-group">
+                            <label>{{$Model->Column_Title_Text["status"]}}</label>
+                            <select name="filter_status[]" class="select2bs5" multiple="multiple" style="width: 100%;">
+                                @foreach ($Model->statusText as $key => $value)
+                                    <option
+                                        value="{{$key}}" {{in_array($key,(array)request()->get("filter_status"))?"selected":""}} >{{$value}}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品分館</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品分類</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品細分類</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品品牌</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品類型</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">商品組合</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">一頁式商品</label>
-                            <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                style="width: 100%">
-                                <option value="Y">未開始</option>
-                                <option value="N">進行中</option>
-                                <option value="N">已過期</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">建立時間</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
-                                <span class="input-group-text">~</span>
-                                <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">上架時間</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
-                                <span class="input-group-text">~</span>
-                                <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">加入購物車時間</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
-                                <span class="input-group-text">~</span>
-                                <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">庫存數量</label>
-                            <div class="input-group">
-                                <select class="form-select" id="inputGroupSelect02">
-                                    <option selected>請選擇</option>
-                                    <option value="1">小於</option>
-                                    <option value="2">等於</option>
-                                    <option value="3">大於</option>
-                                </select>
-                                <input type="number" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">預購庫存數量</label>
-                            <div class="input-group">
-                                <select class="form-select" id="inputGroupSelect02">
-                                    <option selected>請選擇</option>
-                                    <option value="1">小於</option>
-                                    <option value="2">等於</option>
-                                    <option value="3">大於</option>
-                                </select>
-                                <input type="number" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label d-block">安全庫存數量</label>
-                            <div class="input-group">
-                                <select class="form-select" id="inputGroupSelect02">
-                                    <option selected>請選擇</option>
-                                    <option value="1">小於</option>
-                                    <option value="2">等於</option>
-                                    <option value="3">大於</option>
-                                </select>
-                                <input type="number" class="form-control">
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <input id="searchFilter" type="hidden" value="">
                 <input id="searchString" type="hidden" value="">
             </div>
             <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
-                <button type="reset" class="btn btn-muted mx-2">清除篩選器</button>
-                <button type="submit" class="btn btn-primary mx-2">套用N篩選條件</button>
+                <button type="reset" class="btn btn-muted mx-2">{{__("清除篩選器")}}</button>
+                <button type="submit" class="btn btn-primary mx-2">{{__("套用篩選條件")}}</button>
             </div>
         </div>
     </div>
-
+    </form>
     <!-- Modal -->
     <div class="slideFunc-box" id="listSetting">
         <div class="slideFunc-content">
