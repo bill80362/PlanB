@@ -10,6 +10,8 @@
 //reset css
 @import "reset";
 
+@import "color";
+
 //reset css
 @import "button";
 
@@ -82,3 +84,12 @@
 @import "predefine";
 @import "board";
 @import "product";
+
+// plugin sortTable
+@import "jq.tablesort";
+
+// select2 fixed
+.select2-container.select2-container--open {
+    z-index: 2000;
+}
+

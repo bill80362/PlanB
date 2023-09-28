@@ -1,35 +1,349 @@
 
-$font_style_1:'Nunito', sans-serif;
-$font_style_2:'Nunito', sans-serif;
-$font_style_3:'Comfortaa', cursive;
-$white: #fff;
-$black: #000;
-$base_color: #2E4765;
-$body_bg: #FFFFFF;
+$font_style_1:'Nunito', 'Noto Sans TC', 'Helvetica', 'Arial', 'Apple LiGothic Medium', '微軟正黑體', 'Microsoft Jhenghei',sans-serif;
+$font_style_2:'Nunito', 'Noto Sans TC', 'Helvetica', 'Arial', 'Apple LiGothic Medium', '微軟正黑體', 'Microsoft Jhenghei',sans-serif;
+$font_style_3:'Comfortaa', 'Noto Sans TC', cursive;
 
-$section_bg: #fef1f2;
-$section_bg_1: #F5ECEC;
-$heading_color_1: #14256A;
-$heading_color_2: #151B26;
-$heading_color_3: #192434;
+$black      : #000      !default;
+$gray-900   : #212529   !default;
+$gray-800   : #343a40   !default;
+$gray-700   : #495057   !default;
+$gray-600   : #6c757d   !default;
+$gray-500   : #adb5bd   !default;
+$gray-400   : #ced4da   !default;
+$gray-300   : #dee2e6   !default;
+$gray-200   : #e9ecef   !default;
+$gray-100   : #f8f9fa   !default;
+$white      : #fff      !default;
 
-$icon_color: #D9D9D9;
-$text_color: #7e7172;
-$text_color_2: #222222;
-$text_color_3: #707070;
+$red        : #dc3545   !default;
+$pink       : #d63384   !default;
+$orange     : #fd7e14   !default;
+$yellow     : #ffc107   !default;
+$green      : #198754   !default;
+$teal       : #20c997   !default;
+$cyan       : #0dcaf0   !default;
+$blue       : #0d6efd   !default;
+$indigo     : #6610f2   !default;
+$purple     : #6f42c1   !default;
+$brown      : #804000   !default;
 
-$text_color_4: #707DB7;
-$text_color_5: #828BB2;
-$text_color_1:#707070;
-$border_color: #79838b;
-$border_color_1: #BBC1C9;
-$border_color_2: #f1f2f3;
-$border_color_3: #e4e8ec;
-$border_color_4: #eee1e2;
+// 自訂顏色
+
+$red        : #fa3f52;
+$pink       : #f5619a;
+$orange     : #ff8d2f;
+$yellow     : #ffd753;
+$green      : #99db2e;
+$teal       : #64C5B1;
+$cyan       : #67d6ec;
+$blue       : #6d99f7;
+$indigo     : #2D1967;
+$purple     : #936adf;
+$brown      : #773820;
+
+$colors : (
+    "red"       : $red,
+    "pink"      : $pink,
+    "orange"    : $orange,
+    "yellow"    : $yellow,
+    "green"     : $green,
+    "teal"      : $teal,
+    "cyan"      : $cyan,
+    "blue"      : $blue,
+    "indigo"    : $indigo,
+    "purple"    : $purple,
+    "brown"     : $brown  
+);
+
+$red-900        : scale-color($red, $lightness: -80%);
+$red-800        : scale-color($red, $lightness: -60%);
+$red-700        : scale-color($red, $lightness: -40%);
+$red-600        : scale-color($red, $lightness: -20%);
+$red-500        : scale-color($red, $lightness: 0%);
+$red-400        : scale-color($red, $lightness: 20%);
+$red-300        : scale-color($red, $lightness: 40%);
+$red-200        : scale-color($red, $lightness: 60%);
+$red-100        : scale-color($red, $lightness: 80%);
+
+$reds           : (
+    "900"       : $red-900,
+    "800"       : $red-800,
+    "700"       : $red-700,
+    "600"       : $red-600,
+    "500"       : $red-500,
+    "400"       : $red-400,
+    "300"       : $red-300,
+    "200"       : $red-200,
+    "100"       : $red-100
+);
+
+$pink-900       : scale-color($pink, $lightness: -80%);
+$pink-800       : scale-color($pink, $lightness: -60%);
+$pink-700       : scale-color($pink, $lightness: -40%);
+$pink-600       : scale-color($pink, $lightness: -20%);
+$pink-500       : scale-color($pink, $lightness: 0%);
+$pink-400       : scale-color($pink, $lightness: 20%);
+$pink-300       : scale-color($pink, $lightness: 40%);
+$pink-200       : scale-color($pink, $lightness: 60%);
+$pink-100       : scale-color($pink, $lightness: 80%);
+
+$pinks           : (
+    "900"       : $pink-900,
+    "800"       : $pink-800,
+    "700"       : $pink-700,
+    "600"       : $pink-600,
+    "500"       : $pink-500,
+    "400"       : $pink-400,
+    "300"       : $pink-300,
+    "200"       : $pink-200,
+    "100"       : $pink-100
+);
+
+$orange-900     : scale-color($orange, $lightness: -80%);
+$orange-800     : scale-color($orange, $lightness: -60%);
+$orange-700     : scale-color($orange, $lightness: -40%);
+$orange-600     : scale-color($orange, $lightness: -20%);
+$orange-500     : scale-color($orange, $lightness: 0%);
+$orange-400     : scale-color($orange, $lightness: 20%);
+$orange-300     : scale-color($orange, $lightness: 40%);
+$orange-200     : scale-color($orange, $lightness: 60%);
+$orange-100     : scale-color($orange, $lightness: 80%);
+
+$oranges           : (
+    "900"       : $orange-900,
+    "800"       : $orange-800,
+    "700"       : $orange-700,
+    "600"       : $orange-600,
+    "500"       : $orange-500,
+    "400"       : $orange-400,
+    "300"       : $orange-300,
+    "200"       : $orange-200,
+    "100"       : $orange-100
+);
+
+$yellow-900     : scale-color($yellow, $lightness: -80%);
+$yellow-800     : scale-color($yellow, $lightness: -60%);
+$yellow-700     : scale-color($yellow, $lightness: -40%);
+$yellow-600     : scale-color($yellow, $lightness: -20%);
+$yellow-500     : scale-color($yellow, $lightness: 0%);
+$yellow-400     : scale-color($yellow, $lightness: 20%);
+$yellow-300     : scale-color($yellow, $lightness: 40%);
+$yellow-200     : scale-color($yellow, $lightness: 60%);
+$yellow-100     : scale-color($yellow, $lightness: 80%);
+
+$yellows           : (
+    "900"       : $yellow-900,
+    "800"       : $yellow-800,
+    "700"       : $yellow-700,
+    "600"       : $yellow-600,
+    "500"       : $yellow-500,
+    "400"       : $yellow-400,
+    "300"       : $yellow-300,
+    "200"       : $yellow-200,
+    "100"       : $yellow-100
+);
+
+$green-900      : scale-color($green, $lightness: -80%);
+$green-800      : scale-color($green, $lightness: -60%);
+$green-700      : scale-color($green, $lightness: -40%);
+$green-600      : scale-color($green, $lightness: -20%);
+$green-500      : scale-color($green, $lightness: 0%);
+$green-400      : scale-color($green, $lightness: 20%);
+$green-300      : scale-color($green, $lightness: 40%);
+$green-200      : scale-color($green, $lightness: 60%);
+$green-100      : scale-color($green, $lightness: 80%);
+
+$greens           : (
+    "900"       : $green-900,
+    "800"       : $green-800,
+    "700"       : $green-700,
+    "600"       : $green-600,
+    "500"       : $green-500,
+    "400"       : $green-400,
+    "300"       : $green-300,
+    "200"       : $green-200,
+    "100"       : $green-100
+);
+
+$teal-900       : scale-color($teal, $lightness: -80%);
+$teal-800       : scale-color($teal, $lightness: -60%);
+$teal-700       : scale-color($teal, $lightness: -40%);
+$teal-600       : scale-color($teal, $lightness: -20%);
+$teal-500       : scale-color($teal, $lightness: 0%);
+$teal-400       : scale-color($teal, $lightness: 20%);
+$teal-300       : scale-color($teal, $lightness: 40%);
+$teal-200       : scale-color($teal, $lightness: 60%);
+$teal-100       : scale-color($teal, $lightness: 80%);
+
+$teals           : (
+    "900"       : $teal-900,
+    "800"       : $teal-800,
+    "700"       : $teal-700,
+    "600"       : $teal-600,
+    "500"       : $teal-500,
+    "400"       : $teal-400,
+    "300"       : $teal-300,
+    "200"       : $teal-200,
+    "100"       : $teal-100
+);
+
+$cyan-900       : scale-color($cyan, $lightness: -80%);
+$cyan-800       : scale-color($cyan, $lightness: -60%);
+$cyan-700       : scale-color($cyan, $lightness: -40%);
+$cyan-600       : scale-color($cyan, $lightness: -20%);
+$cyan-500       : scale-color($cyan, $lightness: 0%);
+$cyan-400       : scale-color($cyan, $lightness: 20%);
+$cyan-300       : scale-color($cyan, $lightness: 40%);
+$cyan-200       : scale-color($cyan, $lightness: 60%);
+$cyan-100       : scale-color($cyan, $lightness: 80%);
+
+$cyans           : (
+    "900"       : $cyan-900,
+    "800"       : $cyan-800,
+    "700"       : $cyan-700,
+    "600"       : $cyan-600,
+    "500"       : $cyan-500,
+    "400"       : $cyan-400,
+    "300"       : $cyan-300,
+    "200"       : $cyan-200,
+    "100"       : $cyan-100
+);
+
+$blue-900       : scale-color($blue, $lightness: -80%);
+$blue-800       : scale-color($blue, $lightness: -60%);
+$blue-700       : scale-color($blue, $lightness: -40%);
+$blue-600       : scale-color($blue, $lightness: -20%);
+$blue-500       : scale-color($blue, $lightness: 0%);
+$blue-400       : scale-color($blue, $lightness: 20%);
+$blue-300       : scale-color($blue, $lightness: 40%);
+$blue-200       : scale-color($blue, $lightness: 60%);
+$blue-100       : scale-color($blue, $lightness: 80%);
+
+$blues           : (
+    "900"       : $blue-900,
+    "800"       : $blue-800,
+    "700"       : $blue-700,
+    "600"       : $blue-600,
+    "500"       : $blue-500,
+    "400"       : $blue-400,
+    "300"       : $blue-300,
+    "200"       : $blue-200,
+    "100"       : $blue-100
+);
+
+$indigo-900     : scale-color($indigo, $lightness: -80%);
+$indigo-800     : scale-color($indigo, $lightness: -60%);
+$indigo-700     : scale-color($indigo, $lightness: -40%);
+$indigo-600     : scale-color($indigo, $lightness: -20%);
+$indigo-500     : scale-color($indigo, $lightness: 0%);
+$indigo-400     : scale-color($indigo, $lightness: 20%);
+$indigo-300     : scale-color($indigo, $lightness: 40%);
+$indigo-200     : scale-color($indigo, $lightness: 60%);
+$indigo-100     : scale-color($indigo, $lightness: 80%);
+
+$indigos           : (
+    "900"       : $indigo-900,
+    "800"       : $indigo-800,
+    "700"       : $indigo-700,
+    "600"       : $indigo-600,
+    "500"       : $indigo-500,
+    "400"       : $indigo-400,
+    "300"       : $indigo-300,
+    "200"       : $indigo-200,
+    "100"       : $indigo-100
+);
+
+$purple-900     : scale-color($purple, $lightness: -80%);
+$purple-800     : scale-color($purple, $lightness: -60%);
+$purple-700     : scale-color($purple, $lightness: -40%);
+$purple-600     : scale-color($purple, $lightness: -20%);
+$purple-500     : scale-color($purple, $lightness: 0%);
+$purple-400     : scale-color($purple, $lightness: 20%);
+$purple-300     : scale-color($purple, $lightness: 40%);
+$purple-200     : scale-color($purple, $lightness: 60%);
+$purple-100     : scale-color($purple, $lightness: 80%);
+
+$purples           : (
+    "900"       : $purple-900,
+    "800"       : $purple-800,
+    "700"       : $purple-700,
+    "600"       : $purple-600,
+    "500"       : $purple-500,
+    "400"       : $purple-400,
+    "300"       : $purple-300,
+    "200"       : $purple-200,
+    "100"       : $purple-100
+);
+
+$brown-900      : scale-color($brown, $lightness: -80%);
+$brown-800      : scale-color($brown, $lightness: -60%);
+$brown-700      : scale-color($brown, $lightness: -40%);
+$brown-600      : scale-color($brown, $lightness: -20%);
+$brown-500      : scale-color($brown, $lightness: 0%);
+$brown-400      : scale-color($brown, $lightness: 20%);
+$brown-300      : scale-color($brown, $lightness: 40%);
+$brown-200      : scale-color($brown, $lightness: 60%);
+$brown-100      : scale-color($brown, $lightness: 80%);
+
+$browns           : (
+    "900"       : $brown-900,
+    "800"       : $brown-800,
+    "700"       : $brown-700,
+    "600"       : $brown-600,
+    "500"       : $brown-500,
+    "400"       : $brown-400,
+    "300"       : $brown-300,
+    "200"       : $brown-200,
+    "100"       : $brown-100
+);
+
+$primary    : $indigo;
+$secondary  : $teal;
+$danger     : $pink;
+$warning    : $yellow;
+$success    : $green;
+$info       : $cyan;
+$muted      : $gray-500;
+$dark       : $gray-900;
+$light      : $gray-100;
+
+$theme_colors : (
+    "primary"   : $primary,
+    "secondary" : $secondary,
+    "danger"    : $danger,
+    "warning"   : $warning,
+    "success"   : $success,
+    "info"      : $info,
+    "muted"     : $muted,
+    "dark"      : $dark,
+    "light"     : $light      
+);
+
+
+$base_color: $gray-800;
+$body_bg: $white;
+
+$section_bg: $gray-100;
+$section_bg_1: $gray-200;
+$heading_color_1: $primary;
+$heading_color_2: $gray-900;
+$heading_color_3: $gray-900;
+
+$icon_color: $gray-300;
+$text_color: $gray-600;
+$text_color_2: $gray-900;
+$text_color_3: $gray-600;
+
+$text_color_4: $gray-600;
+$text_color_5: $gray-500;
+$text_color_1: $gray-600;
+$border_color: $gray-600;
+$border_color_1: $gray-500;
+$border_color_2: $gray-100;
+$border_color_3: $gray-200;
+$border_color_4: $gray-100;
 
 // bg color 
-$blue_bg: #3B76EF;
-
 $big_device: '(min-width: 1200px)';
 $tab: '(max-width: 991px)';
 $min_tab: '(min-width: 991px)';
@@ -58,3 +372,4 @@ $mobile_device:'(max-width: 767.98px)';
 $min_1200px: '(min-width: 1201px)';
 
 $min_1680px: '(min-width: 1680px)';
+

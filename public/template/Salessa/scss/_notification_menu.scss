@@ -34,9 +34,9 @@
         }
     }
     .Notification_body{
-        padding: 20px 20px;
-        height: 300px;
+        max-height: 300px;
         overflow: auto;
+        padding: 20px 20px;
         .single_notify{
             margin-bottom: 10px;
             &:last-child{
@@ -51,17 +51,25 @@
                 }
             }
             .notify_content{
+                flex: 1 0 0px;
+                width: 1px;
                 a{
                     h5{
-                        margin-bottom: 0;
                         font-size: 16px;
                         font-weight: 500;
+                        margin-bottom: 0;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
                 }
                 p{
                     font-size: 13px;
                     font-weight: 400;
                     margin-bottom: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
 

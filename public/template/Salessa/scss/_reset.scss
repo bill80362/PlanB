@@ -1,5 +1,6 @@
 /**************** common css start ****************/
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+
 body{
     font-family: $font_style_1;
     padding: 0;
@@ -45,7 +46,7 @@ input:hover, input:focus{
 }
 .dropdown-menu{
     margin: 0;
-    padding: 0;
+    padding: .25rem 0;
 }
 .section_padding {
     padding: 120px 0px;
@@ -1458,32 +1459,76 @@ p{
 }
 
 .page-item.active .page-link {
-    background-color: #2D1967;
-    border-color: #2D1967;
+    background-color: $primary;
+    border-color: $primary;
+    color: if(lightness($primary) > 75%, $black, $white);
     &:hover {
-        color: #fff;
-        background-color: #2D1967e6;
-        border-color: #2D1967e6;
+        pointer-events: none;
     }
 }
 .page-link {
-    color: #2D1967;
-    &:hover {
-        color: #fff;
-        background-color: #2D1967e6;
-        border-color: #2D1967e6;
+    .pagination & {
+        border-color: $gray-200;
+        border-radius: 99px;
+        box-shadow: none;
+        color: $primary;
+        display: block;
+        line-height: 1;
+        margin: 0;
+        min-width: calc(2em + 2px);
+        padding: .5em;
+        text-align: center;
+        &:hover {
+            background-color: $primary;
+            border-color: $primary;
+            color: if(lightness($primary) > 75%, $black, $white);
+            transition: all .25s;
+        }
+    }
+    
+    .page-arrow > & {
+        border: none;
+        border-radius: 0;
+        &:hover {
+            background-color: transparent;
+            color:if(lightness($primary) > 75%, scale-color($primary, $lightness: -10%), scale-color($primary, $lightness: 15%));
+        }
     }
 }
-.btn-primary {
-	color: #fff;
-	background-color: #2D1967;
-	border-color: #2D1967;
+.pagination {
+    .page-item{
+        margin-left: .5rem;
+    }
 }
-.btn-primary:hover {
-    color: #fff;
-    background-color: #2D1967e6;
-    border-color: #2D1967e6;
+@each $name, $color in $theme_colors {
+    .btn-#{$name} {
+        background-color: $color;
+        border-color: $color;
+        color: if(lightness($color) > 75%, $black, $white);
+        &:hover {
+            $thisColor : if(lightness($color) > 75%, scale-color($color, $lightness: -10%), scale-color($color, $lightness: 15%));
+            background-color: $thisColor;
+            border-color: $thisColor;
+            color: if(lightness($color) > 75%, $black, $white);
+            transition: all .25s;
+        }
+    }
+    .text-#{$name} {
+        color: $color;
+    }
+    a.text-#{$name} {
+        &:hover {
+            $thisColor : if(lightness($color) > 75%, scale-color($color, $lightness: -10%), scale-color($color, $lightness: 15%));
+            color: $thisColor;
+            transition: all .25s;
+        }
+    }
+    .bg-#{$name} {
+        background-color: $color;
+        color: if(lightness($color) > 75%, $black, $white);
+    }
 }
+
 
 .sm_padding_15px{
     @media #{$tab} {
@@ -1608,38 +1653,6 @@ p{
 }
 .p-20 {
 	padding: 20px;
-}
-.bg-primary {
-    background-color: #4c2fbf !important;
-    color: #fff;
-}
-.bg-secondary {
-    background-color: #2e9de4 !important;
-    color: #fff;
-}
-.bg-success {
-    background-color: #80cf00 !important;
-    color: #fff;
-}
-.bg-info {
-    background-color: #06b5dd !important;
-    color: #fff;
-}
-.bg-warning {
-    background-color: #ffc717 !important;
-    color: #fff;
-}
-.bg-danger {
-    background-color: #fd517d !important;
-    color: #fff;
-}
-.bg-light {
-    background-color: #f8f5fd !important;
-    color: #fff;
-}
-.bg-dark {
-    background-color: #2c323f !important;
-    color: #fff;
 }
 .color-box > div > div {
     border-radius: 15px;
@@ -1982,5 +1995,12 @@ p{
 .sm_w_100{
     @media #{$small_mobile} {
         width: 100%;
+    }
+}
+[class*="ti-"] {
+    display: inline-block;
+    vertical-align: middle;
+    &:before {
+        display: block;
     }
 }
