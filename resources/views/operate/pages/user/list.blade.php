@@ -253,7 +253,7 @@
     <div class="slideFunc-box" id="listSetting">
         <div class="slideFunc-content">
             <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
-                <h5 class="slideFunc-title" id="listSettingTitle">列表欄位調整</h5>
+                <h5 class="slideFunc-title" id="listSettingTitle">{{__("列表欄位調整")}}</h5>
                 <button type="button" class="btn-close" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
@@ -262,6 +262,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="list-group">
+
                             <div class="sort-item">
                                 <div class="list-group-item d-flex flex-content-between align-items-center">
                                     <div class="form-check flex-fill">
@@ -288,6 +289,7 @@
                                     <i class="ti-lock"></i>
                                 </div>
                             </div>
+
                             <div class="sort-item" id="sortGroup">
                                 <div class="list-group-item d-flex flex-content-between align-items-center">
                                     <div class="form-check flex-fill">
