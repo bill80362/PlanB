@@ -6,40 +6,7 @@
 
 @section('Content')
     <!-- main content part here -->
-
-    <!-- sidebar  -->
-    <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
-        <div class="logo d-flex justify-content-between">
-            <a href="index.html"><img src="img/logo.png" alt=""></a>
-            <div class="sidebar_close_icon d-lg-none">
-                <i class="ti-close"></i>
-            </div>
-        </div>
-        <ul id="sidebar_menu">
-            <li class="">
-                <a href="./demo_list.html" class="">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/2.svg" alt="">
-                    </div>
-                    <span>列表範例</span>
-                </a>
-            </li>
-            <li class="">
-                <a href="./demo_page.html" class="">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/4.svg" alt="">
-                    </div>
-                    <span>細節頁範例</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <!--/ sidebar  -->
-
-
     <section>
-
-
         <div class="container-fluid p-0 ">
             <!-- page Content  -->
             <div class="row justify-content-center">

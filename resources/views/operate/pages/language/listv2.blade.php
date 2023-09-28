@@ -5,41 +5,7 @@
 
 
 @section('Content')
-    <!-- main content part here -->
-
-    <!-- sidebar  -->
-    <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
-        <div class="logo d-flex justify-content-between">
-            <a href="index.html"><img src="img/logo.png" alt=""></a>
-            <div class="sidebar_close_icon d-lg-none">
-                <i class="ti-close"></i>
-            </div>
-        </div>
-        <ul id="sidebar_menu">
-            <li class="">
-                <a href="./demo_list.html" class="">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/2.svg" alt="">
-                    </div>
-                    <span>列表範例</span>
-                </a>
-            </li>
-            <li class="">
-                <a href="./demo_page.html" class="">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/4.svg" alt="">
-                    </div>
-                    <span>細節頁範例</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <!--/ sidebar  -->
-
-
     <section>
-
-
         <div class="container-fluid p-0 ">
             <!-- page Content  -->
             <div class="row justify-content-center">
@@ -47,7 +13,7 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>管理人管理 列表</h2>
+                                <h2>{{ __('語系管理') }}</h2>
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
@@ -86,11 +52,14 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="btn-group">
-                                    <a class="btn btn-primary" href="http://127.0.0.1/operate/user/0?">
-                                        新增
-                                    </a>
-                                </div>
+                                @can('language_create')
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('language_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
+                                            {{ __('新增') }}
+                                        </a>
+                                    </div>
+                                @endcan
                             </div>
                         </div>
                         <div class="white_card_body">
