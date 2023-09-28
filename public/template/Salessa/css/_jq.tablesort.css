@@ -1,0 +1,21 @@
+.sortStyle {
+  cursor: pointer;
+}
+
+.ascStyle {
+  background-image: url(../../Sort-Table-Rows-By-Content-jq-TableSort/img/asc.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+.descStyle {
+  background-image: url(../../Sort-Table-Rows-By-Content-jq-TableSort/img/desc.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+.unsortStyle {
+  background-image: url(../../Sort-Table-Rows-By-Content-jq-TableSort/img/bg.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+}

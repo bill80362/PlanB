@@ -1,0 +1,61 @@
+@each $name, $color in $colors {
+    .#{$name} {
+        color: $color;
+    }
+}
+
+@each $level, $color in $reds {
+    .red-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $pinks {
+    .pink-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $oranges {
+    .orange-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $yellows {
+    .yellow-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $greens {
+    .green-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $teals {
+    .teal-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $cyans {
+    .cyan-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $blues {
+    .blue-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $indigos {
+    .indigo-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $purples {
+    .purple-#{$level} {
+        color: $color;
+    }
+}
+@each $level, $color in $browns {
+    .brown-#{$level} {
+        color: $color;
+    }
+}
