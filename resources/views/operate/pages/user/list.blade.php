@@ -99,12 +99,12 @@
                                             @if( strpos($filter_name,"filter_") === 0 )
                                                 @if( is_array($filter_value) )
                                                     @foreach( $filter_value as  $filter_value_sub)
-                                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}')">
+                                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value_sub}}')">
                                                             {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value_sub]}} <i class="ti-close"></i>
                                                         </button>
                                                     @endforeach
                                                 @else
-                                                    <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}')">
+                                                    <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value}}')">
                                                         {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value]}} <i class="ti-close"></i>
                                                     </button>
                                                 @endif
@@ -493,13 +493,15 @@
             postForm('/operate/user/del?{{request()->getQueryString()}}',postArray)
         });
 
-        //
-        function deleteFilter(deleteFilterName){
+        //刪除Filter
+        function deleteFilter(deleteFilterName,deleteFilterValue){
             let queryString = '{{request()->getQueryString()}}';
             let newQueryString = '';
-            queryString.split("&").map(function(item){
+            queryString.split("&amp;").map(function(item){
+                console.log(item);
                 let name = item.split("=")[0];
-                if(  name.indexOf(deleteFilterName)===-1){
+                let value = item.split("=")[1];
+                if(  ! (name.indexOf(deleteFilterName)>=0 && value == deleteFilterValue)  ){
                     newQueryString += item+'&';
                 }
             });
