@@ -14,7 +14,7 @@
             <div class="white_card">
                 <div class="white_card_header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h2>{{ __('操作紀錄') }} {{ __('列表') }}</h2>
+                        <h2>{{ __($RouteTitle->getTitle("audit_list")) }}</h2>
                     </div>
                 </div>
                 <div class="white_card_body">

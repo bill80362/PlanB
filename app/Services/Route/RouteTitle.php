@@ -19,7 +19,7 @@ class RouteTitle
         "user_import" => "管理人匯入",
         "user_audit" => "管理人操作紀錄",
         //
-        "audit_list" => "操作紀錄管理",
+        "audit_list" => "操作紀錄列表",
         "audit_update_html" => "操作紀錄修改",
         "audit_update" => "操作紀錄修改提交",
         "audit_del" => "操作紀錄刪除提交",
