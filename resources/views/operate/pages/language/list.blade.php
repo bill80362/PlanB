@@ -121,7 +121,7 @@
                                                 <tr id="sortList">
                                                     <th class="sortStyle ascStyle">{{ __('流水號') }}</th>
 
-                                                    <th class="sortStyle unsortStyle text_column" 
+                                                    <th class="sortStyle unsortStyle text_column"
                                                         data-sort="{{ array_search('text', $columns) }}">
                                                         {{ __($Model->Column_Title_Text['text']) }}</th>
 
@@ -129,20 +129,20 @@
                                                         data-sort="{{ array_search('tran_text', $columns) }}">
                                                         {{ __($Model->Column_Title_Text['tran_text']) }}</th>
 
-                                                    <th class="sortStyle unsortStyle lang_type_column" 
+                                                    <th class="sortStyle unsortStyle lang_type_column"
                                                         data-sort="{{ array_search('lang_type', $columns) }}">
                                                         {{ __($Model->Column_Title_Text['lang_type']) }}</th>
 
-                                                    <th class="sortStyle unsortStyle isUpdated_column" 
+                                                    <th class="sortStyle unsortStyle isUpdated_column"
                                                         data-sort="{{ array_search('isUpdated', $columns) }}">
                                                         {{ __('是否已修改') }}
                                                     </th>
 
-                                                    <th class="sortStyle unsortStyle updated_at_column" 
+                                                    <th class="sortStyle unsortStyle updated_at_column"
                                                         data-sort="{{ array_search('updated_at', $columns) }}">
                                                         {{ __($Model->Column_Title_Text['updated_at']) }}</th>
 
-                                                    <th class="sortStyle unsortStyle created_at_column" 
+                                                    <th class="sortStyle unsortStyle created_at_column"
                                                         data-sort="{{ array_search('created_at', $columns) }}">
                                                         {{ __($Model->Column_Title_Text['created_at']) }}</th>
 
@@ -167,7 +167,7 @@
                                                                 {{ $key + 1 + ($Paginator->currentPage() - 1) * $Paginator->perPage() }}
                                                             </td>
 
-                                                            <td class="text_column" 
+                                                            <td class="text_column"
                                                                 data-sort="{{ array_search('text', $columns) }}">
                                                                 {{ $Item->text }}</td>
 
@@ -175,7 +175,7 @@
                                                                 data-sort="{{ array_search('tran_text', $columns) }}">
                                                                 {{ $Item->tran_text }}</td>
 
-                                                            <td class="lang_type_column" 
+                                                            <td class="lang_type_column"
                                                                 data-sort="{{ array_search('lang_type', $columns) }}">
                                                                 {{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
                                                             </td>
@@ -191,7 +191,7 @@
                                                             <td class="created_at_column"
                                                                 data-sort="{{ array_search('created_at', $columns) }}">
                                                                 {{ $Item->created_at }}</td>
-                                                                
+
                                                             <td class="text-end">
                                                                 <div class="btn-group">
                                                                     <button type="button"
@@ -389,6 +389,18 @@
 
 @section('BodyJavascript')
     <script>
+        //批次刪除
+        $("#btnDeleteBatch").on("click", function() {
+            var postArray = [];
+            $("input[type=checkbox][name^='id_array']:checked").map(function() {
+                let val = $(this).val();
+                postArray["id_array[" + val + "]"] = val;
+            });
+            postArray["_token"] = '{{ csrf_token() }}';
+            //送出
+            postForm('/operate/language/del?{{ request()->getQueryString() }}', postArray)
+        });
+
         $('.select2bs5').each(function(i, ele) {
             $(ele).select2({
                 dropdownParent: $('#prodFilter'),
