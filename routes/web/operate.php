@@ -55,13 +55,18 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         Route::get('/http_log/{id}', [Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
 
         //操作紀錄
-        Route::get('/audit', [Operation\AuditController::class, 'listHTML'])->name('audit_list');
-        Route::get('/audit/{id}', [Operation\AuditController::class, 'updateHTML'])->whereNumber('id')->name('audit_update_html');
-        Route::post('/audit/{id}', [Operation\AuditController::class, 'update'])->whereNumber('id')->name('audit_update');
-        Route::post('/audit/del', [Operation\AuditController::class, 'delBatch'])->name('audit_del');
-        Route::get('/audit/export', [Operation\AuditController::class, 'export'])->name('audit_export');
-        Route::post('/audit/import', [Operation\AuditController::class, 'import'])->name('audit_import');
-        Route::post('/audit/reverse', [Operation\AuditController::class, 'reverseBatch'])->name('reverse');
+        Route::group([
+            'prefix' => 'audit',
+            'as' => 'audit_',
+        ], function () {
+            Route::get('', [Operation\AuditController::class, 'listHTML'])->name('list');
+            Route::get('/{id}', [Operation\AuditController::class, 'updateHTML'])->whereNumber('id')->name('update_html');
+            Route::post('/{id}', [Operation\AuditController::class, 'update'])->whereNumber('id')->name('update');
+            Route::post('/del', [Operation\AuditController::class, 'delBatch'])->name('del');
+            Route::get('/export', [Operation\AuditController::class, 'export'])->name('export');
+            Route::post('/import', [Operation\AuditController::class, 'import'])->name('import');
+            Route::post('/reverse', [Operation\AuditController::class, 'reverseBatch'])->name('reverse');
+        });
 
         //語系
         Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')

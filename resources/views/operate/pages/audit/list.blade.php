@@ -1,3 +1,5 @@
+@inject('RouteTitle', 'App\Services\Route\RouteTitle')
+
 @extends('operate.layout._Master')
 
 @section('HeaderCSS')
@@ -80,7 +82,7 @@
                             <thead>
                             <tr>
                                 <th>{{__($Model->Column_Title_Text["id"])}}</th>
-                                <th>{{__($Model->Column_Title_Text["tags"])}}</th>
+                                <th>{{__("操作標題")}}</th>
                                 <th>{{__($Model->Column_Title_Text["event"])}}</th>
                                 <th>{{__($Model->Column_Title_Text["url"])}}</th>
                                 <th>{{__($Model->Column_Title_Text["old_values"])}}</th>
@@ -97,7 +99,7 @@
                             @foreach ($Paginator->items() as $Item)
                                     <tr>
                                         <td>{{$Item->id}}</td>
-                                        <td>{{$Item->tags}}</td>
+                                        <td>{{$RouteTitle->getTitle($Item->route_name)}}</td>
                                         <td>{{$Item->event}}</td>
                                         <td>{{$Item->url}}</td>
                                         <td>{{collect($Item->old_values)->toJson()}}</td>
