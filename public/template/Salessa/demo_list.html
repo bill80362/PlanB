@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- themefy CSS -->
-    <link rel="stylesheet" href="vendors/themefy_icon/themify-icons.css" />
+    <link rel="stylesheet" href="../themify-icons-font/themify-icons/themify-icons.css" />
     <!-- select2 CSS -->
     <link rel="stylesheet" href="vendors/niceselect/css/nice-select.css" />
     <!-- owl carousel CSS -->
@@ -19,7 +19,7 @@
     <!-- gijgo css -->
     <link rel="stylesheet" href="vendors/gijgo/gijgo.min.css" />
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="vendors/font_awesome/css/all.min.css" />
+    <link rel="stylesheet" href="../fontawesome-free-6.4.2-web/fontawesome-free-6.4.2-web/css/all.min.css" />
     <link rel="stylesheet" href="vendors/tagsinput/tagsinput.css" />
 
     <!-- date picker -->
@@ -35,11 +35,13 @@
     <!-- morris css -->
     <link rel="stylesheet" href="vendors/morris/morris.css">
     <!-- metarial icon css -->
-    <link rel="stylesheet" href="vendors/material_icon/material-icons.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css?v=1" />
 
     <!-- menu css  -->
     <link rel="stylesheet" href="css/metisMenu.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS">
@@ -49,285 +51,256 @@
 
 
 
-    <!-- main content part here -->
+<!-- main content part here -->
 
-    <!-- sidebar  -->
-    <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
-        <div class="logo d-flex justify-content-between">
-            <a href="index.html"><img src="img/logo.png" alt=""></a>
-            <div class="sidebar_close_icon d-lg-none">
-                <i class="ti-close"></i>
-            </div>
+<!-- sidebar  -->
+<nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
+    <div class="logo d-flex justify-content-between">
+        <a href="index.html"><img src="img/logo.png" alt=""></a>
+        <div class="sidebar_close_icon d-lg-none">
+            <i class="ti-close"></i>
         </div>
-        <ul id="sidebar_menu">
-
-            <li class="">
-                <a href="/operate/dashboard" class="">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/dashboard.svg" alt="">
-                    </div>
-                    <span>儀表板</span>
-                </a>
-            </li>
-            <li class="">
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/5.svg" alt="">
-                    </div>
-                    <span>管理人管理</span>
-                </a>
-                <ul>
-                    <li><a class="active" href="/operate/user">管理人管理</a></li>
-                    <li><a class="" href="/operate/permission_group">群組管理</a></li>
-                </ul>
-            </li>
-            <li class="">
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/5.svg" alt="">
-                    </div>
-                    <span>系統設定</span>
-                </a>
-                <ul>
-                    <li><a class="" href="/operate/language">語系管理</a></li>
-                    <li><a class="" href="/operate/system">系統環境設定</a></li>
-                </ul>
-            </li>
-            <li class="">
-                <a class="has-arrow" href="#" aria-expanded="false">
-                    <div class="icon_menu">
-                        <img src="img/menu-icon/dashboard.svg" alt="">
-                    </div>
-                    <span>操作紀錄</span>
-                </a>
-                <ul>
-                    <li><a class="" href="/operate/audit">操作紀錄</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <!--/ sidebar  -->
+    </div>
+    <ul id="sidebar_menu">
+        <li class="">
+            <a href="./demo_list.html" class="">
+                <div class="icon_menu">
+                    <img src="img/menu-icon/2.svg" alt="">
+                </div>
+                <span>列表範例</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="./demo_page.html" class="">
+                <div class="icon_menu">
+                    <img src="img/menu-icon/4.svg" alt="">
+                </div>
+                <span>細節頁範例</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!--/ sidebar  -->
 
 
-    <section class="main_content dashboard_part large_header_bg">
+<section class="main_content dashboard_part large_header_bg">
 
-        <!-- menu  -->
-        <div class="container-fluid g-0">
-            <div class="row">
-                <div class="col-lg-12 p-0 ">
-                    <div class="header_iner d-flex justify-content-between align-items-center">
-                        <div class="sidebar_icon d-lg-none">
-                            <i class="ti-menu"></i>
+    <!-- menu  -->
+    <div class="container-fluid g-0">
+        <div class="row">
+            <div class="col-lg-12 p-0 ">
+                <div class="header_iner d-flex justify-content-between align-items-center">
+                    <div class="sidebar_icon d-lg-none">
+                        <i class="ti-menu"></i>
+                    </div>
+                    <div class="serach_field-area d-flex align-items-center">
+                        <div class="search_inner">
+                            <form action="#">
+                                <div class="search_field">
+                                    <input type="text" placeholder="Search here...">
+                                </div>
+                                <button type="submit"> <img src="img/icon/icon_search.svg" alt="">
+                                </button>
+                            </form>
                         </div>
-                        <div class="serach_field-area d-flex align-items-center">
-                            <div class="search_inner">
-                                <form action="#">
-                                    <div class="search_field">
-                                        <input type="text" placeholder="Search here...">
+                        <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
+                    </div>
+                    <div class="header_right d-flex justify-content-between align-items-center">
+                        <div class="header_notification_warp d-flex align-items-center">
+                            <li>
+                                <a class="notification_clicker nav-link" href="#">
+                                    <img src="img/icon/global.svg" alt="">
+                                </a>
+                                <!-- Menu_NOtification_Wrap  -->
+                                <div class="Menu_NOtification_Wrap">
+                                    <div class="notification_Header">
+                                        <h4>語系切換</h4>
                                     </div>
-                                    <button type="submit"> <img src="img/icon/icon_search.svg" alt="">
-                                    </button>
-                                </form>
-                            </div>
-                            <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
-                        </div>
-                        <div class="header_right d-flex justify-content-between align-items-center">
-                            <div class="header_notification_warp d-flex align-items-center">
-                                <li>
-                                    <a class="notification_clicker nav-link" href="#">
-                                        <img src="img/icon/global.svg" alt="">
-                                    </a>
-                                    <!-- Menu_NOtification_Wrap  -->
-                                    <div class="Menu_NOtification_Wrap">
-                                        <div class="notification_Header">
-                                            <h4>語系切換</h4>
+                                    <div class="Notification_body">
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>繁體中文</h5>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="Notification_body">
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>繁體中文</h5>
-                                                    </a>
-                                                </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>简体中文</h5>
+                                                </a>
                                             </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>简体中文</h5>
-                                                    </a>
-                                                </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>English</h5>
+                                                </a>
                                             </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>English</h5>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                        </div>
                                     </div>
-                                    <!--/ Menu_NOtification_Wrap  -->
-                                </li>
-                                <li>
-                                    <a class="notification_clicker nav-link-notify" href="#">
-                                        <img src="img/icon/bell.svg" alt="">
-                                    </a>
-                                    <!-- Menu_NOtification_Wrap  -->
-                                    <div class="Menu_NOtification_Wrap">
-                                        <div class="notification_Header">
-                                            <h4>訂單資訊</h4>
-                                        </div>
-                                        <div class="Notification_body">
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>23030348090</h5>
-                                                    </a>
-                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>23053176648</h5>
-                                                    </a>
-                                                    <p>2023-05-31 19:35:13：申請退貨</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>23030348090</h5>
-                                                    </a>
-                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>23030348090</h5>
-                                                    </a>
-                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>23030348090</h5>
-                                                    </a>
-                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
-                                                </div>
+                                </div>
+                                <!--/ Menu_NOtification_Wrap  -->
+                            </li>
+                            <li>
+                                <a class="notification_clicker nav-link-notify" href="#">
+                                    <img src="img/icon/bell.svg" alt="">
+                                </a>
+                                <!-- Menu_NOtification_Wrap  -->
+                                <div class="Menu_NOtification_Wrap">
+                                    <div class="notification_Header">
+                                        <h4>訂單資訊</h4>
+                                    </div>
+                                    <div class="Notification_body">
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>23030348090</h5>
+                                                </a>
+                                                <p>2023-09-23 16:06:55：訂單處理中</p>
                                             </div>
                                         </div>
-                                        <div class="nofity_footer">
-                                            <div class="submit_button text-center pt_20">
-                                                <a href="#" class="btn_1">查看更多</a>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>23053176648</h5>
+                                                </a>
+                                                <p>2023-05-31 19:35:13：申請退貨</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>23030348090</h5>
+                                                </a>
+                                                <p>2023-09-23 16:06:55：訂單處理中</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>23030348090</h5>
+                                                </a>
+                                                <p>2023-09-23 16:06:55：訂單處理中</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>23030348090</h5>
+                                                </a>
+                                                <p>2023-09-23 16:06:55：訂單處理中</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--/ Menu_NOtification_Wrap  -->
-                                </li>
-                                <li>
-                                    <a class="notification_clicker nav-link-notify" href="#">
-                                        <img src="img/icon/msg.svg" alt="">
-                                    </a>
-                                    <div class="Menu_NOtification_Wrap">
-                                        <div class="notification_Header">
-                                            <h4>客服信箱</h4>
+                                    <div class="nofity_footer">
+                                        <div class="submit_button text-center pt_20">
+                                            <a href="#" class="btn_1">查看更多</a>
                                         </div>
-                                        <div class="Notification_body">
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_thumb">
-                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
-                                                </div>
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>會員名稱</h5>
-                                                    </a>
-                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
-                                                </div>
+                                    </div>
+                                </div>
+                                <!--/ Menu_NOtification_Wrap  -->
+                            </li>
+                            <li>
+                                <a class="notification_clicker nav-link-notify" href="#">
+                                    <img src="img/icon/msg.svg" alt="">
+                                </a>
+                                <div class="Menu_NOtification_Wrap">
+                                    <div class="notification_Header">
+                                        <h4>客服信箱</h4>
+                                    </div>
+                                    <div class="Notification_body">
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="img/staf/2.png" alt=""></a>
                                             </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_thumb">
-                                                    <a href="#"><img src="img/staf/4.png" alt=""></a>
-                                                </div>
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>會員名稱</h5>
-                                                    </a>
-                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_thumb">
-                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
-                                                </div>
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>會員名稱</h5>
-                                                    </a>
-                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_thumb">
-                                                    <a href="#"><img src="img/staf/4.png" alt=""></a>
-                                                </div>
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>會員名稱</h5>
-                                                    </a>
-                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
-                                                </div>
-                                            </div>
-                                            <!-- single_notify  -->
-                                            <div class="single_notify d-flex align-items-center">
-                                                <div class="notify_thumb">
-                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
-                                                </div>
-                                                <div class="notify_content">
-                                                    <a href="#">
-                                                        <h5>會員名稱</h5>
-                                                    </a>
-                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
-                                                </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>會員名稱</h5>
+                                                </a>
+                                                <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
                                             </div>
                                         </div>
-                                        <div class="nofity_footer">
-                                            <div class="submit_button text-center pt_20">
-                                                <a href="#" class="btn_1">查看更多</a>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                            </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>會員名稱</h5>
+                                                </a>
+                                                <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                            </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>會員名稱</h5>
+                                                </a>
+                                                <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                            </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>會員名稱</h5>
+                                                </a>
+                                                <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                            </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>會員名稱</h5>
+                                                </a>
+                                                <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            </div>
-                            <div class="profile_info">
-                                <img src="img/client_img.png" alt="#">
-                                <div class="profile_info_iner">
-                                    <div class="profile_author_name">
-                                        <p>客服人員</p>
-                                        <h5>光欣</h5>
+                                    <div class="nofity_footer">
+                                        <div class="submit_button text-center pt_20">
+                                            <a href="#" class="btn_1">查看更多</a>
+                                        </div>
                                     </div>
-                                    <div class="profile_info_details">
-                                        <a href="#">網站設定</a>
-                                        <a href="#">系統設定</a>
-                                        <a href="#">人員權限</a>
-                                        <a href="#">尚峪小幫手</a>
-                                        <a href="/operate/logout">登出</a>
-                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                        <div class="profile_info">
+                            <img src="img/client_img.png" alt="#">
+                            <div class="profile_info_iner">
+                                <div class="profile_author_name">
+                                    <p>客服人員</p>
+                                    <h5>光欣</h5>
+                                </div>
+                                <div class="profile_info_details">
+                                    <a href="#">網站設定</a>
+                                    <a href="#">系統設定</a>
+                                    <a href="#">人員權限</a>
+                                    <a href="#">尚峪小幫手</a>
+                                    <a href="/operate/logout">登出</a>
                                 </div>
                             </div>
                         </div>
@@ -335,162 +308,321 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="main_content_iner ">
-            <div class="container-fluid p-0 ">
-                <!-- page Content  -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="white_card">
-                            <div class="white_card_header">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h2>管理人管理 列表</h2>
-                                    <!-- Example single danger button -->
-                                    <div class="btn-group me-2">
-                                        <button type="button" class="btn btn-info dropdown-toggle"
+    <div class="main_content_iner ">
+        <div class="container-fluid p-0 ">
+            <!-- page Content  -->
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="white_card">
+                        <div class="white_card_header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h2>管理人管理 列表</h2>
+                                <!-- Example single danger button -->
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-light dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="ti-settings"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button type="button" class="dropdown-item">全選</button>
-                                            <button type="button" class="dropdown-item">取消全選</button>
-                                            <button type="button" class="dropdown-item">反向選擇</button>
-                                            <hr class="dropdown-divider">
-                                            <button type="button" class="dropdown-item">勾選顯示</button>
-                                            <button type="button" class="dropdown-item">勾選不顯示</button>
-                                            <button type="button" class="dropdown-item">勾選熱銷品牌</button>
-                                            <button type="button" class="dropdown-item">勾選非熱銷品牌</button>
-                                            <button type="button" class="dropdown-item">勾選新品</button>
-                                            <button type="button" class="dropdown-item">勾選非新品</button>
-                                            <button type="button" class="dropdown-item">設定排列序號</button>
-                                            <button type="button" class="dropdown-item">重置排列序號</button>
-                                            <hr class="dropdown-divider">
-                                            <button type="button" class="dropdown-item">勾選刪除</button>
-                                        </div>
+                                        <i class="ti-settings"></i> 處理
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-item">全選</button>
+                                        <button type="button" class="dropdown-item">取消全選</button>
+                                        <button type="button" class="dropdown-item">反向選擇</button>
+                                        <hr class="dropdown-divider">
+                                        <button type="button" class="dropdown-item">勾選顯示</button>
+                                        <button type="button" class="dropdown-item">勾選不顯示</button>
+                                        <button type="button" class="dropdown-item">勾選熱銷品牌</button>
+                                        <button type="button" class="dropdown-item">勾選非熱銷品牌</button>
+                                        <button type="button" class="dropdown-item">勾選新品</button>
+                                        <button type="button" class="dropdown-item">勾選非新品</button>
+                                        <button type="button" class="dropdown-item">設定排列序號</button>
+                                        <button type="button" class="dropdown-item">重置排列序號</button>
+                                        <hr class="dropdown-divider">
+                                        <button type="button" class="dropdown-item">勾選刪除</button>
                                     </div>
-                                    <div class="btn-group me-2">
-                                        <button type="button" class="btn btn-light dropdown-toggle"
+                                </div>
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="ti-more-alt"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                        匯入 / 匯出
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
                                                 data-bs-target="#importModal">
-                                                匯入
-                                            </button>
-                                            <a class="dropdown-item" href="http://127.0.0.1/operate/user/export?">
-                                                匯出
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a class="btn btn-primary" href="http://127.0.0.1/operate/user/0?">
-                                            新增
+                                            匯入
+                                        </button>
+                                        <a class="dropdown-item" href="http://127.0.0.1/operate/user/export?">
+                                            匯出
                                         </a>
                                     </div>
                                 </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="http://127.0.0.1/operate/user/0?">
+                                        新增
+                                    </a>
+                                </div>
                             </div>
-                            <div class="white_card_body">
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <div class="input-group">
-                                            <div class="input-group input-group" id="searchContnet">
-                                                <div class="input-group-prepend">
-                                                    <select class="form-select" name="filter_text_key"
+                        </div>
+                        <div class="white_card_body">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <div class="input-group">
+                                        <div class="input-group input-group" id="searchContnet">
+                                            <div class="input-group-prepend">
+                                                <select class="form-select" name="filter_text_key"
                                                         data-target="#searchFilter">
-                                                        <option value="">不限制</option>
-                                                        <option value="name">姓名</option>
-                                                        <option value="id">編號</option>
-                                                        <option value="email">Email</option>
-                                                    </select>
-                                                </div>
-                                                <input type="text" class="form-control" name="filter_text_value"
-                                                    value="" data-target="#searchString">
-                                                <button class="btn btn-dark" type="button"
-                                                    id="searchButton"><i class="ti-search"></i></button>
+                                                    <option value="">不限制</option>
+                                                    <option value="name">姓名</option>
+                                                    <option value="id">編號</option>
+                                                    <option value="email">Email</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <button class="btn btn-light" data-bs-toggle="modal"
-                                            data-bs-target="#prodFilter"><i class="ti-filter"></i> 篩選器</button>
-                                        <button class="btn btn-info">重置查詢</button>
-                                        <button class="btn btn-muted" data-bs-toggle="modal"
-                                            data-bs-target="#listSetting"><i class="ti-settings"></i></button>
-                                        <!-- modals ppup  -->
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped" id="sortableTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="sortStyle">編號</th>
-                                                        <th class="sortStyle">姓名</th>
-                                                        <th class="sortStyle">Email</th>
-                                                        <th class="sortStyle">狀態</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <form>
-                                                        <tr>
-                                                            <td>
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    name="id_array[]" value="1">
-                                                                1
-                                                            </td>
-                                                            <td>admin</td>
-                                                            <td>test@gmail.com</td>
-                                                            <td>啟用</td>
-                                                            <td class="text-end">
-                                                                <div class="btn-group">
-                                                                    <button type="button"
-                                                                        class="btn btn-light dropdown-toggle"
-                                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                                        <i class="ti-more-alt"></i>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a class="dropdown-item"
-                                                                                href="/operate/user/1?">編輯</a></li>
-                                                                        <li><a class="dropdown-item" href="#">複製新增</a></li>
-                                                                        <li><a class="dropdown-item" href="#">商品規格</a></li>
-                                                                        <li><a class="dropdown-item" href="#">商品內容</a></li>
-                                                                        <li><a class="dropdown-item" href="#">尺寸表</a></li>
-                                                                        <li><a class="dropdown-item"
-                                                                                href="/operate/user/1/audit?">修改紀錄</a></li>
-                                                                        <li><a class="dropdown-item" href="#"
-                                                                                onclick="postForm('/operate/user/del?',{'id_array[]':1,_token:'UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG'})">刪除</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </form>
-                                                </tbody>
-                                            </table>
+                                            <input type="text" class="form-control" name="filter_text_value"
+                                                   value="" data-target="#searchString">
+                                            <button class="btn btn-dark" type="button" id="searchButton"><i
+                                                class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12 d-flex align-items-center justify-content-between">
-                                        <div class="text-muted">第 <span class="text-primary">1</span> / <span
-                                                class="text-primary">1</span> 頁 | 每頁 <span
-                                                class="text-primary">10</span> 筆 | 共 <span
-                                                class="text-primary">1</span>
-                                            筆</div>
-                                        <div>
-                                            <ul class="pagination pagination-sm m-0">
-                                                <li class="page-item page-arrow"><a class="page-link" href="" aria-label="第一頁"><i class="ti-angle-double-left"></i></a></li>
-                                                <li class="page-item page-arrow"><a class="page-link" href="" aria-label="上一頁"><i class="ti-angle-left"></i></a></li>
-                                                <li class="page-item "><a class="page-link" href="http://127.0.0.1/operate/user?page=1">1</a></li>
-                                                <li class="page-item "><a class="page-link" href="http://127.0.0.1/operate/user?page=1">2</a></li>
-                                                <li class="page-item active"><a class="page-link" href="http://127.0.0.1/operate/user?page=1">3</a></li>
-                                                <li class="page-item "><a class="page-link" href="http://127.0.0.1/operate/user?page=1">4</a></li>
-                                                <li class="page-item "><a class="page-link" href="http://127.0.0.1/operate/user?page=1">5</a></li>
-                                                <li class="page-item page-arrow"><a class="page-link" href="" aria-label="下一頁"><i class="ti-angle-right"></i></a></li>
-                                                <li class="page-item page-arrow"><a class="page-link" href="" aria-label="最尾頁"><i class="ti-angle-double-right"></i></a></li>
-                                            </ul>
-                                        </div>
+                                <div class="col-6 mb-3">
+                                    <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon name="funnel-outline"></ion-icon>
+                                        篩選器</button>
+                                    <button class="btn btn-muted">重置查詢</button>
+                                    <!-- modals ppup  -->
+                                </div>
+                                <div class="col-12">
+                                    <p class="d-flex align-items-center flex-content-start fz-sm filter-string">
+                                        <span class="text-muted me-2">篩選器：</span>
+                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3">上架狀態：上架 <i
+                                            class="ti-close"></i></button>
+                                        <button
+                                            class="btn btn-secondary me-2 btn-sm rounded-pill px-3">上架區間狀態：進行中、未開始
+                                            <i class="ti-close"></i></button>
+                                    </p>
+                                    <div class="table-responsive">
+                                        <table class="table" id="sortableTable">
+                                            <thead>
+                                            <tr>
+                                                <th class="sortStyle ascStyle">編號</th>
+                                                <th class="sortStyle descStyle">排列序號</th>
+                                                <th class="sortStyle unsortStyle">圖片</th>
+                                                <th class="sortStyle unsortStyle">名稱</th>
+                                                <th class="sortStyle unsortStyle">商品編號</th>
+                                                <th class="sortStyle unsortStyle">狀態</th>
+                                                <th class="sortStyle unsortStyle">點閱數</th>
+                                                <th class="sortStyle unsortStyle">串接狀態</th>
+                                                <th class="sortStyle unsortStyle">類型</th>
+                                                <th class="sortStyle unsortStyle">組合</th>
+                                                <th class="sortStyle unsortStyle">最後修改者</th>
+                                                <th class="sortStyle unsortStyle">最後修改日期</th>
+                                                <th class="sortStyle unsortStyle">建置日期</th>
+                                                <th class="text-end">
+                                                    <button class="btn btn-link slideFunc-toggle text-muted" data-target="#listSetting"><i class="ti-settings"></i></button>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="bg-muted-light">
+                                                <td rowspan="2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                           name="id_array[]" value="1">
+                                                    1
+                                                </td>
+                                                <td rowspan="2"><input class="form-control" type="number"></td>
+                                                <td rowspan="2">
+                                                    <img src="./img/products/img-1.png" alt="">
+                                                </td>
+                                                <td class="border-0">測試用商品1</td>
+                                                <td class="border-0">TEST_29N1</td>
+                                                <td class="border-0">
+                                                    <div class="form-check form-switch p-0">
+                                                        <input class="form-check-input float-none mx-auto d-block" type="checkbox" id="flexSwitchCheckDefault">
+                                                    </div>
+                                                    <div class="text-success fz-sm text-center">2023/10/31<br>23:59:59 迄</div>
+                                                </td>
+                                                <td class="border-0">100</td>
+                                                <td class="border-0"><span class="text-muted">未串接</span></td>
+                                                <td class="border-0">商品</td>
+                                                <td class="border-0">無</td>
+                                                <td class="border-0">admin</td>
+                                                <td class="border-0">2023-09-21<br>14:41:41</td>
+                                                <td class="border-0">2023-09-21<br>14:41:41</td>
+                                                <td class="border-0 text-end">
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                                class="btn btn-light dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="ti-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item"
+                                                                   href="/operate/user/1?">編輯</a></li>
+                                                            <li><a class="dropdown-item" href="#">複製新增</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">商品規格</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">商品內容</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">尺寸表</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                   href="/operate/user/1/audit?">修改紀錄</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#"
+                                                                   onclick="postForm('/operate/user/del?',{'id_array[]':1,_token:'UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG'})">刪除</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="bg-muted-light">
+                                                <td class="pt-0 text-muted" colspan="11">顏色：<span class="d-inline-block rounded-circle" style="background-color: red; width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: green; width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: blue; width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: gray; width: 1em; height: 1em; vertical-align: middle;"></span>&nbsp;&nbsp;|&nbsp;&nbsp;尺寸：S、M、L、XL</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                           name="id_array[]" value="1">
+                                                    2
+                                                </td>
+                                                <td rowspan="2"><input class="form-control" type="number"></td>
+                                                <td rowspan="2">
+                                                    <img src="./img/products/img-2.png" alt="">
+                                                </td>
+                                                <td class="border-0">測試用商品2</td>
+                                                <td class="border-0">TEST_29N2</td>
+                                                <td class="border-0">
+                                                    <div class="form-check form-switch p-0">
+                                                        <input class="form-check-input float-none mx-auto d-block" type="checkbox" id="flexSwitchCheckDefault">
+                                                    </div>
+                                                    <div class="text-muted fz-sm text-center">2023/11/01<br>00:00:00 起</div>
+                                                </td>
+                                                <td class="border-0">100</td>
+                                                <td class="border-0"><span class="text-danger">串接失敗</span></td>
+                                                <td class="border-0">贈品</td>
+                                                <td class="border-0">無</td>
+                                                <td class="border-0">admin</td>
+                                                <td class="border-0">2023-09-21<br>14:41:41</td>
+                                                <td class="border-0">2023-09-21<br>14:41:41</td>
+                                                <td class="border-0 text-end">
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                                class="btn btn-light dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="ti-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item"
+                                                                   href="/operate/user/1?">編輯</a></li>
+                                                            <li><a class="dropdown-item" href="#">複製新增</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">商品規格</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">商品內容</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">尺寸表</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                   href="/operate/user/1/audit?">修改紀錄</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#"
+                                                                   onclick="postForm('/operate/user/del?',{'id_array[]':1,_token:'UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG'})">刪除</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pt-0 text-muted" colspan="11">表面尺寸：8cm、10cm&nbsp;&nbsp;|&nbsp;&nbsp;表面顏色：<span class="d-inline-block rounded-circle" style="background-color: rgb(230, 230, 230); width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: rgb(0, 0, 0); width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: rgb(10, 11, 90); width: 1em; height: 1em; vertical-align: middle;"></span>&nbsp;&nbsp;|&nbsp;&nbsp;錶帶顏色：<span class="d-inline-block rounded-circle" style="background-color: rgb(0, 0, 0); width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: rgb(243, 215, 198); width: 1em; height: 1em; vertical-align: middle;"></span></td>
+                                            </tr>
+                                            <tr class="bg-muted-light">
+                                                <td rowspan="2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                           name="id_array[]" value="1">
+                                                    3
+                                                </td>
+                                                <td rowspan="2"><input class="form-control" type="number"></td>
+                                                <td rowspan="2">
+                                                    <img src="./img/products/img-1.png" alt="">
+                                                </td>
+                                                <td class="border-0">測試用商品3</td>
+                                                <td class="border-0">TEST_29N3</td>
+                                                <td class="border-0">
+                                                    <div class="form-check form-switch p-0">
+                                                        <input class="form-check-input float-none mx-auto d-block" type="checkbox" id="flexSwitchCheckDefault" checked>
+                                                    </div>
+                                                    <div class="text-danger fz-sm text-center">2023/08/31<br>23:59:59迄</div>
+                                                </td>
+                                                <td class="border-0">100</td>
+                                                <td class="border-0"><span class="text-success">串接成功</span></td>
+                                                <td class="border-0">特惠組</td>
+                                                <td class="border-0">無</td>
+                                                <td class="border-0">admin</td>
+                                                <td class="border-0">2023-09-21<br>14:41:41</td>
+                                                <td class="border-0">2023-09-21<br>14:41:41</td>
+                                                <td class="border-0 text-end">
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                                class="btn btn-light dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="ti-more-alt"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item"
+                                                                   href="/operate/user/1?">編輯</a></li>
+                                                            <li><a class="dropdown-item" href="#">複製新增</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">商品規格</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">商品內容</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#">尺寸表</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                   href="/operate/user/1/audit?">修改紀錄</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item" href="#"
+                                                                   onclick="postForm('/operate/user/del?',{'id_array[]':1,_token:'UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG'})">刪除</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="bg-muted-light">
+                                                <td class="pt-0 text-muted" colspan="11">顏色：<span class="d-inline-block rounded-circle" style="background-color: red; width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: green; width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: blue; width: 1em; height: 1em; vertical-align: middle;"></span>、<span class="d-inline-block rounded-circle" style="background-color: gray; width: 1em; height: 1em; vertical-align: middle;"></span>&nbsp;&nbsp;|&nbsp;&nbsp;尺寸：S、M、L、XL</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center justify-content-between">
+                                    <div class="text-muted fz-sm me-2">
+                                        <span class="text-primary">1</span>-<span class="text-primary">50</span> / <span
+                                        class="text-primary">495</span>，每頁顯示 <a class="text-dark" href="##">10</a>、<a class="text-primary" href="##">25</a>、<a class="text-primary" href="##">50</a>、<a class="text-primary" href="##">100</a> 筆
+                                    </div>
+                                    <div>
+                                        <ul class="pagination pagination-sm m-0">
+                                            <li class="page-item page-arrow"><a class="page-link" href=""
+                                                                                aria-label="第一頁"><i class="ti-angle-double-left"></i></a></li>
+                                            <li class="page-item page-arrow"><a class="page-link" href=""
+                                                                                aria-label="上一頁"><i class="ti-angle-left"></i></a></li>
+                                            <li class="page-item "><a class="page-link"
+                                                                      href="http://127.0.0.1/operate/user?page=1">1</a></li>
+                                            <li class="page-item "><a class="page-link"
+                                                                      href="http://127.0.0.1/operate/user?page=1">2</a></li>
+                                            <li class="page-item active"><a class="page-link"
+                                                                            href="http://127.0.0.1/operate/user?page=1">3</a></li>
+                                            <li class="page-item "><a class="page-link"
+                                                                      href="http://127.0.0.1/operate/user?page=1">4</a></li>
+                                            <li class="page-item "><a class="page-link"
+                                                                      href="http://127.0.0.1/operate/user?page=1">5</a></li>
+                                            <li class="page-item page-arrow"><a class="page-link" href=""
+                                                                                aria-label="下一頁"><i class="ti-angle-right"></i></a></li>
+                                            <li class="page-item page-arrow"><a class="page-link" href=""
+                                                                                aria-label="最尾頁"><i class="ti-angle-double-right"></i></a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -498,240 +630,659 @@
                     </div>
                 </div>
             </div>
-
-            <!-- footer part -->
-            <div class="footer_part">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="footer_iner text-center">
-                                <p>2023 © 瘋樂購數位行銷股份有限公司</a></p>
-                            </div>
-                        </div>
+        </div>
+    </div>
+    <!-- footer part -->
+    <div class="footer_part">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer_iner text-center">
+                        <p>2023 © 瘋樂購數位行銷股份有限公司</a></p>
                     </div>
                 </div>
             </div>
-    </section>
-    <!-- main content part end -->
-
-    <!-- 彈出視窗 -->
-    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form action="http://127.0.0.1/operate/user/import" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG" />
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="importModalLabel">匯入新增</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h6 class="card-subtitle mb-2">請上傳Excel檔案</h6>
-                        <div class=" mb-0">
-                            <input type="file" class="" name="file">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">送出</button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
+</section>
+<!-- main content part end -->
 
-    <div id="back-top" style="display: none;">
-        <a title="Go to Top" href="#">
-            <i class="ti-angle-up"></i>
-        </a>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="prodFilter" tabindex="-1" role="dialog" aria-labelledby="prodFilterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="prodFilterTitle">商品篩選器</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group mb-3">
-                                <label class="form-label d-block">狀態</label>
-                                <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
-                                    style="width: 100%">
-                                    <option value="Y">啟用</option>
-                                    <option value="N">停用</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label d-block">建立時間</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
-                                    <span class="input-group-text">~</span>
-                                    <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label d-block">庫存數量</label>
-                                <div class="input-group">
-                                    <select class="form-select" id="inputGroupSelect02">
-                                        <option selected>請選擇</option>
-                                        <option value="1">小於</option>
-                                        <option value="2">等於</option>
-                                        <option value="3">大於</option>
-                                    </select>
-                                    <input type="number" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input id="searchFilter" type="hidden" value="">
-                <input id="searchString" type="hidden" value="">
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="reset" class="btn btn-muted" data-bs-dismiss="modal">清除篩選器</button>
-                    <button type="submit" class="btn btn-primary">套用N篩選條件</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="listSetting" tabindex="-1" role="dialog" aria-labelledby="listSettingTitle"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
+<!-- 彈出視窗 -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="http://127.0.0.1/operate/user/import" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="UEaa9fn2Xg2Q62KnLiHIuiXhGZm0cNiRznD1WIbG" />
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="listSettingTitle">列表欄位調整</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"></span>
+                    <h5 class="modal-title" id="importModalLabel">匯入新增</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text">
-                                    <input class="form-check-input mt-0" type="checkbox" value=""
-                                        aria-label="Checkbox for following text input" checked disabled>　編號
+                    <h6 class="card-subtitle mb-2">請上傳Excel檔案</h6>
+                    <div class=" mb-0">
+                        <input type="file" class="" name="file">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="back-top" style="display: none;">
+    <a title="Go to Top" href="#">
+        <i class="ti-angle-up"></i>
+    </a>
+</div>
+
+<!-- Modal -->
+<div class="slideFunc-box" id="prodFilter">
+    <div class="slideFunc-content">
+        <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
+            <h5 class="slideFunc-title" id="prodFilterTitle">商品篩選器</h5>
+            <button type="button" class="btn-close" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="slideFunc-body px-3 py-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">編修狀態</label>
+                        <div class="form-check-wrap">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio1">
+                                <label class="form-check-label" for="FlexRadio1">
+                                    不限制
                                 </label>
-                                <input type="text" class="form-control" aria-label="" placeholder="排列序號">
                             </div>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text">
-                                    <input class="form-check-input mt-0" type="checkbox" value=""
-                                        aria-label="Checkbox for following text input">　姓名
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio2">
+                                <label class="form-check-label" for="FlexRadio2">
+                                    完稿
                                 </label>
-                                <input type="text" class="form-control" aria-label="" placeholder="排列序號">
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    草稿
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">上架狀態</label>
+                        <div class="form-check-wrap">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio1">
+                                <label class="form-check-label" for="FlexRadio1">
+                                    不限制
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio2">
+                                <label class="form-check-label" for="FlexRadio2">
+                                    上架
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    下架
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">上架期間狀態</label>
+                        <div class="form-check-wrap">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio1">
+                                <label class="form-check-label" for="FlexRadio1">
+                                    不限制
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio2">
+                                <label class="form-check-label" for="FlexRadio2">
+                                    未開始
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    進行中
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    已結束
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">熱銷品牌狀態</label>
+                        <div class="form-check-wrap">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio1">
+                                <label class="form-check-label" for="FlexRadio1">
+                                    不限制
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio2">
+                                <label class="form-check-label" for="FlexRadio2">
+                                    是
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    否
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">新品狀態</label>
+                        <div class="form-check-wrap">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio1">
+                                <label class="form-check-label" for="FlexRadio1">
+                                    不限制
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio2">
+                                <label class="form-check-label" for="FlexRadio2">
+                                    是
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    否
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">串接狀態</label>
+                        <div class="form-check-wrap">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio1">
+                                <label class="form-check-label" for="FlexRadio1">
+                                    不限制
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio2">
+                                <label class="form-check-label" for="FlexRadio2">
+                                    未串接
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    串接成功
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"
+                                       name="FlexRadio" value="" id="FlexRadio3">
+                                <label class="form-check-label" for="FlexRadio3">
+                                    串接失敗
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品分店</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品分館</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品分類</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品細分類</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品品牌</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品類型</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">商品組合</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">一頁式商品</label>
+                        <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple"
+                                style="width: 100%">
+                            <option value="Y">未開始</option>
+                            <option value="N">進行中</option>
+                            <option value="N">已過期</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">建立時間</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
+                            <span class="input-group-text">~</span>
+                            <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">上架時間</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
+                            <span class="input-group-text">~</span>
+                            <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">加入購物車時間</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="建立時間起" aria-label="建立時間起">
+                            <span class="input-group-text">~</span>
+                            <input type="date" class="form-control" placeholder="建立時間迄" aria-label="建立時間迄">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">庫存數量</label>
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>請選擇</option>
+                                <option value="1">小於</option>
+                                <option value="2">等於</option>
+                                <option value="3">大於</option>
+                            </select>
+                            <input type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">預購庫存數量</label>
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>請選擇</option>
+                                <option value="1">小於</option>
+                                <option value="2">等於</option>
+                                <option value="3">大於</option>
+                            </select>
+                            <input type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label d-block">安全庫存數量</label>
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect02">
+                                <option selected>請選擇</option>
+                                <option value="1">小於</option>
+                                <option value="2">等於</option>
+                                <option value="3">大於</option>
+                            </select>
+                            <input type="number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="searchFilter" type="hidden" value="">
+            <input id="searchString" type="hidden" value="">
+        </div>
+        <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
+            <button type="reset" class="btn btn-muted mx-2">清除篩選器</button>
+            <button type="submit" class="btn btn-primary mx-2">套用N篩選條件</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="slideFunc-box" id="listSetting">
+    <div class="slideFunc-content">
+        <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
+            <h5 class="slideFunc-title" id="listSettingTitle">列表欄位調整</h5>
+            <button type="button" class="btn-close" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="slideFunc-body px-3 py-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="list-group">
+                        <div class="sort-item">
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input" checked disabled>
+                                    <label class="form-check-label" for="">編號</label>
+                                </div>
+                                <i class="ti-lock "></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">排列序號</label>
+                                </div>
+                                <i class="ti-lock"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">圖片</label>
+                                </div>
+                                <i class="ti-lock"></i>
+                            </div>
+                        </div>
+                        <div class="sort-item" id="sortGroup">
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">編修狀態</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">名稱</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">商品編號</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">狀態/日期</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">點閱數</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">串接狀態</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">類型</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">組合商品</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">一頁式商品</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">最後修改者</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">最後修改日期</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">建置日期</label>
+                                </div>
+                                <i class="ti-align-justify"></i>
+                            </div>
+                        </div>
+                        <div class="sort-item">
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">規格一</label>
+                                </div>
+                                <i class="ti-lock "></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">規格二</label>
+                                </div>
+                                <i class="ti-lock"></i>
+                            </div>
+                            <div class="list-group-item d-flex flex-content-between align-items-center" >
+                                <div class="form-check flex-fill">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           aria-label="Checkbox for following text input">
+                                    <label class="form-check-label" for="">規格三</label>
+                                </div>
+                                <i class="ti-lock"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="reset" class="btn btn-muted" data-bs-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-primary">儲存</button>
-                </div>
             </div>
         </div>
+        <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
+            <button type="reset" class="btn btn-muted mx-2">取消</button>
+            <button type="submit" class="btn btn-primary mx-2">儲存</button>
+        </div>
     </div>
+</div>
 
-    <!-- modals ppup  -->
-    <!-- footer  -->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <!-- popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- bootstarp js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- sidebar menu  -->
-    <script src="js/metisMenu.js"></script>
-    <!-- waypoints js -->
-    <script src="vendors/count_up/jquery.waypoints.min.js"></script>
-    <!-- waypoints js -->
-    <script src="vendors/chartlist/Chart.min.js"></script>
-    <!-- counterup js -->
-    <script src="vendors/count_up/jquery.counterup.min.js"></script>
+<!-- modals ppup  -->
+<!-- footer  -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- popper js -->
+<script src="js/popper.min.js"></script>
+<!-- bootstarp js -->
+<script src="js/bootstrap.min.js"></script>
+<!-- sidebar menu  -->
+<script src="js/metisMenu.js"></script>
+<!-- waypoints js -->
+<script src="vendors/count_up/jquery.waypoints.min.js"></script>
+<!-- waypoints js -->
+<script src="vendors/chartlist/Chart.min.js"></script>
+<!-- counterup js -->
+<script src="vendors/count_up/jquery.counterup.min.js"></script>
 
-    <!-- nice select -->
-    <script src="vendors/niceselect/js/jquery.nice-select.min.js"></script>
-    <!-- owl carousel -->
-    <script src="vendors/owl_carousel/js/owl.carousel.min.js"></script>
+<!-- nice select -->
+<script src="vendors/niceselect/js/jquery.nice-select.min.js"></script>
+<!-- owl carousel -->
+<script src="vendors/owl_carousel/js/owl.carousel.min.js"></script>
 
-    <!-- responsive table -->
-    <script src="vendors/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatable/js/dataTables.responsive.min.js"></script>
-    <script src="vendors/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/datatable/js/buttons.flash.min.js"></script>
-    <script src="vendors/datatable/js/jszip.min.js"></script>
-    <script src="vendors/datatable/js/pdfmake.min.js"></script>
-    <script src="vendors/datatable/js/vfs_fonts.js"></script>
-    <script src="vendors/datatable/js/buttons.html5.min.js"></script>
-    <script src="vendors/datatable/js/buttons.print.min.js"></script>
-
-
-    <script src="js/chart.min.js"></script>
-    <!-- progressbar js -->
-    <script src="vendors/progressbar/jquery.barfiller.js"></script>
-    <!-- tag input -->
-    <script src="vendors/tagsinput/tagsinput.js"></script>
-    <!-- text editor js -->
-    <script src="vendors/text_editor/summernote-bs4.js"></script>
-    <script src="vendors/am_chart/amcharts.js"></script>
-
-    <!-- scrollabe  -->
-    <script src="vendors/scroll/perfect-scrollbar.min.js"></script>
-    <script src="vendors/scroll/scrollable-custom.js"></script>
+<!-- responsive table -->
+<script src="vendors/datatable/js/jquery.dataTables.min.js"></script>
+<script src="vendors/datatable/js/dataTables.responsive.min.js"></script>
+<script src="vendors/datatable/js/dataTables.buttons.min.js"></script>
+<script src="vendors/datatable/js/buttons.flash.min.js"></script>
+<script src="vendors/datatable/js/jszip.min.js"></script>
+<script src="vendors/datatable/js/pdfmake.min.js"></script>
+<script src="vendors/datatable/js/vfs_fonts.js"></script>
+<script src="vendors/datatable/js/buttons.html5.min.js"></script>
+<script src="vendors/datatable/js/buttons.print.min.js"></script>
 
 
-    <script src="vendors/chart_am/core.js"></script>
-    <script src="vendors/chart_am/charts.js"></script>
-    <script src="vendors/chart_am/animated.js"></script>
-    <script src="vendors/chart_am/kelly.js"></script>
-    <script src="vendors/chart_am/chart-custom.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js?v=1"></script>
-    <script type="text/javascript" src="../Sort-Table-Rows-By-Content-jq-TableSort/jq.tablesort.js"></script>
+<script src="js/chart.min.js"></script>
+<!-- progressbar js -->
+<script src="vendors/progressbar/jquery.barfiller.js"></script>
+<!-- tag input -->
+<script src="vendors/tagsinput/tagsinput.js"></script>
+<!-- text editor js -->
+<script src="vendors/text_editor/summernote-bs4.js"></script>
+<script src="vendors/am_chart/amcharts.js"></script>
 
-    <!-- custom js -->
-    <script src="js/custom.js"></script>
+<!-- scrollabe  -->
+<script src="vendors/scroll/perfect-scrollbar.min.js"></script>
+<script src="vendors/scroll/scrollable-custom.js"></script>
 
-    <script>
-        //Initialize Select2 Elements
-        $('.select2bs5').each(function (i, ele) {
-            $(ele).select2()
-        })
-        /**
-         * sends a request to the specified url from a form. this will change the window location.
-         * @param {string} path the path to send the post request to
-         * @param {object} params the parameters to add to the url
-         * @param {string} [method=post] the method to use on the form
-         */
 
-        function postForm(path, params, method = 'post') {
-            const form = document.createElement('form');
-            form.method = method;
-            form.action = path;
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = params[key];
+<script src="vendors/chart_am/core.js"></script>
+<script src="vendors/chart_am/charts.js"></script>
+<script src="vendors/chart_am/animated.js"></script>
+<script src="vendors/chart_am/kelly.js"></script>
+<script src="vendors/chart_am/chart-custom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js?v=1"></script>
+<script type="text/javascript" src="../Sort-Table-Rows-By-Content-jq-TableSort/jq.tablesort.js"></script>
+<script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+<script src="../Sortable-master/Sortable-master/Sortable.min.js"></script>
+<script src="../Sortable-master/Sortable-master/modular/sortable.complete.esm.js"></script>
 
-                    form.appendChild(hiddenField);
-                }
+
+<!-- custom js -->
+<script src="js/custom.js"></script>
+
+<script>
+    //Initialize Select2 Elements
+    $('.select2bs5').each(function (i, ele) {
+        $(ele).select2()
+    })
+    /**
+     * sends a request to the specified url from a form. this will change the window location.
+     * @param {string} path the path to send the post request to
+     * @param {object} params the parameters to add to the url
+     * @param {string} [method=post] the method to use on the form
+     */
+
+    function postForm(path, params, method = 'post') {
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = path;
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+
+                form.appendChild(hiddenField);
             }
-            document.body.appendChild(form);
-            form.submit();
         }
+        document.body.appendChild(form);
+        form.submit();
+    }
 
-        // tableSort
-        $('#sortableTable').tablesort();
-    </script>
+    // tableSort
+    // $('#sortableTable').tablesort();
+
+    // sortable.js
+    new Sortable(document.getElementById('sortGroup'), {
+        filter: '.in-fixed', // 'filtered' class is not draggable
+        animation: 150,
+        handle: '.ti-align-justify',
+        ghostClass: 'bg-secondary-light'
+    });
+</script>
 </body>
 
 </html>
