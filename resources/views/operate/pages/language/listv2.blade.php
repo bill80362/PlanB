@@ -325,13 +325,17 @@
 
                         </div>
                     </div>
-                    <input id="searchFilter" name="filter_text_key" type="hidden" value="{{request()->get('filter_text_key')}}">
-                    <input id="searchString" name="filter_text_value" type="hidden" value="{{request()->get('filter_text_value')}}">
+                    <input id="searchFilter" name="filter_text_key" type="hidden"
+                        value="{{ request()->get('filter_text_key') }}">
+                    <input id="searchString" name="filter_text_value" type="hidden"
+                        value="{{ request()->get('filter_text_value') }}">
                 </form>
 
                 <form id="resetForm">
-                    <input id="searchFilter" name="filter_text_key" type="hidden" value="{{request()->get('filter_text_key')}}">
-                    <input id="searchString" name="filter_text_value" type="hidden" value="{{request()->get('filter_text_value')}}">
+                    <input id="searchFilter" name="filter_text_key" type="hidden"
+                        value="{{ request()->get('filter_text_key') }}">
+                    <input id="searchString" name="filter_text_value" type="hidden"
+                        value="{{ request()->get('filter_text_value') }}">
                 </form>
             </div>
             <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
