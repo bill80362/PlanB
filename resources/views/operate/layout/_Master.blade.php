@@ -176,6 +176,8 @@
     <script src="/template/Salessa/vendors/chart_am/chart-custom.js?v={{ $SystemConfigService->versionJS }}"></script>
     <!-- custom js -->
     <script src="/template/Salessa/js/custom.js?v={{ $SystemConfigService->versionJS }}"></script>
+    <script src="/template/Sortable-master/Sortable-master/Sortable.min.js"></script>
+    <script src="/template/Sortable-master/Sortable-master/modular/sortable.complete.esm.js"></script>
 
     {{-- select2 --}}
     <script

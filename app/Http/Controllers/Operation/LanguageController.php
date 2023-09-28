@@ -25,7 +25,7 @@ class LanguageController extends Controller
     {
         $user = auth('operate')->user();
         $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        // dump($columns);
+        
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())

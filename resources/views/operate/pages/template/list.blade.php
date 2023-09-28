@@ -946,11 +946,11 @@
         // $('#sortableTable').tablesort();
 
         // sortable.js
-        // new Sortable(document.getElementById('sortGroup'), {
-        //     filter: '.in-fixed', // 'filtered' class is not draggable
-        //     animation: 150,
-        //     handle: '.ti-align-justify',
-        //     ghostClass: 'bg-secondary-light'
-        // });
+        new Sortable(document.getElementById('sortGroup'), {
+            filter: '.in-fixed', // 'filtered' class is not draggable
+            animation: 150,
+            handle: '.ti-align-justify',
+            ghostClass: 'bg-secondary-light'
+        });
     </script>
 @endsection
