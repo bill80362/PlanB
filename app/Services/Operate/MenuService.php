@@ -9,7 +9,7 @@ class MenuService
     public function getMenu()
     {
 
-        return [
+        $menus = [
             [
                 'name' => __('儀表板'),
                 'href' => '/operate/dashboard',
@@ -86,7 +86,29 @@ class MenuService
                     ],
                 ],
             ],
+
+
         ];
+        
+        if (!app()->isProduction()) {
+            $templates = [
+                'name' => __('範本'),
+                'icon' => '/template/Salessa/img/menu-icon/5.svg',
+                'subMenu' => [
+                    [
+                        'name' => __('列表頁'),
+                        'href' => '/operate/template/list',
+                        'permission' => '',
+                    ]
+                ]
+            ];
+            $menus = array_merge($menus, [$templates]);
+        }
+
+
+
+
+        return $menus;
     }
 
     /**

@@ -5,7 +5,7 @@ use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
 /**後台*/
-Route::prefix('operate')->middleware(['lang.extend','lang.detect', 'log.request', 'log.response'])->group(function () {
+Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request', 'log.response'])->group(function () {
     //切換後台版面語言
     Route::get('/locale/config/{locale}', [\App\Http\Controllers\Operation\LocaleController::class, 'set'])->name('locale_config');
 
@@ -29,7 +29,7 @@ Route::prefix('operate')->middleware(['lang.extend','lang.detect', 'log.request'
             Route::get('/{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->middleware(['can:user_read']);
             Route::post('/{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->middleware(['can:user_update']);
             Route::post('/del', [UserController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
-            Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type",'[key|value]+')->middleware(['can:user_export']);
+            Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->middleware(['can:user_export']);
             Route::post('/import', [UserController::class, 'import'])->name('import')->middleware(['can:user_import']);
             Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->middleware(['can:user_read']);
         });
@@ -66,6 +66,9 @@ Route::prefix('operate')->middleware(['lang.extend','lang.detect', 'log.request'
         //語系
         Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')
             ->middleware(['can:language_read']);
+        Route::get('/language_v2', [Operation\LanguageController::class, 'listHTMLV2'])->name('language_list_v2')
+            ->middleware(['can:language_read']);
+
         Route::get('/language/{id}', [Operation\LanguageController::class, 'updateHTML'])->whereNumber('id')
             ->name('language_update_html')->middleware(['can:language_read']);
         Route::post('/language/{id}', [Operation\LanguageController::class, 'update'])
@@ -85,5 +88,10 @@ Route::prefix('operate')->middleware(['lang.extend','lang.detect', 'log.request'
 
         Route::post('/upload_image', [Operation\FileController::class, 'uploadImage'])
             ->name('upload_file');
+
+        // ui template
+        if (!app()->isProduction()) {
+            Route::get('/template/list', [Operation\TemplateController::class, 'list'])->name('template_list');
+        }
     });
 });

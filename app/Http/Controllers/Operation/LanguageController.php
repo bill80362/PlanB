@@ -21,10 +21,27 @@ class LanguageController extends Controller
     ) {
     }
 
-    public function listHTML(ListColumnService $listColumnService)
-    {               
+    public function listHTMLV2(ListColumnService $listColumnService)
+    {
         $user = auth('operate')->user();
         $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
+        // dump($columns);
+        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
+        //過濾條件
+        $Paginator = $this->oModel->filter($this->request->all())
+            ->paginate($pageLimit);
+        return view('operate/pages/language/listv2', [
+            'Paginator' => $Paginator,
+            'Model' => $this->oModel,
+            'columns' => $columns,
+        ]);
+    }
+
+    public function listHTML(ListColumnService $listColumnService)
+    {
+        $user = auth('operate')->user();
+        $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
+        // dump($columns);
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())

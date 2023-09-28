@@ -142,9 +142,6 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr id="sortList">
-                                        {{-- @includeWhen(true, 'operate.components.table.column') --}}
-
-
                                         @if (in_array('default_serial_number', $columns))
                                             <th class="default_serial_number">{{ __('流水號') }}</th>
                                         @endif
@@ -316,10 +313,6 @@
 @endsection
 
 @section('BodyJavascript')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"
-        integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script>
         //批次刪除
         $("#btnDeleteBatch").on("click", function() {
@@ -333,7 +326,7 @@
             postForm('/operate/language/del?{{ request()->getQueryString() }}', postArray)
         });
 
-
+        console.log(@json($columns))
         // 處理排序
         $(document).ready(function() {
             updateTitlehandler()
