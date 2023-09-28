@@ -108,9 +108,11 @@ class Language extends Model
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if (isset($Data['filter_lang_type'])) {
-            $query->whereIn('lang_type', (array) $Data['filter_lang_type']);
-        }
+        // if (isset($Data['filter_lang_type'])) {
+        //     $query->whereIn('lang_type', (array) $Data['filter_lang_type']);
+        // }
+
+        $query->where('lang_type', 'zh-tw');
 
         if (isset($Data['filter_is_change'])) {
             $isChanges = (array)$Data['filter_is_change'];

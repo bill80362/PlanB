@@ -37,7 +37,7 @@
                         {{-- 搜尋START --}}
                         <form>
                             <div class="row">
-                                <div class="col-lg-4">
+                                {{-- <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>{{ $Model->Column_Title_Text['lang_type'] }}</label>
                                         <select name="filter_lang_type[]" class="select2bs5" multiple="multiple"
@@ -49,7 +49,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
