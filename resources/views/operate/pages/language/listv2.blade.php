@@ -57,7 +57,7 @@
                         <div class="white_card_body">
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <form>
+                                    <form id="searchFrom">
                                         <div class="input-group">
                                             <div class="input-group input-group" id="searchContnet">
                                                 <div class="input-group-prepend">
@@ -83,6 +83,7 @@
                                                 <input type="text" class="form-control" name="filter_text_value"
                                                     value="{{ request()->get('filter_text_value') }}"
                                                     data-target="#searchString">
+
                                                 <button class="btn btn-dark" type="submit" id="searchButton"><i
                                                         class="ti-search"></i></button>
                                             </div>
@@ -94,18 +95,26 @@
                                             name="funnel-outline"></ion-icon>
                                         {{ __('篩選器') }}</button>
                                     <a href="{{ request()->url() }}">
-                                        <button class="btn btn-muted">重置查詢</button>
+                                        <button class="btn btn-muted">{{ __('重置查詢') }}</button>
                                     </a>
 
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
                                     <p class="d-flex align-items-center flex-content-start fz-sm filter-string">
-                                        <span class="text-muted me-2">篩選器：</span>
-                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3">上架狀態：上架 <i
-                                                class="ti-close"></i></button>
-                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3">上架區間狀態：進行中、未開始
-                                            <i class="ti-close"></i></button>
+                                        <span class="text-muted me-2">{{ __('篩選器') }}：</span>
+
+                                        @if (count((array) request()->get('filter_is_change')) > 0)
+                                            <button onclick="remove()"
+                                                class="btn btn-secondary me-2 btn-sm rounded-pill px-3">{{ __('是否已修改') }}：
+                                                @foreach ($Model->isChangeText as $key => $value)
+                                                    {{ in_array($key, (array) request()->get('filter_is_change')) ? $value : '' }}
+                                                @endforeach
+                                                <i class="ti-close"></i>
+                                            </button>
+                                        @endif
+
+
                                     </p>
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
@@ -299,29 +308,35 @@
                 </button>
             </div>
             <div class="slideFunc-body px-3 py-3">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group mb-3">
-                            <label>{{ __('是否已修改') }}</label>
-                            <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
-                                style="width: 100%;">
-                                @foreach ($Model->isChangeText as $key => $value)
-                                    {{ $value }}
-                                    <option value="{{ $key }}"
-                                        {{ in_array($key, (array) request()->get('filter_is_change')) ? 'selected' : '' }}>
-                                        {{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <form id="searchForm">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label>{{ __('是否已修改') }}</label>
+                                <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
+                                    style="width: 100%;">
+                                    @foreach ($Model->isChangeText as $key => $value)
+                                        {{ $value }}
+                                        <option value="{{ $key }}"
+                                            {{ in_array($key, (array) request()->get('filter_is_change')) ? 'selected' : '' }}>
+                                            {{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <input id="searchFilter" type="hidden" value="">
-                <input id="searchString" type="hidden" value="">
+                    <input id="searchFilter" type="hidden" value="">
+                    <input id="searchString" type="hidden" value="">
+                </form>
+
+                <form id="resetForm"></form>
             </div>
             <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
-                <button type="reset" class="btn btn-muted mx-2">{{ __('清除篩選器') }}</button>
-                <button type="submit" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
+                <button type="button" onclick="selectedForm=document.getElementById('resetForm'); selectedForm.submit();"
+                    class="btn btn-muted mx-2">{{ __('清除篩選器') }}</button>
+                <button onclick="selectedForm=document.getElementById('searchForm'); selectedForm.submit();"
+                    type="button" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
             </div>
         </div>
     </div>
@@ -360,7 +375,7 @@
 
                                 </div>
                                 <div class="sort-item" id="sortGroup">
-                
+
                                     @foreach ($titles as $key => $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
@@ -398,6 +413,14 @@
             })
         })
 
+        function remove() {
+            let form = document.getElementById("searchFrom");
+            form.children("#search_filter_is_change").remove();;
+
+            // form.method = "GET";
+            // form.action = '/';
+            form.submit();
+        }
 
         /**
          * sends a request to the specified url from a form. this will change the window location.
