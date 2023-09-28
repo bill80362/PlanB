@@ -9,6 +9,9 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Facades\Blade;
+use App\View\Components\Operate\Components\Table\Column;
+
 class CommonServiceProvider extends ServiceProvider
 {
     /**
@@ -37,6 +40,8 @@ class CommonServiceProvider extends ServiceProvider
         ): PendingRequest {
             return Http::withMiddleware((new HttpLog())->__invoke($channel, $context, $config));
         });
+
+      
         //全域Queue的Job失敗會觸發
         //        Queue::failing(function (JobFailed $event) {
         //            Log::channel('daily')->error("全域Queue的Job失敗會觸發BBBB");

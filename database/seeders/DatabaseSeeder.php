@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\CompanyManage\PageContent;
+use App\Models\CountryAndShippingFee\Language;
 use App\Models\Permission\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User\ListColumnSetting;
 
 class DatabaseSeeder extends Seeder
 {
@@ -64,6 +66,27 @@ class DatabaseSeeder extends Seeder
         \App\Models\Permission\Permission::create([
             'user_id' => '2',
             'perm_key' => 'mailOrder.newOrder',
+        ]);
+
+        ListColumnSetting::create([
+            'list_model_type' => Language::class,
+            'user_id' => 2,
+            'column_name' => 'text',
+            'sort' => 1,
+        ]);
+
+        ListColumnSetting::create([
+            'list_model_type' => Language::class,
+            'user_id' => 2,
+            'column_name' => 'tran_text',
+            'sort' => 2,
+        ]);
+
+        ListColumnSetting::create([
+            'list_model_type' => Language::class,
+            'user_id' => 2,
+            'column_name' => 'isUpdated',
+            'sort' => 3,
         ]);
 
         // \App\Models\Permission\Permission::create([

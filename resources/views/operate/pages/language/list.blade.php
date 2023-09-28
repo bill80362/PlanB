@@ -141,36 +141,93 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>{{ __($Model->Column_Title_Text['id']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['text']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['tran_text']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['lang_type']) }}</th>
-                                        <th>{{ __('是否已修改') }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['updated_at']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['created_at']) }}</th>
+                                    <tr id="sortList">
+                                        {{-- @includeWhen(true, 'operate.components.table.column') --}}
 
-                                        <th>{{ __('操作') }}</th>
+
+                                        @if (in_array('default_serial_number', $columns))
+                                            <th class="default_serial_number">{{ __('流水號') }}</th>
+                                        @endif
+
+                                        @if (in_array('text', $columns))
+                                            <th data-sort="{{ array_search('text', $columns) }}">
+                                                {{ __($Model->Column_Title_Text['text']) }}</th>
+                                        @endif
+
+                                        @if (in_array('tran_text', $columns))
+                                            <th data-sort="{{ array_search('tran_text', $columns) }}">
+                                                {{ __($Model->Column_Title_Text['tran_text']) }}</th>
+                                        @endif
+
+                                        @if (in_array('lang_type', $columns))
+                                            <th data-sort="{{ array_search('lang_type', $columns) }}">
+                                                {{ __($Model->Column_Title_Text['lang_type']) }}</th>
+                                        @endif
+
+                                        @if (in_array('isUpdated', $columns))
+                                            <th data-sort="{{ array_search('isUpdated', $columns) }}">{{ __('是否已修改') }}
+                                            </th>
+                                        @endif
+
+                                        @if (in_array('updated_at', $columns))
+                                            <th data-sort="{{ array_search('updated_at', $columns) }}">
+                                                {{ __($Model->Column_Title_Text['updated_at']) }}</th>
+                                        @endif
+
+                                        @if (in_array('created_at', $columns))
+                                            <th data-sort="{{ array_search('created_at', $columns) }}">
+                                                {{ __($Model->Column_Title_Text['created_at']) }}</th>
+                                        @endif
+
+                                        @if (in_array('default_action', $columns))
+                                            <th>{{ __('操作') }}</th>
+                                        @endif
+
+
+
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="sortListContent">
                                     <form>
-                                        @foreach ($Paginator->items() as $Item)
+                                        @foreach ($Paginator->items() as $key => $Item)
                                             <tr>
-                                                <td>
+                                                <td data-sort="0">
                                                     <input type="checkbox" class="form-check-input" name="id_array[]"
                                                         value="{{ $Item->id }}">
-                                                    {{ $Item->id }}
+                                                    {{ $key + 1 + ($Paginator->currentPage() - 1) * $Paginator->perPage() }}
                                                 </td>
-                                                <td>{{ $Item->text }}</td>
-                                                <td>{{ $Item->tran_text }}</td>
 
+                                                @if (in_array('text', $columns))
+                                                    <td data-sort="{{ array_search('text', $columns) }}">
+                                                        {{ $Item->text }}</td>
+                                                @endif
 
-                                                <td>{{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
-                                                </td>
-                                                <td>{{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
-                                                <td>{{ $Item->updated_at }}</td>
-                                                <td>{{ $Item->created_at }}</td>
+                                                @if (in_array('tran_text', $columns))
+                                                    <td data-sort="{{ array_search('tran_text', $columns) }}">
+                                                        {{ $Item->tran_text }}</td>
+                                                @endif
+
+                                                @if (in_array('lang_type', $columns))
+                                                    <td data-sort="{{ array_search('lang_type', $columns) }}">
+                                                        {{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
+                                                    </td>
+                                                @endif
+
+                                                @if (in_array('isUpdated', $columns))
+                                                    <td data-sort="{{ array_search('isUpdated', $columns) }}">
+                                                        {{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
+                                                @endif
+
+                                                @if (in_array('updated_at', $columns))
+                                                    <td data-sort="{{ array_search('updated_at', $columns) }}">
+                                                        {{ $Item->updated_at }}</td>
+                                                @endif
+
+                                                @if (in_array('created_at', $columns))
+                                                    <td data-sort="{{ array_search('created_at', $columns) }}">
+                                                        {{ $Item->created_at }}</td>
+                                                @endif
+
 
                                                 <td>
                                                     @can('language_update')
@@ -259,6 +316,10 @@
 @endsection
 
 @section('BodyJavascript')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"
+        integrity="sha512-9pm50HHbDIEyz2RV/g2tn1ZbBdiTlgV7FwcQhIhvykX6qbQitydd6rF19iLmOqmJVUYq90VL2HiIUHjUMQA5fw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         //批次刪除
         $("#btnDeleteBatch").on("click", function() {
@@ -271,5 +332,33 @@
             //送出
             postForm('/operate/language/del?{{ request()->getQueryString() }}', postArray)
         });
+
+
+        // 處理排序
+        $(document).ready(function() {
+            updateTitlehandler()
+            updatehandler();
+        });
+
+        function updateTitlehandler() {
+            var list = $('#sortList');
+            var listItems = list.find('th').sort(function(a, b) {
+                return $(a).attr('data-sort') - $(b).attr('data-sort');
+            });
+            list.find('th').remove();
+            list.append(listItems);
+        }
+
+        function updatehandler() {
+            let list = $('#sortListContent tr').html(function() {
+                let subList = $(this).children().sort(function(a, b) {
+                    return $(a).attr('data-sort') - $(b).attr('data-sort');
+                });
+                return subList;
+
+            });
+            list.find('#sortListContent tr').remove();
+            list.append(list);
+        }
     </script>
 @endsection

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
+use App\Services\Operate\ListColumnService;
+
 class LanguageController extends Controller
 {
     public function __construct(
@@ -19,16 +21,18 @@ class LanguageController extends Controller
     ) {
     }
 
-    public function listHTML()
-    {
+    public function listHTML(ListColumnService $listColumnService)
+    {               
+        $user = auth('operate')->user();
+        $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())
             ->paginate($pageLimit);
-
         return view('operate/pages/language/list', [
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
+            'columns' => $columns,
         ]);
     }
 
