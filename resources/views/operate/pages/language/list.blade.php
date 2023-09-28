@@ -114,8 +114,10 @@
                                         <button class="btn btn-sm btn-primary">{{ __('搜尋') }}</button>
                                         <a class="btn btn-sm btn-secondary"
                                             href="{{ request()->url() }}">{{ __('取消') }}</a>
-                                        <a class="btn btn-warning"
-                                            href="{{ route('language_export') }}?{{ request()->getQueryString() }}">{{ __('匯出') }}</a>
+                                        @can('language_export')
+                                            <a class="btn btn-warning"
+                                                href="{{ route('language_export') }}?{{ request()->getQueryString() }}">{{ __('匯出') }}</a>
+                                        @endcan
                                     </div>
                                 </div>
                             </div>

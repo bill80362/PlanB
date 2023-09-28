@@ -29,7 +29,7 @@ class LanguageTranslator extends LaravelTranslator
 
         //需做開關，如果打開，需執行寫入url的動作。
         if ($this->useUrlMap) {
-            $currenturl = Request::url(); // or url()            
+            $currenturl = Request::url(); // or url()
             // $key、$currenturl
             LangUrlMap::firstOrCreate([
                 'language_key' => $key,
@@ -40,10 +40,12 @@ class LanguageTranslator extends LaravelTranslator
 
 
         if (!isset($line)) {
-            $ignoreKey = ['validation.'];
+            $ignoreKey = ['validation.', 'pagination.', 'auth.', 'common.', 'passwords.'];
             $check = Str::startsWith($key, $ignoreKey);
+            $language = new Language();
+            $langTypeKeys = $language->getCode();
             if (!$check) {
-                foreach (['1', '2', '3'] as $langType) {
+                foreach ($langTypeKeys as $langType) {
                     Language::firstOrCreate([
                         'lang_type' => $langType,
                         'text' => $key,
