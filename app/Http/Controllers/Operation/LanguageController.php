@@ -25,7 +25,23 @@ class LanguageController extends Controller
     {
         $user = auth('operate')->user();
         $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        
+        $lockTitles = [
+            'default_serial_number' => '流水號',
+        ];
+        $titles = [
+            'text' => $this->oModel->Column_Title_Text['text'],
+            'tran_text' => $this->oModel->Column_Title_Text['tran_text'],
+            'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
+            'isUpdated' => '是否已修改',
+            'updated_at' => $this->oModel->Column_Title_Text['updated_at'],
+            'created_at' => $this->oModel->Column_Title_Text['created_at'],
+        ];
+
+        $titles = collect($titles)->sortBy(function ($item, $key) use ($columns) {
+            return array_search($key, $columns);
+        })->toArray();
+
+
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())
@@ -34,6 +50,8 @@ class LanguageController extends Controller
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
             'columns' => $columns,
+            'titles' => $titles,
+            'lockTitles' => $lockTitles
         ]);
     }
 
@@ -231,6 +249,15 @@ class LanguageController extends Controller
             fclose($fp);
         }
 
+        return back();
+    }
+
+
+    public function saveListColumn(ListColumnService $listColumnService)
+    {
+        $list = $this->request->get('list', []);
+        $user = auth('operate')->user();
+        $listColumnService->renewListColumn($this->oModel, $list, $user->id);
         return back();
     }
 }

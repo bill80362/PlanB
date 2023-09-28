@@ -84,6 +84,8 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             ->name('language_export');
         Route::post('/language/import', [Operation\LanguageController::class, 'import'])->name('language_import');
         Route::post('/language/make_file', [Operation\LanguageController::class, 'makeFile'])->name('language_makeFile');
+        Route::post('/language/list_column', [Operation\LanguageController::class, 'saveListColumn'])->name('language_saveListColumn');
+
 
         //公司管理
         Route::get('/company_manage/{key}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement')
