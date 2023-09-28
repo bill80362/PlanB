@@ -10,6 +10,7 @@
             <!-- page Content  -->
             <div class="row justify-content-center">
                 <div class="col-lg-12">
+                    @include('/operate/components/alert/error_message')
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">

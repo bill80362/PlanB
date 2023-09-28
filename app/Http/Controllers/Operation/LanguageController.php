@@ -194,6 +194,9 @@ class LanguageController extends Controller
      */
     public function import()
     {
+        $this->request->validate([
+            'file' => ['required']
+        ]);
         $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
 
         //開始逐筆匯入
