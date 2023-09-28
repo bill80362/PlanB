@@ -26,7 +26,6 @@ class LanguageController extends Controller
         $user = auth('operate')->user();
 
         // table原設定
-        $tableSetting = $listColumnService->getTableSetting($this->oModel);
         $componentTitles = [
             'default_serial_number' => '流水號',
             'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
@@ -36,13 +35,12 @@ class LanguageController extends Controller
             'updated_at' => $this->oModel->Column_Title_Text['updated_at'],
             'created_at' => $this->oModel->Column_Title_Text['created_at'],
         ];
-        $lockTitles = collect($componentTitles)->only($tableSetting['lockColumn']);
-        $titles = collect($componentTitles)->only($tableSetting['canUseColumn']);
+        [$lockTitles, $titles] = $listColumnService->parseSetting($this->oModel, $componentTitles);
 
         // 使用者設定
-        $columns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        $titles = collect($titles)->sortBy(function ($item, $key) use ($columns) {
-            return array_search($key, $columns);
+        $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
+        $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
+            return array_search($key, $userColumns);
         })->toArray();
 
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
@@ -52,10 +50,10 @@ class LanguageController extends Controller
         return view('operate/pages/language/list', [
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
-            'columns' => $columns,
+            'columns' => $userColumns,
             'titles' => $titles,
             'lockTitles' => $lockTitles,
-            'allkeys' => array_keys($titles)
+            'allkeys' => array_keys($sortTitles)
         ]);
     }
 
