@@ -57,38 +57,37 @@
                         <div class="white_card_body">
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <form id="searchFrom">
-                                        <div class="input-group">
-                                            <div class="input-group input-group" id="searchContnet">
-                                                <div class="input-group-prepend">
-                                                    <select class="form-select" name="filter_text_key"
-                                                        data-target="#searchFilter">
-                                                        <option value="">{{ __('不限制') }}</option>
-                                                        <option value="text"
-                                                            {{ request()->get('filter_text_key') == 'text' ? 'selected' : '' }}>
-                                                            {{ __('名稱') }}
-                                                        </option>
-                                                        <option value="tran_text"
-                                                            {{ request()->get('filter_text_key') == 'tran_text' ? 'selected' : '' }}>
-                                                            {{ __('翻譯後名稱') }}
-                                                        </option>
-                                                        <option value="memo"
-                                                            {{ request()->get('filter_text_key') == 'memo' ? 'selected' : '' }}>
-                                                            {{ __('備註') }}</option>
-                                                        <option value="lang_url_map"
-                                                            {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
-                                                            {{ __('相關網址') }}</option>
-                                                    </select>
-                                                </div>
-                                                <input type="text" class="form-control" name="filter_text_value"
-                                                    value="{{ request()->get('filter_text_value') }}"
-                                                    data-target="#searchString">
 
-                                                <button class="btn btn-dark" type="submit" id="searchButton"><i
-                                                        class="ti-search"></i></button>
+                                    <div class="input-group">
+                                        <div class="input-group input-group" id="searchContnet">
+                                            <div class="input-group-prepend">
+                                                <select class="form-select" name="filter_text_key" id="filter_text_key"
+                                                    data-target="#searchFilter">
+                                                    <option value="">{{ __('不限制') }}</option>
+                                                    <option value="text"
+                                                        {{ request()->get('filter_text_key') == 'text' ? 'selected' : '' }}>
+                                                        {{ __('名稱') }}
+                                                    </option>
+                                                    <option value="tran_text"
+                                                        {{ request()->get('filter_text_key') == 'tran_text' ? 'selected' : '' }}>
+                                                        {{ __('翻譯後名稱') }}
+                                                    </option>
+                                                    <option value="memo"
+                                                        {{ request()->get('filter_text_key') == 'memo' ? 'selected' : '' }}>
+                                                        {{ __('備註') }}</option>
+                                                    <option value="lang_url_map"
+                                                        {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
+                                                        {{ __('相關網址') }}</option>
+                                                </select>
                                             </div>
+                                            <input id="filter_text_value" type="text" class="form-control"
+                                                name="filter_text_value" value="{{ request()->get('filter_text_value') }}"
+                                                data-target="#searchString">
+
+                                            <button onclick="searchText()" class="btn btn-dark" type="button"
+                                                id="searchButton"><i class="ti-search"></i></button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon
@@ -105,7 +104,7 @@
                                         <span class="text-muted me-2">{{ __('篩選器') }}：</span>
 
                                         @if (count((array) request()->get('filter_is_change')) > 0)
-                                            <button onclick="remove()"
+                                            <button
                                                 class="btn btn-secondary me-2 btn-sm rounded-pill px-3">{{ __('是否已修改') }}：
                                                 @foreach ($Model->isChangeText as $key => $value)
                                                     {{ in_array($key, (array) request()->get('filter_is_change')) ? $value : '' }}
@@ -326,17 +325,19 @@
 
                         </div>
                     </div>
-                    <input id="searchFilter" type="hidden" value="">
-                    <input id="searchString" type="hidden" value="">
+                    <input id="searchFilter" name="filter_text_key" type="hidden" value="{{request()->get('filter_text_key')}}">
+                    <input id="searchString" name="filter_text_value" type="hidden" value="{{request()->get('filter_text_value')}}">
                 </form>
 
-                <form id="resetForm"></form>
+                <form id="resetForm">
+                    <input id="searchFilter" name="filter_text_key" type="hidden" value="{{request()->get('filter_text_key')}}">
+                    <input id="searchString" name="filter_text_value" type="hidden" value="{{request()->get('filter_text_value')}}">
+                </form>
             </div>
             <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
                 <button type="button" onclick="selectedForm=document.getElementById('resetForm'); selectedForm.submit();"
                     class="btn btn-muted mx-2">{{ __('清除篩選器') }}</button>
-                <button onclick="selectedForm=document.getElementById('searchForm'); selectedForm.submit();"
-                    type="button" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
+                <button onclick="searchText()" type="button" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
             </div>
         </div>
     </div>
@@ -413,13 +414,14 @@
             })
         })
 
-        function remove() {
-            let form = document.getElementById("searchFrom");
-            form.children("#search_filter_is_change").remove();;
+        function searchText() {
+            let filter_text_key = $("#filter_text_key").val();
+            let filter_text_value = $("#filter_text_value").val();
 
-            // form.method = "GET";
-            // form.action = '/';
-            form.submit();
+            $("#searchFilter").val(filter_text_key);
+            $("#searchString").val(filter_text_value);
+            selectedForm = document.getElementById('searchForm');
+            selectedForm.submit();
         }
 
         /**
