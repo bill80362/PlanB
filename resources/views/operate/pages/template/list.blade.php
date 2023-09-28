@@ -913,7 +913,9 @@
     <script>
         //Initialize Select2 Elements
         $('.select2bs5').each(function(i, ele) {
-            $(ele).select2()
+            $(ele).select2({
+                dropdownParent: $('#prodFilter'),
+            })
         })
         /**
          * sends a request to the specified url from a form. this will change the window location.
