@@ -1,9 +1,9 @@
 (function ($) {
     "use strict";
 
-    // metisMenu 
+    // metisMenu
     $("#sidebar_menu").metisMenu();
-    // metisMenu 
+    // metisMenu
     $("#admin_profile_active").metisMenu();
 
     $(window).on('scroll', function () {
@@ -15,7 +15,7 @@
         }
     });
 
-    // back to top 
+    // back to top
     $('#back-top a').on("click", function () {
         $('body,html').animate({
             scrollTop: 0
@@ -24,7 +24,7 @@
     });
 
 
-    // PAGE ACTIVE 
+    // PAGE ACTIVE
     $("#sidebar_menu").find("a").removeClass("active");
     $("#sidebar_menu").find("li").removeClass("mm-active");
     $("#sidebar_menu").find("li ul").removeClass("mm-show");
@@ -42,7 +42,7 @@
         }
     });
 
-    // #NOTIFICATION_ 
+    // #NOTIFICATION_
     // for MENU notification
     $('.notification_clicker').on('click', function (e) {
         e.preventDefault();
@@ -62,7 +62,7 @@
             $("body").find(".Menu_NOtification_Wrap").removeClass("active");
         }
     });
-    // CHAT_MENU_OPEN 
+    // CHAT_MENU_OPEN
     $('.CHATBOX_open').on('click', function () {
         $('.CHAT_MESSAGE_POPUPBOX').toggleClass('active');
     });
@@ -147,7 +147,7 @@
     }
 
 
-    // data table 
+    // data table
 
 
     //niceselect select jquery
@@ -156,7 +156,7 @@
     // $('.nice_Select2').niceSelect();
     // $('.default_sel').niceSelect();
 
-    // niceSelect 
+    // niceSelect
     var niceSelect = $('.nice_Select');
     if (niceSelect.length) {
         niceSelect.niceSelect();
@@ -173,7 +173,7 @@
     };
 
 
-    // datepicker 
+    // datepicker
     $(document).ready(function () {
         var date_picker = $('#start_datepicker');
         if (date_picker.length) {
@@ -309,7 +309,7 @@
         });
     });
 
-    // meta_keywords 
+    // meta_keywords
     var bootstrapTag = $("#meta_keywords");
     if (bootstrapTag.length) {
         bootstrapTag.tagsinput();
@@ -368,8 +368,8 @@
 
 
 
-    // switcher menu 
-    // anly for side switcher menu 
+    // switcher menu
+    // anly for side switcher menu
     $('.switcher_wrap li.Horizontal').click(function () {
         $('.sidebar').addClass('hide_vertical_menu');
         $('.main_content ').addClass('main_content_padding_hide');
@@ -386,8 +386,8 @@
         $('.footer_part').removeClass('pl-0');
     });
 
-    // switcher_wrap 
-    // anly for side switcher menu 
+    // switcher_wrap
+    // anly for side switcher menu
 
     $('.switcher_wrap li').click(function () {
         $('li').removeClass("active");
@@ -401,11 +401,11 @@
 
 
     $('.spin_icon_clicker').on('click', function (e) {
-        $('.switcher_slide_wrapper').toggleClass("swith_show"); //you can list several class names 
+        $('.switcher_slide_wrapper').toggleClass("swith_show"); //you can list several class names
         e.preventDefault();
     });
 
-    //   color skin 
+    //   color skin
     $(document).ready(function () {
         $(function () {
             "use strict";
@@ -430,5 +430,22 @@
             const thisVal = $(ele).val()
             $(target).val(thisVal)
         })
+    })
+
+    // product collapse list
+    $('.collapse-btn').on('click', function(e) {
+        e.preventDefault();
+        $(this).parent('.with-child').toggleClass('in-extand')
+    })
+
+    // slide Func box
+    $('.slideFunc-toggle').on('click', function(e) {
+        e.preventDefault();
+        const thisTarget = $(this).attr('data-target')
+        $(thisTarget).toggleClass('in-active')
+    })
+    $('.slideFunc-box').on('click', '.btn-close', function(e) {
+        e.preventDefault()
+        $(this).parents('.slideFunc-box').removeClass('in-active')
     })
 }(jQuery));
