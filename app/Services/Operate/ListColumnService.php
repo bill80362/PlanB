@@ -54,10 +54,13 @@ class ListColumnService
             ->get()->map(function ($item) {
                 return $item['column_name'];
             })->toArray();
-        if (count($datas) == 0) return [];
 
         $setting = $this->getTableSetting($model);
-        $checkColumn = collect($datas)->intersect($setting['allColumn'])->toArray();
-        return array_merge($checkColumn, $setting['lockColumn']);
+
+        if (count($datas) == 0) return $setting['allColumn'];
+        else {
+            $checkColumn = collect($datas)->intersect($setting['allColumn'])->toArray();
+            return array_merge($checkColumn, $setting['lockColumn']);
+        }
     }
 }

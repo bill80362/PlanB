@@ -89,7 +89,7 @@ class MenuService
 
 
         ];
-        
+
         if (!app()->isProduction()) {
             $templates = [
                 'name' => __('範本'),

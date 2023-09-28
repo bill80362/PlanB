@@ -402,6 +402,17 @@
     </section>
     <!-- main content part end -->
 
+
+
+    <div id="back-top" style="display: none;">
+        <a title="Go to Top" href="#">
+            <i class="ti-angle-up"></i>
+        </a>
+    </div>
+@endsection
+
+
+@section('Modal')
     <!-- 彈出視窗 -->
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
@@ -429,15 +440,6 @@
         </div>
     </div>
 
-    <div id="back-top" style="display: none;">
-        <a title="Go to Top" href="#">
-            <i class="ti-angle-up"></i>
-        </a>
-    </div>
-@endsection
-
-
-@section('Modal')
     <!-- Modal -->
     <div class="slideFunc-box" id="prodFilter">
         <div class="slideFunc-content">
