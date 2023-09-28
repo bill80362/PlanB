@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>瘋樂購購物商城 - 後台管理</title>
+
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- themefy CSS -->
+    <link rel="stylesheet" href="vendors/themefy_icon/themify-icons.css" />
+    <!-- select2 CSS -->
+    <link rel="stylesheet" href="vendors/niceselect/css/nice-select.css" />
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="vendors/owl_carousel/css/owl.carousel.css" />
+    <!-- gijgo css -->
+    <link rel="stylesheet" href="vendors/gijgo/gijgo.min.css" />
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="vendors/font_awesome/css/all.min.css" />
+    <link rel="stylesheet" href="vendors/tagsinput/tagsinput.css" />
+
+    <!-- date picker -->
+    <link rel="stylesheet" href="vendors/datepicker/date-picker.css" />
+    <!-- scrollabe  -->
+    <link rel="stylesheet" href="vendors/scroll/scrollable.css" />
+    <!-- datatable CSS -->
+    <link rel="stylesheet" href="vendors/datatable/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="vendors/datatable/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="vendors/datatable/css/buttons.dataTables.min.css" />
+    <!-- text editor css -->
+    <link rel="stylesheet" href="vendors/text_editor/summernote-bs4.css" />
+    <!-- morris css -->
+    <link rel="stylesheet" href="vendors/morris/morris.css">
+    <!-- metarial icon css -->
+    <link rel="stylesheet" href="vendors/material_icon/material-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css?v=1" />
+
+    <!-- menu css  -->
+    <link rel="stylesheet" href="css/metisMenu.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS">
+</head>
+
+<body class="crm_body_bg">
+
+
+
+    <!-- main content part here -->
+
+    <!-- sidebar  -->
+    <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
+        <div class="logo d-flex justify-content-between">
+            <a href="index.html"><img src="img/logo.png" alt=""></a>
+            <div class="sidebar_close_icon d-lg-none">
+                <i class="ti-close"></i>
+            </div>
+        </div>
+        <ul id="sidebar_menu">
+            <li class="">
+                <a href="./demo_list.html" class="">
+                    <div class="icon_menu">
+                        <img src="img/menu-icon/2.svg" alt="">
+                    </div>
+                    <span>列表範例</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="./demo_page.html" class="">
+                    <div class="icon_menu">
+                        <img src="img/menu-icon/4.svg" alt="">
+                    </div>
+                    <span>細節頁範例</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!--/ sidebar  -->
+
+
+    <section class="main_content dashboard_part large_header_bg">
+
+        <!-- menu  -->
+        <div class="container-fluid g-0">
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <div class="header_iner d-flex justify-content-between align-items-center">
+                        <div class="sidebar_icon d-lg-none">
+                            <i class="ti-menu"></i>
+                        </div>
+                        <div class="serach_field-area d-flex align-items-center">
+                            <div class="search_inner">
+                                <form action="#">
+                                    <div class="search_field">
+                                        <input type="text" placeholder="Search here...">
+                                    </div>
+                                    <button type="submit"> <img src="img/icon/icon_search.svg" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                            <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
+                        </div>
+                        <div class="header_right d-flex justify-content-between align-items-center">
+                            <div class="header_notification_warp d-flex align-items-center">
+                                <li>
+                                    <a class="notification_clicker nav-link" href="#">
+                                        <img src="img/icon/global.svg" alt="">
+                                    </a>
+                                    <!-- Menu_NOtification_Wrap  -->
+                                    <div class="Menu_NOtification_Wrap">
+                                        <div class="notification_Header">
+                                            <h4>語系切換</h4>
+                                        </div>
+                                        <div class="Notification_body">
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>繁體中文</h5>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>简体中文</h5>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>English</h5>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--/ Menu_NOtification_Wrap  -->
+                                </li>
+                                <li>
+                                    <a class="notification_clicker nav-link-notify" href="#">
+                                        <img src="img/icon/bell.svg" alt="">
+                                    </a>
+                                    <!-- Menu_NOtification_Wrap  -->
+                                    <div class="Menu_NOtification_Wrap">
+                                        <div class="notification_Header">
+                                            <h4>訂單資訊</h4>
+                                        </div>
+                                        <div class="Notification_body">
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>23030348090</h5>
+                                                    </a>
+                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>23053176648</h5>
+                                                    </a>
+                                                    <p>2023-05-31 19:35:13：申請退貨</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>23030348090</h5>
+                                                    </a>
+                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>23030348090</h5>
+                                                    </a>
+                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>23030348090</h5>
+                                                    </a>
+                                                    <p>2023-09-23 16:06:55：訂單處理中</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nofity_footer">
+                                            <div class="submit_button text-center pt_20">
+                                                <a href="#" class="btn_1">查看更多</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ Menu_NOtification_Wrap  -->
+                                </li>
+                                <li>
+                                    <a class="notification_clicker nav-link-notify" href="#">
+                                        <img src="img/icon/msg.svg" alt="">
+                                    </a>
+                                    <div class="Menu_NOtification_Wrap">
+                                        <div class="notification_Header">
+                                            <h4>客服信箱</h4>
+                                        </div>
+                                        <div class="Notification_body">
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>會員名稱</h5>
+                                                    </a>
+                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>會員名稱</h5>
+                                                    </a>
+                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>會員名稱</h5>
+                                                    </a>
+                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>會員名稱</h5>
+                                                    </a>
+                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>會員名稱</h5>
+                                                    </a>
+                                                    <p>問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容，問題內容...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nofity_footer">
+                                            <div class="submit_button text-center pt_20">
+                                                <a href="#" class="btn_1">查看更多</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="profile_info">
+                                <img src="img/client_img.png" alt="#">
+                                <div class="profile_info_iner">
+                                    <div class="profile_author_name">
+                                        <p>客服人員</p>
+                                        <h5>光欣</h5>
+                                    </div>
+                                    <div class="profile_info_details">
+                                        <a href="#">網站設定</a>
+                                        <a href="#">系統設定</a>
+                                        <a href="#">人員權限</a>
+                                        <a href="#">尚峪小幫手</a>
+                                        <a href="/operate/logout">登出</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main_content_iner ">
+            <div class="container-fluid p-0 ">
+                <!-- page Content  -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="white_card">
+                            <div class="white_card_header">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h2>商品細節頁 檢修頁</h2>
+                                    <!-- Example single danger button -->
+
+                                    <div class="btn-group ms-2">
+                                        <button type="button" class="btn btn-light dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="ti-more-alt"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="##">
+                                                儲存並複製
+                                            </a>
+                                            <a class="dropdown-item" href="##">
+                                                開啟預覽頁
+                                            </a>
+                                            <a class="dropdown-item" href="##">
+                                                刪除
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group ms-2">
+                                        <a class="btn btn-light" href="##">
+                                            取消
+                                        </a>
+                                    </div>
+                                    <div class="btn-group ms-2">
+                                        <a class="btn btn-primary" href="##">
+                                            儲存
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="white_card_body">
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <div class="card mb-3 border-muted">
+                                            <div class="card-header border-muted">基本表單樣式</div>
+                                            <div class="card-body">
+                                                <div class="mb-3 row">
+                                                    <label for="formString"
+                                                        class="col-12 col-sm-3 col-form-label">字串顯示</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="text" readonly class="form-control-plaintext"
+                                                            id="formString" value="email@example.com">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">文字輸入</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="text" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">密碼輸入</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="password" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">日期選擇</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="date" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">日期時間選擇</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="datetime-local" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">時間選擇</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="time" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">單選</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="flexRadio" value="" id="flexRadio1">
+                                                            <label class="form-check-label" for="flexRadio1">
+                                                                單選 1
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="flexRadio" value="" id="flexRadio2">
+                                                            <label class="form-check-label" for="flexRadio2">
+                                                                單選 2
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="flexRadio" value="" id="flexRadio3">
+                                                            <label class="form-check-label" for="flexRadio3">
+                                                                單選 3
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="flexRadio" value="" id="flexRadio4">
+                                                            <label class="form-check-label" for="flexRadio4">
+                                                                單選 4
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="flexRadio" value="" id="flexRadio5">
+                                                            <label class="form-check-label" for="flexRadio5">
+                                                                單選 5
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">單選 (行內)</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                單選 1
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                單選 2
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio3">
+                                                            <label class="form-check-label" for="FlexRadio3">
+                                                                單選 3
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio4">
+                                                            <label class="form-check-label" for="FlexRadio4">
+                                                                單選 4
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio5">
+                                                            <label class="form-check-label" for="FlexRadio5">
+                                                                單選 5
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">複選</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheck1">
+                                                            <label class="form-check-label" for="flexCheck1">
+                                                                複選 1
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheck2">
+                                                            <label class="form-check-label" for="flexCheck2">
+                                                                複選 2
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheck3">
+                                                            <label class="form-check-label" for="flexCheck3">
+                                                                複選 3
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheck4">
+                                                            <label class="form-check-label" for="flexCheck4">
+                                                                複選 4
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheck5">
+                                                            <label class="form-check-label" for="flexCheck5">
+                                                                複選 5
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">複選</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="FlexCheck1">
+                                                            <label class="form-check-label" for="FlexCheck1">
+                                                                複選 1
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="FlexCheck2">
+                                                            <label class="form-check-label" for="FlexCheck2">
+                                                                複選 2
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="FlexCheck3">
+                                                            <label class="form-check-label" for="FlexCheck3">
+                                                                複選 3
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="FlexCheck4">
+                                                            <label class="form-check-label" for="FlexCheck4">
+                                                                複選 4
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="FlexCheck5">
+                                                            <label class="form-check-label" for="FlexCheck5">
+                                                                複選 5
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">下拉式選單</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>請選擇</option>
+                                                            <option value="1">選項一</option>
+                                                            <option value="2">選項二</option>
+                                                            <option value="3">選項三</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">下拉式選單
+                                                        (複選)</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            multiple>
+                                                            <option selected>請選擇</option>
+                                                            <option value="1">選項一</option>
+                                                            <option value="2">選項二</option>
+                                                            <option value="3">選項三</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">下拉式選單
+                                                        (複選)</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <select class="form-select select2bs5"
+                                                            aria-label="Default select example" multiple
+                                                            style="width: 100%">
+                                                            <option selected>請選擇</option>
+                                                            <option value="1">選項一</option>
+                                                            <option value="2">選項二</option>
+                                                            <option value="3">選項三</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">檔案上傳</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="file" class="form-control " id="inputGroupFile01">
+                                                        <div class="text-hint fz-sm text-muted d-block mt-1">這邊是提示文字
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6 mb-3">
+                                        <div class="card mb-3 border-muted">
+                                            <div class="card-header border-muted">商品管理</div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">商品基本資料</h5>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品名稱 (TW)</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="text" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品名稱 (N)</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="text" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品名稱 (EN)</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="text" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品品牌</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>請選擇</option>
+                                                            <option value="1">選項一</option>
+                                                            <option value="2">選項二</option>
+                                                            <option value="3">選項三</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品編號</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <input type="text" class="form-control" id="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">年度</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>請選擇</option>
+                                                            <option value="1">選項一</option>
+                                                            <option value="2">選項二</option>
+                                                            <option value="3">選項三</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">顯示狀態</h5>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">編修狀態</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                完成
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                未完成
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">狀態</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                上架
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                下架
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">上架時間</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <div class="input-group">
+                                                            <input type="datetime-local" class="form-control" placeholder="上架時間起" aria-label="上架時間起">
+                                                            <span class="input-group-text">~</span>
+                                                            <input type="datetime-local" class="form-control" placeholder="上架時間迄" aria-label="上架時間迄">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">加入購物車時間</label>
+                                                    <div class="col-12 col-sm-9">
+                                                        <div class="input-group mb-3">
+                                                            <input type="datetime-local" class="form-control" placeholder="加入購物車時間起" aria-label="加入購物車時間起">
+                                                            <span class="input-group-text">~</span>
+                                                            <input type="datetime-local" class="form-control" placeholder="加入購物車時間迄" aria-label="加入購物車時間迄">
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheck2">
+                                                            <label class="form-check-label" for="flexCheck2">
+                                                                同上架時間
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">一頁式商品</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                是
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                否
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品類型</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                商品
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                贈品
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">商品組合</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                是
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                否
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">多入組</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                是
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                否
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">熱銷狀態</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                是
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                否
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="" class="col-12 col-sm-3 col-form-label">品牌熱銷狀態</label>
+                                                    <div class="col-12 col-sm-9 form-check-wrap">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio1">
+                                                            <label class="form-check-label" for="FlexRadio1">
+                                                                是
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="FlexRadio" value="" id="FlexRadio2">
+                                                            <label class="form-check-label" for="FlexRadio2">
+                                                                否
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6 mb-3">
+                                        <div class="card mb-3 border-muted">
+                                            <div class="card-header border-muted">商品分類管理</div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">商品分類</h5>
+                                                <div class="row mb-3">
+                                                    <div class="col-12 col-sm-3 text-end">
+                                                        <p>分店</p>
+                                                        <p>分館</p>
+                                                        <p>分類</p>
+                                                        <p>細分類</p>
+                                                    </div>
+                                                    <div class="col-12 col-sm-9">
+                                                        <ol class="collapse-list">
+                                                            <li class="collapse-item with-child in-extand">
+                                                                <button type="button" class="collapse-btn">▶</button>
+                                                                <div class="form-check" for="">
+                                                                    <input class="form-check-input" type="checkbox">
+                                                                    <label class="form-check-label" for="">分店名稱一</label>
+                                                                </div>
+                                                                <ol class="collapse-list">
+                                                                    <li class="collapse-item with-child in-extand">
+                                                                        <button type="button" class="collapse-btn">▶</button>
+                                                                        <div class="form-check" for="">
+                                                                            <input class="form-check-input" type="checkbox">
+                                                                            <label class="form-check-label" for="">分館名稱一</label>
+                                                                        </div>
+                                                                        <ol class="collapse-list">
+                                                                            <li class="collapse-item with-child in-extand">
+                                                                                <button type="button" class="collapse-btn">▶</button>
+                                                                                <div class="form-check" for="">
+                                                                                    <input class="form-check-input" type="checkbox">
+                                                                                    <label class="form-check-label" for="">分類名稱一</label>
+                                                                                </div>
+                                                                                <ol class="collapse-list">
+                                                                                    <li class="collapse-item">
+                                                                                        <div class="form-check" for="">
+                                                                                            <input class="form-check-input" type="checkbox">
+                                                                                            <label class="form-check-label" for="">細分類名稱一</label>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li class="collapse-item">
+                                                                                        <div class="form-check" for="">
+                                                                                            <input class="form-check-input" type="checkbox">
+                                                                                            <label class="form-check-label" for="">細分類名稱二</label>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                    <li class="collapse-item">
+                                                                                        <div class="form-check" for="">
+                                                                                            <input class="form-check-input" type="checkbox">
+                                                                                            <label class="form-check-label" for="">細分類名稱三</label>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ol>
+                                                                            </li>
+                                                                            <li class="collapse-item">
+                                                                                <div class="form-check" for="">
+                                                                                    <input class="form-check-input" type="checkbox">
+                                                                                    <label class="form-check-label" for="">分類名稱二</label>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="collapse-item">
+                                                                                <div class="form-check" for="">
+                                                                                    <input class="form-check-input" type="checkbox">
+                                                                                    <label class="form-check-label" for="">分類名稱三</label>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li class="collapse-item">
+                                                                        <div class="form-check" for="">
+                                                                            <input class="form-check-input" type="checkbox">
+                                                                            <label class="form-check-label" for="">分館名稱二</label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="collapse-item">
+                                                                        <div class="form-check" for="">
+                                                                            <input class="form-check-input" type="checkbox">
+                                                                            <label class="form-check-label" for="">分館名稱三</label>
+                                                                        </div>
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li class="collapse-item">
+                                                                <div class="form-check" for="">
+                                                                    <input class="form-check-input" type="checkbox">
+                                                                    <label class="form-check-label" for="">分店名稱二</label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="collapse-item">
+                                                                <div class="form-check" for="">
+                                                                    <input class="form-check-input" type="checkbox">
+                                                                    <label class="form-check-label" for="">分店名稱三</label>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        
+                                    </div>
+                                    <div class="col-12">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 d-flex align-items-center justify-content-end">
+                                        <div class="btn-group ms-2">
+                                            <a class="btn btn-light" href="##">
+                                                取消
+                                            </a>
+                                        </div>
+                                        <div class="btn-group ms-2">
+                                            <a class="btn btn-primary" href="##">
+                                                儲存
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer part -->
+        <div class="footer_part">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_iner text-center">
+                            <p>2023 © 瘋樂購數位行銷股份有限公司</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main content part end -->
+    <div id="back-top" style="display: none;">
+        <a title="Go to Top" href="#">
+            <i class="ti-angle-up"></i>
+        </a>
+    </div>
+
+    <!-- modals ppup  -->
+    <!-- footer  -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstarp js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- sidebar menu  -->
+    <script src="js/metisMenu.js"></script>
+    <!-- waypoints js -->
+    <script src="vendors/count_up/jquery.waypoints.min.js"></script>
+    <!-- waypoints js -->
+    <script src="vendors/chartlist/Chart.min.js"></script>
+    <!-- counterup js -->
+    <script src="vendors/count_up/jquery.counterup.min.js"></script>
+
+    <!-- nice select -->
+    <script src="vendors/niceselect/js/jquery.nice-select.min.js"></script>
+    <!-- owl carousel -->
+    <script src="vendors/owl_carousel/js/owl.carousel.min.js"></script>
+
+    <!-- responsive table -->
+    <script src="vendors/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="vendors/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/datatable/js/buttons.flash.min.js"></script>
+    <script src="vendors/datatable/js/jszip.min.js"></script>
+    <script src="vendors/datatable/js/pdfmake.min.js"></script>
+    <script src="vendors/datatable/js/vfs_fonts.js"></script>
+    <script src="vendors/datatable/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatable/js/buttons.print.min.js"></script>
+
+
+    <script src="js/chart.min.js"></script>
+    <!-- progressbar js -->
+    <script src="vendors/progressbar/jquery.barfiller.js"></script>
+    <!-- tag input -->
+    <script src="vendors/tagsinput/tagsinput.js"></script>
+    <!-- text editor js -->
+    <script src="vendors/text_editor/summernote-bs4.js"></script>
+    <script src="vendors/am_chart/amcharts.js"></script>
+
+    <!-- scrollabe  -->
+    <script src="vendors/scroll/perfect-scrollbar.min.js"></script>
+    <script src="vendors/scroll/scrollable-custom.js"></script>
+
+
+    <script src="vendors/chart_am/core.js"></script>
+    <script src="vendors/chart_am/charts.js"></script>
+    <script src="vendors/chart_am/animated.js"></script>
+    <script src="vendors/chart_am/kelly.js"></script>
+    <script src="vendors/chart_am/chart-custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js?v=1"></script>
+    <script type="text/javascript" src="../Sort-Table-Rows-By-Content-jq-TableSort/jq.tablesort.js"></script>
+
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+
+    <script>
+        //Initialize Select2 Elements
+        $('.select2bs5').each(function (i, ele) {
+            $(ele).select2()
+        })
+    </script>
+</body>
+
+</html>
