@@ -94,12 +94,22 @@
                                 <div class="col-12">
                                     <p class="d-flex align-items-center flex-content-start fz-sm filter-string">
                                         <span class="text-muted me-2">{{__("篩選器")}}：</span>
-                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3">
-                                            上架狀態：上架 <i class="ti-close"></i>
-                                        </button>
-                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3">
-                                            上架區間狀態：進行中、未開始 <i class="ti-close"></i>
-                                        </button>
+                                        @foreach( request()->all() as $filter_name => $filter_value)
+                                            @php $column = str_replace("filter_","",$filter_name); @endphp
+                                            @if( strpos($filter_name,"filter_") === 0 )
+                                                @if( is_array($filter_value) )
+                                                    @foreach( $filter_value as  $filter_value_sub)
+                                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}')">
+                                                            {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value_sub]}} <i class="ti-close"></i>
+                                                        </button>
+                                                    @endforeach
+                                                @else
+                                                    <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}')">
+                                                        {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value]}} <i class="ti-close"></i>
+                                                    </button>
+                                                @endif
+                                            @endif
+                                        @endforeach
                                     </p>
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
@@ -482,5 +492,18 @@
             //送出
             postForm('/operate/user/del?{{request()->getQueryString()}}',postArray)
         });
+
+        //
+        function deleteFilter(deleteFilterName){
+            let queryString = '{{request()->getQueryString()}}';
+            let newQueryString = '';
+            queryString.split("&").map(function(item){
+                let name = item.split("=")[0];
+                if(  name.indexOf(deleteFilterName)===-1){
+                    newQueryString += item+'&';
+                }
+            });
+            location.href = "?" + newQueryString;
+        }
     </script>
 @endsection
