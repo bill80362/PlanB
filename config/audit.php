@@ -49,6 +49,7 @@ return [
         'user_agent' => OwenIt\Auditing\Resolvers\UserAgentResolver::class,
         'url' => OwenIt\Auditing\Resolvers\UrlResolver::class,
         'version' => \App\Tools\Auditing\Resolvers\VersionResolver::class,
+        'route_name' => \App\Tools\Auditing\Resolvers\RouteNameResolver::class,
     ],
 
     /*

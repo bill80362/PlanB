@@ -147,7 +147,7 @@ class AuditController extends Controller
             } elseif ($Data->event == "deleted") {
                 //刪除 => 新增
                 $object = new $Data->auditable_type;
-                //特殊表，要進行處裡                
+                //特殊表，要進行處裡
                 if ($Data->auditable_type == User::class) {
                     $Data->old_values = array_merge($Data->old_values, ["password" => "admin"]);
                 }
