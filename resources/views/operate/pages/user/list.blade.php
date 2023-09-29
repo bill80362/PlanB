@@ -69,17 +69,17 @@
                                     <div class="input-group">
                                         <div class="input-group input-group" id="searchContnet">
                                             <div class="input-group-prepend">
-                                                <select class="form-select" name="filter_text_key"
-                                                    data-target="#searchFilter">
+                                                <select class="form-select" id="filter_text_key_outside"
+                                                    data-target="#searchFilter" onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{__("不限制")}}</option>
                                                     @foreach(["name","id","email"] as $value)
                                                     <option value="{{$value}}" {{request()->get("filter_text_key")==$value?"selected":""}}>{{__($Model->Column_Title_Text[$value])}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <input type="text" class="form-control" name="filter_text_value"
-                                                value="" data-target="#searchString">
-                                            <button class="btn btn-dark" type="button" id="searchButton"><i
+                                            <input type="text" class="form-control" id="filter_text_value_outside"
+                                                value="{{request()->get("filter_text_value")}}" data-target="#searchString" onchange="$('#filter_text_value').val($(this).val())">
+                                            <button class="btn btn-dark" type="button" onclick="$('#filterForm').submit()"><i
                                                     class="ti-search"></i></button>
                                         </div>
                                     </div>
@@ -92,25 +92,7 @@
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    <p class="d-flex align-items-center flex-content-start fz-sm filter-string">
-                                        <span class="text-muted me-2">{{__("篩選器")}}：</span>
-                                        @foreach( request()->all() as $filter_name => $filter_value)
-                                            @php $column = str_replace("filter_","",$filter_name); @endphp
-                                            @if( strpos($filter_name,"filter_") === 0 )
-                                                @if( is_array($filter_value) )
-                                                    @foreach( $filter_value as  $filter_value_sub)
-                                                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value_sub}}')">
-                                                            {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value_sub]}} <i class="ti-close"></i>
-                                                        </button>
-                                                    @endforeach
-                                                @else
-                                                    <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value}}')">
-                                                        {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value]}} <i class="ti-close"></i>
-                                                    </button>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    </p>
+                                    @include("operate.components.filter.chosen")
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
@@ -223,7 +205,7 @@
             </form>
         </div>
     </div>
-    <form>
+    <form id="filterForm">
     <!-- Modal -->
     <div class="slideFunc-box" id="prodFilter">
         <div class="slideFunc-content">
@@ -249,11 +231,14 @@
 
                     </div>
                 </div>
-                <input id="searchFilter" type="hidden" value="">
-                <input id="searchString" type="hidden" value="">
+                <input id="filter_text_key" name="filter_text_key" type="hidden" value="{{request()->get("filter_text_key")}}">
+                <input id="filter_text_value" name="filter_text_value" type="hidden" value="{{request()->get("filter_text_value")}}">
             </div>
             <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
-                <button type="reset" class="btn btn-muted mx-2">{{__("清除篩選器")}}</button>
+                <button type="reset" class="btn btn-muted mx-2"
+                        onclick="$('.select2bs5').empty() && $(':input','#filterForm').not(':button, :submit, :reset, :hidden').val('').prop('checked', false).prop('selected', false);
+                "
+                >{{__("清除篩選器")}}</button>
                 <button type="submit" class="btn btn-primary mx-2">{{__("套用篩選條件")}}</button>
             </div>
         </div>
@@ -445,31 +430,6 @@
                 dropdownParent: $('#prodFilter'),
             })
         })
-        /**
-         * sends a request to the specified url from a form. this will change the window location.
-         * @param {string} path the path to send the post request to
-         * @param {object} params the parameters to add to the url
-         * @param {string} [method=post] the method to use on the form
-         */
-
-        function postForm(path, params, method = 'post') {
-            const form = document.createElement('form');
-            form.method = method;
-            form.action = path;
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = params[key];
-
-                    form.appendChild(hiddenField);
-                }
-            }
-            document.body.appendChild(form);
-            form.submit();
-        }
-
         // tableSort
         // $('#sortableTable').tablesort();
 
@@ -493,19 +453,5 @@
             postForm('/operate/user/del?{{request()->getQueryString()}}',postArray)
         });
 
-        //刪除Filter
-        function deleteFilter(deleteFilterName,deleteFilterValue){
-            let queryString = '{{request()->getQueryString()}}';
-            let newQueryString = '';
-            queryString.split("&amp;").map(function(item){
-                console.log(item);
-                let name = item.split("=")[0];
-                let value = item.split("=")[1];
-                if(  ! (name.indexOf(deleteFilterName)>=0 && value == deleteFilterValue)  ){
-                    newQueryString += item+'&';
-                }
-            });
-            location.href = "?" + newQueryString;
-        }
     </script>
 @endsection
