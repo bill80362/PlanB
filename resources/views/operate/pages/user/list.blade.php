@@ -97,15 +97,15 @@
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
-                                                    <th class="sortStyle ascStyle">{{__("流水")}}</th>
-                                                    <th class="sortStyle ascStyle">{{__($Model->Column_Title_Text["id"])}}</th>
-                                                    <th class="sortStyle descStyle">{{__($Model->Column_Title_Text["name"])}}</th>
-                                                    <th class="sortStyle unsortStyle">{{__($Model->Column_Title_Text["email"])}}</th>
-                                                    <th class="sortStyle unsortStyle">{{__($Model->Column_Title_Text["status"])}}</th>
-                                                    <th class="sortStyle unsortStyle">{{__("最後修改人")}}</th>
-                                                    <th class="sortStyle unsortStyle">{{__("最後修改時間")}}</th>
+                                                    <th class="sortStyle ascStyle" data-column="default_serial_number">{{__("流水")}}</th>
+                                                    <th class="sortStyle ascStyle" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>
+                                                    <th class="sortStyle descStyle" data-column="name">{{__($Model->Column_Title_Text["name"])}}</th>
+                                                    <th class="sortStyle unsortStyle" data-column="email">{{__($Model->Column_Title_Text["email"])}}</th>
+                                                    <th class="sortStyle unsortStyle" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
+                                                    <th class="sortStyle unsortStyle" data-column="updated_by">{{__("最後修改人")}}</th>
+                                                    <th class="sortStyle unsortStyle" data-column="updated_at">{{__("最後修改時間")}}</th>
                                                     <th class="text-end">
-                                                        <button class="btn btn-link slideFunc-toggle text-muted"
+                                                        <button class="btn btn-link slideFunc-toggle text-muted" onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i
                                                                 class="ti-settings"></i></button>
                                                     </th>
@@ -114,15 +114,15 @@
                                             <tbody>
                                             @foreach ($Paginator->items() as $index => $Item)
                                                 <tr class="{{$index%2?"":"bg-muted-light"}}">
-                                                    <td class="border-0">
+                                                    <td class="border-0" data-column="default_serial_number">
                                                         <input type="checkbox" class="form-check-input" name="id_array[]" value="1"> {{$index+1}}
                                                     </td>
-                                                    <td class="border-0">{{$Item->id}}</td>
-                                                    <td class="border-0">{{$Item->name}}</td>
-                                                    <td class="border-0">{{$Item->email}}</td>
-                                                    <td class="border-0">{{__($Model->statusText[$Item->status]??$Item->status)}}</td>
-                                                    <td class="border-0">{{$Item->audits()->latest()->first()?->user?->name}}</td>
-                                                    <td class="border-0">{{$Item->updated_at}}</td>
+                                                    <td class="border-0" data-column="id">{{$Item->id}}</td>
+                                                    <td class="border-0" data-column="name">{{$Item->name}}</td>
+                                                    <td class="border-0" data-column="email">{{$Item->email}}</td>
+                                                    <td class="border-0" data-column="status">{{__($Model->statusText[$Item->status]??$Item->status)}}</td>
+                                                    <td class="border-0" data-column="updated_by">{{$Item->audits()->latest()->first()?->user?->name}}</td>
+                                                    <td class="border-0" data-column="updated_at">{{$Item->updated_at}}</td>
                                                     <td class="border-0 text-end">
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-light dropdown-toggle"
@@ -253,170 +253,56 @@
                     <span aria-hidden="true"></span>
                 </button>
             </div>
-            <div class="slideFunc-body px-3 py-3">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="list-group">
+            <form action="{{route("user_saveListColumn")}}" method="POST">
+                @csrf
+                <div class="slideFunc-body px-3 py-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="list-group">
+                                <div class="sort-item">
 
-                            <div class="sort-item">
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input" checked disabled>
-                                        <label class="form-check-label" for="">編號</label>
-                                    </div>
-                                    <i class="ti-lock "></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">排列序號</label>
-                                    </div>
-                                    <i class="ti-lock"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">圖片</label>
-                                    </div>
-                                    <i class="ti-lock"></i>
-                                </div>
-                            </div>
+                                    @foreach ($lockTitles as $key => $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox"
+                                                       value="{{ $key }}"
+                                                       aria-label="Checkbox for following text input" checked disabled>
+                                                <label class="form-check-label"
+                                                       for="">{{ $value }}</label>
+                                            </div>
+                                            <i class="ti-lock "></i>
+                                        </div>
+                                    @endforeach
 
-                            <div class="sort-item" id="sortGroup">
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">編修狀態</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
+
+
                                 </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">名稱</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">商品編號</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">狀態/日期</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">點閱數</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">串接狀態</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">類型</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">組合商品</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">一頁式商品</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">最後修改者</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">最後修改日期</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">建置日期</label>
-                                    </div>
-                                    <i class="ti-align-justify"></i>
-                                </div>
-                            </div>
-                            <div class="sort-item">
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">規格一</label>
-                                    </div>
-                                    <i class="ti-lock "></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">規格二</label>
-                                    </div>
-                                    <i class="ti-lock"></i>
-                                </div>
-                                <div class="list-group-item d-flex flex-content-between align-items-center">
-                                    <div class="form-check flex-fill">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            aria-label="Checkbox for following text input">
-                                        <label class="form-check-label" for="">規格三</label>
-                                    </div>
-                                    <i class="ti-lock"></i>
+                                <div class="sort-item" id="sortGroup">
+
+                                    @foreach ($titles as $key => $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox"
+                                                       value="{{ $key }}" name="list[]"
+                                                       aria-label="Checkbox for following text input"
+                                                    {{ in_array($key, $columns) ? 'checked' : '' }}>
+                                                <label class="form-check-label"
+                                                       for="">{{ $value }}</label>
+                                            </div>
+                                            <i class="ti-align-justify"></i>
+                                        </div>
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
-                <button type="reset" class="btn btn-muted mx-2">取消</button>
-                <button type="submit" class="btn btn-primary mx-2">儲存</button>
-            </div>
+                <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
+                    {{-- <button type="reset" class="btn btn-muted mx-2" >取消</button> --}}
+                    <button type="submit" class="btn btn-primary mx-2">儲存</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
@@ -453,5 +339,37 @@
             postForm('/operate/user/del?{{request()->getQueryString()}}',postArray)
         });
 
+        //欄位排序修改
+        let columns = @json($columns);
+        let hideTitles = @json($hideTitles);
+        sortTable();
+        function sortTable() {
+            //需要隱藏的欄位
+            $('#sortableTable').find('th,td').each(function(i,element){
+                if(jQuery.inArray( $(element).attr('data-column') , Object.values(hideTitles) ) !== -1){
+                    $(element).hide();
+                }
+            });
+            //重新排列標題
+            let listHead = $('#sortableTable thead tr');
+            let listHeadItems = listHead.find('th').sort(function(a, b) {
+                let a_key_number = Object.keys(columns).find(k=>columns[k]===$(a).attr('data-column'));
+                let b_key_number = Object.keys(columns).find(k=>columns[k]===$(b).attr('data-column'));
+                return a_key_number - b_key_number;
+            });
+            listHead.find('th').remove();
+            listHead.append(listHeadItems);
+            //重新排列內文
+            let listBody = $('#sortableTable tbody tr').html(function() {
+                let subList = $(this).children().sort(function(a, b) {
+                    let a_key_number = Object.keys(columns).find(k=>columns[k]===$(a).attr('data-column'));
+                    let b_key_number = Object.keys(columns).find(k=>columns[k]===$(b).attr('data-column'));
+                    return a_key_number - b_key_number;
+                });
+                return subList;
+            });
+            listBody.find('#sortableTable tbody tr').remove();
+            listBody.append(listBody);
+        }
     </script>
 @endsection

@@ -13,11 +13,11 @@ class ListColumnService
 
     private $defines = [
         User::class => [
-            "canUseColumn" => [
-                'id', 'name', 'email', 'status'
-            ],
             "lockColumn" => [
                 'id', 'email'
+            ],
+            "canUseColumn" => [
+                'name', 'status'
             ],
         ],
 
@@ -53,6 +53,15 @@ class ListColumnService
         return [$lockTitles, $titles];
     }
 
+    public function parseSetting2(Model $model,$input = []){
+        $tableSetting = $this->getTableSetting($model);
+
+        $lockTitles = collect($input)->only($tableSetting['lockColumn']);
+        $titles = collect($input)->only($tableSetting['canUseColumn']);
+
+        return [$lockTitles, $titles];
+    }
+
 
     public function getWithUserId(Model $model, $userId)
     {
@@ -71,7 +80,7 @@ class ListColumnService
     }
 
     /**
-     * 
+     *
      */
     public function renewListColumn(Model $model, $list = [], $userId)
     {

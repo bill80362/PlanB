@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission\Permission;
 use App\Models\Permission\PermissionGroup;
 use App\Models\User;
+use App\Services\Operate\ListColumnService;
 use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,8 +25,27 @@ class UserController extends Controller
     ) {
     }
 
-    public function listHTML()
+    public function listHTML(ListColumnService $listColumnService)
     {
+        //
+        $user = auth('operate')->user();
+        // table原設定
+        $componentTitles = [
+            'default_serial_number' => '流水號',
+            'id' => $this->oModel->Column_Title_Text['id'],
+            'email' => $this->oModel->Column_Title_Text['email'],
+            'name' => $this->oModel->Column_Title_Text['name'],
+            'password' => $this->oModel->Column_Title_Text['password'],
+            'status' => $this->oModel->Column_Title_Text['status'],
+        ];
+        [$lockTitles, $titles] = $listColumnService->parseSetting2($this->oModel, $componentTitles);
+
+        // 使用者設定
+        $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
+        $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
+            return array_search($key, $userColumns);
+        })->toArray();
+
         //
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
@@ -35,6 +55,12 @@ class UserController extends Controller
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
+            //
+            'columns' => $userColumns,
+            'titles' => $titles,
+            'lockTitles' => $lockTitles,
+            'allkeys' => array_keys($sortTitles),
+            'hideTitles' => array_diff(array_keys($sortTitles),$userColumns),
         ]);
     }
 
@@ -211,4 +237,13 @@ class UserController extends Controller
             'Model' => $this->oModel,
         ]);
     }
+
+    public function saveListColumn(ListColumnService $listColumnService)
+    {
+        $list = $this->request->get('list', []);
+        $user = auth('operate')->user();
+        $listColumnService->renewListColumn($this->oModel, $list, $user->id);
+        return back();
+    }
+
 }

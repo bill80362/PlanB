@@ -32,6 +32,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->middleware(['can:user_export']);
             Route::post('/import', [UserController::class, 'import'])->name('import')->middleware(['can:user_import']);
             Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->middleware(['can:user_read']);
+            Route::post('/list_column', [UserController::class, 'saveListColumn'])->name('saveListColumn');
         });
 
         Route::group([
@@ -71,7 +72,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         //語系
         Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')
             ->middleware(['can:language_read']);
-       
+
 
         Route::get('/language/{id}', [Operation\LanguageController::class, 'updateHTML'])->whereNumber('id')
             ->name('language_update_html')->middleware(['can:language_read']);

@@ -3,10 +3,10 @@
     @foreach( request()->all() as $filter_name => $filter_value)
         @php $column = str_replace("filter_","",$filter_name); @endphp
         @if( strpos($filter_name,"filter_") === 0 )
-            @if( is_array($filter_value) )
+            @if( is_array($filter_value) && isset($Model->{$column."Text"}) )
                 @foreach( $filter_value as  $filter_value_sub)
                     <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value_sub}}')">
-                        {{$Model->Column_Title_Text[$column]}}：{{$Model->{$column."Text"}[$filter_value_sub]}} <i class="ti-close"></i>
+                        {{$Model->Column_Title_Text[$column]??""}}：{{$Model->{$column."Text"}[$filter_value_sub]}} <i class="ti-close"></i>
                     </button>
                 @endforeach
             @elseif(isset($Model->{$column."Text"}))
