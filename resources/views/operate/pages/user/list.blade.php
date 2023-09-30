@@ -341,6 +341,7 @@
 
         //欄位排序修改
         let columns = @json($columns);
+        //要隱藏的欄位
         let hideTitles = @json($hideTitles);
         sortTable();
         function sortTable() {
