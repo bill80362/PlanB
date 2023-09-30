@@ -67,6 +67,8 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::get('/export', [Operation\AuditController::class, 'export'])->name('export');
             Route::post('/import', [Operation\AuditController::class, 'import'])->name('import');
             Route::post('/reverse', [Operation\AuditController::class, 'reverseBatch'])->name('reverse');
+            Route::post('/list_column', [Operation\AuditController::class, 'saveListColumn'])->name('saveListColumn');
+
         });
 
         //語系

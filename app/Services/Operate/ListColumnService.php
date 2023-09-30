@@ -2,6 +2,7 @@
 
 namespace App\Services\Operate;
 
+use App\Models\AuditLog;
 use App\Models\User;
 use App\Models\User\ListColumnSetting;
 use App\Models\CountryAndShippingFee\Language;
@@ -13,13 +14,25 @@ class ListColumnService
     private array $defines = [
         User::class => [
             "lockColumn" => [
-                'default_serial_number','id', 'email',
+                'default_serial_number',
             ],
             "canUseColumn" => [
-                'name','status','updated_at'
+                'id', 'email','name','status','updated_at','updated_by',
             ],
             "lockColumnTail" => [
-                'updated_by','operate'
+                'operate'
+            ],
+        ],
+        AuditLog::class => [
+            "lockColumn" => [
+                'default_serial_number','audit_title',
+            ],
+            "canUseColumn" => [
+                'user_type','user_id','event','auditable_type','auditable_id','old_values','new_values',
+                'url','ip_address','user_agent','version','route_name','created_at',
+            ],
+            "lockColumnTail" => [
+                'operate'
             ],
         ],
         Language::class => [
