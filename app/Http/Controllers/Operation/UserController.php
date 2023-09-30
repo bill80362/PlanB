@@ -29,12 +29,14 @@ class UserController extends Controller
     {
         //
         $user = auth('operate')->user();
-        // table原設定
+        // table設定，可用欄位
         $TableSetting = $listColumnService->getTableSetting($this->oModel);
         // 使用者設定
         $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        $sortTitles = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
-            return array_search($key, $userColumns);
+        $hideTitles = array_diff($TableSetting["canUseColumn"],$userColumns);
+        //根據使用者設定修改順序
+        $TableSetting["canUseColumn"] = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
+            return array_search($item, $userColumns);
         })->toArray();
         //
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
@@ -47,9 +49,8 @@ class UserController extends Controller
             'Model' => $this->oModel,
             //
             'columns' => $userColumns,
-            'titles' => $TableSetting["canUseColumn"],
-            'lockTitles' => $TableSetting["lockColumn"],
-            'hideTitles' => array_diff(array_keys($sortTitles),$userColumns),
+            'TableSetting' => $TableSetting,
+            'hideTitles' => $hideTitles,
         ]);
     }
 

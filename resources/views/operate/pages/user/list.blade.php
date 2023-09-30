@@ -97,13 +97,13 @@
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
-                                                    <th class="sortStyle ascStyle" data-column="default_serial_number">{{__("流水")}}</th>
+                                                    <th class="sortStyle ascStyle" data-column="default_serial_number">{{__("default_serial_number")}}</th>
                                                     <th class="sortStyle ascStyle" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>
                                                     <th class="sortStyle descStyle" data-column="name">{{__($Model->Column_Title_Text["name"])}}</th>
                                                     <th class="sortStyle unsortStyle" data-column="email">{{__($Model->Column_Title_Text["email"])}}</th>
                                                     <th class="sortStyle unsortStyle" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="updated_by">{{__("最後修改人")}}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="updated_at">{{__("最後修改時間")}}</th>
+                                                    <th class="sortStyle unsortStyle" data-column="updated_by">{{__("updated_by")}}</th>
+                                                    <th class="sortStyle unsortStyle" data-column="updated_at">{{__("updated_at")}}</th>
                                                     <th class="text-end">
                                                         <button class="btn btn-link slideFunc-toggle text-muted" onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i
@@ -260,8 +260,7 @@
                         <div class="col-12">
                             <div class="list-group">
                                 <div class="sort-item">
-
-                                    @foreach ($lockTitles as $value)
+                                    @foreach ($TableSetting["lockColumn"] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox" value="{{ $value }}"
@@ -271,13 +270,9 @@
                                             <i class="ti-lock "></i>
                                         </div>
                                     @endforeach
-
-
-
                                 </div>
                                 <div class="sort-item" id="sortGroup">
-
-                                    @foreach ($titles as $value)
+                                    @foreach ($TableSetting["canUseColumn"] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
@@ -289,7 +284,18 @@
                                             <i class="ti-align-justify"></i>
                                         </div>
                                     @endforeach
-
+                                </div>
+                                <div class="sort-item">
+                                    @foreach ($TableSetting["lockColumnTail"] as $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox" value="{{ $value }}"
+                                                       aria-label="Checkbox for following text input" checked disabled>
+                                                <label class="form-check-label" for="">{{__($Model->Column_Title_Text[$value]??$value)}}</label>
+                                            </div>
+                                            <i class="ti-lock "></i>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -338,6 +344,7 @@
 
         //欄位排序修改
         let columns = @json($columns);
+        console.log(columns)
         //要隱藏的欄位
         let hideTitles = @json($hideTitles);
         refreshTable();

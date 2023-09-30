@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListColumnService
 {
-
-
-    private $defines = [
+    //請注意順序 lockColumn > canUseColumn > lockColumnTail
+    private array $defines = [
         User::class => [
             "lockColumn" => [
-                'default_serial_number','id', 'email'
+                'default_serial_number','id', 'email',
             ],
             "canUseColumn" => [
-                'name', 'status'
+                'name','status','updated_at'
+            ],
+            "lockColumnTail" => [
+                'updated_by',
             ],
         ],
-
-
         Language::class => [
             "canUseColumn" => [
                 'text', 'tran_text', 'isUpdated', 'updated_at', 'created_at'
@@ -29,10 +29,13 @@ class ListColumnService
             "lockColumn" => [
                 'lang_type', 'default_serial_number'
             ],
+            "lockColumnTail" => [
+
+            ],
         ],
     ];
 
-
+    //抓取設定檔，會抓取parent class的設定檔
     public function getTableSetting(Model $model)
     {
         foreach ($this->defines as $key => $values) {
@@ -42,7 +45,7 @@ class ListColumnService
         }
         return false;
     }
-
+    //可以不用
     public function parseSetting(Model $model, $input = [])
     {
         $tableSetting = $this->getTableSetting($model);
@@ -56,22 +59,20 @@ class ListColumnService
 
     public function getWithUserId(Model $model, $userId)
     {
+        //固定設定
+        $setting = $this->getTableSetting($model);
+        //使用者的設定
         $datas = ListColumnSetting::where('user_id', $userId)
             ->where("list_model_type", $model::class)->orderBy('sort', 'desc')
             ->get()->map(function ($item) {
                 return $item['column_name'];
             })->toArray();
-        $setting = $this->getTableSetting($model);
-
-        if (count($datas) == 0) return $setting['canUseColumn'];
-        else {
-            $checkColumn = collect($datas)->intersect($setting['canUseColumn'])->toArray();
-            return array_merge($setting['lockColumn'],$checkColumn);
-        }
+        $checkColumn = collect($datas)->intersect($setting['canUseColumn'])->toArray();
+        return array_merge($setting['lockColumn'],$checkColumn,$setting['lockColumnTail']);
     }
 
     /**
-     *
+     * 儲存使用者設定檔
      */
     public function renewListColumn(Model $model, $list = [], $userId)
     {
