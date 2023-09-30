@@ -53,15 +53,6 @@ class ListColumnService
         return [$lockTitles, $titles];
     }
 
-    public function parseSetting2(Model $model,$input = []){
-        $tableSetting = $this->getTableSetting($model);
-
-        $lockTitles = collect($input)->only($tableSetting['lockColumn']);
-        $titles = collect($input)->only($tableSetting['canUseColumn']);
-
-        return [$lockTitles, $titles];
-    }
-
 
     public function getWithUserId(Model $model, $userId)
     {
@@ -75,7 +66,7 @@ class ListColumnService
         if (count($datas) == 0) return $setting['canUseColumn'];
         else {
             $checkColumn = collect($datas)->intersect($setting['canUseColumn'])->toArray();
-            return array_merge($checkColumn, $setting['lockColumn']);
+            return array_merge($setting['lockColumn'],$checkColumn);
         }
     }
 

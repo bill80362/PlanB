@@ -38,14 +38,13 @@ class UserController extends Controller
             'password' => $this->oModel->Column_Title_Text['password'],
             'status' => $this->oModel->Column_Title_Text['status'],
         ];
-        [$lockTitles, $titles] = $listColumnService->parseSetting2($this->oModel, $componentTitles);
+        [$lockTitles, $titles] = $listColumnService->parseSetting($this->oModel, $componentTitles);
 
         // 使用者設定
         $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
         $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
             return array_search($key, $userColumns);
         })->toArray();
-
         //
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
