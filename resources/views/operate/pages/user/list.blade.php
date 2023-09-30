@@ -97,13 +97,13 @@
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
-                                                    <th class="sortStyle ascStyle" data-column="default_serial_number">{{__("default_serial_number")}}</th>
-                                                    <th class="sortStyle ascStyle" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>
-                                                    <th class="sortStyle descStyle" data-column="name">{{__($Model->Column_Title_Text["name"])}}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="email">{{__($Model->Column_Title_Text["email"])}}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="updated_by">{{__("updated_by")}}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="updated_at">{{__("updated_at")}}</th>
+                                                    <th class="sortStyle" data-column="default_serial_number">{{__("default_serial_number")}}</th>
+                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("id")}}" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>
+                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("name")}}" data-column="name">{{__($Model->Column_Title_Text["name"])}}</th>
+                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("email")}}" data-column="email">{{__($Model->Column_Title_Text["email"])}}</th>
+                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("status")}}" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
+                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("updated_by")}}" data-column="updated_by">{{__("updated_by")}}</th>
+                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("updated_at")}}" data-column="updated_at">{{__("updated_at")}}</th>
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted" onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i
