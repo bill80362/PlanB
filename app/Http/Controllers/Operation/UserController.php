@@ -58,7 +58,6 @@ class UserController extends Controller
             'columns' => $userColumns,
             'titles' => $titles,
             'lockTitles' => $lockTitles,
-//            'allkeys' => array_keys($sortTitles),
             'hideTitles' => array_diff(array_keys($sortTitles),$userColumns),
         ]);
     }

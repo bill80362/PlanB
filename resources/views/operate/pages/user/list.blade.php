@@ -343,9 +343,9 @@
         let columns = @json($columns);
         //要隱藏的欄位
         let hideTitles = @json($hideTitles);
-        sortTable();
-        function sortTable() {
-            //需要隱藏的欄位
+        refreshTable();
+        function refreshTable() {
+            //隱藏需要隱藏的欄位
             $('#sortableTable').find('th,td').each(function(i,element){
                 if(jQuery.inArray( $(element).attr('data-column') , Object.values(hideTitles) ) !== -1){
                     $(element).hide();
