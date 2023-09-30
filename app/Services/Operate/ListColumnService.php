@@ -14,7 +14,7 @@ class ListColumnService
     private $defines = [
         User::class => [
             "lockColumn" => [
-                'id', 'email'
+                'default_serial_number','id', 'email'
             ],
             "canUseColumn" => [
                 'name', 'status'

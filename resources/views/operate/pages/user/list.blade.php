@@ -261,14 +261,12 @@
                             <div class="list-group">
                                 <div class="sort-item">
 
-                                    @foreach ($lockTitles as $key => $value)
+                                    @foreach ($lockTitles as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
-                                                <input class="form-check-input" type="checkbox"
-                                                       value="{{ $key }}"
+                                                <input class="form-check-input" type="checkbox" value="{{ $value }}"
                                                        aria-label="Checkbox for following text input" checked disabled>
-                                                <label class="form-check-label"
-                                                       for="">{{ $value }}</label>
+                                                <label class="form-check-label" for="">{{__($Model->Column_Title_Text[$value]??$value)}}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>
@@ -279,15 +277,14 @@
                                 </div>
                                 <div class="sort-item" id="sortGroup">
 
-                                    @foreach ($titles as $key => $value)
+                                    @foreach ($titles as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
-                                                       value="{{ $key }}" name="list[]"
+                                                       value="{{ $value }}" name="list[]"
                                                        aria-label="Checkbox for following text input"
-                                                    {{ in_array($key, $columns) ? 'checked' : '' }}>
-                                                <label class="form-check-label"
-                                                       for="">{{ $value }}</label>
+                                                    {{ in_array($value, $columns) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="">{{__($Model->Column_Title_Text[$value]??$value)}}</label>
                                             </div>
                                             <i class="ti-align-justify"></i>
                                         </div>

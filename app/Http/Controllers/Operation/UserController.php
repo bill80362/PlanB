@@ -30,19 +30,10 @@ class UserController extends Controller
         //
         $user = auth('operate')->user();
         // table原設定
-        $componentTitles = [
-            'default_serial_number' => '流水號',
-            'id' => $this->oModel->Column_Title_Text['id'],
-            'email' => $this->oModel->Column_Title_Text['email'],
-            'name' => $this->oModel->Column_Title_Text['name'],
-            'password' => $this->oModel->Column_Title_Text['password'],
-            'status' => $this->oModel->Column_Title_Text['status'],
-        ];
-        [$lockTitles, $titles] = $listColumnService->parseSetting($this->oModel, $componentTitles);
-
+        $TableSetting = $listColumnService->getTableSetting($this->oModel);
         // 使用者設定
         $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
+        $sortTitles = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
             return array_search($key, $userColumns);
         })->toArray();
         //
@@ -56,8 +47,8 @@ class UserController extends Controller
             'Model' => $this->oModel,
             //
             'columns' => $userColumns,
-            'titles' => $titles,
-            'lockTitles' => $lockTitles,
+            'titles' => $TableSetting["canUseColumn"],
+            'lockTitles' => $TableSetting["lockColumn"],
             'hideTitles' => array_diff(array_keys($sortTitles),$userColumns),
         ]);
     }
