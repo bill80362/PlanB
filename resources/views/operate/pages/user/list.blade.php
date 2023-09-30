@@ -104,7 +104,7 @@
                                                     <th class="sortStyle unsortStyle" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
                                                     <th class="sortStyle unsortStyle" data-column="updated_by">{{__("updated_by")}}</th>
                                                     <th class="sortStyle unsortStyle" data-column="updated_at">{{__("updated_at")}}</th>
-                                                    <th class="text-end">
+                                                    <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted" onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i
                                                                 class="ti-settings"></i></button>
@@ -123,7 +123,7 @@
                                                     <td class="border-0" data-column="status">{{__($Model->statusText[$Item->status]??$Item->status)}}</td>
                                                     <td class="border-0" data-column="updated_by">{{$Item->audits()->latest()->first()?->user?->name}}</td>
                                                     <td class="border-0" data-column="updated_at">{{$Item->updated_at}}</td>
-                                                    <td class="border-0 text-end">
+                                                    <td class="border-0 text-end" data-column="operate">
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-light dropdown-toggle"
                                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -344,14 +344,11 @@
 
         //欄位排序修改
         let columns = @json($columns);
-        console.log(columns)
-        //要隱藏的欄位
-        let hideTitles = @json($hideTitles);
         refreshTable();
         function refreshTable() {
             //隱藏需要隱藏的欄位
             $('#sortableTable').find('th,td').each(function(i,element){
-                if(jQuery.inArray( $(element).attr('data-column') , Object.values(hideTitles) ) !== -1){
+                if(jQuery.inArray( $(element).attr('data-column') , Object.values(columns) ) === -1){
                     $(element).hide();
                 }
             });

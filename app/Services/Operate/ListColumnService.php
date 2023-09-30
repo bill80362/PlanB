@@ -19,7 +19,7 @@ class ListColumnService
                 'name','status','updated_at'
             ],
             "lockColumnTail" => [
-                'updated_by',
+                'updated_by','operate'
             ],
         ],
         Language::class => [

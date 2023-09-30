@@ -33,7 +33,6 @@ class UserController extends Controller
         $TableSetting = $listColumnService->getTableSetting($this->oModel);
         // 使用者設定
         $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        $hideTitles = array_diff($TableSetting["canUseColumn"],$userColumns);
         //根據使用者設定修改順序
         $TableSetting["canUseColumn"] = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
             return array_search($item, $userColumns);
@@ -50,7 +49,6 @@ class UserController extends Controller
             //
             'columns' => $userColumns,
             'TableSetting' => $TableSetting,
-            'hideTitles' => $hideTitles,
         ]);
     }
 
