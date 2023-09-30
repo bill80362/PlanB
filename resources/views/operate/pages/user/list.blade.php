@@ -99,12 +99,11 @@
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">{{__("default_serial_number")}}</th>
                                                     <x-OperateTh column="id" :model="$Model"></x-OperateTh>
-{{--                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("id")}}" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>--}}
-                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("name")}}" data-column="name">{{__($Model->Column_Title_Text["name"])}}</th>
-                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("email")}}" data-column="email">{{__($Model->Column_Title_Text["email"])}}</th>
-                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("status")}}" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
-                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("updated_by")}}" data-column="updated_by">{{__("updated_by")}}</th>
-                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("updated_at")}}" data-column="updated_at">{{__("updated_at")}}</th>
+                                                    <x-OperateTh column="name" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="email" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="status" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_by" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted" onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i
@@ -330,6 +329,20 @@
             handle: '.ti-align-justify',
             ghostClass: 'bg-secondary-light'
         });
+
+        //排序
+        function orderBy(order_key,order_rule){
+            let queryString = '{{request()->getQueryString()}}';
+            let newQueryString = '';
+            queryString.split("&amp;").map(function(item){
+                let name = item.split("=")[0];
+                let value = item.split("=")[1];
+                if(  ! (name.indexOf('order_by')>=0 )  ){
+                    newQueryString += item+'&';
+                }
+            });
+            location.href = "?" + newQueryString + '&order_by=' + order_key + "," + order_rule;
+        }
 
         //批次刪除
         $("#btnDeleteBatch").on("click",function(){

@@ -24,7 +24,6 @@
         let queryString = '{{request()->getQueryString()}}';
         let newQueryString = '';
         queryString.split("&amp;").map(function(item){
-            console.log(item);
             let name = item.split("=")[0];
             let value = item.split("=")[1];
             if(  ! (name.indexOf(deleteFilterName)>=0 && value == deleteFilterValue)  ){

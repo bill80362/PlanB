@@ -61,7 +61,7 @@ class User extends Authenticatable implements Auditable
     }
 
     /**
-     * 資料表欄位名稱對應
+     * 資料表欄位名稱對應，非實體欄位，不能設定
      */
     public array $Column_Title_Text = [
         'id' => '編號',
