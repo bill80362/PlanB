@@ -98,7 +98,8 @@
                                             <thead>
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">{{__("default_serial_number")}}</th>
-                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("id")}}" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>
+                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
+{{--                                                    <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("id")}}" data-column="id">{{__($Model->Column_Title_Text["id"])}}</th>--}}
                                                     <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("name")}}" data-column="name">{{__($Model->Column_Title_Text["name"])}}</th>
                                                     <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("email")}}" data-column="email">{{__($Model->Column_Title_Text["email"])}}</th>
                                                     <th class="sortStyle {{app(\App\Tools\View\Operate\SortClass::class)->className("status")}}" data-column="status">{{__($Model->Column_Title_Text["status"])}}</th>
