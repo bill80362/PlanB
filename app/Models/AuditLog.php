@@ -37,10 +37,10 @@ class AuditLog extends Audit
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        //        if ( isset($Data["filter_status"]) ) {
-        //            $query->whereIn('status',(array)$Data["filter_status"]);
-        //        }
-        //        //過濾文字條件
+        if ( isset($Data["filter_event"]) ) {
+            $query->whereIn('event',(array)$Data["filter_event"]);
+        }
+        //過濾文字條件
         if (isset($Data['filter_text_key'])) {
             $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
         }

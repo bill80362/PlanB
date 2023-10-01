@@ -45,6 +45,6 @@ class OperateTh extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('operate.components.list.th');
+        return view('operate.components_view.list.th');
     }
 }
