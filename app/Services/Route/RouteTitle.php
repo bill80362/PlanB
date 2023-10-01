@@ -25,7 +25,7 @@ class RouteTitle
         "audit_del" => "操作紀錄刪除提交",
         "audit_export" => "操作紀錄匯出",
         "audit_import" => "操作紀錄匯入",
-        "audit_reverse" => "操作紀錄操作紀錄",
+        "audit_reverse" => "操作紀錄還原",
         //
         "system_update_html"=>"",
         "system_update"=>"",
