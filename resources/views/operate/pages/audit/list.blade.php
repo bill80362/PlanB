@@ -236,16 +236,7 @@
             <div class="slideFunc-body px-3 py-3">
                 <div class="row">
                     <div class="col-12">
-
-{{--                        <div class="form-group">--}}
-{{--                            <label>{{$Model->Column_Title_Text["status"]}}</label>--}}
-{{--                            <select name="filter_status[]" class="select2bs5" multiple="multiple" style="width: 100%;">--}}
-{{--                                @foreach ($Model->statusText as $key => $value)--}}
-{{--                                    <option--}}
-{{--                                        value="{{$key}}" {{in_array($key,(array)request()->get("filter_status"))?"selected":""}} >{{$value}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
+                        <x-OperateFilterDiv :model="$Model" column="event" template="select2"></x-OperateFilterDiv>
 
                     </div>
                 </div>

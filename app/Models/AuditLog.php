@@ -27,6 +27,12 @@ class AuditLog extends Audit
         'audit_title' => '操作標題',
         'route_name' => '路由名稱',
     ];
+    //
+    public array $eventText = [
+        "created" => "新增",
+        "updated" => "修改",
+        "deleted" => "刪除",
+    ];
 
     public function scopeFilter($query, array $Data)
     {

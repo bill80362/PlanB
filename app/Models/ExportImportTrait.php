@@ -142,7 +142,10 @@ trait ExportImportTrait
         foreach ($this->Batch_Title_Text as $key => $value){
             if( property_exists($this,$key."Text") ){
                 //要經過語系
-                $Title_Tail = collect($this->{$key."Text"})->map(fn($Text,$key) => ($key.".".__($Text)))->implode(",");
+                $Title_Tail = "";
+                if( isset($this->{$key."Text"}) ){
+                    $Title_Tail = collect($this->{$key."Text"})->map(fn($Text,$key) => ($key.".".__($Text)))->implode(",");
+                }
                 $Column_Title_Text_Attach[$key] = $Title_Tail;
             }
         }
