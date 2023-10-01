@@ -11,7 +11,7 @@ class OperateFilterDiv extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $column,public $model,public $type){}
+    public function __construct(public $column,public $model,public $template){}
 
     /**
      * Get the view / contents that represent the component.
