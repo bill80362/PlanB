@@ -148,24 +148,16 @@
                                                                 <i class="ti-more-alt"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                @can('audit_update')
-                                                                    <li><a class="dropdown-item"
-                                                                       href="/operate/audit/{{$Item->id}}?{{request()->getQueryString()}}"
-                                                                    >{{__("編輯")}}</a></li>
-                                                                @endcan
-                                                                @can('audit_delete')
-                                                                        <li><button class="dropdown-item"
+
+                                                                <li><button class="dropdown-item"
                                                                             type="button"
-                                                                            onclick="postForm('/operate/audit/del?{{request()->getQueryString()}}',{
-                                                                        'id_array[]':{{$Item->id}},
-                                                                        _token:'{{ csrf_token() }}'
-                                                                        })"
-                                                                    >{{__("刪除")}}
-                                                                            </button></li>
-                                                                @endcan
-                                                                    <a target="_blank" class="dropdown-item"
-                                                                       href="/operate/audit/{{$Item->id}}/audit?{{request()->getQueryString()}}"
-                                                                    >{{__("紀錄")}}</a>
+                                                                            onclick="postForm('/operate/audit/reverse?{{request()->getQueryString()}}',{
+                                                                                'id_array[]':{{$Item->id}},
+                                                                                _token:'{{ csrf_token() }}'
+                                                                                })"
+                                                                    >{{__("還原")}}
+                                                                    </button></li>
+
                                                             </ul>
                                                         </div>
                                                     </td>
