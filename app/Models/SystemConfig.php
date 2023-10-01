@@ -40,8 +40,8 @@ class SystemConfig extends Model
 //                "height" => 100,
 //                "min_width" => 100,
 //                "min_height" => 100,
-                "max_width" => 100,
-                "max_height" => 100,
+                "max_width" => 300,
+                "max_height" => 150,
             ],
         ],
     ];
