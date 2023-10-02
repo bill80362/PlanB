@@ -71,4 +71,23 @@ class FileUploadController extends Controller
             'TableSetting' => $TableSetting,
         ]);
     }
+    public function updateHTML($id){
+        //
+        $files = $this->oUploadFileService->getStorage()->files($id);
+        //
+        $DataArray = [];
+        foreach ($files as $file){
+            $Temp = [];
+            $Temp["file"] = $file;
+            $Temp["url"] = asset('storage/'.$file);
+//            $Temp["filePath"] = $this->oUploadFileService->getStorage()->path($file);
+            //
+            $DataArray[] = (object) $Temp;
+        }
+        //View
+        return view('operate/pages/file_upload/update', [
+            'DirName' => $id,
+            'DataList' => $DataArray,
+        ]);
+    }
 }
