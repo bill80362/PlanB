@@ -7,7 +7,7 @@
         <div>
             <ul class="pagination pagination-sm m-0 float-right">
                 <li class="page-item"><a class="page-link" href="{{$Paginator->previousPageUrl()}}">«</a></li>
-                @foreach($Paginator->getUrlRange(max([$Paginator->currentPage()-3,1]),min([$Paginator->currentPage()+3,$Paginator->lastPage()])) as $key => $value)
+                @foreach($Paginator->withQueryString()->getUrlRange(max([$Paginator->currentPage()-3,1]),min([$Paginator->currentPage()+3,$Paginator->lastPage()])) as $key => $value)
                     <li class="page-item {{$key==$Paginator->currentPage()?"active":""}}"><a class="page-link" href="{{$value}}">{{$key}}</a></li>
                 @endforeach
                 <li class="page-item"><a class="page-link" href="{{$Paginator->nextPageUrl()}}">»</a></li>
