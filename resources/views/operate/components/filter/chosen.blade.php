@@ -13,6 +13,18 @@
                 <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value}}')">
                     {{$Model->Column_Title_Text[$column]??""}}：{{$Model->{$column."Text"}[$filter_value]}} <i class="ti-close"></i>
                 </button>
+            @else
+                @foreach( $Model->filterTemplate as $useTemplateFilter => $template)
+                    @if($template=="rangeDate" && $column==$useTemplateFilter."_start")
+                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value}}')">
+                            {{$useTemplateFilter}}:{{$filter_value}}{{__("(起)")}} <i class="ti-close"></i>
+                        </button>
+                    @elseif($template=="rangeDate" && $column==$useTemplateFilter."_end")
+                        <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$filter_name}}','{{$filter_value}}')">
+                            {{$useTemplateFilter}}:{{$filter_value}}{{__("(迄)")}} <i class="ti-close"></i>
+                        </button>
+                    @endif
+                @endforeach
             @endif
         @endif
     @endforeach
