@@ -31,23 +31,6 @@ class SystemConfig extends Model
 
     public array $Column_Title_Text = [];
 
-    //圖片上傳限制格式
-    use UploadImageLimitTrait;
-    public array $UploadImageLimit = [
-        "logo" => [
-            "mimes" => ["jpeg","png","jpg","gif","svg"],//檔案類型限制
-            "max" => "1024",//檔案大小，1MB=1024
-            "dimensions" => [//上傳圖片限制寬高
-//                "width" => 100,
-//                "height" => 100,
-//                "min_width" => 100,
-//                "min_height" => 100,
-                "max_width" => 300,
-                "max_height" => 150,
-            ],
-        ],
-    ];
-
     //DB儲存的資料
     public array $SystemConfig = [
         '系統設定' => [

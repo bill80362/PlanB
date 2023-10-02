@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
 use App\Models\SystemConfig;
 use App\Services\Operate\SystemConfigService;
+use App\Services\Operate\UploadFileService;
 use App\Services\Operate\UploadImageLimit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,12 +17,12 @@ class SystemController extends Controller
         protected Request $request,
         protected SystemConfigService $oSystemConfigService,
         protected SystemConfig $oModel,
+        protected UploadFileService $oUploadFileService,
     ) {
     }
 
     public function updateHTML()
     {
-//        app(UploadImageLimit::class)->viewTips($this->oModel,"logo");
         //
         return view('operate/pages/system/config', [
             'SystemConfigKeyValue' => $this->oSystemConfigService->SystemConfigKeyValue,
@@ -44,9 +45,9 @@ class SystemController extends Controller
             if (in_array($id, $this->oSystemConfigService->SystemConfigImageKey)) {
                 $this->request->validate([
                     $id => [
-                        $this->oModel->getUploadImageLimitMine($id),
-                        $this->oModel->getUploadImageLimitDimensions($id),
-                        $this->oModel->getUploadImageLimitMax($id),
+                        $this->oUploadFileService->getUploadImageLimitMine($this->oModel,$id),
+                        $this->oUploadFileService->getUploadImageLimitMax($this->oModel,$id),
+                        $this->oUploadFileService->getUploadImageLimitDimensions($this->oModel,$id),
                     ],
                 ]);
             }
@@ -57,7 +58,8 @@ class SystemController extends Controller
             if (in_array($id, $this->oSystemConfigService->SystemConfigImageKey)) {
                 $content = '';
                 if ($this->request->file($id)) {
-                    $content = Storage::disk('public')->putFile('input_file', $this->request->file($id));
+//                    $content = Storage::disk('public')->putFile('input_file', $this->request->file($id));
+                    $content = $this->oUploadFileService->uploadFile($this->oModel,$id,$this->request->file($id),$this->request->file($id)->getClientOriginalName(),true);
                 }
             }
             //

@@ -3,7 +3,9 @@
 namespace App\Services\Operate;
 
 use App\Models\SystemConfig;
-
+/**
+ * 上傳圖片限制
+*/
 class SystemConfigService
 {
     public $useLangPrefix = true;
