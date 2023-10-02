@@ -84,6 +84,9 @@
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
                                                     @endforeach
+                                                    <option value="lang_url_map"
+                                                        {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
+                                                        {{ __("相關網址") }}</option>
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" id="filter_text_value_outside"

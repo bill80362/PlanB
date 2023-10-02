@@ -7,6 +7,7 @@ namespace App\Models;
  */
 trait FilterTemplateTrait
 {
+
     /**
      * select2 多選
      */
@@ -23,6 +24,8 @@ trait FilterTemplateTrait
             }
 
             if ($customQuery) continue;
+            if (isset($Data['filter_' . $filterName]) && count(array_filter((array)$Data['filter_' . $filterName])) == 0) continue;
+
             if ($template == "select2" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } elseif ($template == "rangeDate" && isset($Data['filter_' . $filterName . '_end'])) {
@@ -40,10 +43,16 @@ trait FilterTemplateTrait
         }
         //過濾選項-自訂
         $query = $this->useFilterExtend($query, $Data);
-        //過濾文字條件
-        if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
+
+        if (method_exists($this, 'useCustomTextSearch')) {
+            $query = $this->useCustomTextSearch($query, $Data);
+        } else {
+            //過濾文字條件
+            if (isset($Data['filter_text_key'])) {
+                $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
+            }
         }
+
         //排序
         if (isset($Data['order_by'])) {
             $order_by = explode(',', $Data['order_by']);
