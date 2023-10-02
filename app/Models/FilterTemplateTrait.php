@@ -7,7 +7,6 @@ namespace App\Models;
  */
 trait FilterTemplateTrait
 {
-
     /**
      * select2 多選
      */
@@ -39,10 +38,20 @@ trait FilterTemplateTrait
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } else if ($template == "checkbox" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
+            } else if ($template == "selectAndInput" && isset($Data['filter_' . $filterName . "_type"])) {
+                $type = $Data['filter_' . $filterName . '_type'];
+                $typeDict = [
+                    1 => '<',
+                    2 => '=',
+                    3 => '>',
+                ];
+                $query->where($filterName, $typeDict[$type], $Data['filter_' . $filterName . '_value']);
             }
         }
-        //過濾選項-自訂
-        $query = $this->useFilterExtend($query, $Data);
+        //過濾選項-自訂        
+        if (method_exists($this, 'useFilterExtend')) {
+            $query = $this->useFilterExtend($query, $Data);
+        }
 
         if (method_exists($this, 'useCustomTextSearch')) {
             $query = $this->useCustomTextSearch($query, $Data);

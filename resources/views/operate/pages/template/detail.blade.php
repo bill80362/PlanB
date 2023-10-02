@@ -14,7 +14,7 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                @include('/operate/components/title/page_title')
+                                <h2>管理人管理 列表</h2>
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"

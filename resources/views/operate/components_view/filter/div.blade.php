@@ -27,14 +27,14 @@
         <div class="form-check-wrap">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"name="filter_{{ $column }}[]"
-                    {{ count( array_filter((array)request()->get('filter_' . $column))) == 0 ? 'checked' : '' }} value=""
-                    id="FlexRadio1">
+                    {{ count(array_filter((array) request()->get('filter_' . $column))) == 0 ? 'checked' : '' }}
+                    value="" id="FlexRadio1">
                 <label class="form-check-label" for="FlexRadio1">
                     {{ __('不限制') }}
                 </label>
             </div>
 
-            @foreach ((array) $model->{ Str::camel($column) . 'Text'} as $key => $value)
+            @foreach ((array) $model->{Str::camel($column) . 'Text'} as $key => $value)
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="filter_{{ $column }}[]"
                         value="{{ $key }}" id="FlexRadio2-{{ $key }}"
@@ -63,17 +63,21 @@
         </div>
     </div>
 @elseif($template == 'selectAndInput')
-    {{-- <div class="form-group mb-3">
-        <label class="form-label d-block">庫存數量</label>
+    <div class="form-group mb-3">
+        <label class="form-label d-block">{{ __($columnName) }}</label>
         <div class="input-group">
-            <select class="form-select" id="inputGroupSelect02">
-                <option selected>請選擇</option>
-                <option value="1">小於</option>
-                <option value="2">等於</option>
-                <option value="3">大於</option>
+            <select class="form-select" name="filter_{{ $column }}_type">
+                <option selected>{{ __('請選擇') }}</option>
+                <option value="1" {{ '1' == request()->get("filter_{$column}_type") ? 'selected' : '' }}>
+                    {{ __('小於') }}</option>
+                <option value="2" {{ '2' == request()->get("filter_{$column}_type") ? 'selected' : '' }}>
+                    {{ __('等於') }}</option>
+                <option value="3" {{ '3' == request()->get("filter_{$column}_type") ? 'selected' : '' }}>
+                    {{ __('大於') }}</option>
             </select>
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" name="filter_{{ $column }}_value"
+                value="{{ request()->get("filter_{$column}_value") }}">
         </div>
-    </div> --}}
+    </div>
 
 @endif

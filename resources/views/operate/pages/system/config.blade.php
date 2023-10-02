@@ -13,10 +13,7 @@
                     <div class="white_card_header">
                         <div class="box_header m-0">
                             <div class="main-title">
-                                <h2>
-                                    <a class="btn btn-primary mr-2" href="{{route("user_list")}}?{{request()->getQueryString()}}"> < </a>
-                                    {{ __('系統環境設定') }}
-                                </h2>
+                                @include('/operate/components/title/page_title')
                             </div>
                         </div>
                     </div>

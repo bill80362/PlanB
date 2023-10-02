@@ -14,7 +14,8 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>{{ __(app("App\Services\Route\RouteTitle")->getTitle(request()->route()->getName())) }}</h2>
+                                {{-- <h2>{{ __(app("App\Services\Route\RouteTitle")->getTitle(request()->route()->getName())) }}</h2> --}}
+                                @include('/operate/components/title/page_title')
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
@@ -46,10 +47,10 @@
                                         </button>
                                         @endcan
                                         @can('user_export')
-                                        <a target="_blank" class="dropdown-item" href="{{route("user_export",["type"=>"key"])}}?{{request()->getQueryString()}}">
+                                        <a target="_blank" class="dropdown-item" href="{{route("user_export", ['type' => 'key', ...request()->query()]) }}">
                                             {{__("匯出參數版")}}
                                         </a>
-                                        <a target="_blank" class="dropdown-item" href="{{route("user_export",["type"=>"value"])}}?{{request()->getQueryString()}}">
+                                        <a target="_blank" class="dropdown-item" href="{{route("user_export", ['type' => 'key', ...request()->query()]) }}">
                                             {{__("匯出文字版")}}
                                         </a>
                                         @endcan
