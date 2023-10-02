@@ -121,7 +121,7 @@ class Language extends Model
 
         $query->where('lang_type', 'zh-tw');
         if (isset($Data['filter_is_change'])) {
-            $isChanges = (array)$Data['filter_is_change'];
+            $isChanges = array_filter((array)$Data['filter_is_change']);
             $query->where(function ($subQuery) use ($isChanges) {
                 foreach ($isChanges as $isChange) {
                     if ($isChange == 'Y') {
