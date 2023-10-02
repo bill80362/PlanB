@@ -23,6 +23,8 @@ trait FilterTemplateTrait
                 if(isset($Data['filter_'.$filterName.'_end'])){
                     $query->where($filterName,"<=",$Data['filter_'.$filterName.'_end']);
                 }
+            } else if($template=="radio" && isset($Data['filter_'.$filterName])){
+                $query->whereIn($filterName, (array)$Data['filter_'.$filterName] );
             }
         }
         //過濾選項-自訂
