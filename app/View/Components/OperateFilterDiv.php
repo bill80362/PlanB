@@ -8,10 +8,22 @@ use Illuminate\View\Component;
 
 class OperateFilterDiv extends Component
 {
+
+    public $template;
+    public $columnName;
     /**
      * Create a new component instance.
      */
-    public function __construct(public $column,public $model,public $template){}
+    public function __construct(public $column, public $model, public $setting)
+    {
+        $this->columnName = $model->Column_Title_Text[$column] ?? $column;
+        if (is_array($setting)) {
+            $this->template = $setting['type'];
+            $this->columnName = $setting['title'] ?? $column;
+        } else {
+            $this->template = $setting;
+        }
+    }
 
     /**
      * Get the view / contents that represent the component.

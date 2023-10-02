@@ -2,17 +2,17 @@
 
 
 @php
-    $breadCrumbs = $menuService->getCurrentBreadCrumbs();
+    // $breadCrumbs = $menuService->getCurrentBreadCrumbs();
     $path = $menuService->getCurrentLastMenu();
 @endphp
 
 
-@foreach ($breadCrumbs as $key => $breadCrumb)
+{{-- @foreach ($breadCrumbs as $key => $breadCrumb)
     @if ($key != 0)
         =>
     @endif
     {{ $breadCrumb }}
-@endforeach
+@endforeach --}}
 
 
-<h1 class="m-0">{{ $path['name'] }}</h1>
+<h2>{{ $path['name'] }}</h2>

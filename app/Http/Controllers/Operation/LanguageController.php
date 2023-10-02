@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Support\Facades\Storage;
 use App\Services\Operate\ListColumnService;
 
 class LanguageController extends Controller
@@ -149,7 +149,12 @@ class LanguageController extends Controller
                 'tran_text' => $UpdateData['tran_text']
             ]);
         } else {
-            $id = $this->oModel->create($UpdateData)->id;
+            $this->oModel->firstOrCreate([
+                'text' => $UpdateData['text'],
+                'lang_type' => $UpdateData['lang_type'],
+            ], [
+                'tran_text' => $UpdateData['tran_text'],
+            ]);
             foreach ($this->request->else_langTypes as $key => $else_langType) {
                 $trans = $this->request->else_trans[$key];
 
@@ -223,9 +228,10 @@ class LanguageController extends Controller
                 })->all();
             $filePath = lang_path($langType . '.json');
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            $fp = fopen($filePath, 'w');
-            fwrite($fp, $jsonString);
-            fclose($fp);
+            Storage::disk('lang')->put($langType . '.json', $jsonString);
+            // $fp = fopen($filePath, 'w');
+            // fwrite($fp, $jsonString);
+            // fclose($fp);
         }
 
         return back();

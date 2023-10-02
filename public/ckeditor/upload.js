@@ -24,12 +24,8 @@ class MyUploadAdapter {
     // Initializes the XMLHttpRequest object using the URL passed to the constructor.
     _initRequest() {
         const xhr = this.xhr = new XMLHttpRequest();
-
-        // Note that your request may look different. It is up to you and your editor
-        // integration to choose the right communication channel. This example uses
-        // a POST request with JSON as a data structure but your configuration
-        // could be different.
-        xhr.open('POST', 'http://example.com/image/upload/path', true);
+        xhr.open('POST', '/operate/upload_image', true);
+        xhr.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').content);
         xhr.responseType = 'json';
     }
 
@@ -81,7 +77,8 @@ class MyUploadAdapter {
         // Prepare the form data.
         const data = new FormData();
 
-        data.append('upload', file);
+        data.append('image', file);
+        data.append('path', 'editor');
 
         // Important note: This is the right place to implement security mechanisms
         // like authentication and CSRF protection. For instance, you can use
