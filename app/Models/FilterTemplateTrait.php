@@ -7,7 +7,6 @@ namespace App\Models;
  */
 trait FilterTemplateTrait
 {
-
     /**
      * select2 多選
      */
@@ -41,8 +40,10 @@ trait FilterTemplateTrait
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             }
         }
-        //過濾選項-自訂
-        $query = $this->useFilterExtend($query, $Data);
+        //過濾選項-自訂        
+        if (method_exists($this, 'useFilterExtend')) {
+            $query = $this->useFilterExtend($query, $Data);
+        }
 
         if (method_exists($this, 'useCustomTextSearch')) {
             $query = $this->useCustomTextSearch($query, $Data);

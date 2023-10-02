@@ -117,9 +117,12 @@ class Language extends Model
 
     public function useFilterExtend($query, array $Data)
     {
-        //過濾選項
+        // 匯出時要全部語系都匯出，但搜尋時只搜尋出一種語系
+        if (!array_key_exists('type', $Data)) {
+            $query->where('lang_type', 'zh-tw');
+        }
 
-        $query->where('lang_type', 'zh-tw');
+        //過濾選項
         if (isset($Data['filter_is_change'])) {
             $isChanges = array_filter((array)$Data['filter_is_change']);
             $query->where(function ($subQuery) use ($isChanges) {

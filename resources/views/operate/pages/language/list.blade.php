@@ -49,11 +49,11 @@
                                             @endcan
                                             @can('language_export')
                                                 <a target="_blank" class="dropdown-item"
-                                                    href="{{ route('language_export', ['type' => 'key']) }}?{{ request()->getQueryString() }}">
+                                                    href="{{ route('language_export', ['type' => 'key', ...request()->query()]) }}">
                                                     {{ __('匯出參數版') }}
                                                 </a>
                                                 <a target="_blank" class="dropdown-item"
-                                                    href="{{ route('language_export', ['type' => 'value']) }}?{{ request()->getQueryString() }}">
+                                                    href="{{ route('language_export', ['type' => 'value', ...request()->query()]) }}">
                                                     {{ __('匯出文字版') }}
                                                 </a>
                                             @endcan
@@ -86,7 +86,7 @@
                                                     @endforeach
                                                     <option value="lang_url_map"
                                                         {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
-                                                        {{ __("相關網址") }}</option>
+                                                        {{ __('相關網址') }}</option>
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" id="filter_text_value_outside"
