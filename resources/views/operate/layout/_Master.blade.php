@@ -71,7 +71,7 @@
 </head>
 
 <body class="crm_body_bg">
-
+    @include('/tools/lang/Js_translator')
     @include('/operate/include/_Aside')
 
 
