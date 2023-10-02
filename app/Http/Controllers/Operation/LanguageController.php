@@ -149,7 +149,12 @@ class LanguageController extends Controller
                 'tran_text' => $UpdateData['tran_text']
             ]);
         } else {
-            $id = $this->oModel->create($UpdateData)->id;
+            $this->oModel->firstOrCreate([
+                'text' => $UpdateData['text'],
+                'lang_type' => $UpdateData['lang_type'],
+            ], [
+                'tran_text' => $UpdateData['tran_text'],
+            ]);
             foreach ($this->request->else_langTypes as $key => $else_langType) {
                 $trans = $this->request->else_trans[$key];
 
