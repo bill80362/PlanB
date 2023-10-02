@@ -46,7 +46,8 @@ class FileUploadController extends Controller
         $dirList = $this->oUploadFileService->getStorage()->allDirectories();
         //
         $DataArray = [];
-        foreach ($dirList as $key => $dirName){
+        foreach ($dirList as $dirName){
+            //統計size總和
             $size = 0;
             foreach ($this->oUploadFileService->getStorage()->files($dirName) as $fileName){
                 $size += Storage::disk('public')->size($fileName);
