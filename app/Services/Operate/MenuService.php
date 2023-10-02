@@ -99,7 +99,12 @@ class MenuService
                         'name' => __('列表頁-範本'),
                         'href' => '/operate/template/list',
                         'permission' => '',
-                    ]
+                    ],
+                    [
+                        'name' => __('詳細頁'),
+                        'href' => '/operate/template/detail',
+                        'permission' => '',
+                    ],
                 ]
             ];
             $menus = array_merge($menus, [$templates]);
