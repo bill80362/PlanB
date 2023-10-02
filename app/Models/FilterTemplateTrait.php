@@ -9,22 +9,24 @@ trait FilterTemplateTrait
 {
     /**
      * select2 多選
-    */
+     */
     public function scopeFilter($query, array $Data)
     {
         //過濾選項-使用樣板
-        foreach ($this->filterTemplate as $filterName => $template){
-            if ($template=="select2" && isset($Data['filter_'.$filterName])) {
-                $query->whereIn($filterName, (array)$Data['filter_'.$filterName] );
-            }elseif( $template=="rangeDate" && isset($Data['filter_'.$filterName.'_end']) ){
-                if(isset($Data['filter_'.$filterName.'_start'])){
-                    $query->where($filterName,">=",$Data['filter_'.$filterName.'_start']);
+        foreach ($this->filterTemplate as $filterName => $template) {
+            if ($template == "select2" && isset($Data['filter_' . $filterName])) {
+                $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
+            } elseif ($template == "rangeDate" && isset($Data['filter_' . $filterName . '_end'])) {
+                if (isset($Data['filter_' . $filterName . '_start'])) {
+                    $query->where($filterName, ">=", $Data['filter_' . $filterName . '_start']);
                 }
-                if(isset($Data['filter_'.$filterName.'_end'])){
-                    $query->where($filterName,"<=",$Data['filter_'.$filterName.'_end']);
+                if (isset($Data['filter_' . $filterName . '_end'])) {
+                    $query->where($filterName, "<=", $Data['filter_' . $filterName . '_end']);
                 }
-            } else if($template=="radio" && isset($Data['filter_'.$filterName])){
-                $query->whereIn($filterName, (array)$Data['filter_'.$filterName] );
+            } else if ($template == "radio" && isset($Data['filter_' . $filterName])) {
+                $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
+            } else if ($template == "checkbox" && isset($Data['filter_' . $filterName])) {
+                $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             }
         }
         //過濾選項-自訂

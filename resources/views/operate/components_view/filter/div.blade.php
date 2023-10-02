@@ -46,4 +46,34 @@
             @endforeach
         </div>
     </div>
+@elseif($template == 'checkbox')
+    <div class="form-group mb-3">
+        <label class="form-label d-block">{{ $model->Column_Title_Text[$column] ?? $column }}</label>
+        <div class="form-check-wrap">
+            @foreach ((array) $model->{$column . 'Text'} as $key => $value)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="filter_{{ $column }}[]"
+                        {{ in_array($key, (array) request()->get('filter_' . $column)) ? 'checked' : '' }}
+                        value="{{ $key }}" id="checkbox-{{ $key }}">
+                    <label class="form-check-label" for="checkbox-{{ $key }}">
+                        {{ $value }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+    </div>
+@elseif($template == 'selectAndInput')
+    {{-- <div class="form-group mb-3">
+        <label class="form-label d-block">庫存數量</label>
+        <div class="input-group">
+            <select class="form-select" id="inputGroupSelect02">
+                <option selected>請選擇</option>
+                <option value="1">小於</option>
+                <option value="2">等於</option>
+                <option value="3">大於</option>
+            </select>
+            <input type="number" class="form-control">
+        </div>
+    </div> --}}
+
 @endif
