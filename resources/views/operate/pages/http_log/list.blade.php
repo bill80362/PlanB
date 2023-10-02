@@ -10,8 +10,8 @@
             <div class="col-lg-12">
                 <div class="white_card">
                     <div class="white_card_header">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h2>abc公司 {{ __('API串接紀錄') }} {{ __('列表') }}</h2>
+                        <div class="d-flex align-items-center justify-content-between">                            
+                            @include('/operate/components/title/page_title')
                         </div>
                     </div>
                     <div class="white_card_body">

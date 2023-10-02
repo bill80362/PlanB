@@ -96,7 +96,7 @@ class MenuService
                 'icon' => '/template/Salessa/img/menu-icon/5.svg',
                 'subMenu' => [
                     [
-                        'name' => __('列表頁'),
+                        'name' => __('列表頁-範本'),
                         'href' => '/operate/template/list',
                         'permission' => '',
                     ]
