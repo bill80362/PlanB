@@ -101,6 +101,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         // ui template
         if (!app()->isProduction()) {
             Route::get('/template/list', [Operation\TemplateController::class, 'list'])->name('template_list');
+            Route::get('/template/detail', [Operation\TemplateController::class, 'detail'])->name('template_detail');
         }
     });
 });
