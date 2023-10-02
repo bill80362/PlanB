@@ -20,4 +20,6 @@ class ListColumnSetting extends Model
         // 'created' => '',
         // 'updated' => '',
     ];
+    public array $Column_Title_Text = [];
+    
 }

@@ -29,8 +29,8 @@ class ModelTest extends TestCase
             if (class_exists($class)) {
                 $model = app($class);
                 if ($model instanceof Model) {
-                    if ($model->Column_Title_Text == null) {
-                        // throw new Exception($class . "沒有 Column_Title_Text欄位");
+                    if (! is_array($model->Column_Title_Text)) {
+                        throw new Exception($class . "沒有 Column_Title_Text欄位");
                     } else {
                         $dbColumns = Schema::getColumnListing($model->getTable());
                         $columns = array_keys($model->Column_Title_Text);
