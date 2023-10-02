@@ -25,23 +25,33 @@ class LanguageController extends Controller
     {
         $user = auth('operate')->user();
 
-        // table原設定
-        $componentTitles = [
-            'default_serial_number' => '流水號',
-            'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
-            'text' => $this->oModel->Column_Title_Text['text'],
-            'tran_text' => $this->oModel->Column_Title_Text['tran_text'],
-            'isUpdated' => '是否已修改',
-            'updated_at' => $this->oModel->Column_Title_Text['updated_at'],
-            'created_at' => $this->oModel->Column_Title_Text['created_at'],
-        ];
-        [$lockTitles, $titles] = $listColumnService->parseSetting($this->oModel, $componentTitles);
-
+        // table設定，可用欄位
+        $TableSetting = $listColumnService->getTableSetting($this->oModel);
         // 使用者設定
         $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
-            return array_search($key, $userColumns);
+        //根據使用者設定修改順序
+        $TableSetting["canUseColumn"] = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
+            return array_search($item, $userColumns);
         })->toArray();
+
+
+        // // table原設定
+        // $componentTitles = [
+        //     'default_serial_number' => '流水號',
+        //     'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
+        //     'text' => $this->oModel->Column_Title_Text['text'],
+        //     'tran_text' => $this->oModel->Column_Title_Text['tran_text'],
+        //     'isUpdated' => '是否已修改',
+        //     'updated_at' => $this->oModel->Column_Title_Text['updated_at'],
+        //     'created_at' => $this->oModel->Column_Title_Text['created_at'],
+        // ];
+        // [$lockTitles, $titles] = $listColumnService->parseSetting($this->oModel, $componentTitles);
+
+        // // 使用者設定
+        // $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
+        // $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
+        //     return array_search($key, $userColumns);
+        // })->toArray();
 
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
@@ -51,9 +61,13 @@ class LanguageController extends Controller
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
             'columns' => $userColumns,
-            'titles' => $titles,
-            'lockTitles' => $lockTitles,
-            'allkeys' => array_keys($sortTitles)
+
+            'columns' => $userColumns,
+            'TableSetting' => $TableSetting,
+
+            // 'titles' => $titles,
+            // 'lockTitles' => $lockTitles,
+            // 'allkeys' => array_keys($sortTitles)
         ]);
     }
 
