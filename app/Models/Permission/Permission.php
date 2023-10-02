@@ -37,6 +37,8 @@ class Permission extends Model implements Auditable
         ];
     }
 
+    public array $Column_Title_Text = [];
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

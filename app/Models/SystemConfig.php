@@ -29,6 +29,8 @@ class SystemConfig extends Model
         );
     }
 
+    public array $Column_Title_Text = [];
+
     //圖片上傳限制格式
     use UploadImageLimitTrait;
     public array $UploadImageLimit = [
