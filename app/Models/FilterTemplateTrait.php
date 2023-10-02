@@ -13,7 +13,16 @@ trait FilterTemplateTrait
     public function scopeFilter($query, array $Data)
     {
         //過濾選項-使用樣板
-        foreach ($this->filterTemplate as $filterName => $template) {
+        foreach ($this->filterTemplate as $filterName => $set) {
+            $customQuery = false;
+            if (is_array($set)) {
+                $template = $set['type'];
+                $customQuery = $set['customQuery'];
+            } else {
+                $template = $set;
+            }
+
+            if ($customQuery) continue;
             if ($template == "select2" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } elseif ($template == "rangeDate" && isset($Data['filter_' . $filterName . '_end'])) {

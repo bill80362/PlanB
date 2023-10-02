@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ExportImportTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\FilterTemplateTrait;
 
 class Language extends Model
 {
@@ -105,15 +106,20 @@ class Language extends Model
         return [];
     }
 
-    public function scopeFilter($query, array $Data)
+    use FilterTemplateTrait;
+    public array $filterTemplate = [
+        "is_change" => [
+            "type" => "radio",
+            "customQuery" => true,
+            'title' => 'isUpdated'
+        ],
+    ];
+
+    public function useFilterExtend($query, array $Data)
     {
         //過濾選項
-        // if (isset($Data['filter_lang_type'])) {
-        //     $query->whereIn('lang_type', (array) $Data['filter_lang_type']);
-        // }
 
         $query->where('lang_type', 'zh-tw');
-
         if (isset($Data['filter_is_change'])) {
             $isChanges = (array)$Data['filter_is_change'];
             $query->where(function ($subQuery) use ($isChanges) {
@@ -126,24 +132,6 @@ class Language extends Model
                 }
             });
         }
-
-        //過濾文字條件
-        if (isset($Data['filter_text_key'])) {
-            if ($Data['filter_text_key'] == 'lang_url_map') {
-                $query->whereHas('langUrlMaps', function ($subQuery) use ($Data) {
-                    $subQuery->where('url', 'like', '%' . $Data['filter_text_value'] . '%');
-                });
-            } else {
-                $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
-            }
-        }
-        //排序
-        if (isset($Data['order_by'])) {
-            $order_by = explode(',', $Data['order_by']);
-            $query->orderBy($order_by[0], $order_by[1]);
-        }
-
-        //
         return $query;
     }
 

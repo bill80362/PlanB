@@ -103,7 +103,8 @@
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    @include('operate.components.filter.chosen')
+                                    {{-- @include('operate.components.filter.chosen') --}}
+                                    <x-OperateFilterChosen :model="$Model"></x-OperateFilterChosen>
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
@@ -254,7 +255,12 @@
                     <div class="row">
                         <div class="col-12">
 
-                            <div class="form-group">
+                            @foreach ($Model->filterTemplate as $column => $setting)
+                                <x-OperateFilterDiv :column="$column" :model="$Model"
+                                    :setting="$setting"></x-OperateFilterDiv>
+                            @endforeach
+
+                            {{-- <div class="form-group">
                                 <label>{{ __('是否已修改') }}</label>
                                 <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
                                     style="width: 100%;">
@@ -264,7 +270,7 @@
                                             {{ $value }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>

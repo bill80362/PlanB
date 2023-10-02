@@ -1,8 +1,8 @@
 @if ($template == 'select2')
     <div class="form-group">
-        <label>{{ $model->Column_Title_Text[$column] ?? $column }}</label>
+        <label>{{ __($columnName) }}</label>
         <select name="filter_{{ $column }}[]" class="select2bs5" multiple="multiple" style="width: 100%;">
-            @foreach ((array) $model->{$column . 'Text'} as $key => $value)
+            @foreach ((array) $model->{Str::camel($column) . 'Text'} as $key => $value)
                 <option value="{{ $key }}"
                     {{ in_array($key, (array) request()->get('filter_' . $column)) ? 'selected' : '' }}>
                     {{ $value }}
@@ -12,7 +12,7 @@
     </div>
 @elseif($template == 'rangeDate')
     <div class="form-group mb-3">
-        <label class="form-label d-block">{{ $model->Column_Title_Text[$column] ?? $column }}</label>
+        <label class="form-label d-block">{{ __($columnName) }}</label>
         <div class="input-group">
             <input type="date" class="form-control" name="filter_{{ $column }}_start"
                 value="{{ request()->get('filter_' . $column . '_start') }}">
@@ -23,7 +23,7 @@
     </div>
 @elseif($template == 'radio')
     <div class="form-group mb-3">
-        <label class="form-label d-block">{{ $model->Column_Title_Text[$column] ?? $column }}</label>
+        <label class="form-label d-block">{{ __($columnName) }}</label>
         <div class="form-check-wrap">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"name="filter_{{ $column }}[]"
@@ -34,7 +34,7 @@
                 </label>
             </div>
 
-            @foreach ((array) $model->{$column . 'Text'} as $key => $value)
+            @foreach ((array) $model->{ Str::camel($column) . 'Text'} as $key => $value)
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="filter_{{ $column }}[]"
                         value="{{ $key }}" id="FlexRadio2-{{ $key }}"
@@ -48,9 +48,9 @@
     </div>
 @elseif($template == 'checkbox')
     <div class="form-group mb-3">
-        <label class="form-label d-block">{{ $model->Column_Title_Text[$column] ?? $column }}</label>
+        <label class="form-label d-block">{{ __($columnName) }}</label>
         <div class="form-check-wrap">
-            @foreach ((array) $model->{$column . 'Text'} as $key => $value)
+            @foreach ((array) $model->{Str::camel($column) . 'Text'} as $key => $value)
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" name="filter_{{ $column }}[]"
                         {{ in_array($key, (array) request()->get('filter_' . $column)) ? 'checked' : '' }}

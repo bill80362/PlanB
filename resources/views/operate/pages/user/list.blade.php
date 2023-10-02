@@ -219,8 +219,8 @@
             <div class="slideFunc-body px-3 py-3">
                 <div class="row">
                     <div class="col-12">
-                        @foreach($Model->filterTemplate as $column => $template)
-                            <x-OperateFilterDiv :column="$column" :model="$Model" :template="$template"></x-OperateFilterDiv>
+                        @foreach($Model->filterTemplate as $column => $setting)
+                            <x-OperateFilterDiv :column="$column" :model="$Model" :setting="$setting"></x-OperateFilterDiv>
                         @endforeach
 {{--                        //自訂篩選條件--}}
 {{--                        <div class="form-group">--}}

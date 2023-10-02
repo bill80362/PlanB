@@ -26,7 +26,15 @@ class OperateFilterChosen extends Component
             //欄位名稱
             $column = str_replace("filter_", "", $filter_name);
             //樣板
-            foreach ($this->model->filterTemplate as $useTemplateFilter => $template) {
+            foreach ($this->model->filterTemplate as $useTemplateFilter => $set) {
+                $title = '';
+                if (is_array($set)) {
+                    $template = $set['type'];
+                    $title = $set['title'] ?? '';
+                } else {
+                    $template = $set;
+                }
+
                 if ($template == "rangeDate" && $column == $useTemplateFilter . "_start") {
                     $chosenFilterList[] = [
                         "key" => $filter_name,
@@ -56,7 +64,7 @@ class OperateFilterChosen extends Component
                             $chosenFilterList[] = [
                                 "key" => $filter_name,
                                 "value" => $filter_value_sub,
-                                "title" => $this->model->Column_Title_Text[$column] ?? "",
+                                "title" => $title ?: $this->model->Column_Title_Text[$column] ?? "",
                                 "titleValue" => isset($Model->{$column . "Text"}) ? $this->model->{$column . "Text"}[$filter_value_sub] : $filter_value_sub,
                             ];
                         }
