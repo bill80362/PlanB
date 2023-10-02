@@ -27,7 +27,7 @@
         <div class="form-check-wrap">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"name="filter_{{ $column }}[]"
-                    {{ count((array) request()->get('filter_' . $column)) == 0 ? 'checked' : '' }} value=""
+                    {{ count( array_filter((array)request()->get('filter_' . $column))) == 0 ? 'checked' : '' }} value=""
                     id="FlexRadio1">
                 <label class="form-check-label" for="FlexRadio1">
                     {{ __('不限制') }}
