@@ -36,14 +36,14 @@ class ListColumnService
             ],
         ],
         Language::class => [
-            "canUseColumn" => [
-                'text', 'tran_text', 'isUpdated', 'updated_at', 'created_at'
-            ],
             "lockColumn" => [
                 'lang_type', 'default_serial_number'
             ],
+            "canUseColumn" => [
+                'text', 'tran_text', 'isUpdated', 'updated_at', 'created_at'
+            ],
             "lockColumnTail" => [
-
+                "operate"
             ],
         ],
     ];

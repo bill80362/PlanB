@@ -5,17 +5,17 @@
 
 
 @section('Content')
+    <!-- main content part here -->
     <section>
         <div class="container-fluid p-0 ">
             <!-- page Content  -->
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    @include('/operate/components/alert/error_message')
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>{{ __('語系管理') }}</h2>
-
+                                <h2>{{ __(app('App\Services\Route\RouteTitle')->getTitle(request()->route()->getName())) }}
+                                </h2>
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
@@ -23,70 +23,75 @@
                                         <i class="ti-settings"></i> {{ __('處理') }}
                                     </button>
                                     <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-item">{{ __('全選') }}</button>
+                                        <button type="button" class="dropdown-item">{{ __('取消全選') }}</button>
+                                        <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button>
+                                        <hr class="dropdown-divider">
                                         @can('language_delete')
-                                            <button type="button" id="btnDeleteBatch"
+                                            <hr class="dropdown-divider">
+                                            <button id="btnDeleteBatch" type="button"
                                                 class="dropdown-item">{{ __('勾選刪除') }}</button>
                                         @endcan
                                     </div>
                                 </div>
                                 <div class="btn-group me-2">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ __('匯入') }} / {{ __('匯出') }}
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                            data-bs-target="#importModal">
-                                            {{ __('匯入') }}
+                                    @canany('language_import', 'language_export')
+                                        <button type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ __('匯入') }} / {{ __('匯出') }}
                                         </button>
-                                        <a class="dropdown-item"
-                                            href="{{ route('language_export') }}?{{ request()->getQueryString() }}">
-                                            {{ __('匯出') }}
-                                        </a>
-                                    </div>
+                                        <div class="dropdown-menu">
+                                            @can('language_import')
+                                                <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                                    data-bs-target="#importModal">
+                                                    {{ __('匯入') }}
+                                                </button>
+                                            @endcan
+                                            @can('language_export')
+                                                <a target="_blank" class="dropdown-item"
+                                                    href="{{ route('language_export', ['type' => 'key']) }}?{{ request()->getQueryString() }}">
+                                                    {{ __('匯出參數版') }}
+                                                </a>
+                                                <a target="_blank" class="dropdown-item"
+                                                    href="{{ route('language_export', ['type' => 'value']) }}?{{ request()->getQueryString() }}">
+                                                    {{ __('匯出文字版') }}
+                                                </a>
+                                            @endcan
+                                        </div>
+                                    @endcanany
                                 </div>
-                                @can('language_create')
-                                    <div class="btn-group">
+                                <div class="btn-group">
+                                    @can('language_create')
                                         <a class="btn btn-primary"
                                             href="{{ route('language_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
-                                            {{ __('新增') }}
-                                        </a>
-                                    </div>
-                                @endcan
+                                            {{ __('新增') }} </a>
+                                    @endcan
+                                </div>
                             </div>
                         </div>
                         <div class="white_card_body">
                             <div class="row">
                                 <div class="col-6 mb-3">
-
                                     <div class="input-group">
                                         <div class="input-group input-group" id="searchContnet">
                                             <div class="input-group-prepend">
-                                                <select class="form-select" name="filter_text_key" id="filter_text_key"
-                                                    data-target="#searchFilter">
+                                                <select class="form-select" id="filter_text_key_outside"
+                                                    data-target="#searchFilter"
+                                                    onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    <option value="text"
-                                                        {{ request()->get('filter_text_key') == 'text' ? 'selected' : '' }}>
-                                                        {{ __('名稱') }}
-                                                    </option>
-                                                    <option value="tran_text"
-                                                        {{ request()->get('filter_text_key') == 'tran_text' ? 'selected' : '' }}>
-                                                        {{ __('翻譯後名稱') }}
-                                                    </option>
-                                                    <option value="memo"
-                                                        {{ request()->get('filter_text_key') == 'memo' ? 'selected' : '' }}>
-                                                        {{ __('備註') }}</option>
-                                                    <option value="lang_url_map"
-                                                        {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
-                                                        {{ __('相關網址') }}</option>
+                                                    @foreach (['text', 'tran_text'] as $value)
+                                                        <option value="{{ $value }}"
+                                                            {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
+                                                            {{ __($Model->Column_Title_Text[$value]) }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
-                                            <input id="filter_text_value" type="text" class="form-control"
-                                                name="filter_text_value" value="{{ request()->get('filter_text_value') }}"
-                                                data-target="#searchString">
-
-                                            <button onclick="searchText()" class="btn btn-dark" type="button"
-                                                id="searchButton"><i class="ti-search"></i></button>
+                                            <input type="text" class="form-control" id="filter_text_value_outside"
+                                                value="{{ request()->get('filter_text_value') }}"
+                                                data-target="#searchString"
+                                                onchange="$('#filter_text_value').val($(this).val())">
+                                            <button class="btn btn-dark" type="button"
+                                                onclick="$('#filterForm').submit()"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -94,135 +99,82 @@
                                     <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon
                                             name="funnel-outline"></ion-icon>
                                         {{ __('篩選器') }}</button>
-                                    <a href="{{ request()->url() }}">
-                                        <button class="btn btn-muted">{{ __('重置查詢') }}</button>
-                                    </a>
-
+                                    <a class="btn btn-muted" href="{{ request()->url() }}">{{ __('重置查詢') }}</a>
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    <p class="d-flex align-items-center flex-content-start fz-sm filter-string">
-                                        <span class="text-muted me-2">{{ __('篩選器') }}：</span>
-
-                                        @if (count((array) request()->get('filter_is_change')) > 0)
-                                            <button
-                                                class="btn btn-secondary me-2 btn-sm rounded-pill px-3">{{ __('是否已修改') }}：
-                                                @foreach ($Model->isChangeText as $key => $value)
-                                                    {{ in_array($key, (array) request()->get('filter_is_change')) ? $value : '' }}
-                                                @endforeach
-                                                <i class="ti-close"></i>
-                                            </button>
-                                        @endif
-
-
-                                    </p>
+                                    @include('operate.components.filter.chosen')
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
-                                                <tr id="sortList">
-                                                    <th class="sortStyle ascStyle">{{ __('流水號') }}</th>
-
-                                                    <th class="sortStyle unsortStyle text_column"
-                                                        data-sort="{{ array_search('text', $columns) }}">
-                                                        {{ __($Model->Column_Title_Text['text']) }}</th>
-
-                                                    <th class="sortStyle unsortStyle tran_text_column"
-                                                        data-sort="{{ array_search('tran_text', $columns) }}">
-                                                        {{ __($Model->Column_Title_Text['tran_text']) }}</th>
-
-                                                    <th class="sortStyle unsortStyle lang_type_column"
-                                                        data-sort="{{ array_search('lang_type', $columns) }}">
-                                                        {{ __($Model->Column_Title_Text['lang_type']) }}</th>
-
-                                                    <th class="sortStyle unsortStyle isUpdated_column"
-                                                        data-sort="{{ array_search('isUpdated', $columns) }}">
-                                                        {{ __('是否已修改') }}
-                                                    </th>
-
-                                                    <th class="sortStyle unsortStyle updated_at_column"
-                                                        data-sort="{{ array_search('updated_at', $columns) }}">
-                                                        {{ __($Model->Column_Title_Text['updated_at']) }}</th>
-
-                                                    <th class="sortStyle unsortStyle created_at_column"
-                                                        data-sort="{{ array_search('created_at', $columns) }}">
-                                                        {{ __($Model->Column_Title_Text['created_at']) }}</th>
-
-
-
-                                                    <th class="text-end">
-                                                        <button onclick="openToggle(this)"
-                                                            class="btn btn-link slideFunc-toggle text-muted"
+                                                <tr>
+                                                    <th class="sortStyle" data-column="default_serial_number">
+                                                        {{ __('default_serial_number') }}</th>
+                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="text" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="tran_text" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="lang_type" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="isUpdated" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="created_at" :model="$Model"></x-OperateTh>
+                                                    <th class="text-end" data-column="operate">
+                                                        <button class="btn btn-link slideFunc-toggle text-muted"
+                                                            onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i class="ti-settings"></i></button>
                                                     </th>
-
-
                                                 </tr>
                                             </thead>
-                                            <tbody id="sortListContent">
-                                                <form>
-                                                    @foreach ($Paginator->items() as $key => $Item)
-                                                        <tr class="{{ $key % 2 == 0 ? 'bg-muted-light' : '' }}">
-                                                            <td data-sort="0">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    name="id_array[]" value="{{ $Item->id }}">
-                                                                {{ $key + 1 + ($Paginator->currentPage() - 1) * $Paginator->perPage() }}
-                                                            </td>
+                                            <tbody>
+                                                @foreach ($Paginator->items() as $index => $Item)
+                                                    <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
+                                                        <td class="border-0" data-column="default_serial_number">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                name="id_array[]" value="{{ $Item->id }}">
 
-                                                            <td class="text_column"
-                                                                data-sort="{{ array_search('text', $columns) }}">
-                                                                {{ $Item->text }}</td>
-
-                                                            <td class="tran_text_column"
-                                                                data-sort="{{ array_search('tran_text', $columns) }}">
-                                                                {{ $Item->tran_text }}</td>
-
-                                                            <td class="lang_type_column"
-                                                                data-sort="{{ array_search('lang_type', $columns) }}">
-                                                                {{ __($Model->langTypeText[$Item->lang_type] ?? $Item->lang_type) }}
-                                                            </td>
-
-                                                            <td class="isUpdated_column"
-                                                                data-sort="{{ array_search('isUpdated', $columns) }}">
-                                                                {{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
-
-                                                            <td class="updated_at_column"
-                                                                data-sort="{{ array_search('updated_at', $columns) }}">
-                                                                {{ $Item->updated_at }}</td>
-
-                                                            <td class="created_at_column"
-                                                                data-sort="{{ array_search('created_at', $columns) }}">
-                                                                {{ $Item->created_at }}</td>
-
-                                                            <td class="text-end">
-                                                                <div class="btn-group">
-                                                                    <button type="button"
-                                                                        class="btn btn-light dropdown-toggle"
-                                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                                        <i class="ti-more-alt"></i>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu">
-                                                                        @can('language_update')
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="/operate/language/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
-                                                                            </li>
-                                                                        @endcan
-                                                                        @can('language_delete')
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="javascript:void(0)"
-                                                                                    onclick="postForm('/operate/language/del?{{ request()->getQueryString() }}',{
-                                                                                'id_array[]':{{ $Item->id }},
-                                                                                '_token':'{{ csrf_token() }}'
-                                                                                })">{{ __('刪除') }}</a>
-                                                                            </li>
-                                                                        @endcan
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </form>
-
+                                                            {{ $index + 1 + ($Paginator->currentPage() - 1) * $Paginator->perPage() }}
+                                                        </td>
+                                                        <td class="border-0" data-column="id">{{ $Item->id }}</td>
+                                                        <td class="border-0" data-column="text">
+                                                            {{ $Item->text }}</td>
+                                                        <td class="border-0" data-column="tran_text">
+                                                            {{ $Item->tran_text }}</td>
+                                                        <td class="border-0" data-column="lang_type">
+                                                            {{ $Item->lang_type }}</td>
+                                                        <td class="border-0" data-column="isUpdated">
+                                                            {{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
+                                                        <td class="border-0" data-column="updated_at">
+                                                            {{ $Item->updated_at }}</td>
+                                                        <td class="border-0" data-column="created_at">
+                                                            {{ $Item->created_at }}</td>
+                                                        <td class="border-0 text-end" data-column="operate">
+                                                            <div class="btn-group">
+                                                                <button type="button"
+                                                                    class="btn btn-light dropdown-toggle"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <i class="ti-more-alt"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu">
+                                                                    @can('language_update')
+                                                                        <li><a class="dropdown-item"
+                                                                                href="/operate/language/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                                        </li>
+                                                                    @endcan
+                                                                    @can('language_delete')
+                                                                        <li><button class="dropdown-item" type="button"
+                                                                                onclick="postForm('/operate/language/del?{{ request()->getQueryString() }}',{
+                                                                        'id_array[]':{{ $Item->id }},
+                                                                        _token:'{{ csrf_token() }}'
+                                                                        })">{{ __('刪除') }}
+                                                                            </button></li>
+                                                                    @endcan
+                                                                    <a target="_blank" class="dropdown-item"
+                                                                        href="/operate/language/{{ $Item->id }}/audit?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                             </tbody>
+                                            @endforeach
                                         </table>
                                     </div>
                                 </div>
@@ -257,7 +209,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="importModalLabel">{{ __('匯入新增') }}</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -274,26 +226,25 @@
             </form>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div class="slideFunc-box" id="prodFilter">
-        <div class="slideFunc-content">
-            <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
-                <h5 class="slideFunc-title" id="prodFilterTitle">{{ __('篩選器') }}</h5>
-                <button type="button" class="btn-close" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="slideFunc-body px-3 py-3">
-                <form id="searchForm">
+    <form id="filterForm">
+        <!-- Modal -->
+        <div class="slideFunc-box" id="prodFilter">
+            <div class="slideFunc-content">
+                <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
+                    <h5 class="slideFunc-title" id="prodFilterTitle">{{ __('篩選器') }}</h5>
+                    <button type="button" class="btn-close" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="slideFunc-body px-3 py-3">
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group mb-3">
+
+                            <div class="form-group">
                                 <label>{{ __('是否已修改') }}</label>
                                 <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
                                     style="width: 100%;">
                                     @foreach ($Model->isChangeText as $key => $value)
-                                        {{ $value }}
                                         <option value="{{ $key }}"
                                             {{ in_array($key, (array) request()->get('filter_is_change')) ? 'selected' : '' }}>
                                             {{ $value }}</option>
@@ -303,27 +254,20 @@
 
                         </div>
                     </div>
-                    <input id="searchFilter" name="filter_text_key" type="hidden"
+                    <input id="filter_text_key" name="filter_text_key" type="hidden"
                         value="{{ request()->get('filter_text_key') }}">
-                    <input id="searchString" name="filter_text_value" type="hidden"
+                    <input id="filter_text_value" name="filter_text_value" type="hidden"
                         value="{{ request()->get('filter_text_value') }}">
-                </form>
-
-                <form id="resetForm">
-                    <input id="searchFilter" name="filter_text_key" type="hidden"
-                        value="{{ request()->get('filter_text_key') }}">
-                    <input id="searchString" name="filter_text_value" type="hidden"
-                        value="{{ request()->get('filter_text_value') }}">
-                </form>
-            </div>
-            <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
-                <button type="button" onclick="selectedForm=document.getElementById('resetForm'); selectedForm.submit();"
-                    class="btn btn-muted mx-2">{{ __('清除篩選器') }}</button>
-                <button onclick="searchText()" type="button" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
+                </div>
+                <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
+                    <button type="reset" class="btn btn-muted mx-2"
+                        onclick="$('.select2bs5').empty() && $(':input','#filterForm').not(':button, :submit, :reset, :hidden').val('').prop('checked', false).prop('selected', false);
+                ">{{ __('清除篩選器') }}</button>
+                    <button type="submit" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
+                </div>
             </div>
         </div>
-    </div>
-
+    </form>
     <!-- Modal -->
     <div class="slideFunc-box" id="listSetting">
         <div class="slideFunc-content">
@@ -333,46 +277,54 @@
                     <span aria-hidden="true"></span>
                 </button>
             </div>
-            <form action="/operate/language/list_column" method="POST">
+            <form action="{{ route('language_saveListColumn') }}" method="POST">
                 @csrf
                 <div class="slideFunc-body px-3 py-3">
                     <div class="row">
                         <div class="col-12">
                             <div class="list-group">
                                 <div class="sort-item">
-
-                                    @foreach ($lockTitles as $key => $value)
+                                    @foreach ($TableSetting['lockColumn'] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
-                                                    value="{{ $key }}"
+                                                    value="{{ $value }}"
                                                     aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                    for="">{{ $value }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>
                                     @endforeach
-
-
-
                                 </div>
                                 <div class="sort-item" id="sortGroup">
-
-                                    @foreach ($titles as $key => $value)
+                                    @foreach ($TableSetting['canUseColumn'] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
-                                                    value="{{ $key }}" name="list[]"
+                                                    value="{{ $value }}" name="list[]"
                                                     aria-label="Checkbox for following text input"
-                                                    {{ in_array($key, $columns) ? 'checked' : '' }}>
+                                                    {{ in_array($value, $columns) ? 'checked' : '' }}>
                                                 <label class="form-check-label"
-                                                    for="">{{ $value }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-align-justify"></i>
                                         </div>
                                     @endforeach
-
+                                </div>
+                                <div class="sort-item">
+                                    @foreach ($TableSetting['lockColumnTail'] as $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox"
+                                                    value="{{ $value }}"
+                                                    aria-label="Checkbox for following text input" checked disabled>
+                                                <label class="form-check-label"
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                            </div>
+                                            <i class="ti-lock "></i>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -390,6 +342,37 @@
 
 @section('BodyJavascript')
     <script>
+        //Initialize Select2 Elements
+        $('.select2bs5').each(function(i, ele) {
+            $(ele).select2({
+                dropdownParent: $('#prodFilter'),
+            })
+        })
+        // tableSort
+        // $('#sortableTable').tablesort();
+
+        // sortable.js
+        new Sortable(document.getElementById('sortGroup'), {
+            filter: '.in-fixed', // 'filtered' class is not draggable
+            animation: 150,
+            handle: '.ti-align-justify',
+            ghostClass: 'bg-secondary-light'
+        });
+
+        //排序
+        function orderBy(order_key, order_rule) {
+            let queryString = '{{ request()->getQueryString() }}';
+            let newQueryString = '';
+            queryString.split("&amp;").map(function(item) {
+                let name = item.split("=")[0];
+                let value = item.split("=")[1];
+                if (!(name.indexOf('order_by') >= 0)) {
+                    newQueryString += item + '&';
+                }
+            });
+            location.href = "?" + newQueryString + '&order_by=' + order_key + "," + order_rule;
+        }
+
         //批次刪除
         $("#btnDeleteBatch").on("click", function() {
             var postArray = [];
@@ -402,95 +385,39 @@
             postForm('/operate/language/del?{{ request()->getQueryString() }}', postArray)
         });
 
-        $('.select2bs5').each(function(i, ele) {
-            $(ele).select2({
-                dropdownParent: $('#prodFilter'),
-            })
-        })
-
-        function searchText() {
-            let filter_text_key = $("#filter_text_key").val();
-            let filter_text_value = $("#filter_text_value").val();
-
-            $("#searchFilter").val(filter_text_key);
-            $("#searchString").val(filter_text_value);
-            selectedForm = document.getElementById('searchForm');
-            selectedForm.submit();
-        }
-
-        /**
-         * sends a request to the specified url from a form. this will change the window location.
-         * @param {string} path the path to send the post request to
-         * @param {object} params the parameters to add to the url
-         * @param {string} [method=post] the method to use on the form
-         */
-
-        function postForm(path, params, method = 'post') {
-            const form = document.createElement('form');
-            form.method = method;
-            form.action = path;
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = params[key];
-
-                    form.appendChild(hiddenField);
-                }
-            }
-            document.body.appendChild(form);
-            form.submit();
-        }
-
-        function openToggle(thisTarget) {
-            const data = $(thisTarget).attr('data-target')
-            $(data).toggleClass('in-active')
-        }
-        // tableSort
+        //欄位排序修改
         let columns = @json($columns);
-        let allColumn = @json($allkeys);
-        allColumn.forEach(element => {
-            $("." + element + "_column").hide();
-        });
+        refreshTable();
 
-        columns.forEach(element => {
-            $("." + element + "_column").show();
-        });
-
-        // 處理排序
-        $(document).ready(function() {
-            updateTitlehandler()
-            updatehandler();
-        });
-
-        function updateTitlehandler() {
-            var list = $('#sortList');
-            var listItems = list.find('th').sort(function(a, b) {
-                return $(a).attr('data-sort') - $(b).attr('data-sort');
+        function refreshTable() {
+            //隱藏需要隱藏的欄位
+            $('#sortableTable').find('th,td').each(function(i, element) {
+                if (jQuery.inArray($(element).attr('data-column'), Object.values(columns)) === -1) {
+                    $(element).hide();
+                }
             });
-            list.find('th').remove();
-            list.append(listItems);
-        }
-
-        function updatehandler() {
-            let list = $('#sortListContent tr').html(function() {
+            //重新排列標題
+            let listHead = $('#sortableTable thead tr');
+            let listHeadItems = listHead.find('th').sort(function(a, b) {
+                let a_key_number = Object.keys(columns).find(k => columns[k] === $(a).attr('data-column'));
+                let b_key_number = Object.keys(columns).find(k => columns[k] === $(b).attr('data-column'));
+                return a_key_number - b_key_number;
+            });
+            listHead.find('th').remove();
+            listHead.append(listHeadItems);
+            //重新排列內文
+            let listBody = $('#sortableTable tbody tr').html(function() {
                 let subList = $(this).children().sort(function(a, b) {
-                    return $(a).attr('data-sort') - $(b).attr('data-sort');
+                    let a_key_number = Object.keys(columns).find(k => columns[k] === $(a).attr(
+                        'data-column'));
+                    let b_key_number = Object.keys(columns).find(k => columns[k] === $(b).attr(
+                        'data-column'));
+                    return a_key_number - b_key_number;
                 });
                 return subList;
-
             });
-            list.find('#sortListContent tr').remove();
-            list.append(list);
+            listBody.find('#sortableTable tbody tr').remove();
+            listBody.append(listBody);
         }
-
-
-        new Sortable(document.getElementById('sortGroup'), {
-            filter: '.in-fixed', // 'filtered' class is not draggable
-            animation: 150,
-            handle: '.ti-align-justify',
-            ghostClass: 'bg-secondary-light'
-        });
     </script>
 @endsection
