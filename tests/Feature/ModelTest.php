@@ -19,6 +19,9 @@ class ModelTest extends TestCase
         parent::setUp();
     }
 
+    /**
+     * 測試所有model Column_Title_Text欄位是否有非db欄位
+     */
     public function test_model_column(): void
     {
         $datas = $this->getModels(app_path('Models'));

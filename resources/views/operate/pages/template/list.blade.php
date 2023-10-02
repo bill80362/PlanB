@@ -911,6 +911,7 @@
 
 @section('BodyJavascript')
     <script>
+        // console.log($trans('儀表板'))
         //Initialize Select2 Elements
         $('.select2bs5').each(function(i, ele) {
             $(ele).select2({

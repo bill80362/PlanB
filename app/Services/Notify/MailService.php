@@ -17,16 +17,16 @@ class MailService
         $content = $this->toMailAble($mailKey, $values);
         $sendToMails = [];
         //收信權限
-        if ($content['recivePermission'] != '') {
-            $permissions = Permission::where('perm_key', $content['recivePermission'])
-                ->has('user')
-                ->with('user')
-                ->get();
+        // if ($content['recivePermission'] != '') {
+        //     $permissions = Permission::where('perm_key', $content['recivePermission'])
+        //         ->has('user')
+        //         ->with('user')
+        //         ->get();
 
-            $sendToMails = collect($permissions)->map(function ($item) {
-                return $item['user']['email'];
-            })->toArray();
-        }
+        //     $sendToMails = collect($permissions)->map(function ($item) {
+        //         return $item['user']['email'];
+        //     })->toArray();
+        // }
 
         array_push($sendToMails, $to);
         Mail::send($content['blade'], $content['values'], function ($message) use ($content, $from, $sendToMails) {
@@ -50,7 +50,7 @@ class MailService
             'subject' => $mailContent['subject'],
             'blade' => $mailContent['blade'],
             'values' => $content,
-            'recivePermission' => $mailContent['recivePermission']
+            // 'recivePermission' => $mailContent['recivePermission']
         ];
     }
 
@@ -69,21 +69,21 @@ class MailService
                 'subject' => '訂單 - 新訂單通知',
                 'blade' => 'emails.orders.new_order',
                 'defaultValue' => ['price' => 0],
-                'recivePermission' => 'mailOrder.newOrder',
+                // 'recivePermission' => 'mailOrder.newOrder',
             ],
             'orderShipped' => [
                 'name' => '到貨通知',
                 'subject' => '貨到通知信件',
                 'blade' => 'emails.orders.shipped',
                 'defaultValue' => [],
-                'recivePermission' => 'mailOrder.orderShipped',
+                // 'recivePermission' => 'mailOrder.orderShipped',
             ],
             'refund' => [
                 'name' => '退款通知',
                 'subject' => '退款通知信件',
                 'blade' => 'emails.orders.shipped',
                 'defaultValue' => [],
-                'recivePermission' => 'mailOrder.refund',
+                // 'recivePermission' => 'mailOrder.refund',
             ]
         ];
     }
