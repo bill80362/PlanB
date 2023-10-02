@@ -313,7 +313,7 @@
                                                     value="{{ $value }}"
                                                     aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? __($value)) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>
