@@ -3,6 +3,7 @@
 namespace App\Services\Operate;
 
 use App\Models\AuditLog;
+use App\Models\FileUpload;
 use App\Models\User;
 use App\Models\User\ListColumnSetting;
 use App\Models\CountryAndShippingFee\Language;
@@ -57,6 +58,17 @@ class ListColumnService
                 "operate"
             ],
         ],
+        FileUpload::class => [
+            "lockColumn" => [
+                'default_serial_number'
+            ],
+            "canUseColumn" => [
+                'id',
+            ],
+            "lockColumnTail" => [
+                "operate"
+            ],
+        ],
     ];
 
     //抓取設定檔，會抓取parent class的設定檔
@@ -65,7 +77,7 @@ class ListColumnService
         foreach ($this->defines as $key => $values) {
             if ($model instanceof $key) {
                 $columnStyle = array_key_exists($model::class, $this->columnStyle) ? $this->columnStyle[$model::class] : [];
-                
+
                 return array_merge($values, [
                     'columnStyle' => $columnStyle
                 ]);

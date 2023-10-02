@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Operation;
+use App\Http\Controllers\Operation\FileUploadController;
 use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -97,6 +98,9 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
 
         Route::post('/upload_image', [Operation\FileController::class, 'uploadImage'])
             ->name('upload_file');
+
+        //檔案管理
+        Route::get('/file_upload/list', [FileUploadController::class, 'listHTML'])->name('file_upload_list');
 
         // ui template
         if (!app()->isProduction()) {

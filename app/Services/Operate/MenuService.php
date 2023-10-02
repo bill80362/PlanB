@@ -76,6 +76,17 @@ class MenuService
                 ],
             ],
             [
+                'name' => __('檔案管理'),
+                'icon' => '',
+                'subMenu' => [
+                    [
+                        'name' => __('檔案管理'),
+                        'href' => '/operate/file_upload/list',
+                        'permission' => '', //
+                    ],
+                ],
+            ],
+            [
                 'name' => __('操作紀錄'),
                 'icon' => '',
                 'subMenu' => [
@@ -146,7 +157,7 @@ class MenuService
     }
 
     /**
-     * 取得現在menu路由(包含上層選單)   
+     * 取得現在menu路由(包含上層選單)
      */
     public function getCurrentMenu(): array
     {
@@ -174,7 +185,7 @@ class MenuService
 
     /**
      * 取得目前麵包屑
-     * 
+     *
      */
     public function getCurrentBreadCrumbs()
     {

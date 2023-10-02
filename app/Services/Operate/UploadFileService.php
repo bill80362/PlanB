@@ -106,4 +106,12 @@ class UploadFileService
         //
         return Storage::disk('public')->putFileAs($dirName, $file , $fileName);
     }
+    //檔案儲存的路徑
+    public function getStorage(): \Illuminate\Contracts\Filesystem\Filesystem
+    {
+        return Storage::disk('public');
+    }
+    public function getPath(){
+        return Storage::disk('public')->path('');
+    }
 }

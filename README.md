@@ -14,6 +14,10 @@
 - php artisan migrate 建立資料表
 - php artisan db:seed 塞入測試假資料
 
+### 其他指令
+- 圖片soft link建立，php artisan storage:link
+- 清除各式快取，php artisan app:clear
+
 ### Session使用Redis說明
 - 先安裝 composer require predis/predis
 - .env 環境設定redis主機連線資料 
