@@ -3,6 +3,6 @@
 <script>
     function $trans(key) {
         let lang = @json($jsTranslator->getJsLang());
-        return lang[key];
+        return lang[key] ?? key;
     }
 </script>

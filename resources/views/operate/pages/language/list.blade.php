@@ -84,6 +84,9 @@
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
                                                     @endforeach
+                                                    <option value="lang_url_map"
+                                                        {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
+                                                        {{ __("相關網址") }}</option>
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" id="filter_text_value_outside"
@@ -103,20 +106,35 @@
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    @include('operate.components.filter.chosen')
+                                    {{-- @include('operate.components.filter.chosen') --}}
+                                    <x-OperateFilterChosen :model="$Model"></x-OperateFilterChosen>
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">
                                                         {{ __('default_serial_number') }}</th>
-                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="text" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="tran_text" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="lang_type" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="isUpdated" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="created_at" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="id" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="text" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="tran_text" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="lang_type" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="isUpdated" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="updated_at" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="created_at" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted"
                                                             onclick="$('#listSetting').toggleClass('in-active')"
@@ -240,7 +258,12 @@
                     <div class="row">
                         <div class="col-12">
 
-                            <div class="form-group">
+                            @foreach ($Model->filterTemplate as $column => $setting)
+                                <x-OperateFilterDiv :column="$column" :model="$Model"
+                                    :setting="$setting"></x-OperateFilterDiv>
+                            @endforeach
+
+                            {{-- <div class="form-group">
                                 <label>{{ __('是否已修改') }}</label>
                                 <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
                                     style="width: 100%;">
@@ -250,7 +273,7 @@
                                             {{ $value }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>

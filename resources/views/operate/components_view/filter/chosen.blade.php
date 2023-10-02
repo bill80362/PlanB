@@ -2,7 +2,7 @@
     <span class="text-muted me-2">{{__("篩選器")}}：</span>
     @foreach( $chosenFilterList as $chosenFilter)
         <button class="btn btn-secondary me-2 btn-sm rounded-pill px-3" onclick="deleteFilter('{{$chosenFilter["key"]}}','{{$chosenFilter["value"]}}')">
-            {{$chosenFilter["title"]}}：{{$chosenFilter["titleValue"]}} <i class="ti-close"></i>
+            {{__($chosenFilter["title"])}}：{{$chosenFilter["titleValue"]}} <i class="ti-close"></i>
         </button>
     @endforeach
 </p>

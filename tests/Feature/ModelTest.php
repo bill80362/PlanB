@@ -32,7 +32,7 @@ class ModelTest extends TestCase
             if (class_exists($class)) {
                 $model = app($class);
                 if ($model instanceof Model) {
-                    if (! is_array($model->Column_Title_Text)) {
+                    if (!is_array($model->Column_Title_Text)) {
                         throw new Exception($class . "沒有 Column_Title_Text欄位");
                     } else {
                         $dbColumns = Schema::getColumnListing($model->getTable());

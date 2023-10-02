@@ -147,7 +147,7 @@ class User extends Authenticatable implements Auditable
      */
     use FilterTemplateTrait;
     public array $filterTemplate = [
-        "status" => "select2",
+        "status" => "radio",
         "updated_at" => "rangeDate",
     ];
     //自定義篩選條件

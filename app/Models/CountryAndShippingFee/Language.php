@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ExportImportTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\FilterTemplateTrait;
 
 class Language extends Model
 {
@@ -39,8 +40,8 @@ class Language extends Model
         'text' => '名稱',
         'tran_text' => '翻譯後名稱',
         'memo' => '備註',
-        // 'created_at' => '建置日期',
-        // 'updated_at' => '修改時間',
+        'created_at' => '建置日期',
+        'updated_at' => '修改時間',
     ];
 
     public function getOtherLangs()
@@ -105,17 +106,22 @@ class Language extends Model
         return [];
     }
 
-    public function scopeFilter($query, array $Data)
+    use FilterTemplateTrait;
+    public array $filterTemplate = [
+        "is_change" => [
+            "type" => "radio",
+            "customQuery" => true,
+            'title' => 'isUpdated'
+        ],
+    ];
+
+    public function useFilterExtend($query, array $Data)
     {
         //過濾選項
-        // if (isset($Data['filter_lang_type'])) {
-        //     $query->whereIn('lang_type', (array) $Data['filter_lang_type']);
-        // }
 
         $query->where('lang_type', 'zh-tw');
-
         if (isset($Data['filter_is_change'])) {
-            $isChanges = (array)$Data['filter_is_change'];
+            $isChanges = array_filter((array)$Data['filter_is_change']);
             $query->where(function ($subQuery) use ($isChanges) {
                 foreach ($isChanges as $isChange) {
                     if ($isChange == 'Y') {
@@ -127,6 +133,14 @@ class Language extends Model
             });
         }
 
+        return $query;
+    }
+
+    /**
+     * 客制文字搜尋
+     */
+    public function useCustomTextSearch($query, array $Data)
+    {
         //過濾文字條件
         if (isset($Data['filter_text_key'])) {
             if ($Data['filter_text_key'] == 'lang_url_map') {
@@ -137,13 +151,7 @@ class Language extends Model
                 $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
             }
         }
-        //排序
-        if (isset($Data['order_by'])) {
-            $order_by = explode(',', $Data['order_by']);
-            $query->orderBy($order_by[0], $order_by[1]);
-        }
 
-        //
         return $query;
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Support\Facades\Storage;
 use App\Services\Operate\ListColumnService;
 
 class LanguageController extends Controller
@@ -34,25 +34,6 @@ class LanguageController extends Controller
             return array_search($item, $userColumns);
         })->toArray();
 
-
-        // // table原設定
-        // $componentTitles = [
-        //     'default_serial_number' => '流水號',
-        //     'lang_type' => $this->oModel->Column_Title_Text['lang_type'],
-        //     'text' => $this->oModel->Column_Title_Text['text'],
-        //     'tran_text' => $this->oModel->Column_Title_Text['tran_text'],
-        //     'isUpdated' => '是否已修改',
-        //     'updated_at' => $this->oModel->Column_Title_Text['updated_at'],
-        //     'created_at' => $this->oModel->Column_Title_Text['created_at'],
-        // ];
-        // [$lockTitles, $titles] = $listColumnService->parseSetting($this->oModel, $componentTitles);
-
-        // // 使用者設定
-        // $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
-        // $sortTitles = collect($titles)->sortBy(function ($item, $key) use ($userColumns) {
-        //     return array_search($key, $userColumns);
-        // })->toArray();
-
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())
@@ -61,13 +42,7 @@ class LanguageController extends Controller
             'Paginator' => $Paginator,
             'Model' => $this->oModel,
             'columns' => $userColumns,
-
-            'columns' => $userColumns,
             'TableSetting' => $TableSetting,
-
-            // 'titles' => $titles,
-            // 'lockTitles' => $lockTitles,
-            // 'allkeys' => array_keys($sortTitles)
         ]);
     }
 
@@ -248,9 +223,10 @@ class LanguageController extends Controller
                 })->all();
             $filePath = lang_path($langType . '.json');
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            $fp = fopen($filePath, 'w');
-            fwrite($fp, $jsonString);
-            fclose($fp);
+            Storage::disk('lang')->put($langType . '.json', $jsonString);
+            // $fp = fopen($filePath, 'w');
+            // fwrite($fp, $jsonString);
+            // fclose($fp);
         }
 
         return back();

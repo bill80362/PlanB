@@ -911,13 +911,15 @@
 
 @section('BodyJavascript')
     <script>
-        // console.log($trans('儀表板'))
+        console.log($trans('確認要刪除嗎？'))
+        
         //Initialize Select2 Elements
         $('.select2bs5').each(function(i, ele) {
             $(ele).select2({
                 dropdownParent: $('#prodFilter'),
             })
         })
+        
         /**
          * sends a request to the specified url from a form. this will change the window location.
          * @param {string} path the path to send the post request to

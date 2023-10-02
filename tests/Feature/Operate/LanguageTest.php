@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * 測試controller範例
@@ -35,6 +36,7 @@ class LanguageTest extends TestCase
      */
     public function test_make_file(): void
     {
+        Storage::fake('lang');
         $user = User::find(1);
         $this->actingAs($user, 'operate');
 

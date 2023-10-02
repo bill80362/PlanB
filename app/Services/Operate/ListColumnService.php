@@ -10,6 +10,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListColumnService
 {
+    private array $columnStyle = [
+        Language::class => [
+            "updated_at" => [
+                "width: 140px",
+            ],
+            "created_at" => [
+                "width: 140px",
+            ]
+        ],
+    ];
+
     //請注意順序 lockColumn > canUseColumn > lockColumnTail
     private array $defines = [
         User::class => [
@@ -17,7 +28,7 @@ class ListColumnService
                 'default_serial_number',
             ],
             "canUseColumn" => [
-                'id', 'email','name','status','updated_at','updated_by',
+                'id', 'email', 'name', 'status', 'updated_at', 'updated_by',
             ],
             "lockColumnTail" => [
                 'operate'
@@ -25,11 +36,11 @@ class ListColumnService
         ],
         AuditLog::class => [
             "lockColumn" => [
-                'default_serial_number','audit_title',
+                'default_serial_number', 'audit_title',
             ],
             "canUseColumn" => [
-                'user_type','user_id','event','auditable_type','auditable_id','old_values','new_values',
-                'url','ip_address','user_agent','version','route_name','created_at',
+                'user_type', 'user_id', 'event', 'auditable_type', 'auditable_id', 'old_values', 'new_values',
+                'url', 'ip_address', 'user_agent', 'version', 'route_name', 'created_at',
             ],
             "lockColumnTail" => [
                 'operate'
@@ -53,7 +64,11 @@ class ListColumnService
     {
         foreach ($this->defines as $key => $values) {
             if ($model instanceof $key) {
-                return $values;
+                $columnStyle = array_key_exists($model::class, $this->columnStyle) ? $this->columnStyle[$model::class] : [];
+                
+                return array_merge($values, [
+                    'columnStyle' => $columnStyle
+                ]);
             }
         }
         return false;
@@ -81,7 +96,7 @@ class ListColumnService
                 return $item['column_name'];
             })->toArray();
         $checkColumn = collect($datas)->intersect($setting['canUseColumn'])->toArray();
-        return array_merge($setting['lockColumn'],$checkColumn,$setting['lockColumnTail']);
+        return array_merge($setting['lockColumn'], $checkColumn, $setting['lockColumnTail']);
     }
 
     /**
