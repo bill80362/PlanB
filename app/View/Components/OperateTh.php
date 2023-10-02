@@ -9,33 +9,40 @@ use Illuminate\View\Component;
 
 class OperateTh extends Component
 {
-    public string $className="";
-    public string $clickString="";
+    public string $className = "";
+    public string $clickString = "";
+    public array $styleSetting = [];
     /**
      * Create a new component instance.
      */
-    public function __construct(public $column,public $model)
+    public function __construct(public $column, public $model, public $setting = ['columnStyle' => []])
     {
-        //不是實體欄位，無法排序
-        if( !isset($model->Column_Title_Text[$column]) ){
-            $this->className = "";
-            $this->clickString = "";//預設都跑反序
-            return ;
+        $style = $setting['columnStyle'];
+        if (array_key_exists($column, $style)) {
+            $this->styleSetting = $style[$column];
         }
+
+        //不是實體欄位，無法排序
+        if (!isset($model->Column_Title_Text[$column])) {
+            $this->className = "";
+            $this->clickString = ""; //預設都跑反序
+            return;
+        }
+
         //預設
         $this->className = "sortStyle";
-        $this->clickString ="orderBy('".$column."','desc')";//預設都跑反序
+        $this->clickString = "orderBy('" . $column . "','desc')"; //預設都跑反序
         //
-        $order_by = request()->get("order_by")??"";
-        $order_by_key = explode(",",$order_by)[0];
-        $order_by_rule = explode(",",$order_by)[1]??"";
-        if($order_by_key==$column){
-            if($order_by_rule=="asc"){
+        $order_by = request()->get("order_by") ?? "";
+        $order_by_key = explode(",", $order_by)[0];
+        $order_by_rule = explode(",", $order_by)[1] ?? "";
+        if ($order_by_key == $column) {
+            if ($order_by_rule == "asc") {
                 $this->className = "sortStyle ascStyle";
-                $this->clickString ="orderBy('".$column."','desc')";
-            }elseif($order_by_rule=="desc"){
+                $this->clickString = "orderBy('" . $column . "','desc')";
+            } elseif ($order_by_rule == "desc") {
                 $this->className = "sortStyle descStyle";
-                $this->clickString ="orderBy('".$column."','asc')";
+                $this->clickString = "orderBy('" . $column . "','asc')";
             }
         }
     }

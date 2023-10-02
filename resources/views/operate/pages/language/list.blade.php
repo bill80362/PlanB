@@ -110,13 +110,27 @@
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">
                                                         {{ __('default_serial_number') }}</th>
-                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="text" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="tran_text" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="lang_type" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="isUpdated" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="created_at" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="id" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="text" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="tran_text" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="lang_type" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="isUpdated" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="updated_at" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
+                                                    <x-OperateTh column="created_at" :model="$Model"
+                                                        :setting="$TableSetting"></x-OperateTh>
+
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted"
                                                             onclick="$('#listSetting').toggleClass('in-active')"

@@ -39,8 +39,8 @@ class Language extends Model
         'text' => '名稱',
         'tran_text' => '翻譯後名稱',
         'memo' => '備註',
-        // 'created_at' => '建置日期',
-        // 'updated_at' => '修改時間',
+        'created_at' => '建置日期',
+        'updated_at' => '修改時間',
     ];
 
     public function getOtherLangs()
