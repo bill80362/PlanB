@@ -80,6 +80,19 @@ class OperateFilterChosen extends Component
                             ];
                         }
                     }
+                } elseif ($template == "selectAndInput" && is_array($filter_value)) {
+                    // dump($useTemplateFilter);
+                    // dump('filter_' . $column . '_type');
+                    // foreach ($filter_value as  $filter_value_sub) {
+                    //     if ($filter_value_sub) {
+                    //         $chosenFilterList[] = [
+                    //             "key" => $filter_name,
+                    //             "value" => $filter_value_sub,
+                    //             "title" => $this->model->Column_Title_Text[$column] ?? "",
+                    //             "titleValue" => isset($Model->{$column . "Text"}) ? $this->model->{$column . "Text"}[$filter_value_sub] : $filter_value_sub,
+                    //         ];
+                    //     }
+                    // }
                 }
             }
         }

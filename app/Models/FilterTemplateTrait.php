@@ -38,6 +38,14 @@ trait FilterTemplateTrait
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } else if ($template == "checkbox" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
+            } else if ($template == "selectAndInput" && isset($Data['filter_' . $filterName . "_type"])) {
+                $type = $Data['filter_' . $filterName . '_type'];
+                $typeDict = [
+                    1 => '<',
+                    2 => '=',
+                    3 => '>',
+                ];
+                $query->where($filterName, $typeDict[$type], $Data['filter_' . $filterName . '_value']);
             }
         }
         //過濾選項-自訂        

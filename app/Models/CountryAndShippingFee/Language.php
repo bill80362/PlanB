@@ -113,6 +113,11 @@ class Language extends Model
             "customQuery" => true,
             'title' => 'isUpdated'
         ],
+        // "test" => [
+        //     "type" => "selectAndInput",
+        //     "customQuery" => true,
+        //     'title' => 'test'
+        // ]
     ];
 
     public function useFilterExtend($query, array $Data)
