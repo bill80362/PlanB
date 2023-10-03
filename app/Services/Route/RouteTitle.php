@@ -33,6 +33,8 @@ class RouteTitle
         //
         "http_log"=>"",
         "http_log_update"=>"",
+        //
+        "file_upload_list"=>"檔案管理列表",
     ];
 
     public function getTitle($routeName){
