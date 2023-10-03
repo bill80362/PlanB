@@ -67,7 +67,7 @@
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3">
-                                                                <input type="datetime-local" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
+                                                                <input type="datetime-local" class="form-control" step="1" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -76,7 +76,7 @@
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3">
-                                                                <input type="time" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
+                                                                <input type="time" class="form-control" step="1" type name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                             </div>
                                                         </div>
                                                     </div>
