@@ -69,6 +69,6 @@ class CompanyManageController extends Controller
             ]);
         }
 
-        return back()->with(['message' => __('修改成功')]);
+        return back()->with(['success' => __('修改成功')]);
     }
 }
