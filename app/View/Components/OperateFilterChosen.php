@@ -82,7 +82,10 @@ class OperateFilterChosen extends Component
                             ];
                         }
                     }
-                } elseif ($template == "selectAndInput" && ($filter_name == 'filter_' . $useTemplateFilter . '_type')) {
+                } elseif (
+                    $template == "selectAndInput" && ($filter_name == 'filter_' . $useTemplateFilter . '_type') &&
+                    array_key_exists($filter_value, [1, 2, 3])
+                ) {
                     $value = $body['filter_' . $useTemplateFilter . '_value'];
                     $typeDict = [
                         1 => '小於',
