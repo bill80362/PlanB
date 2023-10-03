@@ -4401,7 +4401,7 @@ body::-webkit-scrollbar {
 }
 .sidebar::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-  background-color: #f8dbdd;
+  background-color: #343a40;
 }
 
 body::-webkit-scrollbar {
@@ -10984,7 +10984,6 @@ td.sortStyle.unsortStyle {
   flex: 0 0 auto;
 }
 
-
 .prodPic-list {
   display: block;
   list-style: none;
@@ -11099,4 +11098,4 @@ textarea {
   -webkit-appearance: textfield;
      -moz-appearance: textfield;
           appearance: textfield;
-
+}/*# sourceMappingURL=style.css.map */
