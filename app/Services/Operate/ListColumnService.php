@@ -4,6 +4,7 @@ namespace App\Services\Operate;
 
 use App\Models\AuditLog;
 use App\Models\FileUpload;
+use App\Models\Permission\PermissionGroup;
 use App\Models\User;
 use App\Models\User\ListColumnSetting;
 use App\Models\CountryAndShippingFee\Language;
@@ -56,6 +57,17 @@ class ListColumnService
             ],
             "lockColumnTail" => [
                 "operate"
+            ],
+        ],
+        PermissionGroup::class => [
+            "lockColumn" => [
+                'default_serial_number',
+            ],
+            "canUseColumn" => [
+                'id', 'name', 'status',
+            ],
+            "lockColumnTail" => [
+                'operate'
             ],
         ],
     ];

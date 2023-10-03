@@ -2,14 +2,17 @@
 
 namespace App\Models\Permission;
 
+use App\Models\FilterTemplateTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\ExportImportTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class PermissionGroup extends Model
+class PermissionGroup extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable; //操作Log
     use ExportImportTrait; //匯出
 
     public $incrementing = true;
@@ -39,15 +42,7 @@ class PermissionGroup extends Model
         'Y' => '正常',
         'N' => '鎖定',
     ];
-    protected function status(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => $this->showFlagText[$value] ?? $value,
-            set: fn (string $value) => array_flip($this->showFlagText)[$value] ?? $value,
-        );
-    }
 
-    protected $with = ['permissionGrouopItems'];
     public function permissionGrouopItems()
     {
         return $this->hasMany(PermissionGroupItem::class);
@@ -96,6 +91,25 @@ class PermissionGroup extends Model
             $query->where('id', 0);
         }
         //
+        return $query;
+    }
+
+    /**
+     * 後台操作 列表 匯出 篩選器
+     * template 對應的地方:
+     * 1.版面，修改位置 class OperateFilterDiv，主要負責讓使用者選擇篩選條件
+     * 2.功能，修改位置 model，主要負責SQL篩選條件
+     * 3.篩選器移除標籤，修改位置 chosen ，主要可以快速移除篩選條件
+     */
+    use FilterTemplateTrait;
+    public array $filterTemplate = [
+        "status" => "radio",
+        "updated_at" => "rangeDateTime",
+        "id" => "selectAndInput"
+    ];
+    //自定義篩選條件
+    public function useFilterExtend($query, array $Data)
+    {
         return $query;
     }
 }

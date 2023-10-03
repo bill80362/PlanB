@@ -50,6 +50,8 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
             // Route::get('/export', [Operation\PermissionGroupController::class, 'export'])->name('export')->middleware(['can:user_export']);
             // Route::post('/import', [Operation\PermissionGroupController::class, 'import'])->name('import')->middleware(['can:user_import']);
+            Route::post('/list_column', [Operation\PermissionGroupController::class, 'saveListColumn'])->name('saveListColumn');
+
         });
 
         //系統設定

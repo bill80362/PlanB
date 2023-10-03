@@ -6,6 +6,7 @@ use App\Events\Operate\UserEditEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Permission\PermissionGroupItem;
 use App\Models\Permission\PermissionGroup;
+use App\Services\Operate\ListColumnService;
 use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,8 +25,18 @@ class PermissionGroupController extends Controller
     }
 
 
-    public function listHTML()
+    public function listHTML(ListColumnService $listColumnService)
     {
+        //
+        $user = auth('operate')->user();
+        // table設定，可用欄位
+        $TableSetting = $listColumnService->getTableSetting($this->oModel);
+        // 使用者設定
+        $userColumns = $listColumnService->getWithUserId($this->oModel, $user->id);
+        //根據使用者設定修改順序
+        $TableSetting["canUseColumn"] = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
+            return array_search($item, $userColumns);
+        })->toArray();
         //
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
@@ -35,6 +46,9 @@ class PermissionGroupController extends Controller
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
+            //
+            'columns' => $userColumns,
+            'TableSetting' => $TableSetting,
         ]);
     }
 
@@ -235,5 +249,13 @@ class PermissionGroupController extends Controller
 
         //匯出
         return (new Collection($ExportList))->downloadExcel('permission_group_data_' . time() . '.xlsx');
+    }
+
+    public function saveListColumn(ListColumnService $listColumnService)
+    {
+        $list = $this->request->get('list', []);
+        $user = auth('operate')->user();
+        $listColumnService->renewListColumn($this->oModel, $list, $user->id);
+        return back();
     }
 }
