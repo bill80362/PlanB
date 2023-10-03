@@ -25,23 +25,13 @@ class FileUploadController extends Controller
     public function __construct(
         protected Request $request,
         protected SystemConfigService $oSystemConfigService,
-        protected FileUpload $oModel,
+//        protected FileUpload $oModel,
         protected UploadFileService $oUploadFileService,
         protected ListColumnService $listColumnService,
     ) {
     }
 
     public function listHTML(){
-        //
-        $user = auth('operate')->user();
-        // table設定，可用欄位
-        $TableSetting = $this->listColumnService->getTableSetting($this->oModel);
-        // 使用者設定
-        $userColumns = $this->listColumnService->getWithUserId($this->oModel, $user->id);
-        //根據使用者設定修改順序
-        $TableSetting["canUseColumn"] = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
-            return array_search($item, $userColumns);
-        })->toArray();
         //
         $dirList = $this->oUploadFileService->getStorage()->allDirectories();
         //
@@ -67,9 +57,6 @@ class FileUploadController extends Controller
         //
         return view('operate/pages/file_upload/list', [
             'Paginator' => $Paginator,
-            //
-            'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
         ]);
     }
     public function updateHTML($id){

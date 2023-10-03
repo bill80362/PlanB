@@ -1,4 +1,4 @@
-@extends('admin.layout._MasterNoAuth')
+@extends('operate.layout._MasterNoAuth')
 
 @section('HeaderCSS')
 @endsection

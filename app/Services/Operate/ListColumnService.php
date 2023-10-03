@@ -58,17 +58,6 @@ class ListColumnService
                 "operate"
             ],
         ],
-        FileUpload::class => [
-            "lockColumn" => [
-                'default_serial_number'
-            ],
-            "canUseColumn" => [
-                'id',
-            ],
-            "lockColumnTail" => [
-                "operate"
-            ],
-        ],
     ];
 
     //抓取設定檔，會抓取parent class的設定檔

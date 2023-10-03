@@ -18,15 +18,15 @@ class CompanyManageController extends Controller
     ) {
     }
 
-    public function pageContentHtml($key)
+    public function pageContentHtml($companyKey)
     {
-        $check = $this->pageContentService->checkKey($key);
-        $permKey = Str::of($key)->camel();
-        if (! $check) {
+        $check = $this->pageContentService->checkKey($companyKey);
+        $permKey = Str::of($companyKey)->camel();
+        if (!$check) {
             return abort(404);
         }
 
-        if (! auth('operate')->user()->can($permKey.'_read')) {
+        if (!auth('operate')->user()->can($permKey . '_read')) {
             return abort(403);
         }
 
@@ -34,13 +34,13 @@ class CompanyManageController extends Controller
         $langTypeKeys = array_keys($language->langTypeText);
         foreach ($langTypeKeys as $langType) {
             $this->oModel->firstOrCreate([
-                'key' => $key,
+                'key' => $companyKey,
                 'lang_type' => $langType,
             ], [
-                'page_name' => $key,
+                'page_name' => $companyKey,
             ]);
         }
-        $datas = $this->oModel->where('key', $key)->get();
+        $datas = $this->oModel->where('key', $companyKey)->get();
 
         return view('operate/pages/company_manage/page_content', [
             'langTypeText' => $language->langTypeText,
@@ -49,15 +49,15 @@ class CompanyManageController extends Controller
         ]);
     }
 
-    public function pageContent($key)
+    public function pageContent($companyKey)
     {
-        $check = $this->pageContentService->checkKey($key);
-        if (! $check) {
+        $check = $this->pageContentService->checkKey($companyKey);
+        if (!$check) {
             return abort(404);
         }
 
-        $permKey = Str::of($key)->camel();
-        if (! auth('operate')->user()->can($permKey.'_update')) {
+        $permKey = Str::of($companyKey)->camel();
+        if (!auth('operate')->user()->can($permKey . '_update')) {
             return abort(403);
         }
 

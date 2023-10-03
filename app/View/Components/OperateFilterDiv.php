@@ -18,7 +18,7 @@ class OperateFilterDiv extends Component
     {
         $this->columnName = $model->Column_Title_Text[$column] ?? $column;
         if (is_array($setting)) {
-            $this->template = $setting['type'];
+            $this->template = $setting['template'];
             $this->columnName = $setting['title'] ?? $column;
         } else {
             $this->template = $setting;
