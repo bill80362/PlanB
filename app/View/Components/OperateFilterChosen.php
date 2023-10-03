@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -82,7 +83,10 @@ class OperateFilterChosen extends Component
                             ];
                         }
                     }
-                } elseif ($template == "selectAndInput" && ($filter_name == 'filter_' . $useTemplateFilter . '_type')) {
+                } elseif (
+                    $template == "selectAndInput" && ($filter_name == 'filter_' . $useTemplateFilter . '_type') &&
+                    array_key_exists($filter_value, [1, 2, 3])
+                ) {
                     $value = $body['filter_' . $useTemplateFilter . '_value'];
                     $typeDict = [
                         1 => '小於',
@@ -95,6 +99,24 @@ class OperateFilterChosen extends Component
                         "title" => $this->model->Column_Title_Text[$useTemplateFilter] ?? "",
                         "titleValue" => $typeDict[$filter_value] . $value,
                     ];
+                } else if ($template == "rangeDateTime" && $column == $useTemplateFilter . "_start") {
+                    if ($filter_value) {
+                        $chosenFilterList[] = [
+                            "key" => $filter_name,
+                            "value" => $filter_value,
+                            "title" => $useTemplateFilter,
+                            "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("起"),
+                        ];
+                    }
+                } elseif ($template == "rangeDateTime" && $column == $useTemplateFilter . "_end") {
+                    if ($filter_value) {
+                        $chosenFilterList[] = [
+                            "key" => $filter_name,
+                            "value" => $filter_value,
+                            "title" => $useTemplateFilter,
+                            "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("迄"),
+                        ];
+                    }
                 }
             }
         }

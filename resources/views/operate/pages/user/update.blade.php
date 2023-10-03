@@ -39,33 +39,101 @@
                                                 @include('/operate/components/alert/error_message')
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label>{{__($Data->Column_Title_Text["name"])}}</label>
+                                                        <label>{{ __($Data->Column_Title_Text['name']) }}</label>
                                                         <input type="text" class="form-control" name="name"
                                                             value="{{ $Data->name }}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>{{__($Data->Column_Title_Text["password"])}}</label>
+                                                        <label>{{ __($Data->Column_Title_Text['password']) }}</label>
                                                         <input type="password" class="form-control" name="password"
                                                             value="">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>{{__($Data->Column_Title_Text["email"])}}</label>
+                                                        <label>{{ __($Data->Column_Title_Text['email']) }}</label>
                                                         <input type="text" class="form-control" name="email"
                                                             value="{{ $Data->email }}">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>{{__($Data->Column_Title_Text["status"])}}</label>
+                                                    <div class="form-group mb-5">
+                                                        <label>{{ __($Data->Column_Title_Text['status']) }}</label>
                                                         <select class="form-control" name="status">
-                                                            @foreach($Data->statusText as $key => $value)
-                                                            <option value="{{$key}}" {{ $Data->status==$key?"selected":"" }} >{{__($value)}}</option>
+                                                            @foreach ($Data->statusText as $key => $value)
+                                                                <option value="{{ $key }}"
+                                                                    {{ $Data->status == $key ? 'selected' : '' }}>
+                                                                    {{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
+                                                    {{-- start --}}
+
+
+                                                    @php
+                                                        $mails = [
+                                                            [
+                                                                'label' => '訂單信件',
+                                                                'actions' => [['key' => 'order1', 'label' => '新訂單通知'], ['key' => 'order2', 'label' => '到貨通知']],
+                                                            ],
+                                                            [
+                                                                'label' => '庫存信件',
+                                                                'actions' => [['key' => 'stock1', 'label' => '無庫存通知']],
+                                                            ],
+                                                        ];
+                                                    @endphp
+
+                                                    <div class="card card-outline mb-2">
+                                                        <div class="card-header">
+                                                            {{ __('收信功能') }}： (範本)
+                                                        </div>
+                                                        <div class="card-body">
+                                                            @foreach ($mails as $mail)
+                                                                <div class="card">
+                                                                    <div class="card-header"
+                                                                        id="heading_{{ $mail['label'] }}">
+                                                                        <input class="form-check-input" type="checkbox">
+                                                                        <span class="btn" data-bs-toggle="collapse"
+                                                                            data-bs-target="#collapse_{{ $mail['label'] }}"
+                                                                            aria-expanded="true"
+                                                                            aria-controls="heading_{{ $mail['label'] }}">
+                                                                            {{ $mail['label'] }}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="collapse show"
+                                                                        id="collapse_{{ $mail['label'] }}"
+                                                                        aria-labelledby="heading_{{ $mail['label'] }}"
+                                                                        data-parent="#accordionclose" style="">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                @foreach ($mail['actions'] as $action)
+                                                                                    <div class="col-3">
+                                                                                        <div class="form-check">
+                                                                                            {{-- <input class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                id="{{ $action['key'] }}"
+                                                                                                name="{{ $action['key'] }}"
+                                                                                                {{ in_array($action['key'], $DataPermission->toArray()) ? 'checked' : '' }}> --}}
+                                                                                            <label
+                                                                                                class="form-label form-check-label"
+                                                                                                for="{{ $action['key'] }}">
+                                                                                                {{ $action['label'] }}
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- end --}}
+
+
                                                 </div>
                                                 <div class="col-6">
                                                     <div>
                                                         <button class="btn btn-sm btn-primary m-2" type="button"
-                                                            onclick="$('input[type=\'checkbox\']').prop('checked', true);">{{__("全部打勾")}}</button>
+                                                            onclick="$('input[type=\'checkbox\']').prop('checked', true);">{{ __('全部打勾') }}</button>
                                                     </div>
                                                     <div>
                                                         {{ __('選擇群組') }}：
@@ -126,7 +194,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">{{__("送出")}}</button>
+                                            <button type="submit" class="btn btn-primary">{{ __('送出') }}</button>
                                         </div>
 
                                     </div>

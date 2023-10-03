@@ -16,11 +16,12 @@ trait FilterTemplateTrait
      */
     public function scopeFilter($query, array $Data)
     {
+        // dd($Data);
         //過濾選項-使用樣板
         foreach ($this->filterTemplate as $filterName => $set) {
             $customQuery = false;
             if (is_array($set)) {
-                $template = $set['type'];
+                $template = $set['template'];
                 $customQuery = $set['customQuery'];
             } else {
                 $template = $set;
@@ -42,7 +43,11 @@ trait FilterTemplateTrait
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } else if ($template == "checkbox" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
-            } else if ($template == "selectAndInput" && isset($Data['filter_' . $filterName . "_type"])) {
+            } else if (
+                $template == "selectAndInput" &&
+                isset($Data['filter_' . $filterName . "_type"]) &&
+                array_key_exists($Data['filter_' . $filterName . "_type"], [1, 2, 3])
+            ) {
                 $type = $Data['filter_' . $filterName . '_type'];
                 $typeDict = [
                     1 => '<',
@@ -50,6 +55,13 @@ trait FilterTemplateTrait
                     3 => '>',
                 ];
                 $query->where($filterName, $typeDict[$type], $Data['filter_' . $filterName . '_value']);
+            } else if ($template == "rangeDateTime" && isset($Data['filter_' . $filterName . '_end'])) {
+                if (isset($Data['filter_' . $filterName . '_start'])) {
+                    $query->where($filterName, ">=", $Data['filter_' . $filterName . '_start']);
+                }
+                if (isset($Data['filter_' . $filterName . '_end'])) {
+                    $query->where($filterName, "<=", $Data['filter_' . $filterName . '_end']);
+                }
             }
         }
         //過濾選項-自訂        
