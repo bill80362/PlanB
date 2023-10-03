@@ -12,9 +12,4 @@ class TemplateController extends Controller
     {
         return view("operate/pages/template/list");
     }
-
-    public function detail()
-    {
-        return view("operate/pages/template/detail");
-    }
 }

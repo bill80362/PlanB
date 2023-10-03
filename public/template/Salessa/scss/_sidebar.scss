@@ -360,9 +360,9 @@
 
                     // background: $base_color;
                     // color:$white;
-                    //i {
+                    i {
                         // color: $white;
-                    //}
+                    }
 
                     &::before {
                         width: 6px;
@@ -482,9 +482,9 @@
                 padding: 30px 0 30px 20px;
             }
 
-            //&.mm-active {
+            &.mm-active {
                 // padding: 30px 0 27px 30px;
-            //}
+            }
 
             a {
                 display: block;
@@ -578,7 +578,7 @@ body {
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: #333;
+        background-color: #f8dbdd;
     }
 }
 
