@@ -8,5 +8,8 @@ use Illuminate\Http\Request;
 // php artisan make:controller PhotoController
 class {{ class }} extends Controller
 {
-    //
+    public function __construct(
+        protected Request $request,
+    ) {
+    }
 }
