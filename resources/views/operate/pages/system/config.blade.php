@@ -43,6 +43,7 @@
                                                     </select>
                                                 @elseif($item["input"]=="img")
                                                     <label>{{$item["title"]}}{{app(App\Services\Operate\UploadFileService::class)->viewUploadImageLimitTips($Model,$item["id"])}}</label>
+                                                    <input type="text" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                     <div><img src="{{app(App\Services\Operate\UploadFileService::class)->url($SystemConfigKeyValue[$item["id"]])}}" width="200"></div>
 {{--                                                    <button type="button" class="btn btn-xs btn-danger"--}}
 {{--                                                            onclick="postForm('/operate/delete/image',{--}}
@@ -51,7 +52,7 @@
 {{--                                                                        })"--}}
 {{--                                                    >{{__("刪除圖片")}}</button>--}}
 
-                                                    <input type="file" class="form-control" name="{{$item["id"]}}" >
+                                                    <input type="file" class="form-control" name="{{$item["id"]}}_file" >
                                                 @endif
                                             </div>
                                         </div>
