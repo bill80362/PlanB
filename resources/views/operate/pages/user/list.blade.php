@@ -49,7 +49,7 @@
                                         <a target="_blank" class="dropdown-item" href="{{route("user_export", ['type' => 'key', ...request()->query()]) }}">
                                             {{__("匯出參數版")}}
                                         </a>
-                                        <a target="_blank" class="dropdown-item" href="{{route("user_export", ['type' => 'key', ...request()->query()]) }}">
+                                        <a target="_blank" class="dropdown-item" href="{{route("user_export", ['type' => 'value', ...request()->query()]) }}">
                                             {{__("匯出文字版")}}
                                         </a>
                                         @endcan

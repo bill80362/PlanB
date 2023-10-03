@@ -170,7 +170,7 @@ class PermissionService
             [
                 'label' => '群組管理',
                 'groupKey' => 'permissionGroup',
-                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
+                'actions' => ['read', 'create', 'update', 'delete'],
             ],
             [
                 'label' => '管理人管理',

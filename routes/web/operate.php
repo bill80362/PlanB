@@ -44,8 +44,8 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::get('/{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->middleware(['can:user_read']);
             Route::post('/{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->middleware(['can:user_update']);
             Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
-            Route::get('/export', [Operation\PermissionGroupController::class, 'export'])->name('export')->middleware(['can:user_export']);
-            Route::post('/import', [Operation\PermissionGroupController::class, 'import'])->name('import')->middleware(['can:user_import']);
+            // Route::get('/export', [Operation\PermissionGroupController::class, 'export'])->name('export')->middleware(['can:user_export']);
+            // Route::post('/import', [Operation\PermissionGroupController::class, 'import'])->name('import')->middleware(['can:user_import']);
         });
 
         //系統設定
@@ -65,7 +65,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::get('/{id}', [Operation\AuditController::class, 'updateHTML'])->whereNumber('id')->name('update_html');
             Route::post('/{id}', [Operation\AuditController::class, 'update'])->whereNumber('id')->name('update');
             Route::post('/del', [Operation\AuditController::class, 'delBatch'])->name('del');
-            Route::get('/export', [Operation\AuditController::class, 'export'])->name('export');
+            // Route::get('/export', [Operation\AuditController::class, 'export'])->name('export');
             Route::post('/import', [Operation\AuditController::class, 'import'])->name('import');
             Route::post('/reverse', [Operation\AuditController::class, 'reverseBatch'])->name('reverse');
             Route::post('/list_column', [Operation\AuditController::class, 'saveListColumn'])->name('saveListColumn');
@@ -91,9 +91,9 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
 
 
         //公司管理
-        Route::get('/company_manage/{key}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement')
+        Route::get('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement')
             ->middleware([]);
-        Route::post('/company_manage/{key}', [Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement')
+        Route::post('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement')
             ->middleware([]);
 
         Route::post('/upload_image', [Operation\FileController::class, 'uploadImage'])
