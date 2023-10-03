@@ -203,8 +203,8 @@
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                @endforeach
                                             </tbody>
-                                            @endforeach
                                         </table>
                                     </div>
                                 </div>
@@ -270,7 +270,7 @@
                     <div class="row">
                         <div class="col-12">
                             <x-OperateFilterDiv :model="$Model" column="event" setting="select2"></x-OperateFilterDiv>
-                          
+
                         </div>
                     </div>
                     <input id="filter_text_key" name="filter_text_key" type="hidden"
