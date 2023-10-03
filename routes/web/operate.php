@@ -19,7 +19,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
     Route::middleware([
         'auth:operate',
         'OperateLoginAuth',
-//        'online.user',
+//        'online.user', //線上人數
     ])->group(function () {
 
         //Dashboard
