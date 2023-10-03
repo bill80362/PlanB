@@ -42,7 +42,7 @@ trait FilterTemplateTrait
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } else if ($template == "checkbox" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
-            } else if ($template == "selectAndInput" && isset($Data['filter_' . $filterName . "_type"])) {
+            } else if ($template == "selectAndInput" && array_key_exists($Data['filter_' . $filterName . "_type"], [1, 2, 3])) {
                 $type = $Data['filter_' . $filterName . '_type'];
                 $typeDict = [
                     1 => '<',
