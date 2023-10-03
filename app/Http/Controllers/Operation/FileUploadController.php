@@ -55,6 +55,7 @@ class FileUploadController extends Controller
             //資料集合
             $Temp = [
                 "id" => $dirName,
+                "url" => $this->oUploadFileService->getStorage()->url($dirName),
                 "files" => $this->oUploadFileService->getStorage()->files($dirName),
                 "size" => $size,
             ];
@@ -79,8 +80,9 @@ class FileUploadController extends Controller
         foreach ($files as $file){
             $Temp = [];
             $Temp["file"] = $file;
-            $Temp["url"] = asset('storage/'.$file);
-//            $Temp["filePath"] = $this->oUploadFileService->getStorage()->path($file);
+            $Temp["url"] = $this->oUploadFileService->url($file);
+            $Temp["size"] = $this->oUploadFileService->getStorage()->size($file);
+            $Temp["updated_at"] = $this->oUploadFileService->getStorage()->lastModified($file);
             //
             $DataArray[] = (object) $Temp;
         }
@@ -89,5 +91,14 @@ class FileUploadController extends Controller
             'DirName' => $id,
             'DataList' => $DataArray,
         ]);
+    }
+    public function delBatch(){
+        //刪除
+        foreach ((array) $this->request->post('id_array') as $id) {
+            $this->oUploadFileService->del($id);
+        }
+
+        //
+        return redirect()->back()->with(['success' => '刪除成功']);
     }
 }

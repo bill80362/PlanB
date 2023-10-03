@@ -14,7 +14,7 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>{{ __(app('App\Services\Route\RouteTitle')->getTitle(request()->route()->getName())) }}
+                                @include('/operate/components/title/page_title')
                                 </h2>
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">

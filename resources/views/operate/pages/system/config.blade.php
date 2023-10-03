@@ -43,18 +43,15 @@
                                                     </select>
                                                 @elseif($item["input"]=="img")
                                                     <label>{{$item["title"]}}{{app(App\Services\Operate\UploadFileService::class)->viewUploadImageLimitTips($Model,$item["id"])}}</label>
-                                                    @if($SystemConfigKeyValue[$item["id"]])
-                                                        <div><img src="{{asset('storage/'.$SystemConfigKeyValue[$item["id"]])}}" width="200"></div>
-                                                        <button type="button" class="btn btn-xs btn-danger"
-                                                                onclick="postForm('/operate/delete/image',{
-                                                                            'id':'{{$item["id"]}}',
-                                                                            _token:'{{ csrf_token() }}'
-                                                                            })"
-                                                        >{{__("刪除圖片")}}</button>
-                                                    @else
-                                                        <input type="file" class="form-control" name="{{$item["id"]}}" >
-                                                    @endif
+                                                    <div><img src="{{app(App\Services\Operate\UploadFileService::class)->url($SystemConfigKeyValue[$item["id"]])}}" width="200"></div>
+{{--                                                    <button type="button" class="btn btn-xs btn-danger"--}}
+{{--                                                            onclick="postForm('/operate/delete/image',{--}}
+{{--                                                                        'id':'{{$item["id"]}}',--}}
+{{--                                                                        _token:'{{ csrf_token() }}'--}}
+{{--                                                                        })"--}}
+{{--                                                    >{{__("刪除圖片")}}</button>--}}
 
+                                                    <input type="file" class="form-control" name="{{$item["id"]}}" >
                                                 @endif
                                             </div>
                                         </div>
