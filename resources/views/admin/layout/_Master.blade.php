@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="/template/Salessa/css/colors/default.css" id="colorSkinCSS">
 
     {{--select2--}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="/template/select2-4.0.13/dist/css/select2.min.css" />
 
 
 </head>
@@ -139,7 +139,7 @@
 <script src="/template/Salessa/js/custom.js"></script>
 
 {{--select2--}}
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script src="/template/select2-4.0.13/dist/js/select2.full.min.js"></script>
 
 
 <script>

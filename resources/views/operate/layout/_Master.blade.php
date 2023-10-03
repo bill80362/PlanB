@@ -65,7 +65,7 @@
 
     {{-- select2 --}}
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css?v={{ $SystemConfigService->versionJS }}" />
+        href="/template/select2-4.0.13/dist/css/select2.min.css?v={{ $SystemConfigService->versionJS }}" />
 
 
 </head>
@@ -183,7 +183,7 @@
 
     {{-- select2 --}}
     <script
-        src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js?v={{ $SystemConfigService->versionJS }}">
+        src="/template/select2-4.0.13/dist/js/select2.full.min.js?v={{ $SystemConfigService->versionJS }}">
     </script>
 
 
