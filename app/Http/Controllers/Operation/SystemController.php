@@ -75,7 +75,7 @@ class SystemController extends Controller
                 //修改
                 $Model = $this->oModel->find($id);
                 //
-                $Model->content = $content;
+                $Model->content = $content??"";
                 $Model->save();
             }
         }
