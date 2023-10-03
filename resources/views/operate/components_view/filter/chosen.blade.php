@@ -19,6 +19,10 @@
                 newQueryString += item+'&';
             }
         });
+        console.log(deleteFilterName)
+        console.log(deleteFilterValue)
+
+        console.log(newQueryString)
         location.href = "?" + newQueryString;
     }
 </script>

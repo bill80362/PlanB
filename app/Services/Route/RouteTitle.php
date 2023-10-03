@@ -27,7 +27,7 @@ class RouteTitle
         "audit_import" => "操作紀錄匯入",
         "audit_reverse" => "操作紀錄還原",
         //
-        "system_update_html"=>"",
+        "system_update_html"=>"系統設定",
         "system_update"=>"",
         "system_delete_image"=>"",
         //

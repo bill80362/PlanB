@@ -5,6 +5,7 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class OperateFilterChosen extends Component
 {
@@ -21,8 +22,9 @@ class OperateFilterChosen extends Component
     public function render(): View|Closure|string
     {
         //
+        $body = request()->all();
         $chosenFilterList = [];
-        foreach (request()->all() as $filter_name => $filter_value) {
+        foreach ($body as $filter_name => $filter_value) {
             //欄位名稱
             $column = str_replace("filter_", "", $filter_name);
             //樣板
@@ -80,19 +82,19 @@ class OperateFilterChosen extends Component
                             ];
                         }
                     }
-                } elseif ($template == "selectAndInput" && is_array($filter_value)) {
-                    // dump($useTemplateFilter);
-                    // dump('filter_' . $column . '_type');
-                    // foreach ($filter_value as  $filter_value_sub) {
-                    //     if ($filter_value_sub) {
-                    //         $chosenFilterList[] = [
-                    //             "key" => $filter_name,
-                    //             "value" => $filter_value_sub,
-                    //             "title" => $this->model->Column_Title_Text[$column] ?? "",
-                    //             "titleValue" => isset($Model->{$column . "Text"}) ? $this->model->{$column . "Text"}[$filter_value_sub] : $filter_value_sub,
-                    //         ];
-                    //     }
-                    // }
+                } elseif ($template == "selectAndInput" && ($filter_name == 'filter_' . $useTemplateFilter . '_type')) {
+                    $value = $body['filter_' . $useTemplateFilter . '_value'];
+                    $typeDict = [
+                        1 => '小於',
+                        2 => '等於',
+                        3 => '大於',
+                    ];
+                    $chosenFilterList[] = [
+                        "key" => $filter_name,
+                        "value" => $filter_value,
+                        "title" => $this->model->Column_Title_Text[$useTemplateFilter] ?? "",
+                        "titleValue" => $typeDict[$filter_value] . $value,
+                    ];
                 }
             }
         }
