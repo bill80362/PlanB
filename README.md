@@ -51,4 +51,10 @@
 ### 後續再說的課題
 
 
+### 產生檔案指令
+```
+ php artisan make:model User/Photo  -mcr
+```
+
+
 ### ICON
