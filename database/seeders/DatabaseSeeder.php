@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\CompanyManage\PageContent;
 use App\Models\CountryAndShippingFee\Language;
-use App\Models\Permission\Permission;
+use App\Services\Operate\PermissionService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User\ListColumnSetting;
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run(PermissionService $permissionService): void
     {
         \App\Models\User::create([
             'id' => '1',
@@ -35,19 +35,15 @@ class DatabaseSeeder extends Seeder
             'status' => 'Y',
         ]);
 
-        \App\Models\Permission\Permission::create([
-            'user_id' => '1',
-            'perm_key' => 'user_read',
-        ]);
-        \App\Models\Permission\Permission::create([
-            'user_id' => '1',
-            'perm_key' => 'user_update',
-        ]);
+        $perms = $permissionService->getPermissions();
+        foreach ($perms as $perm) {
+            \App\Models\Permission\Permission::create([
+                'user_id' => '1',
+                'perm_key' => $perm['key'],
+            ]);
+        }
 
-        \App\Models\Permission\Permission::create([
-            'user_id' => '1',
-            'perm_key' => 'user_delete',
-        ]);
+
 
         \App\Models\Permission\Permission::create([
             'user_id' => '2',

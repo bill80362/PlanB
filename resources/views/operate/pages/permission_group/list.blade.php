@@ -18,12 +18,12 @@
                                         href="{{ route('permission_group_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
                                         {{ __('新增') }} </a>
                                 @endcan
-                                @can('permissionGroup_import')
+                                {{-- @can('permissionGroup_import')
                                     <button type="button" class="btn btn-sm btn-warning mr-2" data-bs-toggle="modal"
                                         data-bs-target="#importModal">
                                         {{ __('匯入') }}
                                     </button>
-                                @endcan
+                                @endcan --}}
                             </div>
                         </div>
                     </div>
@@ -103,12 +103,12 @@
                                             <button class="btn btn-sm btn-warning">{{ __('更新排序') }}</button>
                                         @endcan
                                     </div>
-                                    @can('permissionGroup_export')
+                                    {{-- @can('permissionGroup_export')
                                         <div>
                                             <a class="btn btn-sm btn-warning"
                                                 href="{{ route('permission_group_export') }}?{{ request()->getQueryString() }}">{{ __('匯出') }}</a>
                                         </div>
-                                    @endcan
+                                    @endcan --}}
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
 
 @section('Modal')
     <!-- 彈出視窗 -->
-    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+    {{-- <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('permission_group_import') }}" method="post" enctype="multipart/form-data">
@@ -187,13 +187,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        {{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button> --}}
                         <button type="submit" class="btn btn-primary">送出</button>
                     </div>
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @section('BodyJavascript')

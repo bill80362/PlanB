@@ -4,11 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\Models\Permission\Permission;
 use Tests\TestCase;
 use App\Rules\TwPhone;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class ExampleTest extends TestCase
 {
@@ -20,6 +18,7 @@ class ExampleTest extends TestCase
         parent::setUp();
         // $this->seed();
     }
+
 
     /**
      * 測試客製化驗證
