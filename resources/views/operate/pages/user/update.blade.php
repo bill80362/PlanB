@@ -78,9 +78,9 @@
                                                 <div class="col-12 col-sm-9 form-check-wrap">
                                                     @foreach ($Data->statusText as $key => $value)
                                                         <div class="form-check form-check-inline">
-                                                            <input {{ $Data->status == $key ? 'selected' : '' }}
+                                                            <input {{ $Data->status == $key ? 'checked' : '' }}
                                                                 class="form-check-input" type="radio" name="status"
-                                                                value="{{ $key }}" id="{{ $key }}">
+                                                                value="{{ $key }}" id="{{ $key }}" >
                                                             <label class="form-check-label"
                                                                 for="FlexRadio1{{ $key }}">
                                                                 {{ __($value) }}

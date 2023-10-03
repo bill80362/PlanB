@@ -65,6 +65,7 @@ class UserController extends Controller
             $Data->id = 0;
             $Data->name = '';
             $Data->email = '';
+            $Data->status = 'Y';
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array) $this->request->old() as $key => $value) {
