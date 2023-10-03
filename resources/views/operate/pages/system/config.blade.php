@@ -39,14 +39,14 @@
                                                     <div class="mb-3 row">
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
-                                                            <input type="text" class="form-control form-check-inline" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
+                                                            <input type="text" class="form-control " name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                         </div>
                                                     </div>
                                                 @elseif($item["input"]=="select")
                                                     <div class="mb-3 row">
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
-                                                            <select class="form-select form-check-inline" aria-label="Default select example" name="{{$item["id"]}}">
+                                                            <select class="form-select " aria-label="Default select example" name="{{$item["id"]}}">
                                                                 @foreach($item["options"] as $value => $option)
                                                                     <option value="{{$value}}" {{$SystemConfigKeyValue[$item["id"]]==$value?"selected":""}}>{{$option}}</option>
                                                                 @endforeach
@@ -57,7 +57,7 @@
                                                     <div class="mb-3 row">
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
-                                                            <div class="input-group mb-3 form-check-inline">
+                                                            <div class="input-group mb-3 ">
                                                                 <input type="date" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                             </div>
                                                         </div>
@@ -67,7 +67,7 @@
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3">
-                                                                <input type="datetime-local" class="form-control form-check-inline" step="1" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
+                                                                <input type="datetime-local" class="form-control " step="1" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -76,7 +76,7 @@
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3">
-                                                                <input type="time" class="form-control form-check-inline" step="1" type name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
+                                                                <input type="time" class="form-control " step="1" type name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -84,12 +84,10 @@
                                                     <div class="row mb-3">
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
-                                                            <div class="form-check-inline">
-                                                                <img src="{{app(App\Services\Operate\UploadFileService::class)->url($SystemConfigKeyValue[$item["id"]])}}" width="200">
-                                                                <input class="form-control" type="file" name="{{$item["id"]}}_file">
-                                                                {{app(App\Services\Operate\UploadFileService::class)->viewUploadImageLimitTips($Model,$item["id"])}}
-                                                                <input type="text" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
-                                                            </div>
+                                                            <img src="{{app(App\Services\Operate\UploadFileService::class)->url($SystemConfigKeyValue[$item["id"]])}}" width="200">
+                                                            <input class="form-control" type="file" name="{{$item["id"]}}_file">
+                                                            {{app(App\Services\Operate\UploadFileService::class)->viewUploadImageLimitTips($Model,$item["id"])}}
+                                                            <input type="text" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                         </div>
                                                     </div>
                                                 @elseif($item["input"]=="radio")
@@ -120,7 +118,7 @@
                                                     <div class="mb-3 row">
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
-                                                            <select name="{{$item["id"]}}[]" class="select2bs5 form-select form-check-inline" multiple="multiple" style="width: 100%">
+                                                            <select name="{{$item["id"]}}[]" class="select2bs5 form-select" multiple="multiple" style="width: 100%">
                                                                 @foreach($item["options"] as $value => $option)
                                                                 <option value="{{$value}}" {{collect(explode(",",$SystemConfigKeyValue[$item["id"]]))->contains($value)?"selected":""}}>{{$option}}</option>
                                                                 @endforeach
@@ -131,7 +129,7 @@
                                                     <div class="row mb-3">
                                                         <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
-                                                            <textarea class="form-control form-check-inline" rows="10" name="{{$item["id"]}}">{{$SystemConfigKeyValue[$item["id"]]??""}}</textarea>
+                                                            <textarea class="form-control" rows="10" name="{{$item["id"]}}">{{$SystemConfigKeyValue[$item["id"]]??""}}</textarea>
                                                         </div>
                                                     </div>
                                                 @endif
