@@ -4,7 +4,6 @@
 @endsection
 
 @section('Content')
-
     {{--  --}}
     <div class="container-fluid p-0 ">
         <!-- page Content  -->
@@ -16,7 +15,7 @@
                             {{-- @include('/operate/components/title/page_title') --}}
                             <h2> {{ __('管理人管理') }} {{ $Data->id ? __('修改') : __('新增') }}</h2>
 
-                            @can('user_delete')
+                            {{-- @can('user_delete')
                                 @if ($Data->id)
                                     <div class="btn-group ms-2">
                                         <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
@@ -24,19 +23,13 @@
                                             <i class="ti-more-alt"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            {{-- <a class="dropdown-item" href="##">
-                                            儲存並複製
-                                        </a> --}}
-                                            {{-- <a class="dropdown-item" href="##">
-                                            開啟預覽頁
-                                        </a> --}}
                                             <a class="dropdown-item" id="delBtn" href="javascript:void(0)">
                                                 刪除
                                             </a>
                                         </div>
                                     </div>
                                 @endif
-                            @endcan
+                            @endcan --}}
                             <div class="btn-group ms-2">
                                 <a class="btn btn-light" href="{{ route('user_list') }}?{{ request()->getQueryString() }}">
                                     {{ __('取消') }}
@@ -63,7 +56,7 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 
-                                            <div class="mb-3 row">
+                                            {{-- <div class="mb-3 row">
                                                 <label for="" class="col-12 col-sm-3 col-form-label">
                                                     {{ __($Data->Column_Title_Text['status']) }}
                                                 </label>
@@ -75,6 +68,25 @@
                                                                 {{ __($value) }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                            </div> --}}
+
+                                            <div class="mb-3 row">
+                                                <label for="" class="col-12 col-sm-3 col-form-label">
+                                                    {{ __($Data->Column_Title_Text['status']) }}
+                                                </label>
+                                                <div class="col-12 col-sm-9 form-check-wrap">
+                                                    @foreach ($Data->statusText as $key => $value)
+                                                        <div class="form-check form-check-inline">
+                                                            <input {{ $Data->status == $key ? 'selected' : '' }}
+                                                                class="form-check-input" type="radio" name="status"
+                                                                value="{{ $key }}" id="{{ $key }}">
+                                                            <label class="form-check-label"
+                                                                for="FlexRadio1{{ $key }}">
+                                                                {{ __($value) }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
 
@@ -133,8 +145,7 @@
                                                             否
                                                         </label>
                                                     </div>
-                                                    <div class="text-hint fz-sm text-muted d-block mt-1">新訂單通知通知
-                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -155,8 +166,6 @@
                                                         <label class="form-check-label" for="FlexRadio2">
                                                             否
                                                         </label>
-                                                    </div>
-                                                    <div class="text-hint fz-sm text-muted d-block mt-1">安全庫存不足通知、庫存不足通知
                                                     </div>
                                                 </div>
 
@@ -199,16 +208,20 @@
                                         </div>
                                     @endforeach
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center justify-content-end">
+                                    <div class="btn-group ms-2">
+                                        <a href="{{ route('user_list') }}?{{ request()->getQueryString() }}"
+                                            class="btn btn-muted mx-2">{{ __('取消') }}</a>
+                                    </div>
+                                    <div class="btn-group ms-2">
+                                        <button type="submit" class="btn btn-primary">{{ __('儲存') }}</button>
 
-
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="slideFunc-footer d-flex justify-content-end px-3 py-3">
-                            <a href="{{ route('user_list') }}?{{ request()->getQueryString() }}"
-                                class="btn btn-muted mx-2">{{ __('取消') }}</a>
-                            <button type="submit" class="btn btn-primary mx-2">{{ __('儲存') }}</button>
-                        </div>
-
                     </form>
 
                 </div>
@@ -217,9 +230,6 @@
     </div>
 
     {{--  --}}
-
-
-
 @endsection
 
 @section('BodyJavascript')

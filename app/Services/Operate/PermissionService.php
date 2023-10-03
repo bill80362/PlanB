@@ -26,7 +26,7 @@ class PermissionService
 
         ];
     }
-    
+
     /**
      * 定義權限群組，要加權限或刪除在此處修改。
      */
@@ -98,7 +98,7 @@ class PermissionService
 
         return $actions;
     }
-    
+
 
     // 會員管理群組
     private function getMemberItem()
@@ -114,6 +114,63 @@ class PermissionService
                 'groupKey' => 'member',
                 'actions' => ['read', 'create', 'update', 'delete'],
             ],
+
+            // [
+            //     'label' => '會員管理_通訊錄',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '會員管理_VIP紀錄',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '會員內部備註辭庫',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '會員外部升等金額',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '黑名單',
+            //     'groupKey' => '訂閱電子報',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '退貨保留款',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '退貨保留款-申請退款',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '貨到通知',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '認識管道',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '認識管道_細項',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+            // [
+            //     'label' => '職業管理',
+            //     'groupKey' => '',
+            //     'actions' => ['read', 'create', 'update', 'delete'],
+            // ],
+
         ];
     }
 
