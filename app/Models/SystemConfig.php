@@ -107,6 +107,13 @@ class SystemConfig extends Model
                     'N' => '關',
                 ],
             ],
+            [
+                'id' => 'textarea_template',
+                'title' => 'Textarea範本',
+                'content' => '', //DB抓取後會覆蓋這個職
+                'input' => 'textarea', //後臺操作的模式
+                'options' => [],
+            ],
         ],
         '右線預備' => [
             [
