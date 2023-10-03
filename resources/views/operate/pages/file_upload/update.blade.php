@@ -24,9 +24,19 @@
                     <div class="white_card_body">
                         <div class="row mt-2">
                             @foreach($DataList as $Data)
-                            <div class="col-lg-4 text-center">
-                                <img src="{{$Data->url}}" width="150" />
-                                <span>{{$Data->file}}</span>
+                            <div class="col-lg-3 text-center">
+                                <div class="card">
+                                    <img src="{{$Data->url}}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$Data->file}}</h5>
+                                        <button type="button" class="btn btn-xs btn-danger"
+                                                onclick="postForm('{{ route('file_upload_del') }}?{{ request()->getQueryString() }}',{
+                                                            'id_array[]':'{{$Data->file}}',
+                                                            _token:'{{ csrf_token() }}'
+                                                            })"
+                                        >{{__("刪除圖片")}}</button>
+                                    </div>
+                                </div>
                             </div>
                             @endforeach
                         </div>

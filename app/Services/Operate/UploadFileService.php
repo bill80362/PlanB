@@ -114,4 +114,10 @@ class UploadFileService
     public function getPath(){
         return Storage::disk('public')->path('');
     }
+    public function url($file){
+        return asset('storage/'.$file);
+    }
+    public function del($file){
+        return Storage::disk('public')->delete($file);
+    }
 }

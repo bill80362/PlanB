@@ -14,39 +14,19 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>{{ __(app("App\Services\Route\RouteTitle")->getTitle(request()->route()->getName())) }}</h2>
-                                <!-- Example single danger button -->
-                                <div class="btn-group me-2">
-                                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="ti-settings"></i> {{__("處理")}}
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <button type="button" class="dropdown-item">{{__("全選")}}</button>
-                                        <button type="button" class="dropdown-item">{{__("取消全選")}}</button>
-                                        <button type="button" class="dropdown-item">{{__("反向選擇")}}</button>
-                                        <hr class="dropdown-divider">
-                                    </div>
-                                </div>
+                                @include('/operate/components/title/page_title')
                             </div>
                         </div>
                         <div class="white_card_body">
                             <div class="row">
-                                <div class="col-6 mb-3">
-                                    <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon
-                                            name="funnel-outline"></ion-icon>
-                                        {{__("篩選器")}}</button>
-                                    <a class="btn btn-muted" href="{{request()->url()}}">{{__("重置查詢")}}</a>
-                                    <!-- modals ppup  -->
-                                </div>
                                 <div class="col-12">
-
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">{{__("default_serial_number")}}</th>
                                                     <th class="sortStyle" data-column="id">{{__("目錄名稱")}}</th>
+                                                    <th class="sortStyle" data-column="url">{{__("網址")}}</th>
                                                     <th class="sortStyle" data-column="files_count">{{__("檔案數量")}}</th>
                                                     <th class="sortStyle" data-column="size">{{__("使用空間")}}</th>
 
@@ -64,6 +44,7 @@
                                                         <input type="checkbox" class="form-check-input" name="id_array[]" value="1"> {{$index+1}}
                                                     </td>
                                                     <td class="border-0" data-column="id">{{$Item->id}}</td>
+                                                    <td class="border-0" data-column="url">{{$Item->url}}</td>
                                                     <td class="border-0" data-column="files_count">{{count($Item->files)}}</td>
                                                     <td class="border-0" data-column="size">{{$Item->size}}</td>
 

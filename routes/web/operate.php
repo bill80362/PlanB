@@ -51,7 +51,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         //系統設定
         Route::get('/system', [Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->middleware(['can:system_update']);
         Route::post('/system', [Operation\SystemController::class, 'update'])->name('system_update')->middleware(['can:system_update']);
-        Route::post('/delete/image', [Operation\SystemController::class, 'deleteImage'])->name('system_delete_image')->middleware(['can:system_update']);
+//        Route::post('/delete/image', [Operation\SystemController::class, 'deleteImage'])->name('system_delete_image')->middleware(['can:system_update']);
 
         Route::get('/http_log', [Operation\HttpLogController::class, 'listHTML'])->name('http_log_list');
         Route::get('/http_log/{id}', [Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
@@ -102,6 +102,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         //檔案管理
         Route::get('/file_upload/list', [FileUploadController::class, 'listHTML'])->name('file_upload_list');
         Route::get('/file_upload/{id}', [FileUploadController::class, 'updateHTML'])->name('file_upload_update_html');
+        Route::post('/file_upload/del', [FileUploadController::class, 'delBatch'])->name('file_upload_del');
 
         // ui template
         if (!app()->isProduction()) {
