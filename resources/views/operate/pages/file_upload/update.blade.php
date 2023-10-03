@@ -25,16 +25,27 @@
                         @include('/operate/components/alert/error_message')
                         <div class="row mt-2">
                             @foreach($DataList as $Data)
-                            <div class="col-lg-3 text-center">
+                            <div class="col-lg-4">
                                 <div class="card">
-                                    <img src="{{$Data->url}}" class="card-img-top">
+                                    <img class="card-img-top" src="{{$Data->url}}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{$Data->file}}</h5>
-                                        <button type="button" class="btn btn-xs btn-danger"
+                                        <div class="card-title">
+                                            {{$Data->file}}
+                                        </div>
+                                        <p class="card-text">
+                                            {{__("檔案大小")}}:{{$Data->size}}
+                                        </p>
+                                        <p class="card-text">
+                                            {{__("修改時間")}}:{{$Data->updated_at}}
+                                        </p>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-sm btn-danger"
                                                 onclick="postForm('{{ route('file_upload_del') }}?{{ request()->getQueryString() }}',{
-                                                            'id_array[]':'{{$Data->file}}',
-                                                            _token:'{{ csrf_token() }}'
-                                                            })"
+                                                        'id_array[]':'{{$Data->file}}',
+                                                        _token:'{{ csrf_token() }}'
+                                                        })"
                                         >{{__("刪除圖片")}}</button>
                                     </div>
                                 </div>

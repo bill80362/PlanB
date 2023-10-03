@@ -81,7 +81,8 @@ class FileUploadController extends Controller
             $Temp = [];
             $Temp["file"] = $file;
             $Temp["url"] = $this->oUploadFileService->url($file);
-//            $Temp["filePath"] = $this->oUploadFileService->getStorage()->path($file);
+            $Temp["size"] = $this->oUploadFileService->getStorage()->size($file);
+            $Temp["updated_at"] = $this->oUploadFileService->getStorage()->lastModified($file);
             //
             $DataArray[] = (object) $Temp;
         }
