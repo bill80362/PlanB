@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -97,6 +98,20 @@ class OperateFilterChosen extends Component
                         "value" => $filter_value,
                         "title" => $this->model->Column_Title_Text[$useTemplateFilter] ?? "",
                         "titleValue" => $typeDict[$filter_value] . $value,
+                    ];
+                } else if ($template == "rangeDateTime" && $column == $useTemplateFilter . "_start") {
+                    $chosenFilterList[] = [
+                        "key" => $filter_name,
+                        "value" => $filter_value,
+                        "title" => $useTemplateFilter,
+                        "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("起"),
+                    ];
+                } elseif ($template == "rangeDateTime" && $column == $useTemplateFilter . "_end") {
+                    $chosenFilterList[] = [
+                        "key" => $filter_name,
+                        "value" => $filter_value,
+                        "title" => $useTemplateFilter,
+                        "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("迄"),
                     ];
                 }
             }
