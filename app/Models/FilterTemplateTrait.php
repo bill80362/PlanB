@@ -21,7 +21,7 @@ trait FilterTemplateTrait
         foreach ($this->filterTemplate as $filterName => $set) {
             $customQuery = false;
             if (is_array($set)) {
-                $template = $set['type'];
+                $template = $set['template'];
                 $customQuery = $set['customQuery'];
             } else {
                 $template = $set;

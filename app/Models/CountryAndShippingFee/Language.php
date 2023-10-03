@@ -109,10 +109,11 @@ class Language extends Model
     use FilterTemplateTrait;
     public array $filterTemplate = [
         "is_change" => [
-            "type" => "radio",
+            "template" => "radio",
             "customQuery" => true,
             'title' => 'isUpdated'
         ],
+        // "text" => ''
         // "test" => [
         //     "type" => "selectAndInput",
         //     "customQuery" => true,

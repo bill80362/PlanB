@@ -100,19 +100,23 @@ class OperateFilterChosen extends Component
                         "titleValue" => $typeDict[$filter_value] . $value,
                     ];
                 } else if ($template == "rangeDateTime" && $column == $useTemplateFilter . "_start") {
-                    $chosenFilterList[] = [
-                        "key" => $filter_name,
-                        "value" => $filter_value,
-                        "title" => $useTemplateFilter,
-                        "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("起"),
-                    ];
+                    if ($filter_value) {
+                        $chosenFilterList[] = [
+                            "key" => $filter_name,
+                            "value" => $filter_value,
+                            "title" => $useTemplateFilter,
+                            "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("起"),
+                        ];
+                    }
                 } elseif ($template == "rangeDateTime" && $column == $useTemplateFilter . "_end") {
-                    $chosenFilterList[] = [
-                        "key" => $filter_name,
-                        "value" => $filter_value,
-                        "title" => $useTemplateFilter,
-                        "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("迄"),
-                    ];
+                    if ($filter_value) {
+                        $chosenFilterList[] = [
+                            "key" => $filter_name,
+                            "value" => $filter_value,
+                            "title" => $useTemplateFilter,
+                            "titleValue" => Carbon::parse($filter_value)->format('Y-m-d H:i:s') . __("迄"),
+                        ];
+                    }
                 }
             }
         }
