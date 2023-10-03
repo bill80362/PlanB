@@ -228,9 +228,6 @@
             }
         
         }
-        p{
-
-        }
     }
 }
 .student_list_img{
@@ -696,12 +693,27 @@
 }
 
 .table-responsive {
-    overflow-x: visible;
+    .table {
+        th {
+            white-space: nowrap;
+        }
+    }
 }
 .table {
+    color: inherit;
     th,
     td {
         vertical-align: middle;
+    }
+    img {
+        background-color: $white;
+        border-radius: .25rem;
+        height: 100px;
+        object-fit: contain;
+        width: 100px;
+    }
+    .form-control {
+        width: 3rem;
     }
 }
 
@@ -721,3 +733,5 @@
     border-bottom-left-radius: .25rem;
     margin-left: .5rem;
 }
+// input[class*="form-"],
+// input[class*="form-"]
