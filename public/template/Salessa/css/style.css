@@ -11245,6 +11245,7 @@ td.sortStyle.unsortStyle {
   flex: 0 0 auto;
 }
 
+
 .prodPic-list {
   display: block;
   list-style: none;
@@ -11356,4 +11357,4 @@ td.sortStyle.unsortStyle {
 
 textarea {
   appearance: textfield;
-}/*# sourceMappingURL=style.css.map */
+
