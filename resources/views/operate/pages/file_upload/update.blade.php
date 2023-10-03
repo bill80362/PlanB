@@ -22,6 +22,7 @@
                         </div>
                     </div>
                     <div class="white_card_body">
+                        @include('/operate/components/alert/error_message')
                         <div class="row mt-2">
                             @foreach($DataList as $Data)
                             <div class="col-lg-3 text-center">
