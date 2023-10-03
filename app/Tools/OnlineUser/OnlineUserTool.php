@@ -13,13 +13,13 @@ class OnlineUserTool
     public function __construct()
     {
         $this->ttl = env('ONLINE_TTL', 15); //存活時間(多久不操作算是離線)
-        try{
-            $this->redis = Redis::connection('online'); //使用config database的redis連線
-        }catch(\Exception $e){
-            Log::channel('daily')->error($e->getMessage());
-            $this->redis = false;
-        }
-
+//        try{
+//            $this->redis = Redis::connection('online'); //使用config database的redis連線
+//        }catch(\Exception $e){
+//            Log::channel('daily')->error($e->getMessage());
+//            $this->redis = false;
+//        }
+        $this->redis = false;
     }
 
     /**
