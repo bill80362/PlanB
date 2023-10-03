@@ -11,7 +11,7 @@
                 <div class="white_card">
                     <div class="white_card_header">
                         <div class="d-flex align-items-center justify-content-between">
-                            @include('/operate/components/title/page_title')
+                            <h2>{{ __(app("App\Services\Route\RouteTitle")->getTitle(request()->route()->getName())) }}</h2>
                             <div>
                                 @can('permissionGroup_create')
                                     <a class="btn btn-sm btn-primary mr-2"
