@@ -120,7 +120,7 @@
         max-height: 0;
         min-height: 0;
         opacity: 0;
-        padding-bottom: 0;
+        padding-top: 0;
         transition: all .25s;
     }
     .in-extand > & {
@@ -128,7 +128,7 @@
         max-height: unset;
         min-height: 100px;
         opacity: 1;
-        padding-bottom: .5rem;
+        padding-top: .5rem;
     }
 }
 
@@ -200,10 +200,18 @@
     .prodPic-item {
         display: block;
         float: left;
-        height: 13.5%;
         margin-right: 3.8%;
         margin-top: 3.8%;
+        padding-bottom: 13.5%;
+        position: relative;
         width: 13.5%;
+        > * {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
         &:nth-child(-n + 5) {
             margin-top: 0;
         }
@@ -214,16 +222,42 @@
         &:nth-child(6n + 10) {
             clear: left;
         }
+        i[class^=ti-],
+        i[class*= ti-] {
+            display: block;
+            font-size: 2rem;
+        }
         &.main-item {
-            height: 30.8%;
+            padding-bottom: 30.8%;
             width: 30.8%;
+            i[class^=ti-],
+            i[class*= ti-] {
+                font-size: 4rem;
+            }
         }
     }
     .prodPic-img {
         display: block;
-        height: 100%;
-        object-fit: cover;
-        width: 100%;
+        object-fit: contain;
+    }
+    .prodPic-upload {
+        align-items: center;
+        background-color: rgba($teal-100, .5);
+        border: 2px dashed $teal-200;
+        color: $teal-200;
+        display: flex;
+        justify-content: center;
+    }
+    .prodPic-uploadbox {
+        cursor: pointer;
+        opacity: 0;
+    }
+    .prodPic-hover {
+        align-items: center;
+        background-color: rgba($black, .15);
+        color: rgba($white, .75);
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -241,4 +275,43 @@
             margin: 0;
         }
     }
+}
+
+
+// .variant-group
+.variant-group {
+    .list-group-item {
+        position: relative;
+        // &:nth-child(n + 2) {
+        //     &:hover {
+        //         background-color: $teal-100;
+        //     }
+        // }
+        &:hover {
+            .variant-hover {
+                opacity: 1;
+                z-index: 1;
+            }
+        }
+    }
+    .variant-hover {
+        background-color: rgba($teal-100, .5);
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: opacity .25s;
+        z-index: -1;
+    }
+}
+
+.select2-container--default {
+    .select2-selection--multiple {
+        border-color: $gray-300;
+    }
+}
+textarea {
+    appearance: textfield;
 }
