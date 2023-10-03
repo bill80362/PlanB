@@ -3,7 +3,11 @@
 namespace App\Models;
 
 /**
- * 匯出 匯入
+ * 後台操作 列表 匯出 篩選器
+ * template 對應的地方:
+ * 1.版面，修改位置 class OperateFilterDiv，主要負責讓使用者選擇篩選條件
+ * 2.功能，修改位置 model，主要負責SQL篩選條件
+ * 3.篩選器移除標籤，修改位置 chosen ，主要可以快速移除篩選條件
  */
 trait FilterTemplateTrait
 {

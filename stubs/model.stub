@@ -4,20 +4,50 @@ namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\FilterTemplateTrait;
+use App\Models\ExportImportTrait;
 
 class {{ class }} extends Model
 {
     use HasFactory;
+    // use ExportImportTrait; //匯出
+    // use FilterTemplateTrait; // 搜尋
+
     
     public $incrementing = true;
     protected $keyType = 'int';
-    // protected $table = 'table name';
     protected $guarded = [];
 
-    //事件偵測 retrieved, creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored
-    protected $dispatchesEvents = [
-        // 'saving' => '',
-        // 'created' => '',
-        // 'updated' => '',
+    /**
+    * 資料表欄位名稱對應，非實體欄位，不能設定
+    */
+    public array $Column_Title_Text = [
+    
     ];
+
+    /**
+    * 匯入匯出的欄位，
+    * 1.請注意匯入也會考慮必填欄位，沒有會擋下。
+    * 2.要有PrimaryKey
+    */
+    public array $Batch_Title_Text = [
+        'id' => '編號',
+
+    ];
+
+    /**
+    * 欄位強制轉型
+    * @var array<string, string>
+    */
+    protected $casts = [];
+
+    /**
+    * 後台操作 列表 匯出 篩選器
+    * template 對應的地方:
+    * 1.版面，修改位置 class OperateFilterDiv，主要負責讓使用者選擇篩選條件
+    * 2.功能，修改位置 model，主要負責SQL篩選條件
+    * 3.篩選器移除標籤，修改位置 chosen ，主要可以快速移除篩選條件
+    */    
+    // public array $filterTemplate = [];
+
 }
