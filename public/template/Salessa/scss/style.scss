@@ -93,3 +93,225 @@
     z-index: 2000;
 }
 
+
+.collapse-list {
+    line-height: 1.5;
+    padding: 0;
+    overflow: hidden;
+    .collapse-item {
+        padding: 0 0 .5rem 1.5rem;
+        position: relative;
+    }
+    .collapse-btn {
+        background: transparent;
+        border: none;
+        left: 0;
+        margin-top: -.75rem;
+        padding: 0;
+        position: absolute;
+        top: .75rem;
+        transition: transform .25s;
+    }
+    .in-extand > .collapse-btn {
+        transform: rotate(90deg);
+    }
+    .with-child > & {
+        height: 0;
+        max-height: 0;
+        min-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        transition: all .25s;
+    }
+    .in-extand > & {
+        height: auto;
+        max-height: unset;
+        min-height: 100px;
+        opacity: 1;
+        padding-top: .5rem;
+    }
+}
+
+.modal {
+    .modal-dialog-lg {
+        max-width: 1000px;
+    }
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        max-height: 90vh;
+    }
+    .modal-header,
+    .modal-footer {
+        flex: 0 0 auto;
+    }
+    .modal-body {
+        flex: 1 1 auto;
+        overflow-y: auto;
+    }
+}
+
+.slideFunc-box {
+    background-color: $white;
+    bottom: 0;
+    box-shadow: 0px 0px 3px rgba($black, 0.25);
+    height: 100vh;
+    max-width: 75%;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: all .25s;
+    width: 500px;
+    z-index: 999999;
+    &.in-active {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    .slideFunc-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .slideFunc-header {
+        border-bottom: 1px solid $gray-200;
+        flex: 0 0 auto;
+    }
+    .slideFunc-body {
+        flex: 1 1 auto;
+        overflow-y: auto;
+    }
+    .slideFunc-footer {
+        border-top: 1px solid $gray-200;
+        flex: 0 0 auto;
+    }
+}
+
+// .prodPic-list
+.prodPic-list {
+    display: block;
+    list-style: none;
+    &:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+    .prodPic-item {
+        display: block;
+        float: left;
+        margin-right: 3.8%;
+        margin-top: 3.8%;
+        padding-bottom: 13.5%;
+        position: relative;
+        width: 13.5%;
+        > * {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        &:nth-child(-n + 5) {
+            margin-top: 0;
+        }
+        &:nth-child(5),
+        &:nth-child(6n + 9) {
+            margin-right: 0;
+        }
+        &:nth-child(6n + 10) {
+            clear: left;
+        }
+        i[class^=ti-],
+        i[class*= ti-] {
+            display: block;
+            font-size: 2rem;
+        }
+        &.main-item {
+            padding-bottom: 30.8%;
+            width: 30.8%;
+            i[class^=ti-],
+            i[class*= ti-] {
+                font-size: 4rem;
+            }
+        }
+    }
+    .prodPic-img {
+        display: block;
+        object-fit: contain;
+    }
+    .prodPic-upload {
+        align-items: center;
+        background-color: rgba($teal-100, .5);
+        border: 2px dashed $teal-200;
+        color: $teal-200;
+        display: flex;
+        justify-content: center;
+    }
+    .prodPic-uploadbox {
+        cursor: pointer;
+        opacity: 0;
+    }
+    .prodPic-hover {
+        align-items: center;
+        background-color: rgba($black, .15);
+        color: rgba($white, .75);
+        display: flex;
+        justify-content: center;
+    }
+}
+
+// card-detail
+.card-detail {
+    box-shadow: 1px 1px 5px rgba($black, .15);
+    overflow: hidden;
+    .card-header {
+        background-color: $white;
+        box-shadow: 0 0 3px rgba($black, .15);
+        .card-title {
+            color: $primary;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+        }
+    }
+}
+
+
+// .variant-group
+.variant-group {
+    .list-group-item {
+        position: relative;
+        // &:nth-child(n + 2) {
+        //     &:hover {
+        //         background-color: $teal-100;
+        //     }
+        // }
+        &:hover {
+            .variant-hover {
+                opacity: 1;
+                z-index: 1;
+            }
+        }
+    }
+    .variant-hover {
+        background-color: rgba($teal-100, .5);
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: opacity .25s;
+        z-index: -1;
+    }
+}
+
+.select2-container--default {
+    .select2-selection--multiple {
+        border-color: $gray-300;
+    }
+}
+textarea {
+    appearance: textfield;
+}
