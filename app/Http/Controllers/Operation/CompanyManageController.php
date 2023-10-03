@@ -63,9 +63,11 @@ class CompanyManageController extends Controller
 
         $ids = $this->request->get('ids');
         $editors = $this->request->get('editors');
+        $seoArray = $this->request->get('seoArray');
         foreach ($ids as $key => $id) {
             $this->oModel->where('id', $id)->update([
                 'content' => $editors[$key],
+                'seo' => $seoArray[$key],
             ]);
         }
 

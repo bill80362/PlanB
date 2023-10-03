@@ -63,7 +63,7 @@
                                                             <h5 class="card-title">{{__("SEO")}}</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                            <textarea class="form-control" rows="10"></textarea>
+                                                            <textarea class="form-control" name="seoArray[]" rows="10">{{$data->seo}}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
