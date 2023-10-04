@@ -8,6 +8,9 @@
 @import "_extends";
 
 //reset css
+:root {
+    font-size: 14px !important;
+}
 @import "reset";
 
 @import "color";
@@ -50,8 +53,6 @@
 @import "bar-chart.scss";
 
 
-// lms_category 
-@import "_ionicon.scss";
 
 // lms_category 
 @import "lms_category";
@@ -112,9 +113,11 @@
         padding: 0;
         position: absolute;
         top: .75rem;
-        transition: transform .25s;
+        & > * {
+            transition: transform .25s;
+        }
     }
-    .in-extand > .collapse-btn {
+    .in-extand > .collapse-btn > * {
         transform: rotate(90deg);
     }
     .with-child > & {
@@ -202,40 +205,38 @@
     .prodPic-item {
         display: block;
         float: left;
-        margin-right: 3.8%;
-        margin-top: 3.8%;
-        padding-bottom: 13.5%;
+        font-size: 1.5rem;
+        margin-right: 3.5%;
+        margin-top: 3.5%;
+        padding-bottom: 17.2%;
         position: relative;
-        width: 13.5%;
+        width: 17.2%;
         > * {
+            border-radius: .25rem;
             height: 100%;
             left: 0;
             position: absolute;
             top: 0;
             width: 100%;
         }
-        &:nth-child(-n + 5) {
+        &:nth-child(-n + 4) {
             margin-top: 0;
         }
-        &:nth-child(5),
-        &:nth-child(6n + 9) {
+        &:nth-child(4),
+        &:nth-child(5n + 7) {
             margin-right: 0;
         }
-        &:nth-child(6n + 10) {
+        &:nth-child(5n + 8) {
             clear: left;
         }
         i[class^=ti-],
         i[class*= ti-] {
             display: block;
-            font-size: 2rem;
         }
-        &.main-item {
-            padding-bottom: 30.8%;
-            width: 30.8%;
-            i[class^=ti-],
-            i[class*= ti-] {
-                font-size: 4rem;
-            }
+        &:first-child {
+            font-size: 3rem;
+            padding-bottom: 37.9%;
+            width: 37.9%;
         }
     }
     .prodPic-img {
@@ -258,18 +259,51 @@
         align-items: center;
         background-color: rgba($black, .15);
         color: rgba($white, .75);
+        cursor: grab;
         display: flex;
         justify-content: center;
+        opacity: 0;
+        transition: opacity .25s;
+        .func-group {
+            color: $white;
+            display: flex;
+            font-size: 1rem;
+            padding: 0 .25rem;
+            position: absolute;
+            right: 0;
+            top: 0;
+            a {
+                color: inherit;
+                display: block;
+                padding: .5rem .25rem;
+            }
+        }
+    }
+    .prodPic-item:hover {
+        .prodPic-hover {
+            opacity: 1;
+        }
     }
 }
 
 // card-detail
 .card-detail {
-    box-shadow: 1px 1px 5px rgba($black, .15);
+    box-shadow: 0px 0px 3px rgba($black, .1);
     overflow: hidden;
     .card-header {
         background-color: $white;
-        box-shadow: 0 0 3px rgba($black, .15);
+        position: relative;
+        &::after {
+            background-image: linear-gradient(180deg, rgba($black, .1) 0%, rgba($black, 0) 100%);
+            bottom: 0;
+            content: '';
+            display: block;
+            height: 2px;
+            left: 5px;
+            position: absolute;
+            right: 5px;
+            width: auto;
+        }
         .card-title {
             color: $primary;
             font-size: 1.25rem;
@@ -284,11 +318,6 @@
 .variant-group {
     .list-group-item {
         position: relative;
-        // &:nth-child(n + 2) {
-        //     &:hover {
-        //         background-color: $teal-100;
-        //     }
-        // }
         &:hover {
             .variant-hover {
                 opacity: 1;
@@ -307,6 +336,23 @@
         transition: opacity .25s;
         z-index: -1;
     }
+    .variant-img {
+        padding-bottom: 50px;
+        position: relative;
+        width: 50px;
+        > * {
+            bottom: 0;
+            display: block;
+            height: 100%;
+            left: 0;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+        }
+    }
+
 }
 
 .select2-container--default {
@@ -315,5 +361,36 @@
     }
 }
 textarea {
-    appearance: textfield;
+    resize: none;
+}
+.lang-nav {
+    border-bottom: none;
+    .nav-link {
+        background-color: $light;
+        color: $muted;
+        &.active {
+            background-color: $primary;
+            border: none;
+            color: $white;
+        }
+    }
+}
+.alert {
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+    position: fixed;
+    right: 0;
+    z-index: 99999;
+    @media ($mid_device) {
+        left: 20%;
+    }
+    @media ($big_device) {
+        left: 270px;
+    }
+}
+ion-icon {
+    vertical-align: middle;
 }

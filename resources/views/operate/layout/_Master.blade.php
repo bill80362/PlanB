@@ -99,6 +99,7 @@
     </section>
     <!-- main content part end -->
 
+    @include('/operate/components/alert/error_message')
     {{-- 彈出視窗 --}}
     @yield('Modal')
 

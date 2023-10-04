@@ -47,7 +47,9 @@ input:focus {
     box-shadow: none;
 }
 
-.form-control {
+.form-control,
+.form-select,
+.form-check-input {
     border-color: $border_color_1;
 }
 
@@ -2306,21 +2308,20 @@ $color in $theme_colors {
 }
 
 #back-top {
-    position: fixed;
-    right: 20px;
     bottom: 30px;
     cursor: pointer;
-    z-index: 9999999;
     display: none;
-
+    position: fixed;
+    right: 20px;
+    z-index: 9999999;
     a {
-        display: inline-block;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        display: block;
+        align-items: center;
         color: #fff;
-        line-height: 40px;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        text-align: center;
+        width: 40px;
         background: #4C6EF8;
         font-size: 15px;
         border-radius: 30px;
