@@ -78,10 +78,16 @@
                                                     data-target="#searchFilter"
                                                     onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    @foreach (['name', 'id', 'email'] as $value)
+                                                    @foreach ($Model->filterTextKey as $value)
                                                         <option value="{{ $value }}"
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
+                                                    @endforeach
+
+                                                    @foreach ($Model->filterTextKeyCustom as $key => $value)
+                                                        <option value="{{ $key }}"
+                                                            {{ request()->get('filter_text_key') == $key ? 'selected' : '' }}>
+                                                            {{ __($value) }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

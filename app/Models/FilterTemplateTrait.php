@@ -65,18 +65,14 @@ trait FilterTemplateTrait
             }
         }
         //過濾選項-自訂        
-        if (method_exists($this, 'useFilterExtend')) {
-            $query = $this->useFilterExtend($query, $Data);
+        $query = $this->useFilterExtend($query, $Data);
+        $query = $this->useCustomTextSearch($query, $Data);
+
+        if (isset($Data['filter_text_key']) && in_array($Data['filter_text_key'], $this->filterTextKey)) {
+            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
         }
 
-        if (method_exists($this, 'useCustomTextSearch')) {
-            $query = $this->useCustomTextSearch($query, $Data);
-        } else {
-            //過濾文字條件
-            if (isset($Data['filter_text_key'])) {
-                $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
-            }
-        }
+
 
         //排序
         if (isset($Data['order_by'])) {

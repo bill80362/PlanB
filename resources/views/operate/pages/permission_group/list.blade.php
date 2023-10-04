@@ -18,7 +18,7 @@
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        aria-haspopup="true" aria-expanded="false">
                                         <i class="ti-settings"></i> {{ __('處理') }}
                                     </button>
                                     <div class="dropdown-menu">
@@ -29,40 +29,40 @@
                                         @can('permissionGroup_delete')
                                             <hr class="dropdown-divider">
                                             <button id="btnDeleteBatch" type="button"
-                                                    class="dropdown-item">{{ __('勾選刪除') }}</button>
+                                                class="dropdown-item">{{ __('勾選刪除') }}</button>
                                         @endcan
                                     </div>
                                 </div>
-{{--                                <div class="btn-group me-2">--}}
-{{--                                    @canany('permissionGroup_import', 'permissionGroup_export')--}}
-{{--                                        <button type="button" class="btn btn-secondary dropdown-toggle"--}}
-{{--                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                                            {{ __('匯入') }} / {{ __('匯出') }}--}}
-{{--                                        </button>--}}
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            @can('permissionGroup_import')--}}
-{{--                                                <button type="button" class="dropdown-item" data-bs-toggle="modal"--}}
-{{--                                                        data-bs-target="#importModal">--}}
-{{--                                                    {{ __('匯入') }}--}}
-{{--                                                </button>--}}
-{{--                                            @endcan--}}
-{{--                                            @can('permissionGroup_export')--}}
-{{--                                                <a target="_blank" class="dropdown-item"--}}
-{{--                                                   href="{{ route('permission_group_export', ['type' => 'key', ...request()->query()]) }}">--}}
-{{--                                                    {{ __('匯出參數版') }}--}}
-{{--                                                </a>--}}
-{{--                                                <a target="_blank" class="dropdown-item"--}}
-{{--                                                   href="{{ route('permission_group_export', ['type' => 'value', ...request()->query()]) }}">--}}
-{{--                                                    {{ __('匯出文字版') }}--}}
-{{--                                                </a>--}}
-{{--                                            @endcan--}}
-{{--                                        </div>--}}
-{{--                                    @endcanany--}}
-{{--                                </div>--}}
+                                {{--                                <div class="btn-group me-2"> --}}
+                                {{--                                    @canany('permissionGroup_import', 'permissionGroup_export') --}}
+                                {{--                                        <button type="button" class="btn btn-secondary dropdown-toggle" --}}
+                                {{--                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> --}}
+                                {{--                                            {{ __('匯入') }} / {{ __('匯出') }} --}}
+                                {{--                                        </button> --}}
+                                {{--                                        <div class="dropdown-menu"> --}}
+                                {{--                                            @can('permissionGroup_import') --}}
+                                {{--                                                <button type="button" class="dropdown-item" data-bs-toggle="modal" --}}
+                                {{--                                                        data-bs-target="#importModal"> --}}
+                                {{--                                                    {{ __('匯入') }} --}}
+                                {{--                                                </button> --}}
+                                {{--                                            @endcan --}}
+                                {{--                                            @can('permissionGroup_export') --}}
+                                {{--                                                <a target="_blank" class="dropdown-item" --}}
+                                {{--                                                   href="{{ route('permission_group_export', ['type' => 'key', ...request()->query()]) }}"> --}}
+                                {{--                                                    {{ __('匯出參數版') }} --}}
+                                {{--                                                </a> --}}
+                                {{--                                                <a target="_blank" class="dropdown-item" --}}
+                                {{--                                                   href="{{ route('permission_group_export', ['type' => 'value', ...request()->query()]) }}"> --}}
+                                {{--                                                    {{ __('匯出文字版') }} --}}
+                                {{--                                                </a> --}}
+                                {{--                                            @endcan --}}
+                                {{--                                        </div> --}}
+                                {{--                                    @endcanany --}}
+                                {{--                                </div> --}}
                                 <div class="btn-group">
                                     @can('permissionGroup_create')
                                         <a class="btn btn-primary"
-                                           href="{{ route('permission_group_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
+                                            href="{{ route('permission_group_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
                                             {{ __('新增') }} </a>
                                     @endcan
                                 </div>
@@ -75,22 +75,28 @@
                                         <div class="input-group input-group" id="searchContnet">
                                             <div class="input-group-prepend">
                                                 <select class="form-select" id="filter_text_key_outside"
-                                                        data-target="#searchFilter"
-                                                        onchange="$('#filter_text_key').val($(this).val())">
+                                                    data-target="#searchFilter"
+                                                    onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    @foreach (['name', 'id'] as $value)
+                                                    @foreach ($Model->filterTextKey as $value)
                                                         <option value="{{ $value }}"
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
                                                     @endforeach
+
+                                                    @foreach ($Model->filterTextKeyCustom as $key => $value)
+                                                        <option value="{{ $key }}"
+                                                            {{ request()->get('filter_text_key') == $key ? 'selected' : '' }}>
+                                                            {{ __($value) }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" id="filter_text_value_outside"
-                                                   value="{{ request()->get('filter_text_value') }}"
-                                                   data-target="#searchString"
-                                                   onchange="$('#filter_text_value').val($(this).val())">
+                                                value="{{ request()->get('filter_text_value') }}"
+                                                data-target="#searchString"
+                                                onchange="$('#filter_text_value').val($(this).val())">
                                             <button class="btn btn-dark" type="button"
-                                                    onclick="$('#filterForm').submit()"><i class="ti-search"></i></button>
+                                                onclick="$('#filterForm').submit()"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -107,66 +113,66 @@
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
-                                            <tr>
-                                                <th class="sortStyle" data-column="default_serial_number">
-                                                    {{ __('default_serial_number') }}</th>
-                                                <x-OperateTh column="id" :model="$Model"></x-OperateTh>
-                                                <x-OperateTh column="name" :model="$Model"></x-OperateTh>
-                                                <x-OperateTh column="email" :model="$Model"></x-OperateTh>
-                                                <x-OperateTh column="status" :model="$Model"></x-OperateTh>
-                                                <x-OperateTh column="updated_by" :model="$Model"></x-OperateTh>
-                                                <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
-                                                <th class="text-end" data-column="operate">
-                                                    <button class="btn btn-link slideFunc-toggle text-muted"
+                                                <tr>
+                                                    <th class="sortStyle" data-column="default_serial_number">
+                                                        {{ __('default_serial_number') }}</th>
+                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="name" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="email" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="status" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_by" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
+                                                    <th class="text-end" data-column="operate">
+                                                        <button class="btn btn-link slideFunc-toggle text-muted"
                                                             onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i class="ti-settings"></i></button>
-                                                </th>
-                                            </tr>
+                                                    </th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach ($Paginator->items() as $index => $Item)
-                                                <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
-                                                    <td class="border-0" data-column="default_serial_number">
-                                                        <input type="checkbox" class="form-check-input"
-                                                               name="id_array[]" value="1"> {{ $index + 1 }}
-                                                    </td>
-                                                    <td class="border-0" data-column="id">{{ $Item->id }}</td>
-                                                    <td class="border-0" data-column="name">{{ $Item->name }}</td>
-                                                    <td class="border-0" data-column="email">{{ $Item->email }}</td>
-                                                    <td class="border-0" data-column="status">
-                                                        {{ __($Model->statusText[$Item->status] ?? $Item->status) }}</td>
-                                                    <td class="border-0" data-column="updated_by">
-                                                        {{ $Item->audits()->latest()->first()?->user?->name }}</td>
-                                                    <td class="border-0" data-column="updated_at">
-                                                        {{ $Item->updated_at }}</td>
-                                                    <td class="border-0 text-end" data-column="operate">
-                                                        <div class="btn-group">
-                                                            <button type="button"
-                                                                    class="btn btn-light dropdown-toggle"
+                                                @foreach ($Paginator->items() as $index => $Item)
+                                                    <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
+                                                        <td class="border-0" data-column="default_serial_number">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                name="id_array[]" value="1"> {{ $index + 1 }}
+                                                        </td>
+                                                        <td class="border-0" data-column="id">{{ $Item->id }}</td>
+                                                        <td class="border-0" data-column="name">{{ $Item->name }}</td>
+                                                        <td class="border-0" data-column="email">{{ $Item->email }}</td>
+                                                        <td class="border-0" data-column="status">
+                                                            {{ __($Model->statusText[$Item->status] ?? $Item->status) }}
+                                                        </td>
+                                                        <td class="border-0" data-column="updated_by">
+                                                            {{ $Item->audits()->latest()->first()?->user?->name }}</td>
+                                                        <td class="border-0" data-column="updated_at">
+                                                            {{ $Item->updated_at }}</td>
+                                                        <td class="border-0 text-end" data-column="operate">
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-light dropdown-toggle"
                                                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <i class="ti-more-alt"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                @can('permissionGroup_update')
-                                                                    <li><a class="dropdown-item"
-                                                                           href="/operate/permission_group/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
-                                                                    </li>
-                                                                @endcan
-                                                                @can('permissionGroup_delete')
-                                                                    <li><button class="dropdown-item" type="button"
+                                                                    <i class="ti-more-alt"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu">
+                                                                    @can('permissionGroup_update')
+                                                                        <li><a class="dropdown-item"
+                                                                                href="/operate/permission_group/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                                        </li>
+                                                                    @endcan
+                                                                    @can('permissionGroup_delete')
+                                                                        <li><button class="dropdown-item" type="button"
                                                                                 onclick="postForm('/operate/permission_group/del?{{ request()->getQueryString() }}',{
                                                                         'id_array[]':{{ $Item->id }},
                                                                         _token:'{{ csrf_token() }}'
                                                                         })">{{ __('刪除') }}
-                                                                        </button></li>
-                                                                @endcan
-                                                                <a target="_blank" class="dropdown-item"
-                                                                   href="/operate/permission_group/{{ $Item->id }}/audit?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                                            </button></li>
+                                                                    @endcan
+                                                                    <a target="_blank" class="dropdown-item"
+                                                                        href="/operate/permission_group/{{ $Item->id }}/audit?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -194,31 +200,31 @@
 
 @section('Modal')
     <!-- 彈出視窗 -->
-{{--    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"--}}
-{{--         aria-hidden="true">--}}
-{{--        <div class="modal-dialog" role="document">--}}
-{{--            <form action="{{ route('permission_group_import') }}" method="post" enctype="multipart/form-data">--}}
-{{--                <input type="hidden" name="_token" value="{{ csrf_token() }}" />--}}
-{{--                <div class="modal-content">--}}
-{{--                    <div class="modal-header">--}}
-{{--                        <h5 class="modal-title" id="importModalLabel">{{ __('匯入新增') }}</h5>--}}
-{{--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                            <span aria-hidden="true">&times;</span>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                    <div class="modal-body">--}}
-{{--                        <h6 class="card-subtitle mb-2">{{ __('請上傳Excel檔案') }}</h6>--}}
-{{--                        <div class=" mb-0">--}}
-{{--                            <input type="file" class="" name="file">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="modal-footer">--}}
-{{--                        <button type="submit" class="btn btn-primary">{{ __('送出') }}</button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </form>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" --}}
+    {{--         aria-hidden="true"> --}}
+    {{--        <div class="modal-dialog" role="document"> --}}
+    {{--            <form action="{{ route('permission_group_import') }}" method="post" enctype="multipart/form-data"> --}}
+    {{--                <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
+    {{--                <div class="modal-content"> --}}
+    {{--                    <div class="modal-header"> --}}
+    {{--                        <h5 class="modal-title" id="importModalLabel">{{ __('匯入新增') }}</h5> --}}
+    {{--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> --}}
+    {{--                            <span aria-hidden="true">&times;</span> --}}
+    {{--                        </button> --}}
+    {{--                    </div> --}}
+    {{--                    <div class="modal-body"> --}}
+    {{--                        <h6 class="card-subtitle mb-2">{{ __('請上傳Excel檔案') }}</h6> --}}
+    {{--                        <div class=" mb-0"> --}}
+    {{--                            <input type="file" class="" name="file"> --}}
+    {{--                        </div> --}}
+    {{--                    </div> --}}
+    {{--                    <div class="modal-footer"> --}}
+    {{--                        <button type="submit" class="btn btn-primary">{{ __('送出') }}</button> --}}
+    {{--                    </div> --}}
+    {{--                </div> --}}
+    {{--            </form> --}}
+    {{--        </div> --}}
+    {{--    </div> --}}
     <form id="filterForm">
         <!-- Modal -->
         <div class="slideFunc-box" id="prodFilter">
@@ -234,7 +240,7 @@
                         <div class="col-12">
                             @foreach ($Model->filterTemplate as $column => $setting)
                                 <x-OperateFilterDiv :column="$column" :model="$Model"
-                                                    :setting="$setting"></x-OperateFilterDiv>
+                                    :setting="$setting"></x-OperateFilterDiv>
                             @endforeach
                             {{--                        //自訂篩選條件 --}}
                             {{--                        <div class="form-group"> --}}
@@ -250,13 +256,13 @@
                         </div>
                     </div>
                     <input id="filter_text_key" name="filter_text_key" type="hidden"
-                           value="{{ request()->get('filter_text_key') }}">
+                        value="{{ request()->get('filter_text_key') }}">
                     <input id="filter_text_value" name="filter_text_value" type="hidden"
-                           value="{{ request()->get('filter_text_value') }}">
+                        value="{{ request()->get('filter_text_value') }}">
                 </div>
                 <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
                     <button type="reset" class="btn btn-muted mx-2"
-                            onclick="$('.select2bs5').empty() && $(':input','#filterForm').not(':button, :submit, :reset, :hidden').val('').prop('checked', false).prop('selected', false);
+                        onclick="$('.select2bs5').empty() && $(':input','#filterForm').not(':button, :submit, :reset, :hidden').val('').prop('checked', false).prop('selected', false);
                 ">{{ __('清除篩選器') }}</button>
                     <button type="submit" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
                 </div>
@@ -283,10 +289,10 @@
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
-                                                       value="{{ $value }}"
-                                                       aria-label="Checkbox for following text input" checked disabled>
+                                                    value="{{ $value }}"
+                                                    aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                       for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>
@@ -297,11 +303,11 @@
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
-                                                       value="{{ $value }}" name="list[]"
-                                                       aria-label="Checkbox for following text input"
+                                                    value="{{ $value }}" name="list[]"
+                                                    aria-label="Checkbox for following text input"
                                                     {{ in_array($value, $columns) ? 'checked' : '' }}>
                                                 <label class="form-check-label"
-                                                       for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-align-justify"></i>
                                         </div>
@@ -312,10 +318,10 @@
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
-                                                       value="{{ $value }}"
-                                                       aria-label="Checkbox for following text input" checked disabled>
+                                                    value="{{ $value }}"
+                                                    aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                       for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>

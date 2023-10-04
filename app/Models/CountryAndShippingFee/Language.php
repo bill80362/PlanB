@@ -145,20 +145,29 @@ class Language extends Model
         return $query;
     }
 
+
+    /**
+     * 資料表欄位文字搜尋
+     */
+    public $filterTextKey = [
+        'text',
+        'tran_text'
+    ];
+
+
     /**
      * 客制文字搜尋
      */
+    public $filterTextKeyCustom = [
+        'lang_url_map' => '相關網址'
+    ];
+
     public function useCustomTextSearch($query, array $Data)
     {
-        //過濾文字條件
-        if (isset($Data['filter_text_key'])) {
-            if ($Data['filter_text_key'] == 'lang_url_map') {
-                $query->whereHas('langUrlMaps', function ($subQuery) use ($Data) {
-                    $subQuery->where('url', 'like', '%' . $Data['filter_text_value'] . '%');
-                });
-            } else {
-                $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
-            }
+        if (isset($Data['filter_text_key']) && in_array($Data['filter_text_key'], array_keys($this->filterTextKeyCustom))) {
+            $query->whereHas('langUrlMaps', function ($subQuery) use ($Data) {
+                return $subQuery->where('url', 'like', '%' . $Data['filter_text_value'] . '%');
+            });
         }
 
         return $query;

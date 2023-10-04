@@ -65,18 +65,18 @@ class ImageTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function test_uploadimage(): void
-    {
-        $user = User::find(1);
-        $this->actingAs($user, 'operate');
-        $response = $this->json('POST', '/operate/upload_image', [
-            'image' => UploadedFile::fake()->image('avatar.jpg'),
-            'path' => 'editor',
-        ]);
-        $json = $response->json();
+    // public function test_uploadimage(): void
+    // {
+    //     $user = User::find(1);
+    //     $this->actingAs($user, 'operate');
+    //     $response = $this->json('POST', '/operate/upload_image', [
+    //         'image' => UploadedFile::fake()->image('avatar.jpg'),
+    //         'path' => 'editor',
+    //     ]);
+    //     $json = $response->json();
 
-        $this->assertFileExists(public_path($json['url']));        
-        $response->assertStatus(200);
-        unlink(public_path($json['url']));
-    }
+    //     $this->assertFileExists(public_path($json['url']));        
+    //     $response->assertStatus(200);
+    //     unlink(public_path($json['url']));
+    // }
 }

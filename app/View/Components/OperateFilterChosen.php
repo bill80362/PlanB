@@ -32,7 +32,7 @@ class OperateFilterChosen extends Component
             foreach ($this->model->filterTemplate as $useTemplateFilter => $set) {
                 $title = '';
                 if (is_array($set)) {
-                    $template = $set['type'];
+                    $template = $set['template'];
                     $title = $set['title'] ?? '';
                 } else {
                     $template = $set;
