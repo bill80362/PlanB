@@ -448,4 +448,19 @@
         e.preventDefault()
         $(this).parents('.slideFunc-box').removeClass('in-active')
     })
+
+    // .alert fade out
+
+    $('.alert').ready(function() {
+        console.log(this)
+    })
+    const alertAry = document.getElementsByClassName('alert');
+    console.log(alertAry)
+    alertAry.forEach((ele, i ) => {
+        ele.onload = setTimeout(() => {
+            $(ele).fadeOut(300).remove()
+        }, 5000)
+        
+    });
+
 }(jQuery));
