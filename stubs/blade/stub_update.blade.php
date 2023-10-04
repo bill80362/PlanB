@@ -67,10 +67,7 @@
                                                 <label for=""
                                                     class="col-12 col-sm-3 col-form-label">{{ __('名稱') }}</label>
                                                 <div class="col-12 col-sm-9">
-                                                    <textarea {{ $Data->id ? 'disabled' : '' }} name="text" class="form-control" rows="3">{{ $Data->text }}</textarea>
-                                                    @if ($Data->id)
-                                                        <input type="hidden" name="text" value="{{ $Data->text }}">
-                                                    @endif
+                                                    <textarea  name="name" class="form-control" rows="3">{{ $Data->text }}</textarea>
                                                 </div>
                                             </div> --}}
 

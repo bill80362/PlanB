@@ -6,16 +6,43 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\FilterTemplateTrait;
 use App\Models\ExportImportTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class {{ class }} extends Model
+class {{ class }} extends Model implements Auditable
 {
     use HasFactory;
-    // use ExportImportTrait; //匯出
-
+    // use ExportImportTrait; //匯出    
+    use \OwenIt\Auditing\Auditable; //操作Log
     
     public $incrementing = true;
     protected $keyType = 'int';
     protected $guarded = [];
+
+
+    public function getValidatorRules()
+    {
+        return [
+           // 'lang_type' => ['required'],
+           // 'text' => ['required'],
+           // 'tran_text' => ['required'],
+           // 'memo' => [''],
+        ];
+    }
+
+    public function getValidatorRulesForUpdate()
+    {
+        return [
+           // 'tran_text' => ['required'],
+           // 'memo' => [''],
+           // 'else_langTypes.*' => ['array'],
+           // 'else_trans.*' => ['array', 'string'],
+        ];
+    }
+
+    public function getValidatorMessage()
+    {
+        return [];
+    }
 
     /**
     * 資料表欄位名稱對應，非實體欄位，不能設定
