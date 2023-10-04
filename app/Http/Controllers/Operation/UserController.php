@@ -100,7 +100,7 @@ class UserController extends Controller
     {
         $user = auth('operate')->user();
         //過濾，重要model在設定這個，其他都直接all()即可
-        $UpdateData = $this->request->only(['name', 'email', 'password','status']);
+        $UpdateData = $this->request->only(['name', 'email', 'password', 'status']);
         if (!$UpdateData['password']) {
             unset($UpdateData['password']);
         } else {
@@ -125,6 +125,7 @@ class UserController extends Controller
         if ($id) {
             $this->oModel->find($id)->update($UpdateData);
         } else {
+            $UpdateData['lv'] = 4;
             $id = $this->oModel->create($UpdateData)->id;
         }
         /***寫入權限 START **/
@@ -185,9 +186,9 @@ class UserController extends Controller
         //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
         $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
         //開始逐筆匯入
-        try{
+        try {
             $AllMessage = $this->oModel->importData($subjects->toArray());
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect("/operate/user?" . $this->request->getQueryString())->with(['error' => $e->getMessage()]);
         }
         //有錯誤
@@ -203,7 +204,7 @@ class UserController extends Controller
     {
         //匯出的內文是否使用變異器
         $useMutator = false;
-        if($Type=="value"){
+        if ($Type == "value") {
             $useMutator = true;
         }
         $ExportList = $this->oModel->filter($this->request->all())->export($useMutator);
@@ -234,5 +235,4 @@ class UserController extends Controller
         $listColumnService->renewListColumn($this->oModel, $list, $user->id);
         return back();
     }
-
 }

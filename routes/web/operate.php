@@ -64,7 +64,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'prefix' => 'audit',
             'as' => 'audit_',
         ], function () {
-            Route::get('', [Operation\AuditController::class, 'listHTML'])->name('list');
+            Route::get('', [Operation\AuditController::class, 'listHTML'])->name('list')->can('audit_read');
             Route::get('/{id}', [Operation\AuditController::class, 'updateHTML'])->whereNumber('id')->name('update_html');
             Route::post('/{id}', [Operation\AuditController::class, 'update'])->whereNumber('id')->name('update');
             Route::post('/del', [Operation\AuditController::class, 'delBatch'])->name('del');
