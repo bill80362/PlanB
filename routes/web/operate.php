@@ -5,6 +5,9 @@ use App\Http\Controllers\Operation\FileUploadController;
 use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
+//stub產生放置位置
+
+
 /**後台*/
 Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request', 'log.response'])->group(function () {
     //切換後台版面語言

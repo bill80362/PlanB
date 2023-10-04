@@ -1,4 +1,4 @@
-//路由範本產生器
+//stub產生放置位置
 /*
 Route::group([
     'prefix' => '{{ model }}',
