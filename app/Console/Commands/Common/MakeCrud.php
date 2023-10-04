@@ -29,8 +29,6 @@ class MakeCrud extends Command
     public function handle()
     {
         $modelname = $this->argument('modelname');
-        //變數名稱轉換
-
         // 產生model
         Artisan::call("make:model " . $modelname . " -m");
         // 產生controller
