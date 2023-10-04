@@ -1,4 +1,4 @@
-//管理人管理
+//路由範本產生器
 /*
 Route::group([
     'prefix' => '{{ model }}',
