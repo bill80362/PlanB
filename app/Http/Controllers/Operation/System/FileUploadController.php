@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Operation;
+namespace App\Http\Controllers\Operation\System;
 
-use App\Events\Operate\UserEditEvent;
 use App\Http\Controllers\Controller;
 use App\Models\FileUpload;
-use App\Models\Permission\Permission;
-use App\Models\Permission\PermissionGroup;
-use App\Models\User;
 use App\Services\Operate\ListColumnService;
-use App\Services\Operate\PermissionService;
 use App\Services\Operate\SystemConfigService;
 use App\Services\Operate\UploadFileService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
 
 class FileUploadController extends Controller
 {

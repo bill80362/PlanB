@@ -65,17 +65,6 @@ class MenuService
                 ],
             ],
             [
-                'name' => __('Log'),
-                'icon' => '',
-                'subMenu' => [
-                    [
-                        'name' => __('abc公司串接Log'),
-                        'href' => '/operate/http_log',
-                        'permission' => '',
-                    ],
-                ],
-            ],
-            [
                 'name' => __('檔案管理'),
                 'icon' => '',
                 'subMenu' => [
@@ -87,13 +76,18 @@ class MenuService
                 ],
             ],
             [
-                'name' => __('操作紀錄'),
+                'name' => __('紀錄管理'),
                 'icon' => '',
                 'subMenu' => [
                     [
                         'name' => __('操作紀錄'),
                         'href' => '/operate/audit',
                         'permission' => 'audit_read',
+                    ],
+                    [
+                        'name' => __('串接紀錄'),
+                        'href' => '/operate/http_log',
+                        'permission' => '',
                     ],
                 ],
             ],
