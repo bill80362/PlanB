@@ -85,7 +85,7 @@ class UserController extends Controller
             ]);
         }
 
-        $permissionGroups = PermissionGroup::where('show_flag', 'Y')->with(['permissionGrouopItems'])
+        $permissionGroups = PermissionGroup::where('status', 'Y')->with(['permissionGrouopItems'])
             ->get()->toArray();
         //View
         return view('operate/pages/user/update', [

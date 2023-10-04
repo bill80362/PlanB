@@ -23,12 +23,12 @@ class MenuService
                     [
                         'name' => __('管理人管理'),
                         'href' => '/operate/user',
-                        'permission' => '', //user.read
+                        'permission' => 'user.read',
                     ],
                     [
                         'name' => __('群組管理'),
                         'href' => '/operate/permission_group',
-                        'permission' => '', //permissionGroup.read
+                        'permission' => 'permissionGroup.read',
                     ],
                 ],
             ],

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('permission_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->char('show_flag', 1)->default('Y');
+            $table->char('status', 1)->default('Y');
             $table->timestamps();
         });
     }

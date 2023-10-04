@@ -19,7 +19,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
     Route::middleware([
         'auth:operate',
         'OperateLoginAuth',
-//        'online.user', //線上人數
+        //        'online.user', //線上人數
     ])->group(function () {
 
         //Dashboard
@@ -30,13 +30,13 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'prefix' => 'user',
             'as' => 'user_',
         ], function () {
-            Route::get('/', [UserController::class, 'listHTML'])->name('list')->middleware(['can:user_read']);
-            Route::get('/{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->middleware(['can:user_read']);
-            Route::post('/{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->middleware(['can:user_update']);
-            Route::post('/del', [UserController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
-            Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->middleware(['can:user_export']);
-            Route::post('/import', [UserController::class, 'import'])->name('import')->middleware(['can:user_import']);
-            Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->middleware(['can:user_read']);
+            Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('user_read');
+            Route::get('/{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_update');
+            Route::post('/{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
+            Route::post('/del', [UserController::class, 'delBatch'])->name('del')->can('user_delete');
+            Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->can('user_export');
+            Route::post('/import', [UserController::class, 'import'])->name('import')->can('user_import');
+            Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->can('user_read');
             Route::post('/list_column', [UserController::class, 'saveListColumn'])->name('saveListColumn');
         });
 
@@ -44,20 +44,19 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'prefix' => 'permission_group',
             'as' => 'permission_group_',
         ], function () {
-            Route::get('/', [Operation\PermissionGroupController::class, 'listHTML'])->name('list')->middleware(['can:user_read']);
-            Route::get('/{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->middleware(['can:user_read']);
-            Route::post('/{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->middleware(['can:user_update']);
-            Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->middleware(['can:user_delete']);
+            Route::get('/', [Operation\PermissionGroupController::class, 'listHTML'])->name('list')->can('user_read');
+            Route::get('/{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_read');
+            Route::post('/{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
+            Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->can('user_delete');
             // Route::get('/export', [Operation\PermissionGroupController::class, 'export'])->name('export')->middleware(['can:user_export']);
             // Route::post('/import', [Operation\PermissionGroupController::class, 'import'])->name('import')->middleware(['can:user_import']);
             Route::post('/list_column', [Operation\PermissionGroupController::class, 'saveListColumn'])->name('saveListColumn');
-
         });
 
         //系統設定
-        Route::get('/system', [Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->middleware(['can:system_update']);
-        Route::post('/system', [Operation\SystemController::class, 'update'])->name('system_update')->middleware(['can:system_update']);
-//        Route::post('/delete/image', [Operation\SystemController::class, 'deleteImage'])->name('system_delete_image')->middleware(['can:system_update']);
+        Route::get('/system', [Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->can('system_update');
+        Route::post('/system', [Operation\SystemController::class, 'update'])->name('system_update')->can('system_update');
+        //        Route::post('/delete/image', [Operation\SystemController::class, 'deleteImage'])->name('system_delete_image')->middleware(['can:system_update']);
 
         Route::get('/http_log', [Operation\HttpLogController::class, 'listHTML'])->name('http_log_list');
         Route::get('/http_log/{id}', [Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
@@ -75,20 +74,19 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::post('/import', [Operation\AuditController::class, 'import'])->name('import');
             Route::post('/reverse', [Operation\AuditController::class, 'reverseBatch'])->name('reverse');
             Route::post('/list_column', [Operation\AuditController::class, 'saveListColumn'])->name('saveListColumn');
-
         });
 
         //語系
         Route::get('/language', [Operation\LanguageController::class, 'listHTML'])->name('language_list')
-            ->middleware(['can:language_read']);
+            ->can('language_read');
 
 
         Route::get('/language/{id}', [Operation\LanguageController::class, 'updateHTML'])->whereNumber('id')
-            ->name('language_update_html')->middleware(['can:language_read']);
+            ->name('language_update_html')->can('language_read');
         Route::post('/language/{id}', [Operation\LanguageController::class, 'update'])
-            ->whereNumber('id')->name('language_update')->middleware(['can:language_update']);
+            ->whereNumber('id')->name('language_update')->can('language_update');
         Route::post('/language/del', [Operation\LanguageController::class, 'delBatch'])
-            ->name('language_del')->middleware(['can:language_delete']);
+            ->name('language_del')->can('language_delete');
         Route::get('/language/export', [Operation\LanguageController::class, 'export'])
             ->name('language_export');
         Route::post('/language/import', [Operation\LanguageController::class, 'import'])->name('language_import');
@@ -97,10 +95,8 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
 
 
         //公司管理
-        Route::get('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement')
-            ->middleware([]);
-        Route::post('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement')
-            ->middleware([]);
+        Route::get('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement');
+        Route::post('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement');
 
         Route::post('/upload_image', [Operation\FileController::class, 'uploadImage'])
             ->name('upload_file');

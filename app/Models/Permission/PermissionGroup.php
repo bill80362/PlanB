@@ -32,13 +32,13 @@ class PermissionGroup extends Model implements Auditable
     public array $Column_Title_Text = [
         'id' => '編號',
         'name' => '名稱',
-        'show_flag' => '狀態',
+        'status' => '狀態',
     ];
 
     /**
      * model的key-value對轉，考慮excel匯入匯出可以使用
      */
-    public array $showFlagText = [
+    public array $statusText = [
         'Y' => '正常',
         'N' => '鎖定',
     ];
@@ -66,8 +66,8 @@ class PermissionGroup extends Model implements Auditable
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if (isset($Data['filter_show_flag'])) {
-            $query->whereIn('show_flag', (array) $Data['filter_show_flag']);
+        if (isset($Data['filter_status'])) {
+            $query->whereIn('status', (array) $Data['filter_status']);
         }
         //過濾文字條件
         if (isset($Data['filter_text_key'])) {

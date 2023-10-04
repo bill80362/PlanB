@@ -43,52 +43,13 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        foreach ($perms as $perm) {
+            \App\Models\Permission\Permission::create([
+                'user_id' => '2',
+                'perm_key' => $perm['key'],
+            ]);
+        }
 
-
-        \App\Models\Permission\Permission::create([
-            'user_id' => '2',
-            'perm_key' => 'user_read',
-        ]);
-        \App\Models\Permission\Permission::create([
-            'user_id' => '2',
-            'perm_key' => 'user_update',
-        ]);
-
-        \App\Models\Permission\Permission::create([
-            'user_id' => '2',
-            'perm_key' => 'user_delete',
-        ]);
-
-        \App\Models\Permission\Permission::create([
-            'user_id' => '2',
-            'perm_key' => 'mailOrder.newOrder',
-        ]);
-
-        // ListColumnSetting::create([
-        //     'list_model_type' => Language::class,
-        //     'user_id' => 2,
-        //     'column_name' => 'text',
-        //     'sort' => 1,
-        // ]);
-
-        // ListColumnSetting::create([
-        //     'list_model_type' => Language::class,
-        //     'user_id' => 2,
-        //     'column_name' => 'tran_text',
-        //     'sort' => 2,
-        // ]);
-
-        // ListColumnSetting::create([
-        //     'list_model_type' => Language::class,
-        //     'user_id' => 2,
-        //     'column_name' => 'isUpdated',
-        //     'sort' => 3,
-        // ]);
-
-        // \App\Models\Permission\Permission::create([
-        //     'user_id' => '1',
-        //     'perm_key' => 'mailOrder.newOrder',
-        // ]);
 
         // PageContent::firstOrCreate([
         //     'key' => 'privacyStatement',
