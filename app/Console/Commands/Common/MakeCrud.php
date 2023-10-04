@@ -29,14 +29,6 @@ class MakeCrud extends Command
     public function handle()
     {
         $modelname = $this->argument('modelname');
-        // 產生model
-        Artisan::call("make:model " . $modelname . " -m");
-        // 產生controller
-        Artisan::call("make:controller " . $modelname . "Controller" . " --model=" . $modelname);
-
-        // 產生blade
-        $stubPath = base_path('stubs') . '/blade/';
-        $bladeNames = ['list.blade.php', 'update.blade.php']; // ['stub_list.blade.php', 'stub_update.blade.php']
 
         $splitStrs = explode("/", $modelname);
         $subPathArr = collect($splitStrs)->map(function ($item) {
@@ -45,8 +37,20 @@ class MakeCrud extends Command
 
         $subPath = $subPathArr->join('/') . '/';
 
+        // 產生名稱
         $snacktName = $subPathArr->last();
         $camelName = Str::camel($snacktName);
+
+        // 產生model
+        Artisan::call("make:model " . $modelname . " -m");
+        // 產生controller
+        Artisan::call("make:controller " . 'Operation/' . $modelname . "Controller" . " --model=" . $modelname);
+
+        // 產生blade
+        $stubPath = base_path('stubs') . '/blade/';
+        $bladeNames = ['list.blade.php', 'update.blade.php']; // ['stub_list.blade.php', 'stub_update.blade.php']
+
+
 
         $tagetPath = resource_path('views/operate/pages/' . $subPath);
 

@@ -1,4 +1,4 @@
-//stub產生放置位置
+// 請勿刪除此行註解，stub產生放置位置
 /*
 Route::group([
     'prefix' => '{{ model }}',

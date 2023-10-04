@@ -5,7 +5,7 @@ use App\Http\Controllers\Operation\FileUploadController;
 use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
-//stub產生放置位置
+// 請勿刪除此行註解，stub產生放置位置
 
 
 /**後台*/
