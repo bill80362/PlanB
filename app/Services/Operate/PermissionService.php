@@ -115,31 +115,26 @@ class PermissionService
                 'actions' => ['read', 'create', 'update', 'delete'],
             ],
 
-            // [
-            //     'label' => '會員管理_通訊錄',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '會員管理_VIP紀錄',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '會員內部備註辭庫',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '會員外部升等金額',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '黑名單',
-            //     'groupKey' => '訂閱電子報',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
+            [
+                'label' => '會員標籤',
+                'groupKey' => 'memberTag',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
+            [
+                'label' => '會員內部備註辭庫',
+                'groupKey' => 'memberRemark',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
+            [
+                'label' => '會員外部升等金額',
+                'groupKey' => 'externalPoints',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
+            [
+                'label' => '黑名單',
+                'groupKey' => 'memberBlack',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
             // [
             //     'label' => '退貨保留款',
             //     'groupKey' => '',
