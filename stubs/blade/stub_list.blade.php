@@ -1,7 +1,8 @@
 @php
     /**
      * 產生後請執行以下步驟：
-     * 1. 請先取代掉 xxxxxxxx_ 參數
+     * xxxxxxxxx_ 參數(路由用)
+     * yyyyyyyyy_ 參數(權限用)
      * 2. 確認欄位
      **/
 @endphp
@@ -34,7 +35,7 @@
                                         <button type="button" class="dropdown-item">{{ __('取消全選') }}</button>
                                         <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button>
                                         <hr class="dropdown-divider">
-                                        @can('xxxxxxxxx_delete')
+                                        @can('yyyyyyyyy_delete')
                                             <hr class="dropdown-divider">
                                             <button id="btnDeleteBatch" type="button"
                                                 class="dropdown-item">{{ __('勾選刪除') }}</button>
@@ -42,19 +43,19 @@
                                     </div>
                                 </div>
                                 <div class="btn-group me-2">
-                                    @canany('xxxxxxxxx_import', 'xxxxxxxxx_export')
+                                    @canany('yyyyyyyyy_import', 'yyyyyyyyy_export')
                                         <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {{ __('匯入') }} / {{ __('匯出') }}
                                         </button>
                                         <div class="dropdown-menu">
-                                            @can('xxxxxxxxx_import')
+                                            @can('yyyyyyyyy_import')
                                                 <button type="button" class="dropdown-item" data-bs-toggle="modal"
                                                     data-bs-target="#importModal">
                                                     {{ __('匯入') }}
                                                 </button>
                                             @endcan
-                                            @can('xxxxxxxxx_export')
+                                            @can('yyyyyyyyy_export')
                                                 <a target="_blank" class="dropdown-item"
                                                     href="{{ route('xxxxxxxxx_export', ['type' => 'key', ...request()->query()]) }}">
                                                     {{ __('匯出參數版') }}
@@ -68,7 +69,7 @@
                                     @endcanany
                                 </div>
                                 <div class="btn-group">
-                                    @can('xxxxxxxxx_create')
+                                    @can('yyyyyyyyy_create')
                                         <a class="btn btn-primary"
                                             href="{{ route('xxxxxxxxx_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
                                             {{ __('新增') }} </a>
@@ -80,7 +81,7 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <div class="input-group">
-                                        <div class="input-group input-group" id="searchContnet">
+                                        <div class="input-group input-group" id="searchContent">
                                             <div class="input-group-prepend">
                                                 <select class="form-select" id="filter_text_key_outside"
                                                     data-target="#searchFilter"
@@ -157,12 +158,12 @@
                                                                     <i class="ti-more-alt"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    @can('xxxxxxxxx_update')
+                                                                    @can('yyyyyyyyy_update')
                                                                         <li><a class="dropdown-item"
                                                                                 href="{{ route('xxxxxxxxx_update', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
                                                                         </li>
                                                                     @endcan
-                                                                    @can('xxxxxxxxx_delete')
+                                                                    @can('yyyyyyyyy_delete')
                                                                         <li><button class="dropdown-item" type="button"
                                                                                 onclick="postForm('{{ route('xxxxxxxxx_del') }}?{{ request()->getQueryString() }}',{
                                                                         'id_array[]':{{ $Item->id }},

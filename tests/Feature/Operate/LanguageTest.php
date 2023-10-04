@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Operate;
 
-use App\Http\Controllers\Operation\LanguageController;
+use App\Http\Controllers\Operation\Config\LanguageController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 /**
  * 測試controller範例

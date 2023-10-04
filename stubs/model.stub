@@ -11,7 +11,6 @@ class {{ class }} extends Model
 {
     use HasFactory;
     // use ExportImportTrait; //匯出
-    // use FilterTemplateTrait; // 搜尋
 
     
     public $incrementing = true;
@@ -36,18 +35,55 @@ class {{ class }} extends Model
     ];
 
     /**
-    * 欄位強制轉型
-    * @var array<string, string>
-    */
-    protected $casts = [];
+     * 後台操作 列表 匯出 篩選器
+     * template 對應的地方:
+     * 1.版面，修改位置 class OperateFilterDiv，主要負責讓使用者選擇篩選條件
+     * 2.功能，修改位置 model，主要負責SQL篩選條件
+     * 3.篩選器移除標籤，修改位置 chosen ，主要可以快速移除篩選條件
+     */
+    use FilterTemplateTrait;
+    public array $filterTemplate = [
+        // "status" => "radio",
+        // "updated_at" => "rangeDateTime",
+        "id" => "selectAndInput"
+    ];
+    //自定義篩選條件
+    public function useFilterExtend($query, array $Data)
+    {
+        //過濾選項
+        // if (isset($Data['filter_is_change'])) {
+        //     $isChanges = array_filter((array)$Data['filter_is_change']);
+        //     $query->where(function ($subQuery) use ($isChanges) {
+        //         foreach ($isChanges as $isChange) {
+        //             if ($isChange == 'Y') {
+        //                 $subQuery->orWhereColumn('updated_at', '!=', 'created_at');
+        //             } else {
+        //                 $subQuery->orWhereColumn('updated_at',  'created_at');
+        //             }
+        //         }
+        //     });
+        // }
 
-    /**
-    * 後台操作 列表 匯出 篩選器
-    * template 對應的地方:
-    * 1.版面，修改位置 class OperateFilterDiv，主要負責讓使用者選擇篩選條件
-    * 2.功能，修改位置 model，主要負責SQL篩選條件
-    * 3.篩選器移除標籤，修改位置 chosen ，主要可以快速移除篩選條件
-    */    
-    // public array $filterTemplate = [];
+        return $query;
+    }
+
+
+    public $filterTextKey = [
+        'id'
+    ];
+    public $filterTextKeyCustom = [
+        // 'lang_url_map' => '相關網址'
+    ];
+
+    public function useCustomTextSearch($query, array $Data)
+    {
+        // if (isset($Data['filter_text_key']) && in_array($Data['filter_text_key'], array_keys($this->filterTextKeyCustom))) {
+        //     $query->whereHas('langUrlMaps', function ($subQuery) use ($Data) {
+        //         return $subQuery->where('url', 'like', '%' . $Data['filter_text_value'] . '%');
+        //     });
+        // }
+
+        return $query;
+    }
 
 }

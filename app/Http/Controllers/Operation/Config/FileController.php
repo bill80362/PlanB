@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Operation;
+namespace App\Http\Controllers\Operation\Config;
 
 use App\Http\Controllers\Controller;
 use App\Services\Operate\SystemConfigService;
 use App\Services\Operate\UploadFileService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-
+/**
+ * 編輯器圖片上傳
+*/
 class FileController extends Controller
 {
     public function __construct(

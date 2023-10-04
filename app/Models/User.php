@@ -54,7 +54,7 @@ class User extends Authenticatable implements Auditable
     /**
      * 資料表關聯設定
      */
-//    protected $with = ['permissions'];
+    //    protected $with = ['permissions'];
     public function permissions()
     {
         return $this->hasMany(Permission::class);
@@ -129,7 +129,7 @@ class User extends Authenticatable implements Auditable
     {
         return [
             'name' => ['required', Rule::unique(User::class, 'name')->ignore($id)],
-            'password' => (!$id || $this->newPassword) ? 'required' : '',//新增或是更新有密碼，就是必填
+            'password' => (!$id || $this->newPassword) ? 'required' : '', //新增或是更新有密碼，就是必填
             'email' => ['required', 'email', Rule::unique(User::class, 'email')->ignore($id)],
             'status' => [Rule::in(['Y', 'N'])],
         ];
@@ -153,6 +153,16 @@ class User extends Authenticatable implements Auditable
     ];
     //自定義篩選條件
     public function useFilterExtend($query, array $Data)
+    {
+        return $query;
+    }
+
+    public $filterTextKey = [
+        'name', 'id', 'email'
+    ];
+    public $filterTextKeyCustom = [];
+
+    public function useCustomTextSearch($query, array $Data)
     {
         return $query;
     }

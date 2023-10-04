@@ -14,7 +14,7 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                @include('/operate/components/title/page_title')
+                                <h2> @include('/operate/components/title/page_title')</h2>
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <div class="input-group">
-                                        <div class="input-group input-group" id="searchContnet">
+                                        <div class="input-group input-group" id="searchContent">
                                             <div class="input-group-prepend">
                                                 <select class="form-select" name="filter_text_key"
                                                     data-target="#searchFilter">
@@ -912,14 +912,14 @@
 @section('BodyJavascript')
     <script>
         console.log($trans('確認要刪除嗎？'))
-        
+
         //Initialize Select2 Elements
         $('.select2bs5').each(function(i, ele) {
             $(ele).select2({
                 dropdownParent: $('#prodFilter'),
             })
         })
-        
+
         /**
          * sends a request to the specified url from a form. this will change the window location.
          * @param {string} path the path to send the post request to

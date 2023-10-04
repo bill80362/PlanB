@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Operation;
+namespace App\Http\Controllers\Operation\Config;
 
 use App\Http\Controllers\Controller;
 use App\Services\Route\RouteLanguageService;

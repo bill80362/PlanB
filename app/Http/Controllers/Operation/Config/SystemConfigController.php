@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Operation;
+namespace App\Http\Controllers\Operation\Config;
 
 use App\Http\Controllers\Controller;
 use App\Models\SystemConfig;
 use App\Services\Operate\SystemConfigService;
 use App\Services\Operate\UploadFileService;
-use App\Services\Operate\UploadImageLimit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
-class SystemController extends Controller
+class SystemConfigController extends Controller
 {
     public function __construct(
         protected Request $request,

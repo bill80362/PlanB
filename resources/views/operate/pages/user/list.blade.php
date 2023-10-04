@@ -72,16 +72,22 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <div class="input-group">
-                                        <div class="input-group input-group" id="searchContnet">
+                                        <div class="input-group input-group" id="searchContent">
                                             <div class="input-group-prepend">
                                                 <select class="form-select" id="filter_text_key_outside"
                                                     data-target="#searchFilter"
                                                     onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    @foreach (['name', 'id', 'email'] as $value)
+                                                    @foreach ($Model->filterTextKey as $value)
                                                         <option value="{{ $value }}"
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
+                                                    @endforeach
+
+                                                    @foreach ($Model->filterTextKeyCustom as $key => $value)
+                                                        <option value="{{ $key }}"
+                                                            {{ request()->get('filter_text_key') == $key ? 'selected' : '' }}>
+                                                            {{ __($value) }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -128,7 +134,7 @@
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
                                                             <input type="checkbox" class="form-check-input"
-                                                                name="id_array[]" value="1"> {{ $index + 1 }}
+                                                                name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
                                                         </td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
                                                         <td class="border-0" data-column="name">{{ $Item->name }}</td>

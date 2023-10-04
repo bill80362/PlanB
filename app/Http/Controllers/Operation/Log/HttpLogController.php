@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Operation;
+namespace App\Http\Controllers\Operation\Log;
 
 use App\Http\Controllers\Controller;
 use App\Models\Log\HttpLog;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Operation;
+namespace App\Http\Controllers\Operation\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyManage\PageContent;

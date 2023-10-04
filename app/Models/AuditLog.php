@@ -36,12 +36,12 @@ class AuditLog extends Audit
     public function scopeFilter($query, array $Data)
     {
         //過濾選項
-        if ( isset($Data["filter_event"]) ) {
-            $query->whereIn('event',(array)$Data["filter_event"]);
+        if (isset($Data["filter_event"])) {
+            $query->whereIn('event', (array)$Data["filter_event"]);
         }
         //過濾文字條件
         if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%'.$Data['filter_text_value'].'%');
+            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
         }
         //排序
         if (isset($Data['order_by'])) {
@@ -52,4 +52,9 @@ class AuditLog extends Audit
         //
         return $query;
     }
+
+
+    public array $filterTemplate = [
+        "filter_event" => "select2",
+    ];
 }

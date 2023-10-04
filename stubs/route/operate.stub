@@ -1,0 +1,16 @@
+// 請勿刪除此行註解，stub產生放置位置
+/*
+Route::group([
+    'prefix' => '{{ model }}',
+    'as' => '{{ model }}_',
+], function () {
+    Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('{{ model }}_read');
+    Route::get('{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('{{ model }}_update');
+    Route::post('{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->can('{{ model }}_update');
+    Route::post('del', [UserController::class, 'delBatch'])->name('del')->can('{{ model }}_delete');
+    Route::get('export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->can('{{ model }}_export');
+    Route::post('import', [UserController::class, 'import'])->name('import')->can('{{ model }}_import');
+    Route::get('{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->can('{{ model }}_read');
+    Route::post('list_column', [UserController::class, 'saveListColumn'])->name('saveListColumn');
+});
+*/

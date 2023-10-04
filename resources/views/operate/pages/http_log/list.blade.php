@@ -10,8 +10,8 @@
             <div class="col-lg-12">
                 <div class="white_card">
                     <div class="white_card_header">
-                        <div class="d-flex align-items-center justify-content-between">                            
-                            @include('/operate/components/title/page_title')
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h2> @include('/operate/components/title/page_title')</h2>
                         </div>
                     </div>
                     <div class="white_card_body">
