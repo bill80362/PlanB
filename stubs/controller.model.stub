@@ -8,6 +8,7 @@ use App\Services\Operate\ListColumnService;
 use {{ namespacedModel }};
 
 // php artisan make:controller PhotoController --model=Photo
+// 請修改「xxxxxx」參數
 class {{ class }} extends Controller
 {
     public function __construct(

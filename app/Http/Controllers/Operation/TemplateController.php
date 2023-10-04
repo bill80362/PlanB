@@ -17,4 +17,15 @@ class TemplateController extends Controller
     {
         return view("operate/pages/template/detail");
     }
+
+
+    public function stubList()
+    {
+        return view("operate/pages/template/stub_list");
+    }
+
+    public function stubUpdate()
+    {
+        return view("operate/pages/template/stub_update");
+    }
 }
