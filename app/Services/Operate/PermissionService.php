@@ -114,7 +114,16 @@ class PermissionService
                 'groupKey' => 'member',
                 'actions' => ['read', 'create', 'update', 'delete'],
             ],
-
+            [
+                'label' => '會員管理_通訊錄',
+                'groupKey' => 'memberAddress',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
+            [
+                'label' => '會員管理_VIP紀錄',
+                'groupKey' => 'memberVIPRecord',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
             [
                 'label' => '會員標籤',
                 'groupKey' => 'memberTag',
@@ -135,36 +144,41 @@ class PermissionService
                 'groupKey' => 'memberBlack',
                 'actions' => ['read', 'create', 'update', 'delete'],
             ],
-            // [
-            //     'label' => '退貨保留款',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '退貨保留款-申請退款',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '貨到通知',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '認識管道',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '認識管道_細項',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
-            // [
-            //     'label' => '職業管理',
-            //     'groupKey' => '',
-            //     'actions' => ['read', 'create', 'update', 'delete'],
-            // ],
+            [
+                'label' => '訂閱電子報',
+                'groupKey' => 'newsletter',
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
+            ],
+            [
+                'label' => '退貨保留款',
+                'groupKey' => 'memberMoney',
+                'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
+            ],
+            [
+                'label' => '退貨保留款-申請退款',
+                'groupKey' => 'moneyRet',
+                'actions' => ['read', 'update', 'delete'],
+            ],
+            [
+                'label' => '貨到通知',
+                'groupKey' => 'prodInform',
+                'actions' => ['read',  'delete'],
+            ],
+            [
+                'label' => '認識管道',
+                'groupKey' => 'understandPipeline',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
+            [
+                'label' => '認識管道_細項',
+                'groupKey' => 'understandPipelineDetail',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
+            [
+                'label' => '職業管理',
+                'groupKey' => 'careerManagement',
+                'actions' => ['read', 'create', 'update', 'delete'],
+            ],
 
         ];
     }
