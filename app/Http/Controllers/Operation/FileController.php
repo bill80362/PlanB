@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
 use App\Services\Operate\SystemConfigService;
+use App\Services\Operate\UploadFileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,7 +14,8 @@ class FileController extends Controller
 {
     public function __construct(
         protected Request $request,
-        protected SystemConfigService $oSystemConfigService
+        protected SystemConfigService $oSystemConfigService,
+        protected UploadFileService $oUploadFileService,
     ) {
     }
 
@@ -28,10 +30,10 @@ class FileController extends Controller
         $uuid = Str::uuid();
         $ext = $image->extension();
         $filePath = $path . "/{$uuid}.{$ext}";
-        Storage::disk('public')->put($filePath, file_get_contents($image));
+        $this->oUploadFileService->getStorage()->put($filePath, file_get_contents($image));
 
         return response([
-            'url' => "/storage/{$filePath}",
+            'url' => $this->oUploadFileService->url($filePath),
         ], 200);
     }
 }
