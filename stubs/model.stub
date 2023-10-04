@@ -11,7 +11,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 class {{ class }} extends Model implements Auditable
 {
     use HasFactory;
-    // use ExportImportTrait; //匯出    
+    use ExportImportTrait; //匯出    
     use \OwenIt\Auditing\Auditable; //操作Log
     
     public $incrementing = true;
@@ -48,7 +48,7 @@ class {{ class }} extends Model implements Auditable
     * 資料表欄位名稱對應，非實體欄位，不能設定
     */
     public array $Column_Title_Text = [
-    
+        'name' => '名稱'
     ];
 
     /**
@@ -96,7 +96,7 @@ class {{ class }} extends Model implements Auditable
 
 
     public $filterTextKey = [
-        'id'
+        // 'name'
     ];
     public $filterTextKeyCustom = [
         // 'lang_url_map' => '相關網址'
