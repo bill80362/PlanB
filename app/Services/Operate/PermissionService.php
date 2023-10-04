@@ -244,6 +244,11 @@ class PermissionService
                 'actions' => ['read', 'create', 'update', 'delete', 'export', 'import'],
             ],
             [
+                'label' => '操作紀錄',
+                'groupKey' => 'audit',
+                'actions' => ['read'],
+            ],
+            [
                 'label' => '系統環境',
                 'groupKey' => 'system',
                 'actions' => ['update'],

@@ -7,9 +7,21 @@
 </style>
 
 <script>
+    // https://ckeditor.com/docs/ckeditor5/latest/features/html/general-html-support.html
     ClassicEditor
         .create(document.querySelector('#' + "{{ $id }}"), {
             extraPlugins: [MyCustomUploadAdapterPlugin],
+            htmlSupport: {
+                allow: [{
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true,
+                }],
+                disallow: [{
+                    name: /^(script)$/, //是否允語使用script語法
+                }]
+            },
             toolbar: {
                 items: [
                     'findAndReplace', 'selectAll', '|',

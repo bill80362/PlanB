@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->char('status', 1)->default('Y');
-            $table->integer('lv')->default(5)->comment('1.超級使用者, 2.工程師, 3.PM, 4.網址管理者, 5.使用者');
-            $table->rememberToken();        
+            $table->integer('lv')->default(4)->comment('1.超級使用者, 2.工程師, 3.PM, 4.網址管理者');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

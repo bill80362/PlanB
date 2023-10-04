@@ -46,6 +46,29 @@ class UserTest extends TestCase
     }
 
 
+    /**
+     * 新增
+     * 可驗證是否有正確寫入資料庫、測試加入權限
+     */
+    public function test_user_create(): void
+    {
+        $name = '4e6g4ew6r';
+        $response = $this->post('/operate/user/0', [
+            'name' => $name,
+            'email' => 'test123@test.com',
+            'password' => Hash::make('1234567'),
+            'status' => 'Y',
+            'memberLevel_read' => 'on',
+        ]);
+
+        $checkUser = User::where("email", 'test123@test.com')->first();
+
+        $permission = Permission::where('perm_key', 'memberLevel_read')->where('user_id', $checkUser->id)->first();
+        $response->assertStatus(302);
+        $this->assertSame($name, $checkUser->name, '名字更新失敗'); //驗證姓名是否有正確寫入資料庫
+        $this->assertNotNull($permission, '會員新增時-權限沒有被加上');
+    }
+
 
     /**
      * 更新

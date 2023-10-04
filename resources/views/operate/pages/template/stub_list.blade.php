@@ -1,3 +1,11 @@
+@php
+    /**
+     * 產生後請執行以下步驟：
+     * 1. 請先取代掉 xxxxxxxx_ 參數
+     * 2. 確認欄位
+     **/
+@endphp
+
 @extends('operate.layout._Master')
 
 @section('HeaderCSS')
@@ -14,47 +22,45 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>@include('/operate/components/title/page_title')</h2>
+                                <h2> @include('/operate/components/title/page_title')</h2>
                                 <!-- Example single danger button -->
-                                @can('language_delete')
-                                    <div class="btn-group me-2">
-                                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="ti-settings"></i> {{ __('處理') }}
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            {{-- <button type="button" class="dropdown-item">{{ __('全選') }}</button>
-                                        <button type="button" class="dropdown-item">{{ __('取消全選') }}</button>
-                                        <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button> --}}
-                                            {{-- <hr class="dropdown-divider"> --}}
-                                            @can('language_delete')
-                                                <hr class="dropdown-divider">
-                                                <button id="btnDeleteBatch" type="button"
-                                                    class="dropdown-item">{{ __('勾選刪除') }}</button>
-                                            @endcan
-                                        </div>
-                                    </div>
-                                @endcan
                                 <div class="btn-group me-2">
-                                    @canany('language_import', 'language_export')
+                                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="ti-settings"></i> {{ __('處理') }}
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-item">{{ __('全選') }}</button>
+                                        <button type="button" class="dropdown-item">{{ __('取消全選') }}</button>
+                                        <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button>
+                                        <hr class="dropdown-divider">
+                                        @can('xxxxxxxxx_delete')
+                                            <hr class="dropdown-divider">
+                                            <button id="btnDeleteBatch" type="button"
+                                                class="dropdown-item">{{ __('勾選刪除') }}</button>
+                                        @endcan
+                                    </div>
+                                </div>
+                                <div class="btn-group me-2">
+                                    @canany('xxxxxxxxx_import', 'xxxxxxxxx_export')
                                         <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {{ __('匯入') }} / {{ __('匯出') }}
                                         </button>
                                         <div class="dropdown-menu">
-                                            @can('language_import')
+                                            @can('xxxxxxxxx_import')
                                                 <button type="button" class="dropdown-item" data-bs-toggle="modal"
                                                     data-bs-target="#importModal">
                                                     {{ __('匯入') }}
                                                 </button>
                                             @endcan
-                                            @can('language_export')
+                                            @can('xxxxxxxxx_export')
                                                 <a target="_blank" class="dropdown-item"
-                                                    href="{{ route('language_export', ['type' => 'key', ...request()->query()]) }}">
+                                                    href="{{ route('xxxxxxxxx_export', ['type' => 'key', ...request()->query()]) }}">
                                                     {{ __('匯出參數版') }}
                                                 </a>
                                                 <a target="_blank" class="dropdown-item"
-                                                    href="{{ route('language_export', ['type' => 'value', ...request()->query()]) }}">
+                                                    href="{{ route('xxxxxxxxx_export', ['type' => 'value', ...request()->query()]) }}">
                                                     {{ __('匯出文字版') }}
                                                 </a>
                                             @endcan
@@ -62,9 +68,9 @@
                                     @endcanany
                                 </div>
                                 <div class="btn-group">
-                                    @can('language_create')
+                                    @can('xxxxxxxxx_create')
                                         <a class="btn btn-primary"
-                                            href="{{ route('language_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
+                                            href="{{ route('xxxxxxxxx_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
                                             {{ __('新增') }} </a>
                                     @endcan
                                 </div>
@@ -80,14 +86,11 @@
                                                     data-target="#searchFilter"
                                                     onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    @foreach (['text', 'tran_text'] as $value)
+                                                    @foreach ([] as $value)
                                                         <option value="{{ $value }}"
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
                                                     @endforeach
-                                                    <option value="lang_url_map"
-                                                        {{ request()->get('filter_text_key') == 'lang_url_map' ? 'selected' : '' }}>
-                                                        {{ __('相關網址') }}</option>
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" id="filter_text_value_outside"
@@ -100,42 +103,27 @@
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter">
-                                        <i class="ionicon-funnel-outline"></i>
+                                    <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon
+                                            name="funnel-outline"></ion-icon>
                                         {{ __('篩選器') }}</button>
                                     <a class="btn btn-muted" href="{{ request()->url() }}">{{ __('重置查詢') }}</a>
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    {{-- @include('operate.components.filter.chosen') --}}
                                     <x-OperateFilterChosen :model="$Model"></x-OperateFilterChosen>
+                                    {{--                                    @include("operate.components.filter.chosen") --}}
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">
                                                         {{ __('default_serial_number') }}</th>
-                                                    <x-OperateTh column="id" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
-                                                    <x-OperateTh column="text" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
-                                                    <x-OperateTh column="tran_text" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
-                                                    <x-OperateTh column="lang_type" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
-                                                    <x-OperateTh column="isUpdated" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
-                                                    <x-OperateTh column="updated_at" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
-                                                    <x-OperateTh column="created_at" :model="$Model"
-                                                        :setting="$TableSetting"></x-OperateTh>
-
+                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="name" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="email" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="status" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_by" :model="$Model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted"
                                                             onclick="$('#listSetting').toggleClass('in-active')"
@@ -148,23 +136,19 @@
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
                                                             <input type="checkbox" class="form-check-input"
-                                                                name="id_array[]" value="{{ $Item->id }}">
-
-                                                            {{ $index + 1 + ($Paginator->currentPage() - 1) * $Paginator->perPage() }}
+                                                                name="id_array[]" value="1"> {{ $index + 1 }}
                                                         </td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
-                                                        <td class="border-0" data-column="text">
-                                                            {{ $Item->text }}</td>
-                                                        <td class="border-0" data-column="tran_text">
-                                                            {{ $Item->tran_text }}</td>
-                                                        <td class="border-0" data-column="lang_type">
-                                                            {{ $Item->lang_type }}</td>
-                                                        <td class="border-0" data-column="isUpdated">
-                                                            {{ $Item->isUpdated ? 'Ⅹ' : '√' }}</td>
+                                                        <td class="border-0" data-column="name">{{ $Item->name }}</td>
+                                                        <td class="border-0" data-column="email">{{ $Item->email }}</td>
+                                                        <td class="border-0" data-column="status">
+                                                            {{ __($Model->statusText[$Item->status] ?? $Item->status) }}
+                                                        </td>
+                                                        <td class="border-0" data-column="updated_by">
+                                                            {{-- {{ $Item->audits()->latest()->first()?->user?->name }} --}}
+                                                        </td>
                                                         <td class="border-0" data-column="updated_at">
                                                             {{ $Item->updated_at }}</td>
-                                                        <td class="border-0" data-column="created_at">
-                                                            {{ $Item->created_at }}</td>
                                                         <td class="border-0 text-end" data-column="operate">
                                                             <div class="btn-group">
                                                                 <button type="button"
@@ -173,21 +157,21 @@
                                                                     <i class="ti-more-alt"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    @can('language_update')
+                                                                    @can('xxxxxxxxx_update')
                                                                         <li><a class="dropdown-item"
-                                                                                href="/operate/language/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                                                href="{{ route('xxxxxxxxx_update', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
                                                                         </li>
                                                                     @endcan
-                                                                    @can('language_delete')
+                                                                    @can('xxxxxxxxx_delete')
                                                                         <li><button class="dropdown-item" type="button"
-                                                                                onclick="postForm('/operate/language/del?{{ request()->getQueryString() }}',{
+                                                                                onclick="postForm('{{ route('xxxxxxxxx_del') }}?{{ request()->getQueryString() }}',{
                                                                         'id_array[]':{{ $Item->id }},
                                                                         _token:'{{ csrf_token() }}'
                                                                         })">{{ __('刪除') }}
                                                                             </button></li>
                                                                     @endcan
                                                                     <a target="_blank" class="dropdown-item"
-                                                                        href="/operate/language/{{ $Item->id }}/audit?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                        href="{{ route('xxxxxxxxx_audit', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
                                                                 </ul>
                                                             </div>
                                                         </td>
@@ -223,7 +207,7 @@
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('language_import') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('xxxxxxxxx_import') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-content">
                     <div class="modal-header">
@@ -258,23 +242,20 @@
                 <div class="slideFunc-body px-3 py-3">
                     <div class="row">
                         <div class="col-12">
-
                             @foreach ($Model->filterTemplate as $column => $setting)
                                 <x-OperateFilterDiv :column="$column" :model="$Model"
                                     :setting="$setting"></x-OperateFilterDiv>
                             @endforeach
-
-                            {{-- <div class="form-group">
-                                <label>{{ __('是否已修改') }}</label>
-                                <select name="filter_is_change[]" class="select2bs5" multiple="multiple"
-                                    style="width: 100%;">
-                                    @foreach ($Model->isChangeText as $key => $value)
-                                        <option value="{{ $key }}"
-                                            {{ in_array($key, (array) request()->get('filter_is_change')) ? 'selected' : '' }}>
-                                            {{ $value }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
+                            {{--                        //自訂篩選條件 --}}
+                            {{--                        <div class="form-group"> --}}
+                            {{--                            <label>{{$Model->Column_Title_Text["status"]}}</label> --}}
+                            {{--                            <select name="filter_status[]" class="select2bs5" multiple="multiple" style="width: 100%;"> --}}
+                            {{--                                @foreach ($Model->statusText as $key => $value) --}}
+                            {{--                                    <option --}}
+                            {{--                                        value="{{$key}}" {{in_array($key,(array)request()->get("filter_status"))?"selected":""}} >{{$value}}</option> --}}
+                            {{--                                @endforeach --}}
+                            {{--                            </select> --}}
+                            {{--                        </div> --}}
 
                         </div>
                     </div>
@@ -301,7 +282,7 @@
                     <span aria-hidden="true"></span>
                 </button>
             </div>
-            <form action="{{ route('language_saveListColumn') }}" method="POST">
+            <form action="{{ route('xxxxxxxxx_saveListColumn') }}" method="POST">
                 @csrf
                 <div class="slideFunc-body px-3 py-3">
                     <div class="row">
@@ -315,7 +296,7 @@
                                                     value="{{ $value }}"
                                                     aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? __($value)) }}</label>
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>
@@ -356,7 +337,7 @@
                 </div>
                 <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
                     {{-- <button type="reset" class="btn btn-muted mx-2" >取消</button> --}}
-                    <button type="submit" class="btn btn-primary mx-2">儲存</button>
+                    <button type="submit" class="btn btn-primary mx-2">{{ __('儲存') }}</button>
                 </div>
             </form>
         </div>
@@ -406,7 +387,7 @@
             });
             postArray["_token"] = '{{ csrf_token() }}';
             //送出
-            postForm('/operate/language/del?{{ request()->getQueryString() }}', postArray)
+            postForm('{{ route('xxxxxxxxx_del') }}?{{ request()->getQueryString() }}', postArray)
         });
 
         //欄位排序修改

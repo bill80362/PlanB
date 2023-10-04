@@ -192,7 +192,7 @@
                                                                 <ul class="dropdown-menu">
 
                                                                     <li><button class="dropdown-item" type="button"
-                                                                            onclick="postForm('/operate/audit/reverse?{{ request()->getQueryString() }}',{
+                                                                            onclick="postForm('{{route('audit_reverse')}}?{{ request()->getQueryString() }}',{
                                                                                 'id_array[]':{{ $Item->id }},
                                                                                 _token:'{{ csrf_token() }}'
                                                                                 })">{{ __('還原') }}
@@ -378,16 +378,16 @@
         });
 
         //批次刪除
-        $("#btnDeleteBatch").on("click", function() {
-            var postArray = [];
-            $("input[type=checkbox][name^='id_array']:checked").map(function() {
-                let val = $(this).val();
-                postArray["id_array[" + val + "]"] = val;
-            });
-            postArray["_token"] = '{{ csrf_token() }}';
-            //送出
-            postForm('/operate/audit/del?{{ request()->getQueryString() }}', postArray)
-        });
+        {{--$("#btnDeleteBatch").on("click", function() {--}}
+        {{--    var postArray = [];--}}
+        {{--    $("input[type=checkbox][name^='id_array']:checked").map(function() {--}}
+        {{--        let val = $(this).val();--}}
+        {{--        postArray["id_array[" + val + "]"] = val;--}}
+        {{--    });--}}
+        {{--    postArray["_token"] = '{{ csrf_token() }}';--}}
+        {{--    //送出--}}
+        {{--    postForm('/operate/audit/del?{{ request()->getQueryString() }}', postArray)--}}
+        {{--});--}}
 
         //欄位排序修改
         let columns = @json($columns);
