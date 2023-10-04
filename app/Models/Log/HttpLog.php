@@ -30,7 +30,7 @@ class HttpLog extends Model
         'status' => '狀態',
         'status_code' => 'http code',
         'connect_time' => '串接時間',
-        'proccess_time' => '',
+        'process_time' => '',
         'url' => '網址',
         'method' => '方法',
         'request' => 'Request',
