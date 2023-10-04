@@ -28,11 +28,10 @@ class RouteTitle
         "audit_reverse" => "操作紀錄還原",
         //
         "system_update_html"=>"系統設定",
-        "system_update"=>"",
-        "system_delete_image"=>"",
+        "system_update"=>"系統設定修改提交",
         //
-        "http_log"=>"",
-        "http_log_update"=>"",
+        "http_log_list"=>"串接紀錄",
+        "http_log_update"=>"串接紀錄詳細",
         //
         "file_upload_list"=>"檔案管理列表",
     ];

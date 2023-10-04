@@ -4,6 +4,7 @@ namespace App\Services\Operate;
 
 use App\Models\AuditLog;
 use App\Models\FileUpload;
+use App\Models\Log\HttpLog;
 use App\Models\Permission\PermissionGroup;
 use App\Models\User;
 use App\Models\User\ListColumnSetting;
@@ -65,6 +66,17 @@ class ListColumnService
             ],
             "canUseColumn" => [
                 'id', 'name', 'status',
+            ],
+            "lockColumnTail" => [
+                'operate'
+            ],
+        ],
+        HttpLog::class => [
+            "lockColumn" => [
+                'default_serial_number',
+            ],
+            "canUseColumn" => [
+                'id', 'type', 'primary_key','status','status_code','connect_time','process_time','url','method','request','response','created_at',
             ],
             "lockColumnTail" => [
                 'operate'

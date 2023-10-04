@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('method')->nullable();
 
             $table->string('connect_time')->nullable();
-            $table->string('proccess_time')->nullable();
+            $table->string('process_time')->nullable();
             $table->string('url')->nullable();
 
             $table->json('request')->nullable();

@@ -35,7 +35,7 @@ class MysqlHandler extends AbstractProcessingHandler
                     'status' => $isSuccess ? '串接成功' : '串接失敗', //串接成功或失敗
                     'status_code' => $statusCode,
                     'connect_time' => $data['context']['sec'],
-                    'proccess_time' => '',
+                    'process_time' => '',
                     'url' => $data['context']['uri'],
                     'method' => $data['context']['method'],
                     'request' => $data['context']['request'] ?: json_decode($data['context']['request']),
