@@ -100,7 +100,10 @@ class UserController extends Controller
     {
         $user = auth('operate')->user();
         //過濾，重要model在設定這個，其他都直接all()即可
-        $UpdateData = $this->request->only(['name', 'email', 'password', 'status']);
+        $UpdateData = $this->request->only([
+            'name', 'email', 'password',
+            'status', 'updated_at'
+        ]);
         if (!$UpdateData['password']) {
             unset($UpdateData['password']);
         } else {

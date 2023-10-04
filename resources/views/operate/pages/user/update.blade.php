@@ -80,7 +80,7 @@
                                                         <div class="form-check form-check-inline">
                                                             <input {{ $Data->status == $key ? 'checked' : '' }}
                                                                 class="form-check-input" type="radio" name="status"
-                                                                value="{{ $key }}" id="{{ $key }}" >
+                                                                value="{{ $key }}" id="{{ $key }}">
                                                             <label class="form-check-label"
                                                                 for="FlexRadio1{{ $key }}">
                                                                 {{ __($value) }}
@@ -89,6 +89,9 @@
                                                     @endforeach
                                                 </div>
                                             </div>
+
+                                            <input type="hidden" class="form-control" name="updated_at"
+                                                value="{{ $Data->updated_at }}">
 
                                             <div class="mb-3 row">
                                                 <label for=""
@@ -212,7 +215,8 @@
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center justify-content-end">
                                     <div class="btn-group ms-2">
-                                        <a class="btn btn-light" href="{{ route('user_list') }}?{{ request()->getQueryString() }}">{{ __('取消') }}</a>
+                                        <a class="btn btn-light"
+                                            href="{{ route('user_list') }}?{{ request()->getQueryString() }}">{{ __('取消') }}</a>
                                     </div>
                                     <div class="btn-group ms-2">
                                         <button type="submit" class="btn btn-primary">{{ __('儲存') }}</button>
