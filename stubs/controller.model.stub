@@ -4,6 +4,7 @@ namespace {{ namespace }};
 
 use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Services\Operate\ListColumnService;
 use {{ namespacedModel }};
 
@@ -46,13 +47,63 @@ class {{ class }} extends Controller
     // 新增、修改頁面
     public function updateHTML($id)
     {
+        $user = auth('operate')->user();
 
+        if ($id) {
+            //修改
+            $Data = $this->oModel->findOrFail($id);
+        } else {
+            $Data = $this->oModel;
+            //新增預設值
+            $Data->id = 0;
+            // $Data->name = '';
+            // $Data->status = 'Y';
+        }
+        //輸入驗證遭擋，會有舊資料，優先使用舊資料
+        foreach ((array) $this->request->old() as $key => $value) {
+            if (!$value) {
+                continue;
+            }
+            $Data->$key = $value;
+        }
+
+        //View
+        return view('operate/pages/{{r_blade_folder}}/update', [
+            'Data' => $Data,                        
+            'Model' => $this->oModel,
+        ]);
     }
 
     // 新增、修改
     public function update($id)
     {
+        $user = auth('operate')->user();
 
+        //過濾
+        $UpdateData = $this->request->only([
+        //    'name', 'status'
+        ]);
+
+        //驗證資料
+        $validator = Validator::make(
+            $UpdateData,
+            $this->oModel->getValidatorRules(),
+            $this->oModel->getValidatorMessage(),
+        );
+
+        //驗證有誤
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        if ($id) {
+            $this->oModel->find($id)->update($UpdateData);
+        } else {
+            $id = $this->oModel->create($UpdateData)->id;
+        }
+        
+        return redirect("/operate/{{r_url}}?" . $this->request->getQueryString())->with(['success' => __('送出成功')]);
     }
 
     //批次刪除

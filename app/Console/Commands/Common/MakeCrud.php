@@ -52,6 +52,7 @@ class MakeCrud extends Command
         if (file_exists($controllerPath)) {
             $controllerContent = file_get_contents($controllerPath);
             $controllerContent = str_replace("{{r_blade_folder}}", $subPath, $controllerContent);
+            $controllerContent = str_replace("{{r_url}}", $snacktName, $controllerContent);
             file_put_contents($controllerPath, $controllerContent);
         }
 
