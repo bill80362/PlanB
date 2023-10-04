@@ -41,9 +41,14 @@ class MakeCrud extends Command
         $bladeNames = ['list.blade.php', 'update.blade.php']; // ['stub_list.blade.php', 'stub_update.blade.php']
 
         $splitStrs = explode("/", $modelname);
-        $subPath = collect($splitStrs)->map(function ($item) {
+        $subPathArr = collect($splitStrs)->map(function ($item) {
             return Str::snake($item);
-        })->join('/') . '/';
+        });
+
+        $subPath = $subPathArr->join('/') . '/';
+
+        $snacktName = $subPathArr->last();
+        $camelName = Str::camel($snacktName);
 
         $tagetPath = resource_path('views/operate/pages/' . $subPath);
 
@@ -53,6 +58,8 @@ class MakeCrud extends Command
             $stubFile = $stubPath . 'stub_' . $bladeName;  // 範本檔
             if (file_exists($stubFile)) {
                 $stubContent = file_get_contents($stubFile);
+                $stubContent = str_replace("xxxxxxxxx_", $snacktName . '_', $stubContent);
+                $stubContent = str_replace("yyyyyyyyy_", $camelName . '_', $stubContent);
                 file_put_contents($fullPath, $stubContent);
             }
             // dump($stubFile);
