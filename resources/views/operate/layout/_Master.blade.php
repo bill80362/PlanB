@@ -184,6 +184,13 @@
         src="/template/select2-4.0.13/dist/js/select2.full.min.js?v={{ $SystemConfigService->versionJS }}">
     </script>
 
+    {{-- sweetalert2 --}}
+    <script
+        src="/template/sweetalert2/dist/sweetalert2.all.min.js?v={{ $SystemConfigService->versionJS }}">
+    </script>
+    <link rel="stylesheet" href="/template/sweetalert2/dist/sweetalert2.min.css?v={{ $SystemConfigService->versionJS }}">
+
+
 
     <script>
         {{-- 統一開啟的JS --}}
