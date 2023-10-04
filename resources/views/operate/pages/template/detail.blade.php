@@ -312,11 +312,15 @@
                             </div>
                             <div class="col-12 col-xl-7 mb-6">
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center justify-content-between">
                                         <h5 class="card-title">圖片和影片</h5>
+                                        <div class="button-group d-flex align-items-center">
+                                            <button class="btn btn-muted ms-2">取消全選</button>
+                                            <button class="btn btn-primary ms-2">全選</button>
+                                        </div>
                                     </div>
                                     <div class="card-body">
-                                        <ul class="prodPic-list">
+                                        <ul class="prodPic-list theme-main">
                                             @for ($i = 0; $i < 6; $i++)
                                             <li class="prodPic-item">
                                                 <img class="prodPic-img" src="/template/Salessa/img/products/1000_1000_{{str_pad($i + 1, 3, '0', STR_PAD_LEFT)}}.jpg"
@@ -1200,7 +1204,7 @@
                                     <div class="card-body">
                                         <ul class="list-group variant-group mb-3">
                                             <li class="list-group-item">
-                                                <div class="row align-items-center">
+                                                <div class="row align-items-center text-center">
                                                     <div class="col">規格主圖</div>
                                                     <div class="col">商品規格</div>
                                                     <div class="col">展示狀態</div>
@@ -1215,8 +1219,8 @@
                                             </li>
                                             @for ($i = 0; $i < 10; $i++)
                                             <li class="list-group-item collapse-item">
-                                                <div class="row align-items-center">
-                                                    <div class="col-2">
+                                                <div class="row align-items-center text-center">
+                                                    <div class="col">
                                                         <div class="variant-img">
                                                             <img src="/template/Salessa/img/products/1000_1000_{{str_pad($i + 1, 3, '0', STR_PAD_LEFT)}}.jpg" alt="">
                                                         </div>
@@ -1246,26 +1250,436 @@
                                                     <div class="col">
                                                         <input class="form-control" type="number">
                                                     </div>
-                                                    <div class="col">管理</div>
                                                     <div class="col d-flex align-items-center justify-content-end">
                                                         <div class="form-check form-switch p-0 ms-2">
                                                             <input class="form-check-input float-none d-block" type="checkbox" id="flexSwitchCheckDefault">
                                                         </div>
-                                                        <a class="text-muted ms-2 d-flex align-items-center fs-5" href="##">
+                                                        <a class="text-muted ms-2 d-flex align-items-center fs-5 variant-setting" href="##">
                                                             <ion-icon name="settings-outline"></ion-icon>
                                                         </a>
-                                                        <a class="text-danger ms-2 d-flex align-items-center fs-5" href="##">
+                                                        <a class="text-danger ms-2 d-flex align-items-center fs-5 variant-delete" href="##">
                                                             <i class="ti-trash"></i>
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="row collapse-box">
-                                                    <div class="col-4">
-                                                        <div class="mb-3 row">
-                                                            <label for="" class="col-12 col-sm-3 col-form-label">上架狀態</label>
-                                                            <div class="col-12 col-sm-9">
-                                                                <input type="text" readonly class="form-control-plaintext" id=""
-                                                                    value="S,M,L,XL">
+                                                <div class="collapse-box">
+                                                    <div class="row">
+                                                        <h5 class="card-title col-12 mb-3">規格圖片</h5>
+                                                        <div class="col-12 mb-3">
+                                                            <ul class="prodPic-list theme-variant">
+                                                                @for ($j = 0; $j < 10; $j++)
+                                                                <li class="prodPic-item">
+                                                                    <img class="prodPic-img" src="/template/Salessa/img/products/1000_1000_{{str_pad($j + 1, 3, '0', STR_PAD_LEFT)}}.jpg"
+                                                                        alt="">
+                                                                    <div class="prodPic-hover">
+                                                                        <div class="func-group">
+                                                                            <a href="##"><i class="ti-pencil"></i></a>
+                                                                            <a href="##"><i class="ti-close"></i></a>
+                                                                        </div>
+                                                                        <i class="ti-move"></i>
+                                                                    </div>
+                                                                </li>
+                                                                @endfor
+                                                                <li class="prodPic-item">
+                                                                    <div class="prodPic-upload">
+                                                                        <i class="ti-plus"></i>
+                                                                    </div>
+                                                                    <input class="prodPic-uploadbox" type="file">
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <h5 class="card-title col-12 mb-3">基本設定</h5>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">商品料號</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Pos_No" name="Pos_No" value="0A920100110F"
+                                                                        placeholder="商品料號">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">單位數</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Unit" name="Unit" value="" placeholder="單位數">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">Sale小圖</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple" style="width: 100%">
+                                                                        <option value="1">Sale</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">活動小字</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="S_Act_Str" name="S_Act_Str" value=""
+                                                                        placeholder="活動小字">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">活動小字色碼</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="color" class="form-control" id="S_Act_Str_Color" name="S_Act_Str_Color" value=""
+                                                                        placeholder="活動小字色碼">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">限購量</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control inpusm" id="Limit_Purchase" name="Limit_Purchase" value=""
+                                                                        placeholder="限購量">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">限購文字</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Limit_Purchase_Text" name="Limit_Purchase_Text"
+                                                                        value="" placeholder="限購文字">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <h5 class="card-title col-12 mb-3">顯示狀態</h5>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">上架狀態</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select id="SShow_Flag" name="SShow_Flag" class="form-control">
+                                                                        <option value="1" selected="">上架</option>
+                                                                        <option value="2">下架</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">商品屬性</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select id="Prod_Attribute" name="Prod_Attribute" class="form-control">
+                                                                        <option value="1" selected="">正價品</option>
+                                                                        <option value="2">正價品及促銷商品</option>
+                                                                        <option value="3">特價活動商品</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">展示狀態</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select id="Display_Flag" name="Display_Flag" class="form-control">
+                                                                        <option value="1" selected="">銷售中</option>
+                                                                        <option value="2">展示中</option>
+                                                                        <option value="3">銷售中可補貨</option>
+                                                                        <option value="4">展示中未定價</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">上架時間</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="datetime-local" class="form-control" placeholder="上架時間起" aria-label="上架時間起">
+                                                                        <span class="input-group-text">~</span>
+                                                                        <input type="datetime-local" class="form-control" placeholder="上架時間迄" aria-label="上架時間迄">
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔時間
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">加入購物車時間</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="datetime-local" class="form-control" placeholder="加入購物車時間起" aria-label="加入購物車時間起">
+                                                                        <span class="input-group-text">~</span>
+                                                                        <input type="datetime-local" class="form-control" placeholder="加入購物車時間迄" aria-label="加入購物車時間迄">
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔時間
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">
+                                                                    預購品
+                                                                </label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select id="S_Pre_Flag" name="S_Pre_Flag" class="form-control">
+                                                                        <option value="1">是</option>
+                                                                        <option value="2" selected="">否</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">到貨時間</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="datetime-local" class="form-control" id="Arrive_Date" name="Arrive_Date" value=""
+                                                                        placeholder="到貨時間">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <h5 class="card-title col-12 mb-3">金額設定</h5>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">價格一</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control mb-3" id="Hops_Price" name="Hops_Price" value="0" placeholder="規格結帳價">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔金額
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">價格二</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control mb-3" id="Hops_List" name="Hops_List" value="" placeholder="規格定價">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔金額
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">規格兌換紅利</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control mb-3" id="Hops_RBonus" name="Hops_RBonus" value="0" placeholder="規格兌換紅利">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔金額
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="mb-3 row">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">優惠價時間</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="datetime-local" class="form-control"
+                                                                            placeholder="優惠價時間起" aria-label="優惠價時間起">
+                                                                        <span class="input-group-text">~</span>
+                                                                        <input type="datetime-local" class="form-control"
+                                                                            placeholder="優惠價時間迄" aria-label="優惠價時間迄">
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value=""
+                                                                            id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔時間
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">優惠價類型</label>
+                                                                <div class="col-12 col-sm-9 form-check-wrap">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="FlexRadio" value="" id="FlexRadio1">
+                                                                        <label class="form-check-label" for="FlexRadio1">
+                                                                            固定價
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="FlexRadio" value="" id="FlexRadio2">
+                                                                        <label class="form-check-label" for="FlexRadio2">
+                                                                            折扣
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">優惠價</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text">NT$</span>
+                                                                        <input type="number" class="form-control" placeholder=""
+                                                                            aria-label="">
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔金額
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 row">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">優惠折扣</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="number" class="form-control" placeholder=""
+                                                                            aria-label="">
+                                                                        <span class="input-group-text">%</span>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔金額
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">定期定額價格</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control mb-3" id="SSIT_Price" name="SSIT_Price" value="" placeholder="定期定額價格">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔金額
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">定期定額限購數</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control mb-3" id="SSIT_Max" name="SSIT_Max" value="" placeholder="定期定額限購數">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                                                                        <label class="form-check-label" for="flexCheck2">
+                                                                            同主檔數量
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <h5 class="card-title col-12 mb-3">優惠管理</h5>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">整單免運商品</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select id="ShippingFee_Free_Flag" name="ShippingFee_Free_Flag" class="form-control">
+                                                                        <option value="1" selected="">是</option>
+                                                                        <option value="2">否</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">免運文字</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="ShippingFee_Free_Text" name="ShippingFee_Free_Text" value="" placeholder="免運文字">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="mb-3 row">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">贈品贈送時間</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="datetime-local" class="form-control"
+                                                                            placeholder="贈品贈送時間起" aria-label="贈品贈送時間起">
+                                                                        <span class="input-group-text">~</span>
+                                                                        <input type="datetime-local" class="form-control"
+                                                                            placeholder="贈品贈送時間迄" aria-label="贈品贈送時間迄">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">贈品編號（多個請以／隔開）</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Gift_No" name="Gift_No" value="" placeholder="贈品編號">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">可得購物金</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Get_Bonus" name="Get_Bonus" value="" placeholder="可得購物金">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <h5 class="card-title col-12 mb-3">倉儲管理</h5>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">庫存</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Stock" name="Stock" value="220" placeholder="庫存" fun="checkNull" len="10" nullstr="請輸入庫存" errorstr="" readonly="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">預購庫存</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Pre_Stock" name="Pre_Stock" value="0" placeholder="預購庫存" fun="checkNull" len="10" nullstr="請輸入預購庫存" errorstr="" readonly="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">安全庫存</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Safe_Stock" name="Safe_Stock" value="0" placeholder="安全庫存" fun="checkNull" len="10" nullstr="請輸入安全庫存" errorstr="" readonly="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">儲櫃</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Stock" name="Stock" placeholder="儲櫃" fun="checkNull" len="10" nullstr="請輸入儲櫃">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">儲位</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control" id="Pre_Stock" name="Pre_Stock" placeholder="儲位" fun="checkNull" len="10" nullstr="請輸入儲位">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">重量(g)</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Safe_Stock" name="Safe_Stock" placeholder="重量(g)" fun="checkNull" len="10" nullstr="請輸入重量(g)">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 mb-3">
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">長(cm)</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Stock" name="Stock" placeholder="長(cm)" fun="checkNull" len="10" nullstr="請輸入長(cm)">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">寬(cm)</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Pre_Stock" name="Pre_Stock" placeholder="寬(cm)" fun="checkNull" len="10" nullstr="請輸入寬(cm)">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">高(cm)</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="number" class="form-control" id="Safe_Stock" name="Safe_Stock" placeholder="高(cm)" fun="checkNull" len="10" nullstr="請輸入高(cm)">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

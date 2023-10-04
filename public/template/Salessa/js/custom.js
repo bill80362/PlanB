@@ -463,4 +463,15 @@
         
     });
 
+    // variant collapse
+    $('body').on('click', '.variant-group .collapse-item .variant-setting', function(e) {
+        e.preventDefault();
+        $(this).parents('.collapse-item').find('.collapse-box').slideToggle(400)
+    })
+
+    // card detail
+    $('body').on('click', '.card-detail .card-header', function(e){
+        e.preventDefault();
+        $(this).siblings('.card-body').slideToggle(400)
+    })
 }(jQuery));
