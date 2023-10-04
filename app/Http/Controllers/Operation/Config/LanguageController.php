@@ -178,7 +178,7 @@ class LanguageController extends Controller
             $this->oModel->find($id)->delete();
         }
 
-        return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => '刪除成功']);
+        return redirect("/operate/language?" . $this->request->getQueryString())->with(['success' => __('刪除成功')]);
     }
 
     /**
