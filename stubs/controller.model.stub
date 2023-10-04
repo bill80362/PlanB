@@ -5,11 +5,11 @@ namespace {{ namespace }};
 use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Services\Operate\ListColumnService;
 use {{ namespacedModel }};
 
-// php artisan make:controller PhotoController --model=Photo
-// 請修改「xxxxxx」參數
 class {{ class }} extends Controller
 {
     public function __construct(
@@ -109,32 +109,73 @@ class {{ class }} extends Controller
     //批次刪除
     public function delBatch()
     {
+        //刪除
+        foreach ((array) $this->request->post('id_array') as $id) {
+            $this->oModel->find($id)->delete();
+        }
 
+        return redirect("/operate/{{r_url}}?" . $this->request->getQueryString())->with(['success' => __('刪除成功')]);
     }
 
     //批次修改排序
     public function sortBatch()
     {
-
-    }
-
-    //批次還原
-    public function reverseBatch()
-    {
-
+        $ID_Array = $this->request->post('sort');
     }
 
     //匯入
     public function import()
     {
-
+        //使用工具只為了轉成 Collection 三維陣列 sheet > row > column
+        $subjects = Excel::toCollection(null, $this->request->file('file')->store('temp'));
+        //開始逐筆匯入
+        try {
+            $AllMessage = $this->oModel->importData($subjects->toArray());
+        } catch (\Exception $e) {
+            return redirect("/operate/{{r_url}}?" . $this->request->getQueryString())->with(['error' => $e->getMessage()]);
+        }
+        //有錯誤
+        if ($AllMessage) {
+            return redirect()->back()->withErrors(['message' => implode(',', $AllMessage)]);
+        }
+        //
+        return redirect("/operate/{{r_url}}?" . $this->request->getQueryString())->with(['success' => __('送出成功')]);
     }
 
     //匯出
     public function export($Type)
     {
+        //匯出的內文是否使用變異器
+        $useMutator = false;
+        if ($Type == "value") {
+            $useMutator = true;
+        }
+        $ExportList = $this->oModel->filter($this->request->all())->export($useMutator);
 
+        //匯出
+        return (new Collection($ExportList))->downloadExcel('{{r_url}}_data_' . time() . '.xlsx');
     }
 
-    
+    //修改紀錄
+    public function audit($id)
+    {
+        //
+        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
+        //
+        $Paginator = $this->oModel->findOrFail($id)->audits()->with('user')->orderBy('id', 'desc')->paginate($pageLimit);
+
+        return view('operate/pages/{{r_url}}/audit', [
+            'Paginator' => $Paginator,            
+            'Model' => $this->oModel,
+        ]);
+    }
+
+    public function saveListColumn(ListColumnService $listColumnService)
+    {
+        $list = $this->request->get('list', []);
+        $user = auth('operate')->user();
+        $listColumnService->renewListColumn($this->oModel, $list, $user->id);
+        return back();
+    }
+
 }
