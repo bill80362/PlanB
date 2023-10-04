@@ -1,0 +1,10 @@
+// 請勿刪除此行註解，stub產生放置位置
+/*
+"{{ model }}_list" => "{{ model }}_list",
+"{{ model }}_update_html" => "{{ model }}_update_html",
+"{{ model }}_update" => "{{ model }}_update",
+"{{ model }}_del" => "{{ model }}_del",
+"{{ model }}_export" => "{{ model }}_export",
+"{{ model }}_import" => "{{ model }}_import",
+"{{ model }}_audit" => "{{ model }}_audit",
+*/
