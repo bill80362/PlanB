@@ -110,6 +110,9 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         if (!app()->isProduction()) {
             Route::get('/template/list', [Operation\TemplateController::class, 'list'])->name('template_list');
             Route::get('/template/detail', [Operation\TemplateController::class, 'detail'])->name('template_detail');
+
+            // Route::get('/template/stub_list', [Operation\TemplateController::class, 'stubList'])->name('template_stub_list');
+            // Route::get('/template/stub_update', [Operation\TemplateController::class, 'stubUpdate'])->name('template_stub_detail');
         }
     });
 });

@@ -16,9 +16,11 @@
                     name: /.*/,
                     attributes: true,
                     classes: true,
-                    styles: true
+                    styles: true,
                 }],
-                disallow: [ /* HTML features to disallow */ ]
+                disallow: [{
+                    name: /^(script)$/, //是否允語使用script語法
+                }]
             },
             toolbar: {
                 items: [
