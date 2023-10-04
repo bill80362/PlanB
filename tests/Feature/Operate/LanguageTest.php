@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Operate;
 
-use App\Http\Controllers\Operation\System\LanguageController;
+use App\Http\Controllers\Operation\Config\LanguageController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
