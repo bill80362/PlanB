@@ -16,23 +16,25 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2>@include('/operate/components/title/page_title')</h2>
                                 <!-- Example single danger button -->
-                                <div class="btn-group me-2">
-                                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="ti-settings"></i> {{ __('處理') }}
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <button type="button" class="dropdown-item">{{ __('全選') }}</button>
+                                @can('language_delete')
+                                    <div class="btn-group me-2">
+                                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="ti-settings"></i> {{ __('處理') }}
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            {{-- <button type="button" class="dropdown-item">{{ __('全選') }}</button>
                                         <button type="button" class="dropdown-item">{{ __('取消全選') }}</button>
-                                        <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button>
-                                        <hr class="dropdown-divider">
-                                        @can('language_delete')
-                                            <hr class="dropdown-divider">
-                                            <button id="btnDeleteBatch" type="button"
-                                                class="dropdown-item">{{ __('勾選刪除') }}</button>
-                                        @endcan
+                                        <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button> --}}
+                                            {{-- <hr class="dropdown-divider"> --}}
+                                            @can('language_delete')
+                                                <hr class="dropdown-divider">
+                                                <button id="btnDeleteBatch" type="button"
+                                                    class="dropdown-item">{{ __('勾選刪除') }}</button>
+                                            @endcan
+                                        </div>
                                     </div>
-                                </div>
+                                @endcan
                                 <div class="btn-group me-2">
                                     @canany('language_import', 'language_export')
                                         <button type="button" class="btn btn-secondary dropdown-toggle"
