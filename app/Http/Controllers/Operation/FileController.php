@@ -27,10 +27,10 @@ class FileController extends Controller
         ]);
         $image = $this->request->file('image');
         $path = $this->request->get('path');
-        $name = $this->request->get('name');//指定名稱
-        $name = $name?:Str::uuid();//無名稱隨機給
+        $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $name = $name ?: Str::uuid(); //無名稱隨機給
         $ext = $image->extension();
-        $ext = strtolower($ext);//副檔名改小寫
+        $ext = strtolower($ext); //副檔名改小寫
         $filePath = $path . "/{$name}.{$ext}";
         $this->oUploadFileService->getStorage()->put($filePath, file_get_contents($image));
 
