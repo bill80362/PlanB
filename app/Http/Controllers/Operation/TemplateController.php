@@ -19,13 +19,13 @@ class TemplateController extends Controller
     }
 
 
-    public function stubList()
-    {
-        return view("operate/pages/template/stub_list");
-    }
+    // public function stubList()
+    // {
+    //     return view('operate/pages/template/stub_list', []);
+    // }
 
-    public function stubUpdate()
-    {
-        return view("operate/pages/template/stub_update");
-    }
+    // public function stubUpdate()
+    // {
+    //     return view("operate/pages/template/stub_update", []);
+    // }
 }
