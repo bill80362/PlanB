@@ -64,7 +64,7 @@ class PermissionGroupController extends Controller
             //新增預設值
             $Data->id = 0;
             $Data->name = '';
-            $Data->show_flag = 'Y';
+            $Data->status = 'Y';
         }
         //輸入驗證遭擋，會有舊資料，優先使用舊資料
         foreach ((array) $this->request->old() as $key => $value) {
@@ -98,7 +98,7 @@ class PermissionGroupController extends Controller
         $user = auth('operate')->user();
 
         //過濾
-        $UpdateData = $this->request->only(['name', 'show_flag']);
+        $UpdateData = $this->request->only(['name', 'status']);
 
         //驗證資料
         $validator = Validator::make(
