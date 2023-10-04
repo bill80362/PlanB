@@ -10,8 +10,6 @@ namespace App\Services\Route;
 class RouteTitle
 {
     public array $NameToTitle = [
-        // 請勿刪除此行註解，stub產生放置位置
-
         //
         "user_list" => "管理人列表",
         "user_update_html" => "管理人修改",
