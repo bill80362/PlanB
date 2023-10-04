@@ -7,9 +7,19 @@
 </style>
 
 <script>
+    // https://ckeditor.com/docs/ckeditor5/latest/features/html/general-html-support.html
     ClassicEditor
         .create(document.querySelector('#' + "{{ $id }}"), {
             extraPlugins: [MyCustomUploadAdapterPlugin],
+            htmlSupport: {
+                allow: [{
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true
+                }],
+                disallow: [ /* HTML features to disallow */ ]
+            },
             toolbar: {
                 items: [
                     'findAndReplace', 'selectAll', '|',
