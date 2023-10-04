@@ -13,6 +13,7 @@
 - php artisan migrate:reset 資料表初始化(全部刪除)
 - php artisan migrate 建立資料表
 - php artisan db:seed 塞入測試假資料
+- php artisan migrate:refresh --seed  資料表全部刪除重建，並跑db seed。
 
 ### 其他指令
 - 圖片soft link建立，php artisan storage:link
