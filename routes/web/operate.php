@@ -100,9 +100,15 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             ->name('upload_file');
 
         //檔案管理
-        Route::get('/file_upload/list', [FileUploadController::class, 'listHTML'])->name('file_upload_list');
-        Route::get('/file_upload/{id}', [FileUploadController::class, 'updateHTML'])->name('file_upload_update_html');
-        Route::post('/file_upload/del', [FileUploadController::class, 'delBatch'])->name('file_upload_del');
+        Route::group([
+            'prefix' => 'file_upload',
+            'as' => 'file_upload_',
+        ], function () {
+            Route::get('list', [FileUploadController::class, 'listHTML'])->name('list');
+            Route::get('{id}', [FileUploadController::class, 'updateHTML'])->name('update_html');
+            Route::post('del', [FileUploadController::class, 'delBatch'])->name('del');
+        });
+
 
         // ui template
         if (!app()->isProduction()) {
