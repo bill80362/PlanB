@@ -2,11 +2,12 @@
 <div class="row">
     <div class="col-12 d-flex align-items-center justify-content-between">
         <div class="text-muted fz-sm me-2">
-            <span class="text-primary">{{ ($Paginator->total() > 0)?1 + ($Paginator->currentPage() - 1) * $Paginator->perPage():0}}</span>-<span class="text-primary">{{min(10 + ($Paginator->currentPage() - 1) * $Paginator->perPage(), $Paginator->total())}}</span> / <span
-                class="text-primary">{{$Paginator->total()}}</span>，{{__('每頁顯示')}} <a class="text-dark"
-                href="##">10</a>、<a class="text-primary" href="##">25</a>、<a
-                class="text-primary" href="##">50</a>、<a class="text-primary"
-                href="##">100</a> 筆
+            <span class="text-primary">{{ ($Paginator->total() > 0)?1 + ($Paginator->currentPage() - 1) * $Paginator->perPage():0}}</span>-<span class="text-primary">{{min(10 + ($Paginator->currentPage() - 1) * $Paginator->perPage(), $Paginator->total())}}</span> /
+            <span class="text-primary">{{$Paginator->total()}}</span>，{{__('每頁顯示')}}
+            <a class="{{$Paginator->perPage()==10?"text-dark":"text-primary"}}" href="{{$Paginator->url(1)}}&pageLimit=10">10</a>、
+            <a class="{{$Paginator->perPage()==25?"text-dark":"text-primary"}}" href="{{$Paginator->url(1)}}&pageLimit=25">25</a>、
+            <a class="{{$Paginator->perPage()==50?"text-dark":"text-primary"}}" href="{{$Paginator->url(1)}}&pageLimit=50">50</a>、
+            <a class="{{$Paginator->perPage()==100?"text-dark":"text-primary"}}" href="{{$Paginator->url(1)}}&pageLimit=100">100</a> {{__("筆")}}
         </div>
         <div>
             <ul class="pagination pagination-sm m-0">
