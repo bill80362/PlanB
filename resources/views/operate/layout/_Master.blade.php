@@ -179,8 +179,6 @@
     <script src="/template/Sortable-master/Sortable-master/Sortable.min.js"></script>
     <script src="/template/Sortable-master/Sortable-master/modular/sortable.complete.esm.js"></script>
 
-    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
-
     {{-- select2 --}}
     <script
         src="/template/select2-4.0.13/dist/js/select2.full.min.js?v={{ $SystemConfigService->versionJS }}">

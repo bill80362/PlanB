@@ -98,8 +98,8 @@
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter"><ion-icon
-                                            name="funnel-outline"></ion-icon>
+                                    <button class="btn btn-secondary slideFunc-toggle" data-target="#prodFilter">
+                                        <i class="ionicon-funnel-outline"></i>
                                         {{ __('篩選器') }}</button>
                                     <a class="btn btn-muted" href="{{ request()->url() }}">{{ __('重置查詢') }}</a>
                                     <!-- modals ppup  -->

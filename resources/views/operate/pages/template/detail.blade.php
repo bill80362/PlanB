@@ -867,7 +867,7 @@
                                             <div class="col-12 col-sm-9">
                                                 <ol class="collapse-list">
                                                     <li class="collapse-item with-child in-extand">
-                                                        <button type="button" class="collapse-btn"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+                                                        <button type="button" class="collapse-btn"><i class="ionicon-chevron-forward-outline"></i></button>
                                                         <div class="form-check" for="">
                                                             <input class="form-check-input" type="checkbox">
                                                             <label class="form-check-label" for="">分店名稱一</label>
@@ -875,7 +875,7 @@
                                                         <ol class="collapse-list">
                                                             <li class="collapse-item with-child in-extand">
                                                                 <button type="button"
-                                                                        class="collapse-btn"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+                                                                        class="collapse-btn"><i class="ionicon-chevron-forward-outline"></i></button>
                                                                 <div class="form-check" for="">
                                                                     <input class="form-check-input"
                                                                            type="checkbox">
@@ -886,7 +886,7 @@
                                                                     <li
                                                                         class="collapse-item with-child in-extand">
                                                                         <button type="button"
-                                                                                class="collapse-btn"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+                                                                                class="collapse-btn"><i class="ionicon-chevron-forward-outline"></i></button>
                                                                         <div class="form-check" for="">
                                                                             <input class="form-check-input"
                                                                                    type="checkbox">
