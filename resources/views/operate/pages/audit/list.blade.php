@@ -152,7 +152,7 @@
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
                                                             <input type="checkbox" class="form-check-input"
-                                                                name="id_array[]" value="1"> {{ $index + 1 }}
+                                                                name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
                                                         </td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
                                                         <td class="border-0" data-column="user_type">
