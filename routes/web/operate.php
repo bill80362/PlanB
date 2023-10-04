@@ -93,7 +93,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         Route::get('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement');
         Route::post('/company_manage/{companyKey}', [Operation\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement');
 
-        //
+        //編輯器圖片上傳
         Route::post('/upload_image', [Operation\FileController::class, 'uploadImage'])->name('upload_file');
 
         //檔案管理
