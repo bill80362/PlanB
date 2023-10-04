@@ -148,20 +148,19 @@
                                                                 </button>
                                                                 <ul class="dropdown-menu">
                                                                     @can('user_update')
-                                                                        <li><a class="dropdown-item"
-                                                                                href="/operate/user/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                                        <li><a class="dropdown-item" href="{{ route("user_update",["id"=>$Item->id])}}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
                                                                         </li>
                                                                     @endcan
                                                                     @can('user_delete')
                                                                         <li><button class="dropdown-item" type="button"
-                                                                                onclick="postForm('/operate/user/del?{{ request()->getQueryString() }}',{
+                                                                                onclick="postForm('{{route("user_del")}}?{{ request()->getQueryString() }}',{
                                                                         'id_array[]':{{ $Item->id }},
                                                                         _token:'{{ csrf_token() }}'
                                                                         })">{{ __('刪除') }}
                                                                             </button></li>
                                                                     @endcan
                                                                     <a target="_blank" class="dropdown-item"
-                                                                        href="/operate/user/{{ $Item->id }}/audit?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                        href="{{route("user_audit",["id"=>$Item->id])}}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
                                                                 </ul>
                                                             </div>
                                                         </td>
@@ -377,7 +376,7 @@
             });
             postArray["_token"] = '{{ csrf_token() }}';
             //送出
-            postForm('/operate/user/del?{{ request()->getQueryString() }}', postArray)
+            postForm('{{route("user_del")}}?{{ request()->getQueryString() }}', postArray)
         });
 
         //欄位排序修改
