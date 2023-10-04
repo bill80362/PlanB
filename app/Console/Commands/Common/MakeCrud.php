@@ -38,7 +38,7 @@ class MakeCrud extends Command
 
         // 產生blade
         $stubPath = base_path('stubs') . '/blade/';
-        $bladeNames = ['list', 'update']; // ['stub_list', 'stub_update']
+        $bladeNames = ['list.blade.php', 'update.blade.php']; // ['stub_list.blade.php', 'stub_update.blade.php']
 
         $splitStrs = explode("/", $modelname);
         $subPath = collect($splitStrs)->map(function ($item) {
@@ -50,11 +50,10 @@ class MakeCrud extends Command
         (new Filesystem)->ensureDirectoryExists($tagetPath);
         foreach ($bladeNames as $bladeName) {
             $fullPath = $tagetPath . $bladeName;
-            $stubFile = $stubPath . 'stub_' . $bladeName . '.blade.php';  // 範本檔
-            $newFile = $fullPath . '.blade.php'; // 實際要建立的檔
+            $stubFile = $stubPath . 'stub_' . $bladeName;  // 範本檔
             if (file_exists($stubFile)) {
                 $stubContent = file_get_contents($stubFile);
-                file_put_contents($newFile, $stubContent);
+                file_put_contents($fullPath, $stubContent);
             }
             // dump($stubFile);
             // dump($newFile);
