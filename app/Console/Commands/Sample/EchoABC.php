@@ -26,7 +26,11 @@ class EchoABC extends Command
     public function handle()
     {
         //
+//        $Temp =  include(base_path()."/composer.lock");
+//        $Temp = json_decode($Temp,true);
+//        var_dump($Temp);
+        //
         echo 'ABC go!go!go!';
-        
+
     }
 }
