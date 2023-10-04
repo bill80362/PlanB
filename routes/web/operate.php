@@ -31,13 +31,13 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'as' => 'user_',
         ], function () {
             Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('user_read');
-            Route::get('/{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_update');
-            Route::post('/{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
-            Route::post('/del', [UserController::class, 'delBatch'])->name('del')->can('user_delete');
-            Route::get('/export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->can('user_export');
-            Route::post('/import', [UserController::class, 'import'])->name('import')->can('user_import');
-            Route::get('/{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->can('user_read');
-            Route::post('/list_column', [UserController::class, 'saveListColumn'])->name('saveListColumn');
+            Route::get('{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_update');
+            Route::post('{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
+            Route::post('del', [UserController::class, 'delBatch'])->name('del')->can('user_delete');
+            Route::get('export/{type}', [UserController::class, 'export'])->name('export')->where("type", '[key|value]+')->can('user_export');
+            Route::post('import', [UserController::class, 'import'])->name('import')->can('user_import');
+            Route::get('{id}/audit', [UserController::class, 'audit'])->whereNumber('id')->name('audit')->can('user_read');
+            Route::post('list_column', [UserController::class, 'saveListColumn'])->name('saveListColumn');
         });
         //管理人權限群組
         Route::group([
@@ -45,19 +45,19 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'as' => 'permission_group_',
         ], function () {
             Route::get('/', [Operation\PermissionGroupController::class, 'listHTML'])->name('list')->can('user_read');
-            Route::get('/{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_read');
-            Route::post('/{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
-            Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->can('user_delete');
-            Route::post('/list_column', [Operation\PermissionGroupController::class, 'saveListColumn'])->name('saveListColumn');
+            Route::get('{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_read');
+            Route::post('{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
+            Route::post('del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->can('user_delete');
+            Route::post('list_column', [Operation\PermissionGroupController::class, 'saveListColumn'])->name('saveListColumn');
         });
 
         //系統設定
-        Route::get('/system', [Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->can('system_update');
-        Route::post('/system', [Operation\SystemController::class, 'update'])->name('system_update')->can('system_update');
+        Route::get('system', [Operation\SystemController::class, 'updateHTML'])->name('system_update_html')->can('system_update');
+        Route::post('system', [Operation\SystemController::class, 'update'])->name('system_update')->can('system_update');
 
         //http log
-        Route::get('/http_log', [Operation\HttpLogController::class, 'listHTML'])->name('http_log_list');
-        Route::get('/http_log/{id}', [Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
+        Route::get('http_log', [Operation\HttpLogController::class, 'listHTML'])->name('http_log_list');
+        Route::get('http_log/{id}', [Operation\HttpLogController::class, 'updateHTML'])->whereNumber('id')->name('http_log_update');
 
         //操作紀錄
         Route::group([
