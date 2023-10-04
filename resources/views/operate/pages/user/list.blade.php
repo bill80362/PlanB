@@ -72,7 +72,7 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <div class="input-group">
-                                        <div class="input-group input-group" id="searchContnet">
+                                        <div class="input-group input-group" id="searchContent">
                                             <div class="input-group-prepend">
                                                 <select class="form-select" id="filter_text_key_outside"
                                                     data-target="#searchFilter"

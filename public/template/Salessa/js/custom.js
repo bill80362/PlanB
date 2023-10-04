@@ -417,14 +417,14 @@
     });
 
     // oper search box
-    $('#searchContnet').on('change', '.form-select[data-target]', function (e) {
+    $('#searchContent').on('change', '.form-select[data-target]', function (e) {
         $(this).each(function (index, ele) {
             const target = $(ele).attr('data-target')
             const thisVal = $(ele).val()
             $(target).val(thisVal)
         })
     })
-    $('#searchContnet').on('keyup', '.form-control[data-target]', function (e) {
+    $('#searchContent').on('keyup', '.form-control[data-target]', function (e) {
         $(this).each(function (index, ele) {
             const target = $(ele).attr('data-target')
             const thisVal = $(ele).val()
