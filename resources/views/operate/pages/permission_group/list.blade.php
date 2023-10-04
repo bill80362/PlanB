@@ -134,7 +134,8 @@
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
                                                             <input type="checkbox" class="form-check-input"
-                                                                name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
+                                                                name="id_array[]" value="{{ $Item->id }}">
+                                                            {{ $index + 1 }}
                                                         </td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
                                                         <td class="border-0" data-column="name">{{ $Item->name }}</td>
@@ -155,19 +156,19 @@
                                                                 <ul class="dropdown-menu">
                                                                     @can('permissionGroup_update')
                                                                         <li><a class="dropdown-item"
-                                                                                href="/operate/permission_group/{{ $Item->id }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                                                href="{{ route('permission_group_update', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
                                                                         </li>
                                                                     @endcan
                                                                     @can('permissionGroup_delete')
                                                                         <li><button class="dropdown-item" type="button"
-                                                                                onclick="postForm('/operate/permission_group/del?{{ request()->getQueryString() }}',{
-                                                                        'id_array[]':{{ $Item->id }},
-                                                                        _token:'{{ csrf_token() }}'
-                                                                        })">{{ __('刪除') }}
+                                                                                onclick="postForm('{{ route('permission_group_del') }}?{{ request()->getQueryString() }}',{
+                                                                            'id_array[]':{{ $Item->id }},
+                                                                            _token:'{{ csrf_token() }}'
+                                                                            })">{{ __('刪除') }}
                                                                             </button></li>
                                                                     @endcan
-                                                                    <a target="_blank" class="dropdown-item"
-                                                                        href="/operate/permission_group/{{ $Item->id }}/audit?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                    {{-- <a target="_blank" class="dropdown-item"
+                                                                        href="{{ route('permission_group_audit', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a> --}}
                                                                 </ul>
                                                             </div>
                                                         </td>
