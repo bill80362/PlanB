@@ -34,8 +34,8 @@ class {{ class }} extends Controller
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
         
-        // @todo
-        return view('operate/pages/xxxxxx/list', [
+        // @todo 
+        return view('operate/pages/{{r_blade_folder}}/list', [
             'Paginator' => $Paginator,            
             'Model' => $this->oModel,
             'columns' => $userColumns,

@@ -1,8 +1,8 @@
 @php
     /**
      * 產生後請執行以下步驟：
-     * xxxxxxxxx_ 參數(路由用)
-     * yyyyyyyyy_ 參數(權限用)
+     * {{route}}_ 參數(路由用)
+     * {{perm}}_ 參數(權限用)
      * 2. 確認欄位
      **/
 @endphp
@@ -35,7 +35,7 @@
                                         <button type="button" class="dropdown-item">{{ __('取消全選') }}</button>
                                         <button type="button" class="dropdown-item">{{ __('反向選擇') }}</button>
                                         <hr class="dropdown-divider">
-                                        @can('yyyyyyyyy_delete')
+                                        @can('{{perm}}_delete')
                                             <hr class="dropdown-divider">
                                             <button id="btnDeleteBatch" type="button"
                                                 class="dropdown-item">{{ __('勾選刪除') }}</button>
@@ -43,25 +43,25 @@
                                     </div>
                                 </div>
                                 <div class="btn-group me-2">
-                                    @canany('yyyyyyyyy_import', 'yyyyyyyyy_export')
+                                    @canany('{{perm}}_import', '{{perm}}_export')
                                         <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {{ __('匯入') }} / {{ __('匯出') }}
                                         </button>
                                         <div class="dropdown-menu">
-                                            @can('yyyyyyyyy_import')
+                                            @can('{{perm}}_import')
                                                 <button type="button" class="dropdown-item" data-bs-toggle="modal"
                                                     data-bs-target="#importModal">
                                                     {{ __('匯入') }}
                                                 </button>
                                             @endcan
-                                            @can('yyyyyyyyy_export')
+                                            @can('{{perm}}_export')
                                                 <a target="_blank" class="dropdown-item"
-                                                    href="{{ route('xxxxxxxxx_export', ['type' => 'key', ...request()->query()]) }}">
+                                                    href="{{ route('{{route}}_export', ['type' => 'key', ...request()->query()]) }}">
                                                     {{ __('匯出參數版') }}
                                                 </a>
                                                 <a target="_blank" class="dropdown-item"
-                                                    href="{{ route('xxxxxxxxx_export', ['type' => 'value', ...request()->query()]) }}">
+                                                    href="{{ route('{{route}}_export', ['type' => 'value', ...request()->query()]) }}">
                                                     {{ __('匯出文字版') }}
                                                 </a>
                                             @endcan
@@ -69,9 +69,9 @@
                                     @endcanany
                                 </div>
                                 <div class="btn-group">
-                                    @can('yyyyyyyyy_create')
+                                    @can('{{perm}}_create')
                                         <a class="btn btn-primary"
-                                            href="{{ route('xxxxxxxxx_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
+                                            href="{{ route('{{route}}_update', ['id' => 0]) }}?{{ request()->getQueryString() }}">
                                             {{ __('新增') }} </a>
                                     @endcan
                                 </div>
@@ -158,21 +158,21 @@
                                                                     <i class="ti-more-alt"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    @can('yyyyyyyyy_update')
+                                                                    @can('{{perm}}_update')
                                                                         <li><a class="dropdown-item"
-                                                                                href="{{ route('xxxxxxxxx_update', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
+                                                                                href="{{ route('{{route}}_update', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
                                                                         </li>
                                                                     @endcan
-                                                                    @can('yyyyyyyyy_delete')
+                                                                    @can('{{perm}}_delete')
                                                                         <li><button class="dropdown-item" type="button"
-                                                                                onclick="postForm('{{ route('xxxxxxxxx_del') }}?{{ request()->getQueryString() }}',{
+                                                                                onclick="postForm('{{ route('{{route}}_del') }}?{{ request()->getQueryString() }}',{
                                                                         'id_array[]':{{ $Item->id }},
                                                                         _token:'{{ csrf_token() }}'
                                                                         })">{{ __('刪除') }}
                                                                             </button></li>
                                                                     @endcan
                                                                     <a target="_blank" class="dropdown-item"
-                                                                        href="{{ route('xxxxxxxxx_audit', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                        href="{{ route('{{route}}_audit', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
                                                                 </ul>
                                                             </div>
                                                         </td>
@@ -208,7 +208,7 @@
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('xxxxxxxxx_import') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('{{route}}_import') }}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="modal-content">
                     <div class="modal-header">
@@ -283,7 +283,7 @@
                     <span aria-hidden="true"></span>
                 </button>
             </div>
-            <form action="{{ route('xxxxxxxxx_saveListColumn') }}" method="POST">
+            <form action="{{ route('{{route}}_saveListColumn') }}" method="POST">
                 @csrf
                 <div class="slideFunc-body px-3 py-3">
                     <div class="row">
@@ -388,7 +388,7 @@
             });
             postArray["_token"] = '{{ csrf_token() }}';
             //送出
-            postForm('{{ route('xxxxxxxxx_del') }}?{{ request()->getQueryString() }}', postArray)
+            postForm('{{ route('{{route}}_del') }}?{{ request()->getQueryString() }}', postArray)
         });
 
         //欄位排序修改
