@@ -48,8 +48,6 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::get('/{id}', [Operation\PermissionGroupController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_read');
             Route::post('/{id}', [Operation\PermissionGroupController::class, 'update'])->whereNumber('id')->name('update')->can('user_update');
             Route::post('/del', [Operation\PermissionGroupController::class, 'delBatch'])->name('del')->can('user_delete');
-            // Route::get('/export', [Operation\PermissionGroupController::class, 'export'])->name('export')->middleware(['can:user_export']);
-            // Route::post('/import', [Operation\PermissionGroupController::class, 'import'])->name('import')->middleware(['can:user_import']);
             Route::post('/list_column', [Operation\PermissionGroupController::class, 'saveListColumn'])->name('saveListColumn');
         });
 

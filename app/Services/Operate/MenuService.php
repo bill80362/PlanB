@@ -23,12 +23,12 @@ class MenuService
                     [
                         'name' => __('管理人管理'),
                         'href' => '/operate/user',
-                        'permission' => 'user.read',
+                        'permission' => 'user_read', 
                     ],
                     [
                         'name' => __('群組管理'),
                         'href' => '/operate/permission_group',
-                        'permission' => 'permissionGroup.read',
+                        'permission' => 'permissionGroup_read',
                     ],
                 ],
             ],
@@ -55,12 +55,12 @@ class MenuService
                     [
                         'name' => __('隱私權聲明'),
                         'href' => '/operate/company_manage/privacy_statement',
-                        'permission' => 'privacyStatement_read', //member.read
+                        'permission' => 'privacyStatement_read', 
                     ],
                     [
                         'name' => __('版權宣告'),
                         'href' => '/operate/company_manage/copyright_notice',
-                        'permission' => 'copyrightNotice_read', //member.read
+                        'permission' => 'copyrightNotice_read', 
                     ],
                 ],
             ],
@@ -93,7 +93,7 @@ class MenuService
                     [
                         'name' => __('操作紀錄'),
                         'href' => '/operate/audit',
-                        'permission' => '', //member.read
+                        'permission' => '', 
                     ],
                 ],
             ],
