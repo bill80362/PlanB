@@ -8,6 +8,7 @@
 
 <script>
     // https://ckeditor.com/docs/ckeditor5/latest/features/html/general-html-support.html
+
     ClassicEditor
         .create(document.querySelector('#' + "{{ $id }}"), {
             extraPlugins: [MyCustomUploadAdapterPlugin],
@@ -26,25 +27,23 @@
                 items: [
                     'findAndReplace', 'selectAll', '|',
                     'heading', '|',
-                    'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript',
-                    'removeFormat', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
+                    'bold', 'italic', 'strikethrough', 'code', 'subscript', 'superscript',
+                    '|',
+                    'bulletedList', 'numberedList', '|',
+                    '|',
                     'undo', 'redo',
                     '-',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
                     'alignment', '|',
-                    'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed',
-                    '|',
-                    'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-
-                    'sourceEditing'
+                    'link', 'insertImage', 'blockQuote', 'insertTable', 'codeBlock', 'htmlEmbed',
+                    '|', 'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                    'sourceEditing', '|', 'fullscreen'
                 ],
                 shouldNotGroupWhenFull: true
             },
         })
         .then(editor => {
-            window.editor = editor;
+            window.editor[{{ $index ?? '1' }}] = editor;
         })
         .catch(error => {
             console.error(error);

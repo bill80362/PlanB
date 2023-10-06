@@ -34,19 +34,56 @@ class CompanyManageController extends Controller
         $langTypeKeys = array_keys($language->langTypeText);
         foreach ($langTypeKeys as $langType) {
             $this->oModel->firstOrCreate([
-                'key' => $companyKey,
+                'slug' => $companyKey,
                 'lang_type' => $langType,
             ], [
                 'page_name' => $companyKey,
             ]);
         }
-        $datas = $this->oModel->where('key', $companyKey)->get();
+        $datas = $this->oModel->where('slug', $companyKey)->get();
 
         return view('operate/pages/company_manage/page_content', [
             'langTypeText' => $language->langTypeText,
             'datas' => $datas,
             'key' => $permKey,
         ]);
+    }
+
+    /**
+     * 修改內容
+     */
+    public function saveContent($pageContentSlug)
+    {
+    }
+
+    /**
+     * 修改草稿
+     */
+    public function saveDraft($pageContentSlug)
+    {
+        $check = $this->pageContentService->checkKey($pageContentSlug);
+        if (!$check) {
+            return abort(404);
+        }
+        $permKey = Str::of($pageContentSlug)->camel();
+        if (!auth('operate')->user()->can($permKey . '_update')) {
+            return abort(403);
+        }
+
+        $ids = $this->request->get('ids');
+        $editors = $this->request->get('editors');
+        foreach ($ids as $key => $id) {
+            $this->oModel->where('id', $id)->update([
+                'draft' => $editors[$key],
+            ]);
+        }
+
+        // $pageContentSlug
+
+        // 回傳前台預覽網址。
+        return [
+            'urls' => [],
+        ];
     }
 
     public function pageContent($companyKey)
@@ -63,11 +100,18 @@ class CompanyManageController extends Controller
 
         $ids = $this->request->get('ids');
         $editors = $this->request->get('editors');
-        $seoArray = $this->request->get('seoArray');
+        $seoArray = $this->request->get('seo_title');
+        $seoKeywordsArr = $this->request->get('seo_keywords');
+        $seoDesArr = $this->request->get('seo_description');
+
         foreach ($ids as $key => $id) {
+            //修改內容並清空草稿
             $this->oModel->where('id', $id)->update([
                 'content' => $editors[$key],
-                'seo' => $seoArray[$key],
+                'seo_title' => $seoArray[$key],
+                'seo_keywords' => $seoKeywordsArr[$key],
+                'seo_description' => $seoDesArr[$key],
+                'draft' => '',
             ]);
         }
 
