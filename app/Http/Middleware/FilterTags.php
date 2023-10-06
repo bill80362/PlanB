@@ -2,12 +2,16 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\Operate\SystemConfigService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class FilterTags
 {
+    public function __construct(
+        protected SystemConfigService $oSystemConfigService
+    ) {}
     /**
      * Handle an incoming request.
      *
@@ -15,9 +19,12 @@ class FilterTags
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //後台是否開啟
+        $values = $this->oSystemConfigService->SystemConfigKeyValue;
+        if($values["filter_css_js"]=="N") return $next($request);
+        //條件過濾
         $userInput = $request->all();
         array_walk_recursive($userInput, function (&$userInput) {
-            //後台如果要開啟，會改掉css和js
             $userInput = $this->filterTags($userInput);
         });
         $request->merge($userInput);
