@@ -97,6 +97,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
 
         //公司管理
         Route::get('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement');
+        Route::post('/company_manage/{companyKey}/draft', [Operation\Content\CompanyManageController::class, 'saveDraft'])->name('post_privacy_statement_draft');
         Route::post('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement');
 
         //編輯器圖片上傳
