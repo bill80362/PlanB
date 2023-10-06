@@ -24,6 +24,7 @@ class CheckFirstRender
             $response = $next($request);
             return response()->json([
                 "content" => $response->getContent(),
+                "debugbar" => debugbar()->getData(),
             ]);
         }
         //
