@@ -147,7 +147,22 @@
     </div>
 
     <script>
-        var data = @json($data);
+        var datas = @json($datas);
+        var data = datas[0];
+
+        // 是否有草稿
+        var haveDraft = @json($haveDraft);
+        if (haveDraft) {
+            var yes = confirm('目前有草稿，是否要載入草稿？');
+
+            if (yes) {
+                alert('你按了確定按鈕');
+                // 確認載入草稿，程式修改載入草稿
+            } else {
+                // 不載入草稿，不需做任何操作。
+            }
+        }
+
 
         document.getElementById('draftBtn').onclick = function() {
 
@@ -159,7 +174,6 @@
             ids.forEach((element, index) => {
                 let i = index + 1;
                 editors.push(window.editor[i].getData());
-                // console.log(window.editor[i].getData())
             });
 
             //頁面加載
@@ -175,7 +189,8 @@
                     'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
                 },
             }).then((res) => {
-                console.log(res);
+                console.log(res.urls); // 目前前台沒有網址先帶入假網址
+                window.open("http://127.0.0.1:8000/");
             }).catch((xhr, status, error) => {
                 //console.error(xhr.responseText);
             })

@@ -42,19 +42,22 @@ class CompanyManageController extends Controller
         }
         $datas = $this->oModel->where('slug', $companyKey)->get();
 
+        $haveDraft = false;
+        foreach ($datas as $data) {
+            if ($data->draft) {
+                $haveDraft = true;
+            }
+        }
+
+
         return view('operate/pages/company_manage/page_content', [
             'langTypeText' => $language->langTypeText,
             'datas' => $datas,
             'key' => $permKey,
+            'haveDraft' => $haveDraft
         ]);
     }
 
-    /**
-     * 修改內容
-     */
-    public function saveContent($pageContentSlug)
-    {
-    }
 
     /**
      * 修改草稿
