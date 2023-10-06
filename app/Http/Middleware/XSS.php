@@ -18,8 +18,8 @@ class XSS
     {
         $userInput = $request->all();
         array_walk_recursive($userInput, function (&$userInput) {
-//            $userInput = strip_tags($userInput,["style"]);
-            $userInput = $this->stripUnwantedTagsAndAttrs($userInput);
+            $userInput = strip_tags($userInput,["style"]);
+//            $userInput = $this->stripUnwantedTagsAndAttrs($userInput);
 
         });
         $request->merge($userInput);
