@@ -22,10 +22,13 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="##">
-                                        儲存並複製
+                                        複製新增
                                     </a>
                                     <a class="dropdown-item" href="##">
                                         開啟預覽頁
+                                    </a>
+                                    <a class="dropdown-item" href="##">
+                                        開啟前台網頁
                                     </a>
                                     <a class="dropdown-item" href="##">
                                         刪除
@@ -79,7 +82,7 @@
                                         <div class="mb-3 row">
                                             <label for="" class="col-12 col-sm-3 col-form-label">日期時間選擇</label>
                                             <div class="col-12 col-sm-9">
-                                                <input type="datetime-local" class="form-control" id="">
+                                                <input type="datetime-local" step="1" class="form-control" id="">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -312,12 +315,21 @@
                             </div>
                             <div class="col-12 col-xl-7 mb-6">
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title">圖片和影片<i class="ionicon-help-circle-outline" data-toggle="tooltip" data-placement="top" title="{{__('說明文字')}}"></i></h5>
-                                        <div class="button-group d-flex align-items-center">
-                                            <button class="btn btn-muted ms-2">取消全選</button>
-                                            <button class="btn btn-primary ms-2">全選</button>
+                                    <div class="card-header border-0 d-flex align-items-center">
+                                        <h5 class="card-title">圖片和影片</h5>
+                                        <div class="button-group d-flex align-items-center ms-auto">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                                                <label class="form-check-label" for="inlineRadio1">全選</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                <label class="form-check-label" for="inlineRadio2">取消全選</label>
+                                            </div>
                                         </div>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-2">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <ul class="prodPic-list theme-main">
@@ -344,8 +356,11 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">商品基本資料</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3 row">
@@ -406,13 +421,17 @@
                                             <label for="" class="col-12 col-sm-3 col-form-label">相關商品</label>
                                             <div class="col-12 col-sm-9">
                                                 <input type="text" class="form-control" id="">
+                                                <span class="text-hint fz-sm text-muted d-block mt-1">(多個請以,分隔)</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">金額設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3 row">
@@ -422,20 +441,32 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">價格一名稱</label>
+                                            <label for="" class="col-12 col-sm-3 col-form-label">定價名稱</label>
                                             <div class="col-12 col-sm-9 form-check-wrap">
                                                 <input class="form-control" type="text">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">價格一</label>
+                                            <label for="" class="col-12 col-sm-3 col-form-label">定價</label>
+                                            <div class="col-12 col-sm-9 form-check-wrap">
+                                                <input class="form-control" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="" class="col-12 col-sm-3 col-form-label">結帳價名稱</label>
+                                            <div class="col-12 col-sm-9 form-check-wrap">
+                                                <input class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="" class="col-12 col-sm-3 col-form-label">結帳價</label>
                                             <div class="col-12 col-sm-9 form-check-wrap">
                                                 <input class="form-control mb-3" type="number">
                                                 <input class="form-control" type="number">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label pt-0">價格一紅字</label>
+                                            <label for="" class="col-12 col-sm-3 col-form-label pt-0">結帳價紅字</label>
                                             <div class="col-12 col-sm-9 form-check-wrap">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio"
@@ -451,18 +482,6 @@
                                                         否
                                                     </label>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">價格二名稱</label>
-                                            <div class="col-12 col-sm-9 form-check-wrap">
-                                                <input class="form-control" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">價格二</label>
-                                            <div class="col-12 col-sm-9 form-check-wrap">
-                                                <input class="form-control" type="number">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -508,10 +527,10 @@
                                             <label for="" class="col-12 col-sm-3 col-form-label">優惠價時間</label>
                                             <div class="col-12 col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="優惠價時間起" aria-label="優惠價時間起">
                                                     <span class="input-group-text">~</span>
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="優惠價時間迄" aria-label="優惠價時間迄">
                                                 </div>
                                                 <div class="form-check">
@@ -538,8 +557,11 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">優惠設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="row mb-3">
@@ -552,10 +574,10 @@
                                             <label for="" class="col-12 col-sm-3 col-form-label">活動主圖時間</label>
                                             <div class="col-12 col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="活動主圖時間起" aria-label="活動主圖時間起">
                                                     <span class="input-group-text">~</span>
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="活動主圖時間迄" aria-label="活動主圖時間迄">
                                                 </div>
                                                 <div class="form-check">
@@ -589,32 +611,35 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">商品資訊欄位</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3 row">
                                             <label for="" class="col-12 col-sm-3 col-form-label">商品說明</label>
                                             <div class="col-12 col-sm-9">
-                                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                <textarea class="form-control" name="" id="" rows="3">此處需套用 CKEditor</textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="" class="col-12 col-sm-3 col-form-label">商品資訊</label>
                                             <div class="col-12 col-sm-9">
-                                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                <textarea class="form-control" name="" id="" rows="3">此處需套用 CKEditor</textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="" class="col-12 col-sm-3 col-form-label">商品成分</label>
                                             <div class="col-12 col-sm-9">
-                                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                <textarea class="form-control" name="" id="" rows="3">此處需套用 CKEditor</textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="" class="col-12 col-sm-3 col-form-label">商品簡介</label>
                                             <div class="col-12 col-sm-9">
-                                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                <textarea class="form-control" name="" id="" rows="3">此處需套用 CKEditor</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -622,8 +647,11 @@
                             </div>
                             <div class="col-12 col-xl-5 mb-3">
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">顯示狀態</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3 row">
@@ -668,10 +696,10 @@
                                             <label for="" class="col-12 col-sm-3 col-form-label">上架時間</label>
                                             <div class="col-12 col-sm-9">
                                                 <div class="input-group">
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="上架時間起" aria-label="上架時間起">
                                                     <span class="input-group-text">~</span>
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="上架時間迄" aria-label="上架時間迄">
                                                 </div>
                                             </div>
@@ -680,10 +708,10 @@
                                             <label for="" class="col-12 col-sm-3 col-form-label">加入購物車時間</label>
                                             <div class="col-12 col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="加入購物車時間起" aria-label="加入購物車時間起">
                                                     <span class="input-group-text">~</span>
-                                                    <input type="datetime-local" class="form-control"
+                                                    <input type="datetime-local" step="1" class="form-control"
                                                            placeholder="加入購物車時間迄" aria-label="加入購物車時間迄">
                                                 </div>
                                                 <div class="form-check">
@@ -812,10 +840,46 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">商品分類設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
+                                        <div class="mb-3 row">
+                                            <label for="" class="col-12 col-sm-3 col-form-label pt-0">開闔功能</label>
+                                            <div class="col-12 col-sm-9 form-check-wrap">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="FlexRadio" value="" id="FlexRadio1">
+                                                    <label class="form-check-label" for="FlexRadio1">
+                                                        全關
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="FlexRadio" value="" id="FlexRadio2">
+                                                    <label class="form-check-label" for="FlexRadio2">
+                                                        全開
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="FlexRadio" value="" id="FlexRadio1">
+                                                    <label class="form-check-label" for="FlexRadio1">
+                                                        全選
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="FlexRadio" value="" id="FlexRadio2">
+                                                    <label class="form-check-label" for="FlexRadio2">
+                                                        取消全選
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row mb-3">
                                             <div class="col-12 col-sm-3 text-end">
                                                 <p>分店</p>
@@ -984,8 +1048,11 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">金流設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="row mb-3">
@@ -1005,11 +1072,14 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">物流設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row mb-3">
+                                        {{-- <div class="row mb-3">
                                             <label for="" class="col-12 col-sm-3 col-form-label pt-0">海外配送設定</label>
                                             <div class="col-12 col-sm-9">
                                                 <div class="form-check form-check-inline">
@@ -1027,7 +1097,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row mb-3">
                                             <label for="" class="col-12 col-sm-3 col-form-label">可配送國家</label>
                                             <div class="col-12 col-sm-9">
@@ -1042,7 +1112,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
+                                        {{-- <div class="row mb-3">
                                             <label for="" class="col-12 col-sm-3 col-form-label pt-0">超取設定</label>
                                             <div class="col-12 col-sm-9">
                                                 <div class="form-check form-check-inline">
@@ -1060,7 +1130,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row mb-3">
                                             <label for="" class="col-12 col-sm-3 col-form-label">可用配送方式</label>
                                             <div class="col-12 col-sm-9">
@@ -1079,8 +1149,11 @@
                                 </div>
 
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">SEO 設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">基本設定</h5>
@@ -1173,48 +1246,106 @@
                             </div>
                             <div class="col-12">
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">商品規格設定</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">顏色
-                                                (規格一)</label>
-                                            <div class="col-12 col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" id=""
-                                                       value="紅色,綠色,藍色,灰色">
+                                            <label for="" class="col-12 col-sm-2 col-form-label pt-0">規格類型</label>
+                                            <div class="col-12 col-sm-10">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="flexRadio" value="" id="flexRadio1">
+                                                    <label class="form-check-label" for="flexRadio1">
+                                                        無規格
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="flexRadio" value="" id="flexRadio2">
+                                                    <label class="form-check-label" for="flexRadio2">
+                                                        單規格
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="flexRadio" value="" id="flexRadio1">
+                                                    <label class="form-check-label" for="flexRadio1">
+                                                        雙規格
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="flexRadio" value="" id="flexRadio2">
+                                                    <label class="form-check-label" for="flexRadio2">
+                                                        三規格
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">規格二</label>
-                                            <div class="col-12 col-sm-9">
-                                                <input type="text" readonly class="form-control-plaintext" id=""
-                                                       value="S,M,L,XL">
+                                            <div class="col-12">
+                                                <a href="##">+ 設定規格一</a>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <a class="d-block" href="##">+ 新增商品規格</a>
+                                        <div class="mb-3 row">
+                                            <label for="" class="col-12 col-sm-2 col-form-label">規格二</label>
+                                            <div class="col-12 col-sm-10">
+                                                <div class="input-group">
+                                                    <span class="form-control-plaintext variant-settings">
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-image: url('/template/Salessa/img/products/1000_1000_001.jpg');"></span>S</span>
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-image: url('/template/Salessa/img/products/1000_1000_002.jpg');"></span>M</span>
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-image: url('/template/Salessa/img/products/1000_1000_003.jpg');"></span>L</span>
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-image: url('/template/Salessa/img/products/1000_1000_004.jpg');"></span>XL</span>
+                                                    </span>
+                                                    <button class="btn btn-light">
+                                                        <i class="ti-pencil"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="" class="col-12 col-sm-2 col-form-label">規格三</label>
+                                            <div class="col-12 col-sm-10">
+                                                <div class="input-group">
+                                                    <span class="form-control-plaintext variant-settings">
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-color: red;"></span>A</span>
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-color: blue;"></span>B</span>
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-color: green;"></span>C</span>
+                                                        <span class="variant-setting"><span class="variant-thumbnail" style="background-color: cyan;"></span>D</span>
+                                                    </span>
+                                                    <button class="btn btn-light">
+                                                        <i class="ti-pencil"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card mb-4 card-detail border-0">
-                                    <div class="card-header border-0">
+                                    <div class="card-header border-0 d-flex align-items-center">
                                         <h5 class="card-title">商品規格管理</h5>
+                                        <span class="card-arrow d-flex align-items-center justify-content-end fs-4 ms-auto">
+                                            <ion-icon name="chevron-down-outline"></ion-icon>
+                                        </span>
                                     </div>
                                     <div class="card-body">
                                         <ul class="list-group variant-group mb-3">
                                             <li class="list-group-item">
                                                 <div class="row align-items-center text-center">
                                                     <div class="col">規格主圖</div>
-                                                    <div class="col">商品規格</div>
-                                                    <div class="col">展示狀態</div>
-                                                    <div class="col">商品料號</div>
-                                                    <div class="col">庫存</div>
-                                                    <div class="col-2">上架起迄時間</div>
-                                                    <div class="col">價格一</div>
-                                                    <div class="col">價格二</div>
-                                                    <div class="col">優惠價</div>
-                                                    <div class="col">管理</div>
+                                                    <div class="col sortStyle ascStyle">商品規格</div>
+                                                    <div class="col sortStyle descStyle">展示狀態</div>
+                                                    <div class="col sortStyle unsortStyle">商品料號</div>
+                                                    <div class="col sortStyle unsortStyle">庫存</div>
+                                                    <div class="col-2 sortStyle unsortStyle">上架起迄時間</div>
+                                                    <div class="col sortStyle unsortStyle">定價</div>
+                                                    <div class="col sortStyle unsortStyle">結帳價</div>
+                                                    <div class="col sortStyle unsortStyle">優惠價</div>
+                                                    <div class="col sortStyle unsortStyle">管理</div>
                                                 </div>
                                             </li>
                                             @for ($i = 0; $i < 10; $i++)
@@ -1239,7 +1370,7 @@
                                                     </div>
                                                     <div class="col">50</div>
                                                     <div class="col-2 text-center">
-                                                        2023/08/01 00:00:00 ~ 2023/12/31 23:59:59
+                                                        2023/08/01 00:00:00 ~ <br>2023/12/31 23:59:59
                                                     </div>
                                                     <div class="col">
                                                         <input class="form-control" type="number">
@@ -1254,11 +1385,11 @@
                                                         <div class="form-check form-switch p-0 ms-2">
                                                             <input class="form-check-input float-none d-block" type="checkbox" id="flexSwitchCheckDefault">
                                                         </div>
-                                                        <a class="text-muted ms-2 d-flex align-items-center fs-5 variant-setting" href="##">
+                                                        <a class="text-dark ms-2 d-flex align-items-center fs-5 variant-setting" href="##">
                                                             <ion-icon name="settings-outline"></ion-icon>
                                                         </a>
-                                                        <a class="text-danger ms-2 d-flex align-items-center fs-5 variant-delete" href="##">
-                                                            <i class="ti-trash"></i>
+                                                        <a class="text-dark ms-2 d-flex align-items-center fs-5 variant-delete" href="##">
+                                                            <ion-icon name="trash-outline"></ion-icon>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -1292,6 +1423,13 @@
                                                         <h5 class="card-title col-12 mb-3">基本設定</h5>
                                                         <div class="col-4 mb-3">
                                                             <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">商品序號</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <input type="text" class="form-control-plaintext" id="Pos_No" name="Pos_No" value="0A920100110F"
+                                                                        placeholder="商品料號">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">商品料號</label>
                                                                 <div class="col-12 col-sm-9">
                                                                     <input type="text" class="form-control" id="Pos_No" name="Pos_No" value="0A920100110F"
@@ -1302,14 +1440,6 @@
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">單位數</label>
                                                                 <div class="col-12 col-sm-9">
                                                                     <input type="text" class="form-control" id="Unit" name="Unit" value="" placeholder="單位數">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mb-3">
-                                                                <label for="" class="col-12 col-sm-3 col-form-label">Sale小圖</label>
-                                                                <div class="col-12 col-sm-9">
-                                                                    <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple" style="width: 100%">
-                                                                        <option value="1">Sale</option>
-                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1326,6 +1456,14 @@
                                                                 <div class="col-12 col-sm-9">
                                                                     <input type="color" class="form-control" id="S_Act_Str_Color" name="S_Act_Str_Color" value=""
                                                                         placeholder="活動小字色碼">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">Sale小圖</label>
+                                                                <div class="col-12 col-sm-9">
+                                                                    <select name="filter_status[]" class="select2bs5 form-select" multiple="multiple" style="width: 100%">
+                                                                        <option value="1">Sale</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1351,7 +1489,7 @@
                                                             <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">上架狀態</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <select id="SShow_Flag" name="SShow_Flag" class="form-control">
+                                                                    <select id="SShow_Flag" name="SShow_Flag" class="form-select">
                                                                         <option value="1" selected="">上架</option>
                                                                         <option value="2">下架</option>
                                                                     </select>
@@ -1360,7 +1498,7 @@
                                                             <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">商品屬性</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <select id="Prod_Attribute" name="Prod_Attribute" class="form-control">
+                                                                    <select id="Prod_Attribute" name="Prod_Attribute" class="form-select">
                                                                         <option value="1" selected="">正價品</option>
                                                                         <option value="2">正價品及促銷商品</option>
                                                                         <option value="3">特價活動商品</option>
@@ -1370,7 +1508,7 @@
                                                             <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">展示狀態</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <select id="Display_Flag" name="Display_Flag" class="form-control">
+                                                                    <select id="Display_Flag" name="Display_Flag" class="form-select">
                                                                         <option value="1" selected="">銷售中</option>
                                                                         <option value="2">展示中</option>
                                                                         <option value="3">銷售中可補貨</option>
@@ -1383,32 +1521,20 @@
                                                             <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">上架時間</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="datetime-local" class="form-control" placeholder="上架時間起" aria-label="上架時間起">
+                                                                    <div class="input-group">
+                                                                        <input type="datetime-local" step="1" class="form-control" placeholder="上架時間起" aria-label="上架時間起">
                                                                         <span class="input-group-text">~</span>
-                                                                        <input type="datetime-local" class="form-control" placeholder="上架時間迄" aria-label="上架時間迄">
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
-                                                                        <label class="form-check-label" for="flexCheck2">
-                                                                            同主檔時間
-                                                                        </label>
+                                                                        <input type="datetime-local" step="1" class="form-control" placeholder="上架時間迄" aria-label="上架時間迄">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">加入購物車時間</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="datetime-local" class="form-control" placeholder="加入購物車時間起" aria-label="加入購物車時間起">
+                                                                    <div class="input-group">
+                                                                        <input type="datetime-local" step="1" class="form-control" placeholder="加入購物車時間起" aria-label="加入購物車時間起">
                                                                         <span class="input-group-text">~</span>
-                                                                        <input type="datetime-local" class="form-control" placeholder="加入購物車時間迄" aria-label="加入購物車時間迄">
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
-                                                                        <label class="form-check-label" for="flexCheck2">
-                                                                            同主檔時間
-                                                                        </label>
+                                                                        <input type="datetime-local" step="1" class="form-control" placeholder="加入購物車時間迄" aria-label="加入購物車時間迄">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1419,7 +1545,7 @@
                                                                     預購品
                                                                 </label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <select id="S_Pre_Flag" name="S_Pre_Flag" class="form-control">
+                                                                    <select id="S_Pre_Flag" name="S_Pre_Flag" class="form-select">
                                                                         <option value="1">是</option>
                                                                         <option value="2" selected="">否</option>
                                                                     </select>
@@ -1428,7 +1554,7 @@
                                                             <div class="row mb-3">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">到貨時間</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <input type="datetime-local" class="form-control" id="Arrive_Date" name="Arrive_Date" value=""
+                                                                    <input type="datetime-local" step="1" class="form-control" id="Arrive_Date" name="Arrive_Date" value=""
                                                                         placeholder="到貨時間">
                                                                 </div>
                                                             </div>
@@ -1437,9 +1563,9 @@
                                                         <h5 class="card-title col-12 mb-3">金額設定</h5>
                                                         <div class="col-4 mb-3">
                                                             <div class="row mb-3">
-                                                                <label for="" class="col-12 col-sm-3 col-form-label">價格一</label>
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">定價</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <input type="number" class="form-control mb-3" id="Hops_Price" name="Hops_Price" value="0" placeholder="規格結帳價">
+                                                                    <input type="number" class="form-control mb-3" id="Hops_List" name="Hops_List" value="" placeholder="規格定價">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
                                                                         <label class="form-check-label" for="flexCheck2">
@@ -1449,9 +1575,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                <label for="" class="col-12 col-sm-3 col-form-label">價格二</label>
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">結帳價</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <input type="number" class="form-control mb-3" id="Hops_List" name="Hops_List" value="" placeholder="規格定價">
+                                                                    <input type="number" class="form-control mb-3" id="Hops_Price" name="Hops_Price" value="0" placeholder="規格結帳價">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
                                                                         <label class="form-check-label" for="flexCheck2">
@@ -1477,19 +1603,12 @@
                                                             <div class="mb-3 row">
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">優惠價時間</label>
                                                                 <div class="col-12 col-sm-9">
-                                                                    <div class="input-group mb-3">
-                                                                        <input type="datetime-local" class="form-control"
+                                                                    <div class="input-group">
+                                                                        <input type="datetime-local" step="1" class="form-control"
                                                                             placeholder="優惠價時間起" aria-label="優惠價時間起">
                                                                         <span class="input-group-text">~</span>
-                                                                        <input type="datetime-local" class="form-control"
+                                                                        <input type="datetime-local" step="1" class="form-control"
                                                                             placeholder="優惠價時間迄" aria-label="優惠價時間迄">
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" value=""
-                                                                            id="flexCheck2">
-                                                                        <label class="form-check-label" for="flexCheck2">
-                                                                            同主檔時間
-                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1595,18 +1714,19 @@
                                                                 <label for="" class="col-12 col-sm-3 col-form-label">贈品贈送時間</label>
                                                                 <div class="col-12 col-sm-9">
                                                                     <div class="input-group mb-3">
-                                                                        <input type="datetime-local" class="form-control"
+                                                                        <input type="datetime-local" step="1" class="form-control"
                                                                             placeholder="贈品贈送時間起" aria-label="贈品贈送時間起">
                                                                         <span class="input-group-text">~</span>
-                                                                        <input type="datetime-local" class="form-control"
+                                                                        <input type="datetime-local" step="1" class="form-control"
                                                                             placeholder="贈品贈送時間迄" aria-label="贈品贈送時間迄">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                <label for="" class="col-12 col-sm-3 col-form-label">贈品編號（多個請以／隔開）</label>
+                                                                <label for="" class="col-12 col-sm-3 col-form-label">贈品編號</label>
                                                                 <div class="col-12 col-sm-9">
                                                                     <input type="text" class="form-control" id="Gift_No" name="Gift_No" value="" placeholder="贈品編號">
+                                                                    <span class="text-hint fz-sm text-muted d-block mt-1">（多個請以／隔開）</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1618,8 +1738,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
 
                                                         <h5 class="card-title col-12 mb-3">倉儲管理</h5>
                                                         <div class="col-4 mb-3">
@@ -1759,7 +1877,7 @@
         //Initialize Select2 Elements
         $('.select2bs5').each(function(i, ele) {
             $(ele).select2({
-                dropdownParent: $('#prodFilter'),
+                // dropdownParent: $('#prodFilter'),
             })
         })
 

@@ -21,3 +21,4 @@ lang/*.json
 /tests/Feature/images/*
 !/tests/Feature/images/example.jpg
 !/tests/Feature/images/watermark.jpg
+.map

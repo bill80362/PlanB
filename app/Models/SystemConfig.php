@@ -114,6 +114,16 @@ class SystemConfig extends Model
                 'input' => 'textarea', //後臺操作的模式
                 'options' => [],
             ],
+            [
+                'id' => 'filter_css_js',
+                'title' => '輸入過濾css和js',
+                'content' => 'N', //DB抓取後會覆蓋這個職
+                'input' => 'radio', //後臺操作的模式
+                'options' => [
+                    'Y' => '開',
+                    'N' => '關',
+                ],
+            ],
         ],
         '右線預備' => [
             [

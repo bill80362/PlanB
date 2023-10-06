@@ -58,6 +58,11 @@
 
     <!-- menu css  -->
     <link rel="stylesheet" href="/template/Salessa/css/metisMenu.css?v={{ $SystemConfigService->versionJS }}">
+
+    {{-- select2 --}}
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css?v={{ $SystemConfigService->versionJS }}" />
+        
     <!-- style CSS -->
     <link rel="stylesheet" href="/template/Salessa/css/style.css?v={{ $SystemConfigService->versionJS }}" />
     <link rel="stylesheet" href="/template/Salessa/css/colors/default.css?v={{ $SystemConfigService->versionJS }}"
@@ -67,7 +72,9 @@
     <link rel="stylesheet"
         href="/template/select2-4.0.13/dist/css/select2.min.css?v={{ $SystemConfigService->versionJS }}" />
 
-
+    <script>
+        window.editor = [];
+    </script>
 </head>
 
 <body class="crm_body_bg">
@@ -181,23 +188,21 @@
     <script src="/template/Sortable-master/Sortable-master/modular/sortable.complete.esm.js"></script>
 
     {{-- select2 --}}
-    <script
-        src="/template/select2-4.0.13/dist/js/select2.full.min.js?v={{ $SystemConfigService->versionJS }}">
-    </script>
+    <script src="/template/select2-4.0.13/dist/js/select2.full.min.js?v={{ $SystemConfigService->versionJS }}"></script>
 
     {{-- sweetalert2 --}}
-    <script
-        src="/template/sweetalert2/dist/sweetalert2.all.min.js?v={{ $SystemConfigService->versionJS }}">
-    </script>
-    <link rel="stylesheet" href="/template/sweetalert2/dist/sweetalert2.min.css?v={{ $SystemConfigService->versionJS }}">
+    <script src="/template/sweetalert2/dist/sweetalert2.all.min.js?v={{ $SystemConfigService->versionJS }}"></script>
+    <link rel="stylesheet"
+        href="/template/sweetalert2/dist/sweetalert2.min.css?v={{ $SystemConfigService->versionJS }}">
 
 
 
     <script>
         {{-- 統一開啟的JS --}}
 
-        //頁面加載
-        ;(function($){
+            //頁面加載
+        ;
+        (function($) {
             $.ajax({
                 // type: 'POST',
                 url: window.location,
@@ -207,10 +212,10 @@
                 //     search: window.location.search
                 // }
             }).then((res) => {
-                if(res.content){
+                if (res.content) {
                     $("#Oper_Content_Wrapper").html(res.content)
                     $(window).trigger("pageLoaded")
-                }else{
+                } else {
                     alert("沒資料")
                 }
             }).catch((xhr, status, error) => {
@@ -222,12 +227,14 @@
         window.originAlert = window.alert
         window.originConfirm = window.confirm
 
-        window.alert = function(message,extra={}){
-            if(typeof Swal.fire === 'function'){
-                let config = {text: message}
+        window.alert = function(message, extra = {}) {
+            if (typeof Swal.fire === 'function') {
+                let config = {
+                    text: message
+                }
                 $.extend(config, extra)
                 Swal.fire(config)
-            }else{
+            } else {
                 window.originAlert(message)
             }
         }
@@ -245,7 +252,7 @@
                 return Swal.fire(config).then((result) => {
                     if (result.isConfirmed) {
                         return true
-                    }else{
+                    } else {
                         return false
                     }
                 });
