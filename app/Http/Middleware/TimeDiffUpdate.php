@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Config;
 
-class UpdateEvent
+class TimeDiffUpdate
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class UpdateEvent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        Config::set('common.update_event', true);
+        Config::set('common.time_diff_update', true);
         return $next($request);
     }
 }

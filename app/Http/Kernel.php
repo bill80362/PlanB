@@ -85,7 +85,7 @@ class Kernel extends HttpKernel
         //線上人數統計工具
         'online.user' => \App\Http\Middleware\OnlineUser::class,
         //時間差檢查
-        'common.updateEvent' => \App\Http\Middleware\UpdateEvent::class,
+        'common.timeDiffUpdate' => \App\Http\Middleware\TimeDiffUpdate::class,
 
     ];
 }

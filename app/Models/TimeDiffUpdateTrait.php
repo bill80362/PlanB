@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
  * 2. 要使用的路由需掛載： (UpdateEvent.php) => Route::middleware(['common.updateEvent'])
  * 3. 前台需送出欄位updated_at
  */
-trait UpdateEventTrait
+trait TimeDiffUpdateTrait
 {
 
     /**
@@ -22,7 +22,7 @@ trait UpdateEventTrait
      */
     abstract static function updatingCheck(): array;
 
-    public static function bootUpdateEventTrait()
+    public static function bootTimeDiffUpdateTrait()
     {
         static::updating(function ($model) {
             if (self::isEnabled()) {
@@ -46,6 +46,6 @@ trait UpdateEventTrait
             return false;
         }
 
-        return Config::get('common.update_event', false);
+        return Config::get('common.time_diff_update', false);
     }
 }

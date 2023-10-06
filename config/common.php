@@ -3,5 +3,5 @@
 use Illuminate\Support\Str;
 
 return [
-    'update_event' => false,
+    'time_diff_update' => false,
 ];
