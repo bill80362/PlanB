@@ -15,3 +15,6 @@
 </div>
 
 @yield('BodyJavascript')
+
+{{--會有字串過長問題，被截斷，無法render() --}}
+{{--@php echo app(\Barryvdh\Debugbar\Facades\Debugbar::class)::render(); @endphp--}}
