@@ -39,7 +39,7 @@
                             <div class="btn-group ms-2">
                                 <a class="btn btn-light"
                                     href="{{ route('language_list') }}?{{ request()->getQueryString() }}">
-                                    {{ __('取消') }}
+                                    {{ __('回總覽') }}
                                 </a>
                             </div>
                             <div class="btn-group ms-2">
@@ -65,7 +65,7 @@
 
                                             <div class="row mb-3">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label">{{ __('名稱') }}</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __('名稱') }}</label>
                                                 <div class="col-12 col-sm-9">
                                                     <textarea {{ $Data->id ? 'disabled' : '' }} name="text" class="form-control" rows="3">{{ $Data->text }}</textarea>
                                                     @if ($Data->id)
@@ -77,7 +77,7 @@
 
                                             <div class="row mb-3">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label">{{ __('翻譯後名稱') }}({{ $LangTypeText[$Data->lang_type] }})</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __('翻譯後名稱') }}({{ $LangTypeText[$Data->lang_type] }})</label>
                                                 <div class="col-12 col-sm-9">
                                                     <textarea class="form-control" name="tran_text" rows="3">{{ $Data->tran_text }}</textarea>
                                                 </div>
@@ -89,7 +89,7 @@
                                                     <input type="hidden" name="else_langTypes[]"
                                                         value="{{ $ElseDatas[$key]['lang_type'] }}">
                                                     <label for=""
-                                                        class="col-12 col-sm-3 col-form-label">{{ __('翻譯後名稱') }}({{ $value }})</label>
+                                                        class="col-12 col-sm-3 col-form-label pt-0">{{ __('翻譯後名稱') }}({{ $value }})</label>
                                                     <div class="col-12 col-sm-9">
                                                         <textarea class="form-control" name="else_trans[]" rows="3">{{ $ElseDatas[$key]['tran_text'] }}</textarea>
                                                     </div>
@@ -106,7 +106,7 @@
                                             {{-- <h5 class="card-title">基本設定</h5> --}}
                                             <div class="row mb-3">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label">{{ __('備註') }}</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __('備註') }}</label>
                                                 <div class="col-12 col-sm-9">
                                                     <textarea class="form-control" name="memo" rows="3">{{ $Data->memo }}</textarea>
                                                 </div>
@@ -114,7 +114,7 @@
 
                                             <div class="row mb-3">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label">{{ __('相關網址') }}</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __('相關網址') }}</label>
                                                 <div class="col-12 col-sm-9">
                                                     @foreach ($UrlMaps as $urlMaps)
                                                         <div>
@@ -135,7 +135,7 @@
                                 <div class="col-12 d-flex align-items-center justify-content-end">
                                     <div class="btn-group ms-2">
                                         <a href="{{ route('language_list') }}?{{ request()->getQueryString() }}"
-                                            class="btn btn-muted mx-2">{{ __('取消') }}</a>
+                                            class="btn btn-muted mx-2">{{ __('回總覽') }}</a>
                                     </div>
                                     <div class="btn-group ms-2">
                                         <button type="submit" class="btn btn-primary">{{ __('儲存') }}</button>

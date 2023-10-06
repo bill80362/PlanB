@@ -10,9 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Validation\ValidationException;
-use App\Models\CountryAndShippingFee\Language;
-use App\Models\AuditLog;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -83,23 +81,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $ignoreModels = [Language::class, AuditLog::class];
-        // Event::listen(['eloquent.saving: *'], function ($event, $models) use ($ignoreModels) {
-        //     foreach ($models as $model) {
-        //         if ($model->id ?? null) {
-        //             $data = explode(" ", $event);
-        //             if (!in_array($data[1], $ignoreModels)) {
-        //                 $modelClass = new $data[1];
-        //                 $anotherModel = $modelClass->whereId($model->id)->first();
-        //                 if ($anotherModel->updated_at > $model->updated_at) {
-        //                     throw ValidationException::withMessages([
-        //                         'message' => __('你慢了一步，此資料已更新，請重新整理')
-        //                     ]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
+       
     }
 
     /**

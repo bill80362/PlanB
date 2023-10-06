@@ -15,7 +15,7 @@
                                 <h2>
                                     <a class="btn btn-primary mr-2"
                                         href="{{ route('http_log_list') }}?{{ request()->getQueryString() }}">
-                                    <</a>
+                                    </a>
                                     {{-- {{ __('管理人管理') }} {{ $Data->id ? __('修改') : __('新增') }} --}}
                                 </h2>
                             </div>

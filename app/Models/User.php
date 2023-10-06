@@ -18,7 +18,13 @@ class User extends Authenticatable implements Auditable
     //操作紀錄
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable; //操作Log
-    use ExportImportTrait; //匯出
+    use ExportImportTrait; //匯出    
+    use UpdateEventTrait; // 時間差修改
+
+    protected static function updatingCheck(): array
+    {
+        return ['name'];
+    }
 
     /**
      * 欄位新增修改的黑名單，注意 create()會吃到，save（）不會吃到

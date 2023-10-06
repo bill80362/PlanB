@@ -39,7 +39,7 @@
                             <div class="btn-group ms-2">
                                 <a class="btn btn-light"
                                     href="{{ route('{{route}}_list') }}?{{ request()->getQueryString() }}">
-                                    {{ __('取消') }}
+                                    {{ __('回總覽') }}
                                 </a>
                             </div>
                             <div class="btn-group ms-2">
@@ -81,7 +81,7 @@
                                             </div> --}}
 
 
-                                           
+
 
 
                                         </div>
@@ -109,7 +109,7 @@
                                 <div class="col-12 d-flex align-items-center justify-content-end">
                                     <div class="btn-group ms-2">
                                         <a href="{{ route('{{route}}_list') }}?{{ request()->getQueryString() }}"
-                                            class="btn btn-muted mx-2">{{ __('取消') }}</a>
+                                            class="btn btn-muted mx-2">{{ __('回總覽') }}</a>
                                     </div>
                                     <div class="btn-group ms-2">
                                         <button type="submit" class="btn btn-primary">{{ __('儲存') }}</button>

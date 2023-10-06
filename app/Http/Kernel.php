@@ -40,7 +40,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -69,8 +69,8 @@ class Kernel extends HttpKernel
         //覆寫語系轉換function
         'lang.extend' => \App\Http\Middleware\LanguageExtend::class,
         //紀錄Log
-        'log.request' => \App\Http\Middleware\LogRequestInfo::class,//紀錄request
-        'log.response' => \App\Http\Middleware\LogResponseInfo::class,//紀錄response
+        'log.request' => \App\Http\Middleware\LogRequestInfo::class, //紀錄request
+        'log.response' => \App\Http\Middleware\LogResponseInfo::class, //紀錄response
 
         /**專屬後台**/
         //後台權限控管
@@ -82,7 +82,8 @@ class Kernel extends HttpKernel
         'lang.redirect' => \App\Http\Middleware\LanguageRedirect::class,
         //線上人數統計工具
         'online.user' => \App\Http\Middleware\OnlineUser::class,
-
+        //時間差檢查
+        'common.updateEvent' => \App\Http\Middleware\UpdateEvent::class,
 
     ];
 }
