@@ -488,12 +488,12 @@
                 imagePreview = fileBox.find(".form-file-img"),
                 imageRoute = fileBox.find(".form-input-route")
 
-            //沒有圖先新增
             if (selectedImage) {
                 console.log(selectedImage)
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     imagePreview.attr("src", e.target.result);
+                    imageLink.attr("target", "");
                     imageLink.attr("href", e.target.result)
                     imageRow.removeClass("hide")
                     imageRoute.val(selectedImage.name)
