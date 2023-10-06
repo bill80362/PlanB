@@ -234,7 +234,7 @@ class PermissionService
     {
         return [
             [
-                'label' => '群組管理',
+                'label' => '權限模板',
                 'groupKey' => 'permissionGroup',
                 'actions' => ['read', 'create', 'update', 'delete'],
             ],

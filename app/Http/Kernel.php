@@ -71,6 +71,8 @@ class Kernel extends HttpKernel
         //紀錄Log
         'log.request' => \App\Http\Middleware\LogRequestInfo::class, //紀錄request
         'log.response' => \App\Http\Middleware\LogResponseInfo::class, //紀錄response
+        //限定dataType進入
+        'check.dataType' => \App\Http\Middleware\CheckRequestHeaderDataType::class, //紀錄request
 
         /**專屬後台**/
         //後台權限控管

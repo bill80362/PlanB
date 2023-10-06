@@ -26,7 +26,7 @@ class MenuService
                         'permission' => 'user_read',
                     ],
                     [
-                        'name' => __('群組管理'),
+                        'name' => __('權限模板'),
                         'href' => '/operate/permission_group',
                         'permission' => 'permissionGroup_read',
                     ],
