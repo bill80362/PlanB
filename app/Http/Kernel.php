@@ -72,7 +72,7 @@ class Kernel extends HttpKernel
         'log.request' => \App\Http\Middleware\LogRequestInfo::class, //紀錄request
         'log.response' => \App\Http\Middleware\LogResponseInfo::class, //紀錄response
         //限定dataType進入
-        'check.dataType' => \App\Http\Middleware\CheckRequestHeaderDataType::class, //紀錄request
+        'check.first.render' => \App\Http\Middleware\CheckFirstRender::class, //紀錄request
 
         /**專屬後台**/
         //後台權限控管

@@ -22,6 +22,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
     Route::middleware([
         'auth:operate',
         'OperateLoginAuth',
+        'check.first.render',
         //        'online.user', //線上人數
     ])->group(function () {
 
@@ -33,7 +34,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'prefix' => 'user',
             'as' => 'user_',
         ], function () {
-            Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('user_read')->middleware("check.dataType");
+            Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('user_read');
             Route::get('{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_update');
             Route::post('{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')
                 ->middleware(['common.updateEvent'])->can('user_update');
