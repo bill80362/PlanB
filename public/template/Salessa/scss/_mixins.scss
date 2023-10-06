@@ -57,6 +57,12 @@
   display: flex;
 }
 
+@mixin flex($width) {
+  flex: 0 0 $with;
+  width: $width;
+  max-width: $width;
+}
+
 // justify-content
 @mixin justify-content($justify) {
   -webkit-justify-content: $justify;
