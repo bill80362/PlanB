@@ -199,13 +199,13 @@
         //頁面加載
         ;(function($){
             $.ajax({
-                type: 'POST',
-                url: '/test',
+                // type: 'POST',
+                url: window.location,
                 dataType: 'json',
-                data: {
-                    pathname: window.location.pathname,
-                    search: window.location.search
-                }
+                // data: {
+                //     pathname: window.location.pathname,
+                //     search: window.location.search
+                // }
             }).then((res) => {
                 if(res.content){
                     $("#Oper_Content_Wrapper").html(res.content)

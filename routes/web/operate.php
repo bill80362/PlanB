@@ -33,7 +33,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             'prefix' => 'user',
             'as' => 'user_',
         ], function () {
-            Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('user_read');
+            Route::get('/', [UserController::class, 'listHTML'])->name('list')->can('user_read')->middleware("check.dataType");
             Route::get('{id}', [UserController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('user_update');
             Route::post('{id}', [UserController::class, 'update'])->whereNumber('id')->name('update')
                 ->middleware(['common.updateEvent'])->can('user_update');
