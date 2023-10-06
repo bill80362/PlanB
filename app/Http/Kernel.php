@@ -87,7 +87,8 @@ class Kernel extends HttpKernel
         //時間差檢查
         'common.timeDiffUpdate' => \App\Http\Middleware\TimeDiffUpdate::class,
         //request過濾工具
-        'xss' => \App\Http\Middleware\XSS::class,
+        'filter.xss' => \App\Http\Middleware\FilterXSS::class,
+        'filter.tags' => \App\Http\Middleware\FilterTags::class,
 
     ];
 }

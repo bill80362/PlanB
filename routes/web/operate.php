@@ -23,7 +23,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         'auth:operate',
         'OperateLoginAuth',
         'check.first.render',
-        'xss',
+        'filter.tags',
         //        'online.user', //線上人數
     ])->group(function () {
 
