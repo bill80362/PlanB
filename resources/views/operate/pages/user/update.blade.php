@@ -12,7 +12,6 @@
                 <div class="white_card">
                     <div class="white_card_header">
                         <div class="d-flex align-items-center justify-content-between">
-                            {{-- @include('/operate/components/title/page_title') --}}
                             <h2> {{ __('管理人管理') }} {{ $Data->id ? __('修改') : __('新增') }}</h2>
 
                             {{-- @can('user_delete')
@@ -46,7 +45,7 @@
                         <div class="white_card_body">
                             <div class="row">
                                 @include('/operate/components/alert/error_message')
-                                <div class="col-12 col-xl-6 mb-6">
+                                <div class="col-12 col-xl-5 mb-6">
                                     <div class="card mb-3 card-detail border-0">
                                         <div class="card-header border-0">
                                             <h5 class="card-title">{{ __('基本資料') }}</h5>
@@ -57,7 +56,7 @@
 
 
                                             {{-- <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label">
+                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">
                                                     {{ __($Data->Column_Title_Text['status']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9">
@@ -72,7 +71,7 @@
                                             </div> --}}
 
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label">
+                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">
                                                     {{ __($Data->Column_Title_Text['status']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
@@ -95,7 +94,7 @@
 
                                             <div class="mb-3 row">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label">{{ __($Data->Column_Title_Text['name']) }}</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __($Data->Column_Title_Text['name']) }}</label>
                                                 <div class="col-12 col-sm-9">
                                                     <input type="text" class="form-control" name="name"
                                                         value="{{ $Data->name }}">
@@ -105,7 +104,7 @@
 
 
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label">
+                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">
                                                     {{ __($Data->Column_Title_Text['password']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9">
@@ -116,7 +115,7 @@
 
 
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label">
+                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">
                                                     {{ __($Data->Column_Title_Text['email']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9">
@@ -132,7 +131,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label">訂單收信</label>
+                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">訂單收信</label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="FlexRadio"
@@ -154,7 +153,7 @@
                                             </div>
 
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label">庫存收信</label>
+                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">庫存收信</label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="FlexRadio"
@@ -178,7 +177,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl-6 mb-6">
+                                <div class="col-12 col-xl-7 mb-6">
 
                                     @foreach ($GroupItemPermission as $key => $value)
                                         <div class="card mb-3 card-detail border-0">
@@ -189,7 +188,7 @@
                                                 @foreach ($value['permissions'] as $permission)
                                                     <div class="mb-3 row">
                                                         <label for=""
-                                                            class="col-12 col-sm-3 col-form-label">{{ $permission['label'] }}</label>
+                                                            class="col-12 col-sm-3 col-form-label pt-0">{{ $permission['label'] }}</label>
                                                         <div class="col-12 col-sm-9 form-check-wrap">
                                                             @foreach ($permission['actions'] as $action)
                                                                 <div class="form-check form-check-inline">

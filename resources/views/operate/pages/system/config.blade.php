@@ -37,14 +37,14 @@
                                             @foreach($groupContent as $item)
                                                 @if($item["input"]=="text")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <input type="text" class="form-control " name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
                                                         </div>
                                                     </div>
                                                 @elseif($item["input"]=="select")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <select class="form-select " aria-label="Default select example" name="{{$item["id"]}}">
                                                                 @foreach($item["options"] as $value => $option)
@@ -55,7 +55,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="date")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3 ">
                                                                 <input type="date" class="form-control" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
@@ -64,7 +64,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="datetime")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3">
                                                                 <input type="datetime-local" class="form-control " step="1" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
@@ -73,7 +73,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="time")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <div class="input-group mb-3">
                                                                 <input type="time" class="form-control " step="1" type name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
@@ -82,7 +82,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="img")
                                                     <div class="row mb-3">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <img src="{{app(App\Services\Operate\UploadFileService::class)->url($SystemConfigKeyValue[$item["id"]])}}" width="200">
                                                             <input class="form-control" type="file" name="{{$item["id"]}}_file">
@@ -92,7 +92,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="radio")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             @foreach($item["options"] as $value => $option)
                                                                 <div class="form-check form-check-inline">
@@ -104,7 +104,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="checkbox")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             @foreach($item["options"] as $value => $option)
                                                             <div class="form-check form-check-inline">
@@ -116,7 +116,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="select2")
                                                     <div class="mb-3 row">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <select name="{{$item["id"]}}[]" class="select2bs5 form-select" multiple="multiple" style="width: 100%">
                                                                 @foreach($item["options"] as $value => $option)
@@ -127,7 +127,7 @@
                                                     </div>
                                                 @elseif($item["input"]=="textarea")
                                                     <div class="row mb-3">
-                                                        <label for="" class="col-12 col-sm-3 col-form-label">{{$item["title"]}}</label>
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
                                                         <div class="col-12 col-sm-9">
                                                             <textarea class="form-control" rows="10" name="{{$item["id"]}}">{{$SystemConfigKeyValue[$item["id"]]??""}}</textarea>
                                                         </div>
