@@ -5579,6 +5579,35 @@ canvas#highlights {
   overflow: hidden;
 }
 
+[class^=ionicon-] {
+  display: inline-block;
+  height: 1em;
+  -webkit-mask: 0 0/100% 100%;
+  mask: 0 0/100% 100%;
+  vertical-align: baseline;
+  width: 1em;
+}
+[class^=ionicon-]::after {
+  background: currentColor;
+  content: "";
+  display: block;
+  height: 100%;
+  -webkit-mask: 0 0/100% 100%;
+  mask: 0 0/100% 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.ionicon-funnel-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
+}
+
+.ionicon-chevron-forward-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/chevron-forward-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/chevron-forward-outline.svg");
+}
+
 .lms_category_wrap {
   margin-bottom: 50px;
 }
