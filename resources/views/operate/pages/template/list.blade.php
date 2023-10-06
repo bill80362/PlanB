@@ -19,7 +19,7 @@
                                 <div class="btn-group me-2">
                                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        <i class="ti-settings"></i> 處理
+                                        <ion-icon name="settings-outline"></ion-icon> 處理
                                     </button>
                                     <div class="dropdown-menu">
                                         <button type="button" class="dropdown-item">全選</button>
@@ -114,9 +114,9 @@
                                                     <th class="sortStyle unsortStyle">最後修改日期</th>
                                                     <th class="sortStyle unsortStyle">建置日期</th>
                                                     <th class="text-end">
-                                                        <button class="btn btn-link slideFunc-toggle text-muted"
-                                                            data-target="#listSetting"><i
-                                                                class="ti-settings"></i></button>
+                                                        <button class="btn btn-link slideFunc-toggle text-muted" data-target="#listSetting">
+                                                            <ion-icon name="settings-outline"></ion-icon>
+                                                        </button>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -129,7 +129,7 @@
                                                     </td>
                                                     <td rowspan="2"><input class="form-control" type="number"></td>
                                                     <td rowspan="2">
-                                                        <img src="./img/products/img-1.png" alt="">
+                                                        <img src="/template/Salessa/img/products/img-1.png" alt="">
                                                     </td>
                                                     <td class="border-0">測試用商品1</td>
                                                     <td class="border-0">TEST_29N1</td>
@@ -195,7 +195,7 @@
                                                     </td>
                                                     <td rowspan="2"><input class="form-control" type="number"></td>
                                                     <td rowspan="2">
-                                                        <img src="./img/products/img-2.png" alt="">
+                                                        <img src="/template/Salessa/img/products/img-2.png" alt="">
                                                     </td>
                                                     <td class="border-0">測試用商品2</td>
                                                     <td class="border-0">TEST_29N2</td>
@@ -264,7 +264,7 @@
                                                     </td>
                                                     <td rowspan="2"><input class="form-control" type="number"></td>
                                                     <td rowspan="2">
-                                                        <img src="./img/products/img-1.png" alt="">
+                                                        <img src="/template/Salessa/img/products/img-4.png" alt="">
                                                     </td>
                                                     <td class="border-0">測試用商品3</td>
                                                     <td class="border-0">TEST_29N3</td>
@@ -906,8 +906,8 @@
             </div>
         </div>
     </div>
+    <div class="alert text-success bg-success-light" role="alert">成功訊息。</div>
 @endsection
-
 
 @section('BodyJavascript')
     <script>

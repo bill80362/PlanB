@@ -58,6 +58,11 @@
 
     <!-- menu css  -->
     <link rel="stylesheet" href="/template/Salessa/css/metisMenu.css?v={{ $SystemConfigService->versionJS }}">
+
+    {{-- select2 --}}
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css?v={{ $SystemConfigService->versionJS }}" />
+        
     <!-- style CSS -->
     <link rel="stylesheet" href="/template/Salessa/css/style.css?v={{ $SystemConfigService->versionJS }}" />
     <link rel="stylesheet" href="/template/Salessa/css/colors/default.css?v={{ $SystemConfigService->versionJS }}"
