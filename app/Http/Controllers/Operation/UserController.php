@@ -42,19 +42,27 @@ class UserController extends Controller
         //過濾條件
         $Paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
         //
-        $html = view('operate/pages/user/list', [
+//        $html = view('operate/pages/user/list', [
+//            'Paginator' => $Paginator,
+//            //
+//            'Model' => $this->oModel,
+//            //
+//            'columns' => $userColumns,
+//            'TableSetting' => $TableSetting,
+//        ])->render();
+////        dd($html);
+//        //
+//        return [
+//            "content" =>$html,
+//        ];
+        return view('operate/pages/user/list', [
             'Paginator' => $Paginator,
             //
             'Model' => $this->oModel,
             //
             'columns' => $userColumns,
             'TableSetting' => $TableSetting,
-        ])->render();
-//        dd($html);
-        //
-        return [
-            "content" =>$html,
-        ];
+        ]);
     }
 
     public function updateHTML($id)

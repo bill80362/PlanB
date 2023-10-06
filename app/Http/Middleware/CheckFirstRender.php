@@ -20,21 +20,13 @@ class CheckFirstRender
         if( $request->method()=="GET" && !$request->ajax()){
             return new response(view('operate.pages.render'));
         }elseif($request->method()=="GET" && $request->ajax()){
-            // Get the response
-//            $response = $next($request);
-            // If the response is not strictly a JsonResponse, we make it
-//            if (!$response instanceof JsonResponse) {
-//                $response = $this->factory->json(
-//                    $response->content(),
-//                    $response->status(),
-//                    $response->headers->all()
-//                );
-//            }
-
-//            return $response;
+            //回覆值改寫JSON
+            $response = $next($request);
+            return response()->json([
+                "content" => $response->getContent(),
+            ]);
         }
         //
-
         return $next($request);
     }
 }
