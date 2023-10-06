@@ -445,6 +445,6 @@
 
   $('body').on('click', '.card-detail .card-header', function (e) {
     e.preventDefault();
-    $(this).siblings('.card-body').slideToggle(400);
+    $(this).siblings('.card-body').slideToggle(400).parent('.card-detail').toggleClass('in-collapse');
   });
 })(jQuery);

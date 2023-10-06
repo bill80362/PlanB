@@ -11136,7 +11136,8 @@ a.pswp__share--download:hover {
 }
 
 th.sortStyle,
-td.sortStyle {
+td.sortStyle,
+div.sortStyle {
   background-repeat: no-repeat;
   background-position: center right;
   background-size: 1rem 1rem;
@@ -11144,15 +11145,18 @@ td.sortStyle {
   padding-right: 1.5rem;
 }
 th.sortStyle.ascStyle,
-td.sortStyle.ascStyle {
+td.sortStyle.ascStyle,
+div.sortStyle.ascStyle {
   background-image: url(../img/icon/asc.png);
 }
 th.sortStyle.descStyle,
-td.sortStyle.descStyle {
+td.sortStyle.descStyle,
+div.sortStyle.descStyle {
   background-image: url(../img/icon/desc.png);
 }
 th.sortStyle.unsortStyle,
-td.sortStyle.unsortStyle {
+td.sortStyle.unsortStyle,
+div.sortStyle.unsortStyle {
   background-image: url(../img/icon/bg_01.png);
 }
 
@@ -11387,11 +11391,40 @@ td.sortStyle.unsortStyle {
   right: 5px;
   width: auto;
 }
+.in-collapse.card-detail .card-header::after {
+  opacity: 0;
+}
+
 .card-detail .card-header .card-title {
   color: #2D1967;
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
+}
+.card-detail .card-header .card-arrow {
+  color: #6c757d;
+  transform: scaleY(-1);
+  transition: transform 0.25s;
+}
+.in-collapse.card-detail .card-header .card-arrow {
+  transform: scaleY(1);
+}
+
+.variant-settings .variant-setting {
+  align-items: center;
+  display: inline-flex;
+  margin-right: 1rem;
+  vertical-align: baseline;
+}
+.variant-settings .variant-thumbnail {
+  background: center center no-repeat;
+  background-size: cover;
+  border-radius: 99px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  display: block;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+  width: 1.5rem;
 }
 
 .variant-group .list-group-item {
@@ -11488,4 +11521,10 @@ td.sortStyle.unsortStyle {
 
 ion-icon {
   vertical-align: middle;
+}
+
+.input-group > .form-control, .input-group > .form-control-plaintext, .input-group > .form-select {
+  flex: 1 1 auto;
+  min-width: 0px;
+  width: 1%;
 }

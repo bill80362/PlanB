@@ -327,6 +327,9 @@
             position: absolute;
             right: 5px;
             width: auto;
+            @at-root .in-collapse#{&} {
+                opacity: 0;
+            }
         }
         .card-title {
             color: $primary;
@@ -334,6 +337,34 @@
             font-weight: 700;
             margin: 0;
         }
+        .card-arrow {
+            color: $gray-600;
+            transform: scaleY(-1);
+            transition: transform .25s;
+            @at-root .in-collapse#{&} {
+                transform: scaleY(1);
+            }
+        }
+    }
+}
+
+// .variant-settings
+.variant-settings {
+    .variant-setting {
+        align-items: center;
+        display: inline-flex;
+        margin-right: 1rem;
+        vertical-align: baseline;
+    }
+    .variant-thumbnail {
+        background: center center no-repeat;
+        background-size: cover;
+        border-radius: 99px;
+        box-shadow: 0 0 3px rgba($black, .15);
+        display: block;
+        height: 1.5rem;
+        margin-right: .5rem;
+        width: 1.5rem;
     }
 }
 
@@ -432,4 +463,13 @@
 }
 ion-icon {
     vertical-align: middle;
+}
+.input-group {
+    & > .form-control,
+    & > .form-control-plaintext,
+    & > .form-select {
+        flex: 1 1 auto;
+        min-width: 0px;
+        width: 1%;
+    }
 }
