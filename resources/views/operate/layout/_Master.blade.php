@@ -79,7 +79,7 @@
 
         @include('/operate/include/_Nav')
 
-        <div class="main_content_iner ">
+        <div id="Oper_Content_Wrapper" class="main_content_iner ">
             @yield('Content')
         </div>
 
@@ -195,6 +195,67 @@
 
     <script>
         {{-- 統一開啟的JS --}}
+
+        //頁面加載
+        console.log(window.location)
+        ;(function($){
+            $.ajax({
+                type: 'POST',
+                url: '/test',
+                dataType: 'json',
+                data: {
+                    pathname: window.location.pathname,
+                    search: window.location.search
+                }
+            }).then((res) => {
+                if(res.content){
+                    $("#Oper_Content_Wrapper").html(res.content)
+                }else{
+                    alert("沒資料")
+                }
+            }).catch((xhr, status, error) => {
+                console.error(xhr.responseText);
+            })
+        })($)
+
+        //sweetalert覆蓋原生
+        window.originAlert = window.alert
+        window.originConfirm = window.confirm
+
+        window.alert = function(message,extra={}){
+            if(typeof Swal.fire === 'function'){
+                let config = {text: message}
+                $.extend(config, extra)
+                Swal.fire(config)
+            }else{
+                window.originAlert(message)
+            }
+        }
+
+        window.confirm = async function(message, extra = {}) {
+            if (typeof Swal.fire === 'function') {
+                let config = {
+                    text: message,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    //confirmButtonColor: '#3085d6',
+                    //cancelButtonColor: '#d33',
+                };
+                $.extend(config, extra);
+                result = await Swal.fire(config).then((result) => {
+                    if (result.isConfirmed) {
+                        return true
+                    } else {
+                        return false
+                    }
+                });
+            } else {
+                // 如果Swal.fire不可用，回退到原生的confirm
+                resolve(window.confirm(message));
+            }
+        };
+
+
         //Initialize Select2 Elements
         $('.select2').select2()
         //Initialize Select2 Elements
