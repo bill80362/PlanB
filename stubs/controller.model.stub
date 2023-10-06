@@ -80,9 +80,10 @@ class {{ class }} extends Controller
         $user = auth('operate')->user();
 
         //過濾
-        $UpdateData = $this->request->only([
+        // $UpdateData = $this->request->only([
         //    'name', 'status'
-        ]);
+        // ]);
+        $UpdateData = $this->request->toArray();
 
         //驗證資料
         $validator = Validator::make(
