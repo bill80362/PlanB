@@ -465,6 +465,47 @@
         
         //欄位提示
         $('[data-toggle="tooltip"]').tooltip()
+
+        //檔案欄位
+        //刪除
+        $(document).on("click", ".form-file-del", function(){
+            let _this = $(this),
+                row = _this.parents(".form-file-row")
+            _this.parents(".form-file-box").find("input").val("")
+            row.addClass("hide")
+            row.find("a").attr("href","")
+            row.find("img").attr("src","")
+
+        })
+        //上傳預覽
+
+        $(document).on('change', ".form-input-img", function () {
+            let _this = $(this),
+                selectedImage = _this[0].files[0],
+                fileBox = _this.parents(".form-file-box"),
+                imageRow = fileBox.find(".form-img-row"),
+                imageLink = fileBox.find(".form-file-link"),
+                imagePreview = fileBox.find(".form-file-img"),
+                imageRoute = fileBox.find(".form-input-route")
+
+            if (selectedImage) {
+                console.log(selectedImage)
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.attr("src", e.target.result);
+                    imageLink.attr("target", "");
+                    imageLink.attr("href", e.target.result)
+                    imageRow.removeClass("hide")
+                    imageRoute.val(selectedImage.name)
+                };
+                reader.readAsDataURL(selectedImage);
+            } else {
+                imagePreview.attr("src", "");
+                imageLink.attr("href", "")
+                imageRoute.val("")
+                imageRow.addClass("hide")
+            }
+        });
     })
 
     // product collapse list

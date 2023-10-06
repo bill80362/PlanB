@@ -28,6 +28,10 @@ body {
   margin: 0;
 }
 
+.hide {
+  display: none !important;
+}
+
 @media (min-width: 1200px) {
   .container {
     max-width: 1310px;
@@ -73,6 +77,28 @@ input:focus {
 .form-control:focus {
   box-shadow: 0 0 0 0rem transparent !important;
   border-color: #dee2e6;
+}
+
+.form-file-box > * {
+  margin-bottom: 5px;
+}
+.form-file-box > *:last-child {
+  margin-bottom: 0;
+}
+.form-file-box .form-file-row {
+  flex-wrap: wrap;
+}
+.form-file-box .form-file-row > input {
+  flex: 1 1 auto;
+  margin-right: 0.5em;
+  width: auto;
+}
+.form-file-box .form-file-img {
+  display: block;
+  max-height: 100px;
+  margin-right: 0.5em;
+  max-width: 100%;
+  width: auto;
 }
 
 .dropdown-menu {
@@ -3779,7 +3805,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child::befor
 .profile_info:hover .profile_info_iner {
   opacity: 1;
   visibility: visible;
-  top: 77px;
+  top: 63px;
 }
 .profile_info .profile_info_details {
   padding: 20px 25px;
@@ -5690,19 +5716,24 @@ canvas#highlights {
   z-index: 1;
 }
 
-.ionicon-funnel-outline::after {
-  -webkit-mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
-  mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
-}
-
 .ionicon-chevron-forward-outline::after {
   -webkit-mask-image: url("/template/ionicons.designerpack/chevron-forward-outline.svg");
   mask-image: url("/template/ionicons.designerpack/chevron-forward-outline.svg");
 }
 
+.ionicon-funnel-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
+}
+
 .ionicon-help-circle-outline::after {
   -webkit-mask-image: url("/template/ionicons.designerpack/help-circle-outline.svg");
   mask-image: url("/template/ionicons.designerpack/help-circle-outline.svg");
+}
+
+.ionicon-document-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/document-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/document-outline.svg");
 }
 
 .lms_category_wrap {
