@@ -31,7 +31,7 @@
                                                     <th class="sortStyle" data-column="size">{{__("使用空間")}}</th>
 
                                                     <th class="text-end" data-column="operate">
-{{--                                                        <button class="btn btn-link slideFunc-toggle text-muted" onclick="$('#listSetting').toggleClass('in-active')"--}}
+{{--                                                        <button class="btn btn-link slideFunc-toggle text-muted" --}}
 {{--                                                            data-target="#listSetting"><i--}}
 {{--                                                                class="ti-settings"></i></button>--}}
                                                     </th>

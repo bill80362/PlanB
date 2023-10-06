@@ -24,6 +24,9 @@
     //     z-index: -1;
     //     border-radius: 0 0 10px 10px;
     // }
+    &:hover {
+        z-index: 101;
+    }
     &.default_header{
          background: #64C5B1;
          border-radius: 0;
