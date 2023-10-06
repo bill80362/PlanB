@@ -282,8 +282,6 @@
             // theme: 'bootstrap-5'
         })
 
-        //欄位提示
-        //$('[data-toggle="tooltip"]').tooltip()
         /**
          * sends a request to the specified url from a form. this will change the window location.
          * @param {string} path the path to send the post request to

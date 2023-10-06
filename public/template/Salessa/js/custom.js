@@ -462,6 +462,9 @@
                 $(ele).fadeOut(300).remove()
             }, 5000)
         });
+        
+        //欄位提示
+        $('[data-toggle="tooltip"]').tooltip()
     })
 
 }(jQuery));

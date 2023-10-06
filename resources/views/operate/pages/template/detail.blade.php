@@ -313,9 +313,7 @@
                             <div class="col-12 col-xl-7 mb-6">
                                 <div class="card mb-4 card-detail border-0">
                                     <div class="card-header border-0 d-flex align-items-center justify-content-between">
-                                        <h5 class="card-title">圖片和影片<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-  Tooltip on top
-</button></h5>
+                                        <h5 class="card-title">圖片和影片<i class="ionicon-help-circle-outline" data-toggle="tooltip" data-placement="top" title="{{__('說明文字')}}"></i></h5>
                                         <div class="button-group d-flex align-items-center">
                                             <button class="btn btn-muted ms-2">取消全選</button>
                                             <button class="btn btn-primary ms-2">全選</button>

@@ -5608,6 +5608,11 @@ canvas#highlights {
   mask-image: url("/template/ionicons.designerpack/chevron-forward-outline.svg");
 }
 
+.ionicon-help-circle-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/help-circle-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/help-circle-outline.svg");
+}
+
 .lms_category_wrap {
   margin-bottom: 50px;
 }
