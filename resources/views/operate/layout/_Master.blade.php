@@ -213,7 +213,7 @@
                     alert("沒資料")
                 }
             }).catch((xhr, status, error) => {
-                console.error(xhr.responseText);
+                //console.error(xhr.responseText);
             })
         })($)
 
@@ -280,6 +280,9 @@
         $('.select2bs5').select2({
             // theme: 'bootstrap-5'
         })
+
+        //欄位提示
+        $('[data-toggle="tooltip"]').tooltip()
         /**
          * sends a request to the specified url from a form. this will change the window location.
          * @param {string} path the path to send the post request to
