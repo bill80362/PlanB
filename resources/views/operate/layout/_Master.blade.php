@@ -209,6 +209,7 @@
             }).then((res) => {
                 if(res.content){
                     $("#Oper_Content_Wrapper").html(res.content)
+                    $(window).trigger("pageLoaded")
                 }else{
                     alert("沒資料")
                 }
