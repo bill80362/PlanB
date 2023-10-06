@@ -1,7 +1,7 @@
 @inject('OnlineUserTool', 'App\Tools\OnlineUser\OnlineUserTool')
 @inject('RouteLanguageService', 'App\Services\Route\RouteLanguageService')
 <!-- menu  -->
-<div class="container-fluid g-0">
+<div class="container g-0">
     <div class="row">
         <div class="col-lg-12 p-0 ">
             <div class="header_iner d-flex justify-content-between align-items-center">
