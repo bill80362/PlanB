@@ -147,7 +147,6 @@
 
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted"
-                                                            onclick="$('#listSetting').toggleClass('in-active')"
                                                             data-target="#listSetting"><i class="ti-settings"></i></button>
                                                     </th>
                                                 </tr>
