@@ -56,7 +56,7 @@
                         '|',
                         'specialCharacters', 'horizontalLine', 'pageBreak', '|',
                         'textPartLanguage', '|',
-                        'sourceEditing'
+                        'sourceEditing', 'fullscreen'
                     ],
                     shouldNotGroupWhenFull: true
                 },

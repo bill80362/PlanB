@@ -19,7 +19,7 @@ class User extends Authenticatable implements Auditable
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable; //操作Log
     use ExportImportTrait; //匯出    
-    use UpdateEventTrait; // 時間差修改
+    use TimeDiffUpdateTrait; // 時間差修改
 
     protected static function updatingCheck(): array
     {

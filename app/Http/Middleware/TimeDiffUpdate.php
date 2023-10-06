@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Config;
 
-class CheckRequestHeaderDataType
+class TimeDiffUpdate
 {
     /**
      * Handle an incoming request.
@@ -15,14 +16,7 @@ class CheckRequestHeaderDataType
      */
     public function handle(Request $request, Closure $next): Response
     {
-//        $r = $next($request);
-//        dd($r);
-        //不紀錄GET
-        if( $request->method()=="GET" && !$request->ajax()){
-            //
-            return new response(view('operate.pages.render'));
-        }
-
+        Config::set('common.time_diff_update', true);
         return $next($request);
     }
 }

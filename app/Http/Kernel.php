@@ -72,7 +72,7 @@ class Kernel extends HttpKernel
         'log.request' => \App\Http\Middleware\LogRequestInfo::class, //紀錄request
         'log.response' => \App\Http\Middleware\LogResponseInfo::class, //紀錄response
         //限定dataType進入
-        'check.dataType' => \App\Http\Middleware\CheckRequestHeaderDataType::class, //紀錄request
+        'check.first.render' => \App\Http\Middleware\CheckFirstRender::class, //紀錄request
 
         /**專屬後台**/
         //後台權限控管
@@ -85,7 +85,9 @@ class Kernel extends HttpKernel
         //線上人數統計工具
         'online.user' => \App\Http\Middleware\OnlineUser::class,
         //時間差檢查
-        'common.updateEvent' => \App\Http\Middleware\UpdateEvent::class,
+        'common.timeDiffUpdate' => \App\Http\Middleware\TimeDiffUpdate::class,
+        //request過濾工具
+        'xss' => \App\Http\Middleware\XSS::class,
 
     ];
 }
