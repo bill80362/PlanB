@@ -86,6 +86,8 @@ class Kernel extends HttpKernel
         'online.user' => \App\Http\Middleware\OnlineUser::class,
         //時間差檢查
         'common.timeDiffUpdate' => \App\Http\Middleware\TimeDiffUpdate::class,
+        //request過濾工具
+        'xss' => \App\Http\Middleware\XSS::class,
 
     ];
 }
