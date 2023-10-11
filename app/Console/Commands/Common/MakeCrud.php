@@ -106,8 +106,8 @@ class MakeCrud extends Command
         $menuServicePath = app_path('services/Operate/MenuService.php');
         $stubPath = base_path('stubs') . '/service/MenuService.stub';
         $result = $this->stubToFile($stubPath, [
-            "r_href"  => $camelName,
-            "r_permission"  => $snacktName . '_read'
+            "r_href"  => $snacktName,
+            "r_permission"  => $camelName . '_read'
         ], $menuServicePath, "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。");
 
 
