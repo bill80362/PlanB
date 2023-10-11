@@ -69,8 +69,6 @@ class MakeCrud extends Command
 
             if (!$result) {
                 dump("發生錯誤，找不到： " . $stubFile);
-            } else {
-                dump("建立成功： " . $fullPath);
             }
         }
 
@@ -87,8 +85,6 @@ class MakeCrud extends Command
 
         if (!$result) {
             dump("發生錯誤，找不到： " . $stubFile);
-        } else {
-            dump("建立成功： " . $fullPath);
         }
 
         // ListColumnService.php
@@ -118,9 +114,9 @@ class MakeCrud extends Command
         /**
          * 需修改及確認以下檔案
          */
-        dump("已產生已下檔案：");
-        dump("migrations => 需補上資料表欄位");
-        dump("model => 需補上model設定");
+        dump("已產生已下相關資料：");
+        dump("migrations檔 => 需補上資料表欄位");
+        dump("model檔 => 需補上model設定");
         dump("PermissionService.php => 需移動註解及補上名稱");
         dump("MenuService.php => 需移動註解及補上名稱");
         dump("ListColumnService.php => 需解開註解");
