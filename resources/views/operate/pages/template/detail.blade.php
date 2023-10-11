@@ -316,8 +316,8 @@
                             <div class="col-12 col-xl-7 mb-6">
                                 <div class="card mb-4 card-detail border-0">
                                     <div class="card-header border-0 d-flex align-items-center">
-                                        <h5 class="card-title">圖片和影片</h5>
-                                        <div class="button-group d-flex align-items-center ms-auto">
+                                        <h5 class="card-title">圖片和影片<i class="ionicon-help-circle-outline" data-toggle="tooltip" data-placement="top" title="{{__('說明文字')}}"></i></h5>
+                                        <div class="allselect-group button-group d-flex align-items-center ms-auto">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
                                                 <label class="form-check-label" for="inlineRadio1">全選</label>

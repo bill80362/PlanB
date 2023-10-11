@@ -181,8 +181,18 @@
 
                                     @foreach ($GroupItemPermission as $key => $value)
                                         <div class="card mb-3 card-detail border-0">
-                                            <div class="card-header border-0">
+                                            <div class="card-header border-0 d-flex align-items-center">
                                                 <h5 class="card-title">{{ $value['groupName'] }}</h5>
+                                                <div class="allselect-group button-group d-flex align-items-center ms-auto">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions_{{$key}}" id="inlineRadio1_{{$key}}" value="1" checked>
+                                                        <label class="form-check-label" for="inlineRadio1_{{$key}}">全選</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions_{{$key}}" id="inlineRadio2_{{$key}}" value="0">
+                                                        <label class="form-check-label" for="inlineRadio2_{{$key}}">取消全選</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="card-body">
                                                 @foreach ($value['permissions'] as $permission)
