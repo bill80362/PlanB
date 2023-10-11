@@ -4691,6 +4691,9 @@ body::-webkit-scrollbar {
   border-radius: 0px;
   padding: 30px 30px;
 }
+.modal-open .main_content .main_content_iner {
+  z-index: auto;
+}
 .main_content .main_content_iner.default_main_contaner_iner {
   background: #FFFFFF;
 }

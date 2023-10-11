@@ -16,6 +16,10 @@ class CheckFirstRender
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //匯出功能統一不使用分開路由
+        if(str_contains($request->route()->getName(), "_export")){
+            return $next($request);
+        }
         //偵測如果不是ajax，則是第一次render給外框即可
         if( $request->method()=="GET" && !$request->ajax()){
             return new response(view('operate.pages.render'));
