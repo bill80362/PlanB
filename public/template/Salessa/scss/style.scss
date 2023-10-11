@@ -92,6 +92,9 @@
 // plugin sortTable
 @import "jq.tablesort";
 
+//breadcrumb css
+@import "_common_loading";
+
 // select2 fixed
 .select2-container.select2-container--open {
     z-index: 2000;

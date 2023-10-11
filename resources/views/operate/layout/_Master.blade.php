@@ -79,6 +79,7 @@
 
 <body class="crm_body_bg">
     @include('/tools/lang/Js_translator')
+    @include('/operate/include/_Loading')
     @include('/operate/include/_Aside')
 
 
@@ -200,9 +201,21 @@
     <script>
         {{-- 統一開啟的JS --}}
 
-            //頁面加載
-        ;
-        (function($) {
+        //loadding彈窗開關
+        function pageLoadding(swicth){
+            if(swicth){
+                $(".common-loading").removeClass("hide")
+            }else{
+                $(".common-loading").addClass("hide")
+            }
+        }
+
+        $(document).on("submit", function(){
+            $(".common-loading").removeClass("hide")
+        })
+
+        //頁面加載
+        ;(function($) {
             $.ajax({
                 // type: 'POST',
                 url: window.location,
@@ -212,6 +225,7 @@
                 //     search: window.location.search
                 // }
             }).then((res) => {
+                pageLoadding(false)
                 if (res.content) {
                     $("#Oper_Content_Wrapper").html(res.content)
                     $(window).trigger("pageLoaded")

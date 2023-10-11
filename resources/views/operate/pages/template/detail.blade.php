@@ -364,7 +364,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3 row">
-                                            <label for="" class="col-12 col-sm-3 col-form-label">商品名稱</label>
+                                            <label for="" class="col-12 col-sm-3 col-form-label">商品名稱<i class="ionicon-help-circle-outline" data-toggle="tooltip" data-placement="top" title="{{__('說明文字')}}"></i></label>
                                             <div class="col-12 col-sm-9">
                                                 <input type="text" class="form-control" id="">
                                             </div>
