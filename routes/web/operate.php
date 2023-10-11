@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 // 請勿刪除此行註解，stub產生放置位置
 
 
+
 /**後台*/
 Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request', 'log.response'])->group(function () {
     //切換後台版面語言
@@ -96,9 +97,26 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
         });
 
         //公司管理
-        Route::get('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement');
-        Route::post('/company_manage/{companyKey}/draft', [Operation\Content\CompanyManageController::class, 'saveDraft'])->name('post_privacy_statement_draft');
-        Route::post('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement');
+        // Route::get('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement');
+        // Route::post('/company_manage/{companyKey}/draft', [Operation\Content\CompanyManageController::class, 'saveDraft'])->name('post_privacy_statement_draft');
+        // Route::post('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement');
+
+        Route::group([
+            'prefix' => 'page_content',
+            'as' => 'page_content_',
+        ], function () {
+            Route::get('/', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'listHTML'])->name('list')->can('pageContent_read');
+            Route::get('{id}', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('pageContent_update');
+            Route::post('{id}', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'update'])->whereNumber('id')->name('update')->can('pageContent_update');
+            Route::post('{id}/draft', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'draft'])->whereNumber('id')->name('draft')->can('pageContent_update');
+
+            // Route::post('del', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'delBatch'])->name('del')->can('pageContent_delete');
+            // Route::get('export/{type}', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'export'])->name('export')->where("type", '[key|value]+')->can('pageContent_export');
+            // Route::post('import', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'import'])->name('import')->can('pageContent_import');
+            // Route::get('{id}/audit', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'audit'])->whereNumber('id')->name('audit')->can('pageContent_read');
+            Route::post('list_column', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'saveListColumn'])->name('saveListColumn');
+        });
+
 
         //編輯器圖片上傳
         Route::post('/upload_image', [Operation\Config\FileController::class, 'uploadImage'])->name('upload_file');

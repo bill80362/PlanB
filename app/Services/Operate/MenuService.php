@@ -53,15 +53,20 @@ class MenuService
                 'icon' => '',
                 'subMenu' => [
                     [
-                        'name' => __('隱私權聲明'),
-                        'href' => '/operate/company_manage/privacy_statement',
-                        'permission' => 'privacyStatement_read',
+                        'name' => __('內容管理列表'),
+                        'href' => '/operate/page_content',
+                        'permission' => 'pageContent_read',
                     ],
-                    [
-                        'name' => __('版權宣告'),
-                        'href' => '/operate/company_manage/copyright_notice',
-                        'permission' => 'copyrightNotice_read',
-                    ],
+                    // [
+                    //     'name' => __('隱私權聲明'),
+                    //     'href' => '/operate/company_manage/privacy_statement',
+                    //     'permission' => 'privacyStatement_read',
+                    // ],
+                    // [
+                    //     'name' => __('版權宣告'),
+                    //     'href' => '/operate/company_manage/copyright_notice',
+                    //     'permission' => 'copyrightNotice_read',
+                    // ],
                 ],
             ],
             [

@@ -14,7 +14,7 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>@include('/operate/components/title/page_title')</h2>
+                                <h2>@include('/operate/components/title/page_title') - {{$pageName}}</h2>
 
                                 <div class="btn-group ms-2">
                                     <a class="btn btn-light" href="{{ request()->url() }}">{{ __('取消') }}</a>

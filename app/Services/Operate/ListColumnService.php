@@ -2,19 +2,14 @@
 
 namespace App\Services\Operate;
 
-use App\Models\AuditLog;
-use App\Models\FileUpload;
-use App\Models\Log\HttpLog;
-use App\Models\Permission\PermissionGroup;
-use App\Models\User;
+use App\Models;
 use App\Models\User\ListColumnSetting;
-use App\Models\CountryAndShippingFee\Language;
 use Illuminate\Database\Eloquent\Model;
 
 class ListColumnService
 {
     private array $columnStyle = [
-        Language::class => [
+        Models\CountryAndShippingFee\Language::class => [
             "updated_at" => [
                 "width: 140px",
             ],
@@ -26,7 +21,7 @@ class ListColumnService
 
     //請注意順序 lockColumn > canUseColumn > lockColumnTail
     private array $defines = [
-        User::class => [
+        Models\User::class => [
             "lockColumn" => [
                 'default_serial_number',
             ],
@@ -37,7 +32,7 @@ class ListColumnService
                 'operate'
             ],
         ],
-        AuditLog::class => [
+        Models\AuditLog::class => [
             "lockColumn" => [
                 'default_serial_number', 'audit_title',
             ],
@@ -49,7 +44,7 @@ class ListColumnService
                 'operate'
             ],
         ],
-        Language::class => [
+        Models\CountryAndShippingFee\Language::class => [
             "lockColumn" => [
                 'lang_type', 'default_serial_number'
             ],
@@ -60,7 +55,7 @@ class ListColumnService
                 "operate"
             ],
         ],
-        PermissionGroup::class => [
+        Models\Permission\PermissionGroup::class => [
             "lockColumn" => [
                 'default_serial_number',
             ],
@@ -71,17 +66,28 @@ class ListColumnService
                 'operate'
             ],
         ],
-        HttpLog::class => [
+        Models\Log\HttpLog::class => [
             "lockColumn" => [
                 'default_serial_number',
             ],
             "canUseColumn" => [
-                'id', 'type', 'primary_key','status','status_code','connect_time','process_time','url','method','request','response','created_at',
+                'id', 'type', 'primary_key', 'status', 'status_code', 'connect_time', 'process_time', 'url', 'method', 'request', 'response', 'created_at',
             ],
             "lockColumnTail" => [
                 'operate'
             ],
         ],
+        Models\Company\PageContent::class => [
+            "lockColumn" => [
+                'default_serial_number',
+            ],
+            "canUseColumn" => [
+                'lang_type', 'page_name', 'slug', 'created_at', 'updated_at'
+            ],
+            "lockColumnTail" => [
+                'operate'
+            ],
+        ]
     ];
 
     //抓取設定檔，會抓取parent class的設定檔

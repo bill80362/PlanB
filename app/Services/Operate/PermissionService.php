@@ -216,6 +216,11 @@ class PermissionService
     {
         return [
             [
+                'label' => '內容管理列表',
+                'groupKey' => 'pageContent',
+                'actions' => ['read', 'update'],
+            ],
+            [
                 'label' => '隱私權聲明',
                 'groupKey' => 'privacyStatement',
                 'actions' => ['read', 'update'],

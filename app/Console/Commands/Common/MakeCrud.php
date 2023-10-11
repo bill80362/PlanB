@@ -97,10 +97,11 @@ class MakeCrud extends Command
          */
         // migration
         // model
-        // ListColumnService.php
-        // route、controller
-        // update.balde.php
         // permissionService.php
+        // ListColumnService.php
         // MenuService.php
+        // route、controller(確認)
+        // list.blade.php、update.blade.php
+
     }
 }
