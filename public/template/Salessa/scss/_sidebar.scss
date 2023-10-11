@@ -4,7 +4,6 @@
     height: 100vh;
     left: 0;
     top: 0;
-    z-index: 99;
     padding-bottom: 50px;
     position: fixed;
     // width: 15%;
@@ -15,7 +14,9 @@
     transition: (.5s);
     background: #FFFFFF;
     box-shadow: 0 12px 30px rgba(80, 143, 244, .10);
-
+    .editor-fullscreen & {
+        z-index: auto;
+    }
     &.hide_vertical_menu {
         @media #{$medium_device} {
             left: -20%;
