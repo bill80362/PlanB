@@ -1,0 +1,17 @@
+#fullscreenoverlay {
+    overflow: hidden;
+}
+
+#fullscreeneditor {
+    position: fixed !important;
+    top: 0!important;
+    left: 0!important;
+    right: 0!important;
+    bottom: 0!important;
+    z-index: 99999999999999!important;
+}
+
+#fullscreeneditor .ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline,
+#fullscreeneditor .ck.ck-editor__main {
+    height: 100%;
+}

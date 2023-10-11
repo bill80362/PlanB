@@ -22,3 +22,5 @@ lang/*.json
 !/tests/Feature/images/example.jpg
 !/tests/Feature/images/watermark.jpg
 .map
+/public/ckeditor/code/node_modules/*
+/public/ckeditor/code/build/*
