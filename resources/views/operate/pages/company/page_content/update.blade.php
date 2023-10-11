@@ -17,7 +17,7 @@
                                 <h2>@include('/operate/components/title/page_title') - {{ __($pageName) }}</h2>
 
                                 <div class="btn-group ms-2">
-                                    <a class="btn btn-light" href="{{ request()->url() }}">{{ __('取消') }}</a>
+                                    <a class="btn btn-light" href="{{ route('page_content_list') }}">{{ __('回總覽') }}</a>
                                 </div>
                                 <div class="btn-group ms-2">
                                     <button type="button" class="btn btn-dark">{{ __('草稿') }}</button>
@@ -128,7 +128,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center justify-content-end">
                                     <div class="btn-group ms-2">
-                                        <a class="btn btn-light" href="{{ request()->url() }}">{{ __('取消') }}</a>
+                                        <a class="btn btn-light" href="{{ route('page_content_list') }}">{{ __('回總覽') }}</a>
                                     </div>
                                     <div class="btn-group ms-2">
                                         <button type="button" id="draftBtn"
