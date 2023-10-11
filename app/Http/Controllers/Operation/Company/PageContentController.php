@@ -31,10 +31,11 @@ class PageContentController extends Controller
         })->toArray();
 
         $keys = $this->oModel->slugDefinition();
+        $defaultLang = config('app.locale', 'zh-tw');
         foreach ($keys as $key) {
             $this->oModel->firstOrCreate([
                 'slug' => $key,
-                'lang_type' => "zh-tw",
+                'lang_type' => $defaultLang,
             ], [
                 'page_name' => $key,
             ]);
