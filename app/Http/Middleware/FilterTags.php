@@ -65,10 +65,10 @@ class FilterTags
 
         $str = preg_replace("/<(script.*?)>(.*?)<(\/script.*?)>/si", "", $str); //过滤script标签
         $str = preg_replace("/<(\/?script.*?)>/si", "", $str); //过滤script标签
-        $str = preg_replace("/javascript/si", "Javascript", $str); //过滤script标签
-        $str = preg_replace("/vbscript/si", "Vbscript", $str); //过滤script标签
+        $str = preg_replace("/javascript/si", "nJavascript", $str); //过滤script标签
+        $str = preg_replace("/vbscript/si", "nVbscript", $str); //过滤script标签
         $str = preg_replace("/on([a-z]+)\s*=/si", "nOn\\1=", $str); //过滤script标签
-        $str = preg_replace("/([style]+)\s*=/si", "nStyle\\1=", $str); //过滤style标签
+//        $str = preg_replace("/([style]+)\s*=/si", "nStyle\\1=", $str); //过滤style标签
         $str = preg_replace("/&#/si", "&＃", $str); //过滤script标签，如javaScript:alert(
 
         return $str;
