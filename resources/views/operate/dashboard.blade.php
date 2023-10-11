@@ -34,9 +34,9 @@
 @endsection
 
 @section('BodyJavascript')
-    <script src="/ckeditor/upload.js"></script>
-    <script src="/ckeditor/ckeditor.js"></script>
     <script>
+        // console.log("{{__('儀表板')}}")
+        // console.log("{{__('儀表板1')}}")
         ClassicEditor
             .create(document.querySelector('#editor'), {
                 extraPlugins: [MyCustomUploadAdapterPlugin],
@@ -44,15 +44,15 @@
                     items: [
                         'findAndReplace', 'selectAll', '|',
                         'heading', '|',
-                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript',
-                        'removeFormat', '|',
-                        'bulletedList', 'numberedList', 'todoList', '|',
-                        'outdent', 'indent', '|',
+                        'bold', 'italic', 'strikethrough', 'code', 'subscript', 'superscript',
+                        '|',
+                        'bulletedList', 'numberedList', '|',
+                        '|',
                         'undo', 'redo',
                         '-',
                         'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
                         'alignment', '|',
-                        'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed',
+                        'link', 'insertImage', 'blockQuote', 'insertTable', 'codeBlock', 'htmlEmbed',
                         '|',
                         'specialCharacters', 'horizontalLine', 'pageBreak', '|',
                         'textPartLanguage', '|',
