@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Operation\Company;
 use App\Http\Controllers\Controller;
 use App\Models\Company\PageContent;
 use App\Services\Operate\ListColumnService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Models\CountryAndShippingFee\Language;
+use App\Services\Operate\PageContentService;
 
 class PageContentController extends Controller
 {
@@ -20,8 +18,10 @@ class PageContentController extends Controller
     }
 
     // 列表頁
-    public function listHTML(ListColumnService $listColumnService)
-    {
+    public function listHTML(
+        ListColumnService $listColumnService,
+        PageContentService $pageContentService
+    ) {
         $user = auth('operate')->user();
         // table設定，可用欄位
         $TableSetting = $listColumnService->getTableSetting($this->oModel);
@@ -34,10 +34,20 @@ class PageContentController extends Controller
         //
         $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
         //過濾條件
-        $Paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
+        $paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
+
+        $keys = $pageContentService->keys();
+        foreach ($keys as $key) {
+            $this->oModel->firstOrCreate([
+                'slug' => $key,
+                'lang_type' => "zh-tw",
+            ], [
+                'page_name' => $key,
+            ]);
+        }
 
         return view('operate/pages/company/page_content/list', [
-            'Paginator' => $Paginator,
+            'Paginator' => $paginator,
             'Model' => $this->oModel,
             'columns' => $userColumns,
             'TableSetting' => $TableSetting,

@@ -14,7 +14,7 @@
                     <div class="white_card">
                         <div class="white_card_header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h2>@include('/operate/components/title/page_title') - {{$pageName}}</h2>
+                                <h2>@include('/operate/components/title/page_title') - {{ __($pageName) }}</h2>
 
                                 <div class="btn-group ms-2">
                                     <a class="btn btn-light" href="{{ request()->url() }}">{{ __('取消') }}</a>
@@ -149,19 +149,31 @@
     <script>
         var datas = @json($datas);
         var data = datas[0];
-
         // 是否有草稿
-        var haveDraft = @json($haveDraft);
-        if (haveDraft) {
-            var yes = confirm('目前有草稿，是否要載入草稿？');
+        checkHasDraft();
 
-            if (yes) {
-                // alert('你按了確定按鈕');
-                // 確認載入草稿，程式修改載入草稿
-            } else {
-                // 不載入草稿，不需做任何操作。
+        async function checkHasDraft() {
+
+            var haveDraft = @json($haveDraft);
+            if (haveDraft) {
+                var yes = await confirm($trans('目前有草稿，是否要載入草稿？'));
+
+                if (yes) {
+                    // 載入草稿
+                    let ids = $("input[name='ids[]']").map(function() {
+                        return $(this).val();
+                    }).get();
+                    ids.forEach((element, index) => {
+                        let i = index + 1;
+                        window.editor[i].data.set(datas[index].draft);
+                    });
+                    alert($trans('載入草稿完成'));
+                } else {
+                    // 不載入草稿，不需做任何操作。
+                }
             }
         }
+
 
 
         document.getElementById('draftBtn').onclick = function() {
@@ -179,7 +191,7 @@
             //頁面加載
             $.ajax({
                 type: 'POST',
-                url: '/operate/company_manage/' + data.slug + '/draft',
+                url: '/operate/page_content/' + data.id + '/draft',
                 dataType: 'json',
                 data: {
                     ids: ids,

@@ -4,6 +4,7 @@ namespace App\Models\Company;
 
 use App\Models\ExportImportTrait;
 use App\Models\FilterTemplateTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -17,6 +18,13 @@ class PageContent extends Model implements Auditable
     public $incrementing = true;
     protected $keyType = 'int';
     protected $guarded = [];
+
+    protected function pageName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string|null $value) => __($value),
+        );
+    }
 
 
     public function getValidatorRules()
@@ -76,7 +84,7 @@ class PageContent extends Model implements Auditable
     public array $filterTemplate = [
         // "status" => "radio",
         // "updated_at" => "rangeDateTime",
-        // "id" => "selectAndInput"
+        "id" => "selectAndInput"
     ];
     //自定義篩選條件
     public function useFilterExtend($query, array $Data)
@@ -91,7 +99,7 @@ class PageContent extends Model implements Auditable
 
 
     public $filterTextKey = [
-        'page_name'
+        'slug'
     ];
     public $filterTextKeyCustom = [
         // 'lang_url_map' => '相關網址'
