@@ -7,7 +7,6 @@ use App\Models\Company\PageContent;
 use App\Services\Operate\ListColumnService;
 use Illuminate\Http\Request;
 use App\Models\CountryAndShippingFee\Language;
-use App\Services\Operate\PageContentService;
 
 class PageContentController extends Controller
 {
@@ -19,8 +18,7 @@ class PageContentController extends Controller
 
     // 列表頁
     public function listHTML(
-        ListColumnService $listColumnService,
-        PageContentService $pageContentService
+        ListColumnService $listColumnService
     ) {
         $user = auth('operate')->user();
         // table設定，可用欄位
@@ -32,11 +30,12 @@ class PageContentController extends Controller
             return array_search($item, $userColumns);
         })->toArray();
 
-        $keys = $pageContentService->keys();
+        $keys = $this->oModel->slugDefinition();
+        $defaultLang = config('app.locale', 'zh-tw');
         foreach ($keys as $key) {
             $this->oModel->firstOrCreate([
                 'slug' => $key,
-                'lang_type' => "zh-tw",
+                'lang_type' => $defaultLang,
             ], [
                 'page_name' => $key,
             ]);

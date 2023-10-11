@@ -98,6 +98,17 @@ class PageContent extends Model implements Auditable
         return $query;
     }
 
+    /**
+     * 定義字串
+     */
+    public function slugDefinition()
+    {
+        return [
+            'privacy_statement', // 隱私權聲明
+            'copyright_notice', // 版權宣告
+        ];
+    }
+
 
     public $filterTextKey = [
         'slug'
