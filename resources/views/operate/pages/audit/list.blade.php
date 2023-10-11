@@ -108,7 +108,8 @@
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    @include('operate.components.filter.chosen')
+                                    <x-OperateFilterChosen :model="$model"></x-OperateFilterChosen>
+{{--                                    @include('operate.components.filter.chosen')--}}
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
                                             <thead>
