@@ -142,37 +142,23 @@
                                                 @foreach ($paginator->items() as $index => $Item)
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
-                                                            <input type="checkbox" class="form-check-input"
-                                                                name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
+                                                            <input type="checkbox" class="form-check-input" name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
                                                         </td>
-                                                        <td class="border-0" data-column="audit_title">
-                                                            {{ app('App\Services\Route\RouteTitle')->getTitle($Item->route_name) }}
-                                                        </td>
+                                                        <td class="border-0" data-column="audit_title">{{ app('App\Services\Route\RouteTitle')->getTitle($Item->route_name) }}</td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
-                                                        <td class="border-0" data-column="user_type">
-                                                            {{ $Item->user_type }}</td>
-                                                        <td class="border-0" data-column="user_id">{{ $Item->user_id }}
-                                                        </td>
+                                                        <td class="border-0" data-column="user_type">{{ $Item->user_type }}</td>
+                                                        <td class="border-0" data-column="user_id">{{ $Item->user_id }}</td>
                                                         <td class="border-0" data-column="event">{{ $Item->event }}</td>
-                                                        <td class="border-0" data-column="auditable_type">
-                                                            {{ $Item->updated_at }}</td>
-                                                        <td class="border-0" data-column="auditable_id">
-                                                            {{ $Item->auditable_id }}</td>
-                                                        <td class="border-0" data-column="old_values">
-                                                            {{ collect($Item->old_values)->toJson() }}</td>
-                                                        <td class="border-0" data-column="new_values">
-                                                            {{ collect($Item->new_values)->toJson() }}</td>
+                                                        <td class="border-0" data-column="auditable_type">{{ $Item->updated_at }}</td>
+                                                        <td class="border-0" data-column="auditable_id">{{ $Item->auditable_id }}</td>
+                                                        <td class="border-0" data-column="old_values">{{ collect($Item->old_values)->toJson() }}</td>
+                                                        <td class="border-0" data-column="new_values">{{ collect($Item->new_values)->toJson() }}</td>
                                                         <td class="border-0" data-column="url">{{ $Item->url }}</td>
-                                                        <td class="border-0" data-column="ip_address">
-                                                            {{ $Item->ip_address }}</td>
-                                                        <td class="border-0" data-column="user_agent">
-                                                            {{ $Item->user_agent }}</td>
-                                                        <td class="border-0" data-column="version">{{ $Item->version }}
-                                                        </td>
-                                                        <td class="border-0" data-column="route_name">
-                                                            {{ $Item->route_name }}</td>
-                                                        <td class="border-0" data-column="created_at">
-                                                            {{ $Item->created_at }}</td>
+                                                        <td class="border-0" data-column="ip_address">{{ $Item->ip_address }}</td>
+                                                        <td class="border-0" data-column="user_agent">{{ $Item->user_agent }}</td>
+                                                        <td class="border-0" data-column="version">{{ $Item->version }}</td>
+                                                        <td class="border-0" data-column="route_name">{{ $Item->route_name }}</td>
+                                                        <td class="border-0" data-column="created_at">{{ $Item->created_at }}</td>
                                                         <td class="border-0 text-end" data-column="operate">
                                                             <div class="btn-group">
                                                                 <button type="button"
