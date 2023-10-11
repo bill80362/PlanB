@@ -131,7 +131,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">訂單收信</label>
+                                                <label for=""
+                                                    class="col-12 col-sm-3 col-form-label pt-0">訂單收信</label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="FlexRadio"
@@ -153,7 +154,8 @@
                                             </div>
 
                                             <div class="mb-3 row">
-                                                <label for="" class="col-12 col-sm-3 col-form-label pt-0">庫存收信</label>
+                                                <label for=""
+                                                    class="col-12 col-sm-3 col-form-label pt-0">庫存收信</label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="FlexRadio"
@@ -183,14 +185,21 @@
                                         <div class="card mb-3 card-detail border-0">
                                             <div class="card-header border-0 d-flex align-items-center">
                                                 <h5 class="card-title">{{ $value['groupName'] }}</h5>
-                                                <div class="allselect-group button-group d-flex align-items-center ms-auto">
+                                                <div
+                                                    class="allselect-group button-group d-flex align-items-center ms-auto">
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions_{{$key}}" id="inlineRadio1_{{$key}}" value="1" checked>
-                                                        <label class="form-check-label" for="inlineRadio1_{{$key}}">全選</label>
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions_{{ $key }}"
+                                                            id="inlineRadio1_{{ $key }}" value="1" checked>
+                                                        <label class="form-check-label"
+                                                            for="inlineRadio1_{{ $key }}">全選</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions_{{$key}}" id="inlineRadio2_{{$key}}" value="0">
-                                                        <label class="form-check-label" for="inlineRadio2_{{$key}}">取消全選</label>
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions_{{ $key }}"
+                                                            id="inlineRadio2_{{ $key }}" value="0">
+                                                        <label class="form-check-label"
+                                                            for="inlineRadio2_{{ $key }}">取消全選</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,26 +261,22 @@
                 //
             });
         }
-
-        window.onload = function() {
-            let saveBtn = document.getElementById("saveBtn");
-            saveBtn.onclick = function() {
-                document.getElementById("subForm").submit();
-            }
-
-            let delBtn = document.getElementById("delBtn");
-            delBtn.onclick = function() {
-                let yes = confirm('你確定嗎？');
-                let data = @json($Data);
-                let id = data.id;
-                if (yes) {
-                    var postArray = [];
-                    let val = $(this).val();
-                    postArray["id_array[" + id + "]"] = id;
-                    postArray["_token"] = '{{ csrf_token() }}';
-                    //送出
-                    postForm('/operate/user/del?{{ request()->getQueryString() }}', postArray)
-                }
+        let saveBtn = document.getElementById("saveBtn");
+        saveBtn.onclick = function() {
+            document.getElementById("subForm").submit();
+        }
+        let delBtn = document.getElementById("delBtn");
+        delBtn.onclick = function() {
+            let yes = confirm('你確定嗎？');
+            let data = @json($Data);
+            let id = data.id;
+            if (yes) {
+                var postArray = [];
+                let val = $(this).val();
+                postArray["id_array[" + id + "]"] = id;
+                postArray["_token"] = '{{ csrf_token() }}';
+                //送出
+                postForm('/operate/user/del?{{ request()->getQueryString() }}', postArray)
             }
         }
     </script>
