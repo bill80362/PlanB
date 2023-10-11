@@ -164,8 +164,10 @@
                                                                         })">{{ __('刪除') }}
                                                                             </button></li>
                                                                     @endcan
+                                                                    @can('audit_read')
                                                                     <a target="_blank" class="dropdown-item"
-                                                                        href="{{route("user_audit",["id"=>$Item->id])}}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a>
+                                                                        href="{{route("audit_list")}}?filter_route_name={{"user_update"}}&filter_auditable_id={{$Item->id}}">{{ __('紀錄') }}</a>
+                                                                    @endcan
                                                                 </ul>
                                                             </div>
                                                         </td>

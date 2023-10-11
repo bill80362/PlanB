@@ -238,4 +238,41 @@ class UserController extends Controller
         $listColumnService->renewListColumn($this->oModel, $list, $user->id);
         return back();
     }
+
+    private function mailDatas()
+    {
+        return [
+            [
+                'group' => '訂單',
+                'datas' => [
+                    "訂購成功信",
+                    "取消訂單信",
+                    "24小時內刷卡、Line pay連續失敗超過10筆以上",
+                    "XX分鐘沒有訂單通知",
+                    "訂單處理中2天以上訂單",
+                    "出貨中2天以上訂單",
+                    "門市關轉訂單",
+                    "配送異常訂單",
+                    "未開立發票1天以上訂單"
+                ]
+            ],
+            [
+                'group' => '庫存',
+                'datas' => [
+                    "庫存低於安全庫存",
+                    "庫存是0要通知的商品",
+                    "庫存更新失敗",
+                    "活動中的贈品0庫存",
+                ]
+            ],
+            [
+                'group' => '客服',
+                'datas' => [
+                    "客服信件",
+                    "評價審核通知",
+                    "商品詢問通知",
+                ]
+            ]
+        ];
+    }
 }

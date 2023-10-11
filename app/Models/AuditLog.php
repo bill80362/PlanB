@@ -24,7 +24,7 @@ class AuditLog extends Audit
         'tags' => '標籤',
         'version' => '版本',
         'created_at' => '建立時間',
-
+        'route_name' => '路由名稱',
     ];
     //
     public array $eventText = [
@@ -44,6 +44,8 @@ class AuditLog extends Audit
     use FilterTemplateTrait;
     public array $filterTemplate = [
         "event" => "select2",
+        "route_name" => "text",
+        "auditable_id" => "text",
     ];
     //自定義篩選條件
     public function useFilterExtend($query, array $Data)

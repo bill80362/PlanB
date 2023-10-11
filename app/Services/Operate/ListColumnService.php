@@ -37,7 +37,7 @@ class ListColumnService
                 'default_serial_number', 'audit_title',
             ],
             "canUseColumn" => [
-                'user_type', 'user_id', 'event', 'auditable_type', 'auditable_id', 'old_values', 'new_values',
+                'route_name','user_type', 'user_id', 'event', 'auditable_type', 'auditable_id', 'old_values', 'new_values',
                 'url', 'ip_address', 'user_agent', 'version', 'created_at',
             ],
             "lockColumnTail" => [
