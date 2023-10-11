@@ -233,6 +233,9 @@
                 } else {
                     alert("沒資料")
                 }
+                if (typeof phpdebugbar != "undefined"){
+                    phpdebugbar.ajaxHandler.handle(xhr);
+                }
             }).catch((xhr, status, error) => {
                 //console.error(xhr.responseText);
             })

@@ -12,10 +12,10 @@ class AuditLog extends Audit
     public array $Column_Title_Text = [
         'id' => '編號',
         'user_type' => '操作對應表',
-        'user_id' => '操作人',
+        'user_id' => '操作人編號',
         'event' => '事件',
         'auditable_type' => '操作表',
-        'auditable_id' => '操作編號',
+        'auditable_id' => '操作表編號',
         'old_values' => '操作前',
         'new_values' => '操作後',
         'url' => '網址',
@@ -24,7 +24,7 @@ class AuditLog extends Audit
         'tags' => '標籤',
         'version' => '版本',
         'created_at' => '建立時間',
-        'route_name' => '路由名稱',
+
     ];
     //
     public array $eventText = [
