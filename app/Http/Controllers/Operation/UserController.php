@@ -43,12 +43,12 @@ class UserController extends Controller
         $Paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
         //
         return view('operate/pages/user/list', [
-            'Paginator' => $Paginator,
+            'paginator' => $Paginator,
             //
-            'Model' => $this->oModel,
+            'model' => $this->oModel,
             //
             'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
+            'tableSetting' => $TableSetting,
         ]);
     }
 
@@ -89,10 +89,10 @@ class UserController extends Controller
             ->get()->toArray();
         //View
         return view('operate/pages/user/update', [
-            'Data' => $Data,
-            'DataPermission' => $DataPermission,
-            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
-            'PermissionGroups' => $permissionGroups,
+            'data' => $Data,
+            'dataPermission' => $DataPermission,
+            'groupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
+            'permissionGroups' => $permissionGroups,
         ]);
     }
 

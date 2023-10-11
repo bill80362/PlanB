@@ -41,12 +41,12 @@ class AuditController extends Controller
         $Paginator = $this->oModel->filter($this->request->all())->with('user')->paginate($pageLimit);
 
         return view('operate/pages/audit/list', [
-            'Paginator' => $Paginator,
+            'paginator' => $Paginator,
             //
-            'Model' => $this->oModel,
+            'model' => $this->oModel,
             //
             'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
+            'tableSetting' => $TableSetting,
         ]);
     }
 

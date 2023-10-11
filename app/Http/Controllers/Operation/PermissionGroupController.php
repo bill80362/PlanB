@@ -43,12 +43,12 @@ class PermissionGroupController extends Controller
         $Paginator = $this->oModel->filter($this->request->all())->paginate($pageLimit);
         //
         return view('operate/pages/permission_group/list', [
-            'Paginator' => $Paginator,
+            'paginator' => $Paginator,
             //
-            'Model' => $this->oModel,
+            'model' => $this->oModel,
             //
             'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
+            'tableSetting' => $TableSetting,
         ]);
     }
 
@@ -86,10 +86,10 @@ class PermissionGroupController extends Controller
 
         //View
         return view('operate/pages/permission_group/update', [
-            'Data' => $Data,
-            'DataPermission' => $DataPermission,
-            'GroupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
-            'Model' => $this->oModel,
+            'data' => $Data,
+            'dataPermission' => $DataPermission,
+            'groupItemPermission' => app(PermissionService::class)->getGroupItemPermission($user->lv),
+            'model' => $this->oModel,
         ]);
     }
 

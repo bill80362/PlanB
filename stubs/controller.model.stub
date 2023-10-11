@@ -37,10 +37,10 @@ class {{ class }} extends Controller
         
         // @todo 
         return view('operate/pages/{{r_blade_folder}}/list', [
-            'Paginator' => $Paginator,            
-            'Model' => $this->oModel,
+            'paginator' => $Paginator,            
+            'model' => $this->oModel,
             'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
+            'tableSetting' => $TableSetting,
         ]);
     }
 
@@ -69,8 +69,8 @@ class {{ class }} extends Controller
 
         //View
         return view('operate/pages/{{r_blade_folder}}/update', [
-            'Data' => $Data,                        
-            'Model' => $this->oModel,
+            'data' => $Data,                        
+            'model' => $this->oModel,
         ]);
     }
 
@@ -156,21 +156,7 @@ class {{ class }} extends Controller
         //匯出
         return (new Collection($ExportList))->downloadExcel('{{r_url}}_data_' . time() . '.xlsx');
     }
-
-    //修改紀錄
-    public function audit($id)
-    {
-        //
-        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
-        //
-        $Paginator = $this->oModel->findOrFail($id)->audits()->with('user')->orderBy('id', 'desc')->paginate($pageLimit);
-
-        return view('operate/pages/{{r_url}}/audit', [
-            'Paginator' => $Paginator,            
-            'Model' => $this->oModel,
-        ]);
-    }
-
+  
     public function saveListColumn(ListColumnService $listColumnService)
     {
         $list = $this->request->get('list', []);

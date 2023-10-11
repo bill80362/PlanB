@@ -7,16 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\FilterTemplateTrait;
 use App\Models\ExportImportTrait;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\TimeDiffUpdateTrait;
 
 class {{ class }} extends Model implements Auditable
 {
     use HasFactory;
     use ExportImportTrait; //匯出    
     use \OwenIt\Auditing\Auditable; //操作Log
+    use TimeDiffUpdateTrait; // 時間差修改
     
     public $incrementing = true;
     protected $keyType = 'int';
     protected $guarded = [];
+
+    // 時間差修改，需檢查的欄位
+    protected static function updatingCheck(): array
+    {
+        return [];
+    }
 
 
     public function getValidatorRules()

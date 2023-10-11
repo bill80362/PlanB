@@ -47,10 +47,10 @@ class PageContentController extends Controller
         }
 
         return view('operate/pages/company/page_content/list', [
-            'Paginator' => $paginator,
-            'Model' => $this->oModel,
+            'paginator' => $paginator,
+            'model' => $this->oModel,
             'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
+            'tableSetting' => $TableSetting,
         ]);
     }
 

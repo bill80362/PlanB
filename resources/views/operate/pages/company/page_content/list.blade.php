@@ -41,13 +41,13 @@
                                                     data-target="#searchFilter"
                                                     onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    @foreach ($Model->filterTextKey as $value)
+                                                    @foreach ($model->filterTextKey as $value)
                                                         <option value="{{ $value }}"
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
-                                                            {{ __($Model->Column_Title_Text[$value]) }}</option>
+                                                            {{ __($model->Column_Title_Text[$value]) }}</option>
                                                     @endforeach
 
-                                                    @foreach ($Model->filterTextKeyCustom as $key => $value)
+                                                    @foreach ($model->filterTextKeyCustom as $key => $value)
                                                         <option value="{{ $key }}"
                                                             {{ request()->get('filter_text_key') == $key ? 'selected' : '' }}>
                                                             {{ __($value) }}</option>
@@ -71,7 +71,7 @@
                                     <!-- modals ppup  -->
                                 </div>
                                 <div class="col-12">
-                                    <x-OperateFilterChosen :model="$Model"></x-OperateFilterChosen>
+                                    <x-OperateFilterChosen :model="$model"></x-OperateFilterChosen>
                                     {{--                                    @include("operate.components.filter.chosen") --}}
                                     <div class="table-responsive">
                                         <table class="table" id="sortableTable">
@@ -79,13 +79,13 @@
                                                 <tr>
                                                     <th class="sortStyle" data-column="default_serial_number">
                                                         {{ __('default_serial_number') }}</th>
-                                                    <x-OperateTh column="id" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="lang_type" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="page_name" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="slug" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="created_at" :model="$Model"></x-OperateTh>
-                                                    <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh>
-                                                    {{-- <x-OperateTh column="updated_at" :model="$Model"></x-OperateTh> --}}
+                                                    <x-OperateTh column="id" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="lang_type" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="page_name" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="slug" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="created_at" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="updated_at" :model="$model"></x-OperateTh>
+                                                    {{-- <x-OperateTh column="updated_at" :model="$model"></x-OperateTh> --}}
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted"
                                                             data-target="#listSetting"><i class="ti-settings"></i></button>
@@ -93,7 +93,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($Paginator->items() as $index => $Item)
+                                                @foreach ($paginator->items() as $index => $Item)
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
                                                             <input type="checkbox" class="form-check-input"
@@ -168,8 +168,8 @@
                 <div class="slideFunc-body px-3 py-3">
                     <div class="row">
                         <div class="col-12">
-                            @foreach ($Model->filterTemplate as $column => $setting)
-                                <x-OperateFilterDiv :column="$column" :model="$Model"
+                            @foreach ($model->filterTemplate as $column => $setting)
+                                <x-OperateFilterDiv :column="$column" :model="$model"
                                     :setting="$setting"></x-OperateFilterDiv>
                             @endforeach
                         </div>
@@ -204,21 +204,21 @@
                         <div class="col-12">
                             <div class="list-group">
                                 <div class="sort-item">
-                                    @foreach ($TableSetting['lockColumn'] as $value)
+                                    @foreach ($tableSetting['lockColumn'] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
                                                     value="{{ $value }}"
                                                     aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>
                                     @endforeach
                                 </div>
                                 <div class="sort-item" id="sortGroup">
-                                    @foreach ($TableSetting['canUseColumn'] as $value)
+                                    @foreach ($tableSetting['canUseColumn'] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
@@ -226,21 +226,21 @@
                                                     aria-label="Checkbox for following text input"
                                                     {{ in_array($value, $columns) ? 'checked' : '' }}>
                                                 <label class="form-check-label"
-                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-align-justify"></i>
                                         </div>
                                     @endforeach
                                 </div>
                                 <div class="sort-item">
-                                    @foreach ($TableSetting['lockColumnTail'] as $value)
+                                    @foreach ($tableSetting['lockColumnTail'] as $value)
                                         <div class="list-group-item d-flex flex-content-between align-items-center">
                                             <div class="form-check flex-fill">
                                                 <input class="form-check-input" type="checkbox"
                                                     value="{{ $value }}"
                                                     aria-label="Checkbox for following text input" checked disabled>
                                                 <label class="form-check-label"
-                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                                    for="">{{ __($model->Column_Title_Text[$value] ?? $value) }}</label>
                                             </div>
                                             <i class="ti-lock "></i>
                                         </div>

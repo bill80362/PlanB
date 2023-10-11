@@ -12,10 +12,10 @@
                 <div class="white_card">
                     <div class="white_card_header">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h2> {{ __('群組') }} {{ $Data->id ? __('修改') : __('新增') }}</h2>
+                            <h2> {{ __('群組') }} {{ $data->id ? __('修改') : __('新增') }}</h2>
 
                             @can('permission_group_delete')
-                                @if ($Data->id)
+                                @if ($data->id)
                                     <div class="btn-group ms-2">
                                         <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -57,12 +57,12 @@
 
                                             <div class="mb-3 row">
                                                 <label for="" class="col-12 col-sm-3 col-form-label pt-0">
-                                                    {{ __($Data->Column_Title_Text['status']) }}
+                                                    {{ __($data->Column_Title_Text['status']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
-                                                    @foreach ($Data->statusText as $key => $value)
+                                                    @foreach ($data->statusText as $key => $value)
                                                         <div class="form-check form-check-inline">
-                                                            <input {{ $Data->status == $key ? 'checked' : '' }}
+                                                            <input {{ $data->status == $key ? 'checked' : '' }}
                                                                 class="form-check-input" type="radio" name="status"
                                                                 value="{{ $key }}" id="{{ $key }}">
                                                             <label class="form-check-label"
@@ -76,10 +76,10 @@
 
                                             <div class="mb-3 row">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __($Data->Column_Title_Text['name']) }}</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __($data->Column_Title_Text['name']) }}</label>
                                                 <div class="col-12 col-sm-9">
                                                     <input type="text" class="form-control" name="name"
-                                                        value="{{ $Data->name }}">
+                                                        value="{{ $data->name }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-12 col-xl-7 mb-6">
 
-                                    @foreach ($GroupItemPermission as $key => $value)
+                                    @foreach ($groupItemPermission as $key => $value)
                                         <div class="card mb-3 card-detail border-0">
                                             <div class="card-header border-0">
                                                 <h5 class="card-title">{{ $value['groupName'] }}</h5>
@@ -103,7 +103,7 @@
                                                                     <input class="form-check-input" type="checkbox"
                                                                         value="" id="{{ $action['key'] }}"
                                                                         name="{{ $action['key'] }}"
-                                                                        {{ in_array($action['key'], $DataPermission->toArray()) ? 'checked' : '' }}>
+                                                                        {{ in_array($action['key'], $dataPermission->toArray()) ? 'checked' : '' }}>
                                                                     <label class="form-check-label"
                                                                         for="{{ $action['key'] }}">
                                                                         {{ $action['label'] }}
@@ -159,7 +159,7 @@
         let delBtn = document.getElementById("delBtn");
         delBtn.onclick = function() {
             let yes = confirm('你確定嗎？');
-            let data = @json($Data);
+            let data = @json($data);
             let id = data.id;
             if (yes) {
                 var postArray = [];

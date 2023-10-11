@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Validation\Rule;
+use App\Models\TimeDiffUpdateTrait;
 
 class User extends Authenticatable implements Auditable
 {
