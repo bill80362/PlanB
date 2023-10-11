@@ -1,0 +1,11 @@
+Models\{{ r_model }}::class => [
+    "lockColumn" => [
+        'default_serial_number',
+    ],
+    "canUseColumn" => [
+        'id','created_at', 'updated_at'
+    ],
+    "lockColumnTail" => [
+        'operate'
+    ],
+],

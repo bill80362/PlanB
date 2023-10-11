@@ -49,12 +49,18 @@ class MakeCrud extends Command
         Artisan::call("make:controller " . $controllerName . " --model=" . $modelname);
 
         $controllerPath = app_path('Http/Controllers/' . $controllerName) . ".php";
-        if (file_exists($controllerPath)) {
-            $controllerContent = file_get_contents($controllerPath);
-            $controllerContent = str_replace("{{r_blade_folder}}", $subPath, $controllerContent);
-            $controllerContent = str_replace("{{r_url}}", $snacktName, $controllerContent);
-            file_put_contents($controllerPath, $controllerContent);
-        }
+        // if (file_exists($controllerPath)) {
+        //     $controllerContent = file_get_contents($controllerPath);
+        //     $controllerContent = str_replace("{{r_blade_folder}}", $subPath, $controllerContent);
+        //     $controllerContent = str_replace("{{r_url}}", $snacktName, $controllerContent);
+        //     file_put_contents($controllerPath, $controllerContent);
+        // }
+
+        $result = $this->stubToFile($controllerPath, [
+            "{{r_blade_folder}}"  => $subPath,
+            "{{r_url}}" => $snacktName
+        ], $controllerPath);
+
 
         // 產生blade
         $stubPath = base_path('stubs') . '/blade/';
@@ -63,34 +69,40 @@ class MakeCrud extends Command
 
         (new Filesystem)->ensureDirectoryExists($tagetPath);
         foreach ($bladeNames as $bladeName) {
+
             $fullPath = $tagetPath . $bladeName;
             $stubFile = $stubPath . 'stub_' . $bladeName;  // 範本檔
-            if (file_exists($stubFile)) {
-                $stubContent = file_get_contents($stubFile);
-                $stubContent = str_replace("{{route}}_", $snacktName . '_', $stubContent);
-                $stubContent = str_replace("{{perm}}_", $camelName . '_', $stubContent);
-                file_put_contents($fullPath, $stubContent);
-            } else {
+            $result = $this->stubToFile($stubFile, [
+                "{{route}}_"  => $snacktName . '_',
+                "{{perm}}_" => $camelName . '_'
+            ], $fullPath);
+
+            if (!$result) {
                 dump("發生錯誤，找不到： " . $stubFile);
+            } else {
+                dump("建立成功： " . $fullPath);
             }
-            dump("建立成功： " . $fullPath);
         }
 
         // 路由
+
         $targetText = "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下面route並移除註解。";
         $targetFile = base_path('routes/web/operate.php');
-
         $routeSubPath = base_path('stubs/route/operate.stub');
-        $stubContent = file_get_contents($routeSubPath);
-        $stubContent = str_replace("{{ r_prefix }}", $snacktName, $stubContent);
-        $stubContent = str_replace("{{ r_perm }}", $camelName, $stubContent);
 
         $namespace = str_replace("/", "\\", $controllerName);
-        $stubContent = str_replace("{{ r_controller }}", "\App\Http\Controllers\\" . $namespace, $stubContent);
 
-        $targetContent = file_get_contents($targetFile);
-        $newRouteContent = str_replace($targetText, $stubContent, $targetContent);
-        file_put_contents($targetFile, $newRouteContent);
+        $result = $this->stubToFile($routeSubPath, [
+            "{{ r_prefix }}"  => $snacktName,
+            "{{ r_perm }}" => $camelName,
+            "{{ r_controller }}" => "\App\Http\Controllers\\" . $namespace
+        ], $targetFile, $targetText);
+
+        if (!$result) {
+            dump("發生錯誤，找不到： " . $stubFile);
+        } else {
+            dump("建立成功： " . $fullPath);
+        }
 
         /**
          * 需修改以下檔案
@@ -103,5 +115,32 @@ class MakeCrud extends Command
         // route、controller(確認)
         // list.blade.php、update.blade.php
 
+    }
+
+    public function stubToFile(
+        $stubFilePath,
+        $stubParam = [],
+        $targetFilePath,
+        $targetSubject = ''
+    ) {
+
+        if (!file_exists($stubFilePath)) return false;
+        $stubContent = file_get_contents($stubFilePath);
+        foreach ($stubParam as $key => $value) {
+            $stubContent = str_replace($key, $value, $stubContent);
+        }
+
+
+        if (file_exists($targetFilePath) && $targetSubject != '') {
+            // 取代
+            $targetContent = file_get_contents($targetFilePath);
+            $newContent = str_replace($targetSubject, $stubContent, $targetContent);
+            file_put_contents($targetFilePath, $newContent);
+        } else {
+            // 建立
+            file_put_contents($targetFilePath, $stubContent);
+        }
+
+        return true;
     }
 }

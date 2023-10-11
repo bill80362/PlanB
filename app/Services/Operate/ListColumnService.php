@@ -87,7 +87,10 @@ class ListColumnService
             "lockColumnTail" => [
                 'operate'
             ],
-        ]
+        ],
+
+
+        // 請勿刪除此行註解，stub產生放置位置
     ];
 
     //抓取設定檔，會抓取parent class的設定檔

@@ -1,12 +1,3 @@
-@php
-    /**
-     * 產生後請執行以下步驟：
-     * {{route}}_ 參數(路由用)
-     * {{perm}}_ 參數(權限用)
-     * 2. 確認欄位
-     **/
-@endphp
-
 @extends('operate.layout._Empty')
 
 @section('HeaderCSS')

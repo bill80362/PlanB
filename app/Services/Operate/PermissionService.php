@@ -32,6 +32,9 @@ class PermissionService
      */
     public function getGroupItemPermission($lv = null)
     {
+        // 請勿刪除此行註解，stub產生放置位置
+
+        
         $newGroup = [];
         $groups = [
             [

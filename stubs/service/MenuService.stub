@@ -1,0 +1,5 @@
+[
+    'name' => __('管理人管理'),
+    'href' => '/operate/user',
+    'permission' => 'user_read',
+],

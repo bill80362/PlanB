@@ -8,7 +8,8 @@ class MenuService
 {
     public function getMenu()
     {
-
+        // 請勿刪除此行註解，stub產生放置位置
+        
         $menus = [
             [
                 'name' => __('儀表板'),

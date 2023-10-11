@@ -1,0 +1,5 @@
+[
+    'label' => '職業管理',
+    'groupKey' => 'careerManagement',
+    'actions' => ['read', 'create', 'update', 'delete'],
+],
