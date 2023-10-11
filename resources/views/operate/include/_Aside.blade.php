@@ -2,7 +2,7 @@
 
 <!-- sidebar  -->
 <button class="sidebar-switch d-flex align-items-center justify-content-center" type="button">
-    <i class="ionicon-apps-outline"></i>
+    <i class="ionicon-menu-outline"></i>
 </button>
 <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
     <div class="logo d-flex justify-content-between">

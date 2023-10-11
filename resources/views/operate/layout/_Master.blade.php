@@ -248,7 +248,8 @@
         window.alert = function(message, extra = {}) {
             if (typeof Swal.fire === 'function') {
                 let config = {
-                    text: message
+                    text: message,
+                    confirmButtonColor: '#000',
                 }
                 $.extend(config, extra)
                 Swal.fire(config)
@@ -257,38 +258,15 @@
             }
         }
 
-        let testaaa = async function(message, extra = {}) {
-            if (typeof Swal.fire === 'function') {
-                let config = {
-                    text: message,
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes'
-                    //confirmButtonColor: '#3085d6',
-                    //cancelButtonColor: '#d33',
-                };
-                $.extend(config, extra);
-                return Swal.fire(config).then((result) => {
-                    if (result.isConfirmed) {
-                        return true
-                    } else {
-                        return false
-                    }
-                });
-            } else {
-                // 如果Swal.fire不可用，回退到原生的confirm
-                window.originConfirm(message);
-            }
-        };
-
         //之後調用confirm需要以 await confirm()調用
         window.confirm = async function(message, extra = {}) {
             if (typeof Swal.fire === 'function') {
                 let config = {
                     text: message,
                     showCancelButton: true,
-                    confirmButtonText: 'Yes'
-                    //confirmButtonColor: '#3085d6',
-                    //cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    confirmButtonColor: '#000',
+                    //cancelButtonColor: '#e8ecf4',
                 };
                 $.extend(config, extra);
                 let result = await Swal.fire(config)
