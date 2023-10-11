@@ -35,8 +35,10 @@ export class Fullscreen extends Plugin {
             button.on('execute', () => {
                 if (!this.isFullScreen) {
                     editor.ui.element?.setAttribute('id', 'fullscreeneditor');
+                    document.body.classList.add('editor-fullscreen');
                 } else {
                     editor.ui.element?.removeAttribute('id');
+                    document.body.classList.remove('editor-fullscreen');
                 }
                 this.isFullScreen = !this.isFullScreen;
                 editor.editing.view.focus();

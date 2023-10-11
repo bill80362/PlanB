@@ -4000,7 +4000,6 @@ table.dataTable {
   height: 100vh;
   left: 0;
   top: 0;
-  z-index: 99;
   padding-bottom: 50px;
   position: fixed;
   width: 270px;
@@ -4010,6 +4009,9 @@ table.dataTable {
   transition: 0.5s;
   background: #FFFFFF;
   box-shadow: 0 12px 30px rgba(80, 143, 244, 0.1);
+}
+.editor-fullscreen .sidebar {
+  z-index: auto;
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .sidebar.hide_vertical_menu {
