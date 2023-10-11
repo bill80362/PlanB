@@ -33,28 +33,29 @@ class AuditLog extends Audit
         "deleted" => "刪除",
     ];
 
-    public function scopeFilter($query, array $Data)
-    {
-        //過濾選項
-        if (isset($Data["filter_event"])) {
-            $query->whereIn('event', (array)$Data["filter_event"]);
-        }
-        //過濾文字條件
-        if (isset($Data['filter_text_key'])) {
-            $query->where($Data['filter_text_key'], 'like', '%' . $Data['filter_text_value'] . '%');
-        }
-        //排序
-        if (isset($Data['order_by'])) {
-            $order_by = explode(',', $Data['order_by']);
-            $query->orderBy($order_by[0], $order_by[1]);
-        }
 
-        //
+    /**
+     * 後台操作 列表 匯出 篩選器
+     * template 對應的地方:
+     * 1.版面，修改位置 class OperateFilterDiv，主要負責讓使用者選擇篩選條件
+     * 2.功能，修改位置 model，主要負責SQL篩選條件
+     * 3.篩選器移除標籤，修改位置 chosen ，主要可以快速移除篩選條件
+     */
+    use FilterTemplateTrait;
+    public array $filterTemplate = [
+        "event" => "select2",
+    ];
+    //自定義篩選條件
+    public function useFilterExtend($query, array $Data)
+    {
         return $query;
     }
-
-
-    public array $filterTemplate = [
-        "filter_event" => "select2",
+    public $filterTextKey = [
+        'old_values', 'new_values', 'event', 'version'
     ];
+    public $filterTextKeyCustom = [];
+    public function useCustomTextSearch($query, array $Data)
+    {
+        return $query;
+    }
 }
