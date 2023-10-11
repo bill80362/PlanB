@@ -126,6 +126,10 @@ class ListColumnService
             ->get()->map(function ($item) {
                 return $item['column_name'];
             })->toArray();
+        //如果沒資料就全部欄位顯示
+        if (count($datas) == 0) {
+            $datas = $setting['canUseColumn'];
+        }
         $checkColumn = collect($datas)->intersect($setting['canUseColumn'])->toArray();
         return array_merge($setting['lockColumn'], $checkColumn, $setting['lockColumnTail']);
     }
