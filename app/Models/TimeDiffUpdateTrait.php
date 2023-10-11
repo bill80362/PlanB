@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Config;
  * 使用方式：
  * 1. model 掛載：UpdateEventTrait。
  * 2. 要使用的路由需掛載： (UpdateEvent.php) => Route::middleware(['common.updateEvent'])
- * 3. 前台需送出欄位updated_at
+ * 3. 前台需送出欄位updated_at, blade引用 => @include('/operate/components/input/update_at_input',['updated_at' => xxxx])
  */
 trait TimeDiffUpdateTrait
 {
