@@ -33,10 +33,10 @@ trait FilterTemplateTrait
             if ($template == "select2" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } elseif ($template == "rangeDate" && isset($Data['filter_' . $filterName . '_end'])) {
-                if (isset($Data['filter_' . $filterName . '_start'])) {
+                if (isset($Data['filter_' . $filterName . '_start']) && $Data['filter_' . $filterName . '_start'] ) {
                     $query->where($filterName, ">=", $Data['filter_' . $filterName . '_start']);
                 }
-                if (isset($Data['filter_' . $filterName . '_end'])) {
+                if (isset($Data['filter_' . $filterName . '_end']) && $Data['filter_' . $filterName . '_end']) {
                     $query->where($filterName, "<=", $Data['filter_' . $filterName . '_end']);
                 }
             } else if ($template == "radio" && isset($Data['filter_' . $filterName])) {
@@ -56,15 +56,15 @@ trait FilterTemplateTrait
                 ];
                 $query->where($filterName, $typeDict[$type], $Data['filter_' . $filterName . '_value']);
             } else if ($template == "rangeDateTime" && isset($Data['filter_' . $filterName . '_end'])) {
-                if (isset($Data['filter_' . $filterName . '_start'])) {
+                if (isset($Data['filter_' . $filterName . '_start']) && $Data['filter_' . $filterName . '_start']) {
                     $query->where($filterName, ">=", $Data['filter_' . $filterName . '_start']);
                 }
-                if (isset($Data['filter_' . $filterName . '_end'])) {
+                if (isset($Data['filter_' . $filterName . '_end']) && $Data['filter_' . $filterName . '_end'] ) {
                     $query->where($filterName, "<=", $Data['filter_' . $filterName . '_end']);
                 }
             }
         }
-        //過濾選項-自訂        
+        //過濾選項-自訂
         $query = $this->useFilterExtend($query, $Data);
         $query = $this->useCustomTextSearch($query, $Data);
 
