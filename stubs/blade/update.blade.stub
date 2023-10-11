@@ -12,10 +12,10 @@
             <div class="white_card">
                 <div class="white_card_header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h2> @include('/operate/components/title/page_title') {{ $Data->id ? __('修改') : __('新增') }}</h2>
+                        <h2> @include('/operate/components/title/page_title') {{ $data->id ? __('修改') : __('新增') }}</h2>
 
                         {{-- @can('{{r_perm}}_delete')
-                        @if ($Data->id)
+                        @if ($data->id)
                         <div class="btn-group ms-2">
                             <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ti-more-alt"></i>
@@ -62,16 +62,16 @@
                                         <div class="row mb-3">
                                             <label for="" class="col-12 col-sm-3 col-form-label">{{ __('名稱') }}</label>
                                             <div class="col-12 col-sm-9">
-                                                <textarea name="name" class="form-control" rows="3">{{ $Data->name }}</textarea>
+                                                <textarea name="name" class="form-control" rows="3">{{ $data->name }}</textarea>
                                             </div>
                                         </div>
 
 
                                         {{-- <div class="row mb-3">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label">{{ __('翻譯後名稱') }}({{ $LangTypeText[$Data->lang_type] }})</label>
+                                                    class="col-12 col-sm-3 col-form-label">{{ __('翻譯後名稱') }}({{ $LangTypeText[$data->lang_type] }})</label>
                                         <div class="col-12 col-sm-9">
-                                            <textarea class="form-control" name="tran_text" rows="3">{{ $Data->tran_text }}</textarea>
+                                            <textarea class="form-control" name="tran_text" rows="3">{{ $data->tran_text }}</textarea>
                                         </div>
                                     </div> --}}
 
@@ -90,7 +90,7 @@
                                                 <label for=""
                                                     class="col-12 col-sm-3 col-form-label">{{ __('備註') }}</label>
                                     <div class="col-12 col-sm-9">
-                                        <textarea class="form-control" name="memo" rows="3">{{ $Data->memo }}</textarea>
+                                        <textarea class="form-control" name="memo" rows="3">{{ $data->memo }}</textarea>
                                     </div>
                                 </div> --}}
 
@@ -134,7 +134,7 @@
     let delBtn = document.getElementById("delBtn");
     delBtn.onclick = function() {
         let yes = confirm('你確定嗎？');
-        let data = @json($Data);
+        let data = @json($data);
         let id = data.id;
         if (yes) {
             var postArray = [];

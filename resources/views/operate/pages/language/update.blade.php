@@ -13,10 +13,10 @@
                     <div class="white_card_header">
                         <div class="d-flex align-items-center justify-content-between">
                             {{-- @include('/operate/components/title/page_title') --}}
-                            <h2> {{ __('語系管理') }} {{ $Data->id ? __('修改') : __('新增') }}</h2>
+                            <h2> {{ __('語系管理') }} {{ $data->id ? __('修改') : __('新增') }}</h2>
 
                             @can('language_delete')
-                                @if ($Data->id)
+                                @if ($data->id)
                                     <div class="btn-group ms-2">
                                         <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -61,15 +61,15 @@
                                         </div> --}}
                                         <div class="card-body">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                            <input type="hidden" name="lang_type" value="{{ $Data->lang_type }}">
+                                            <input type="hidden" name="lang_type" value="{{ $data->lang_type }}">
 
                                             <div class="row mb-3">
                                                 <label for=""
                                                     class="col-12 col-sm-3 col-form-label pt-0">{{ __('名稱') }}</label>
                                                 <div class="col-12 col-sm-9">
-                                                    <textarea {{ $Data->id ? 'disabled' : '' }} name="text" class="form-control" rows="3">{{ $Data->text }}</textarea>
-                                                    @if ($Data->id)
-                                                        <input type="hidden" name="text" value="{{ $Data->text }}">
+                                                    <textarea {{ $data->id ? 'disabled' : '' }} name="text" class="form-control" rows="3">{{ $data->text }}</textarea>
+                                                    @if ($data->id)
+                                                        <input type="hidden" name="text" value="{{ $data->text }}">
                                                     @endif
                                                 </div>
                                             </div>
@@ -77,21 +77,21 @@
 
                                             <div class="row mb-3">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __('翻譯後名稱') }}({{ $LangTypeText[$Data->lang_type] }})</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __('翻譯後名稱') }}({{ $langTypeText[$data->lang_type] }})</label>
                                                 <div class="col-12 col-sm-9">
-                                                    <textarea class="form-control" name="tran_text" rows="3">{{ $Data->tran_text }}</textarea>
+                                                    <textarea class="form-control" name="tran_text" rows="3">{{ $data->tran_text }}</textarea>
                                                 </div>
                                             </div>
 
 
-                                            @foreach ($OtherLangTypeText as $key => $value)
+                                            @foreach ($otherLangTypeText as $key => $value)
                                                 <div class="row mb-3">
                                                     <input type="hidden" name="else_langTypes[]"
-                                                        value="{{ $ElseDatas[$key]['lang_type'] }}">
+                                                        value="{{ $elseDatas[$key]['lang_type'] }}">
                                                     <label for=""
                                                         class="col-12 col-sm-3 col-form-label pt-0">{{ __('翻譯後名稱') }}({{ $value }})</label>
                                                     <div class="col-12 col-sm-9">
-                                                        <textarea class="form-control" name="else_trans[]" rows="3">{{ $ElseDatas[$key]['tran_text'] }}</textarea>
+                                                        <textarea class="form-control" name="else_trans[]" rows="3">{{ $elseDatas[$key]['tran_text'] }}</textarea>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -108,7 +108,7 @@
                                                 <label for=""
                                                     class="col-12 col-sm-3 col-form-label pt-0">{{ __('備註') }}</label>
                                                 <div class="col-12 col-sm-9">
-                                                    <textarea class="form-control" name="memo" rows="3">{{ $Data->memo }}</textarea>
+                                                    <textarea class="form-control" name="memo" rows="3">{{ $data->memo }}</textarea>
                                                 </div>
                                             </div>
 
@@ -116,7 +116,7 @@
                                                 <label for=""
                                                     class="col-12 col-sm-3 col-form-label pt-0">{{ __('相關網址') }}</label>
                                                 <div class="col-12 col-sm-9">
-                                                    @foreach ($UrlMaps as $urlMaps)
+                                                    @foreach ($urlMaps as $urlMaps)
                                                         <div>
                                                             {{ $urlMaps['url'] }}
                                                         </div>
@@ -166,7 +166,7 @@
         let delBtn = document.getElementById("delBtn");
         delBtn.onclick = function() {
             let yes = confirm('你確定嗎？');
-            let data = @json($Data);
+            let data = @json($data);
             let id = data.id;
             if (yes) {
                 var postArray = [];

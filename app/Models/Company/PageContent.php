@@ -91,7 +91,8 @@ class PageContent extends Model implements Auditable
     {
         // 匯出時要全部語系都匯出，但搜尋時只搜尋出一種語系
         if (!array_key_exists('type', $Data)) {
-            $query->where('lang_type', 'zh-tw');
+            $defaultLang = config('app.locale', 'zh-tw');
+            $query->where('lang_type', $defaultLang);
         }
 
         return $query;

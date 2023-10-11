@@ -39,10 +39,10 @@ class LanguageController extends Controller
         $Paginator = $this->oModel->filter($this->request->all())
             ->paginate($pageLimit);
         return view('operate/pages/language/list', [
-            'Paginator' => $Paginator,
-            'Model' => $this->oModel,
+            'paginator' => $Paginator,
+            'model' => $this->oModel,
             'columns' => $userColumns,
-            'TableSetting' => $TableSetting,
+            'tableSetting' => $TableSetting,
         ]);
     }
 
@@ -98,12 +98,12 @@ class LanguageController extends Controller
 
         //View
         return view('operate/pages/language/update', [
-            'Data' => $Data,
-            'ElseDatas' => $elseDatas,
-            'LangTypeText' => $this->oModel->langTypeText,
-            'OtherLangTypeText' => $Data->getOtherLangs(),
-            'Model' => $this->oModel,
-            'UrlMaps' => $urlMaps
+            'data' => $Data,
+            'elseDatas' => $elseDatas,
+            'langTypeText' => $this->oModel->langTypeText,
+            'otherLangTypeText' => $Data->getOtherLangs(),
+            'model' => $this->oModel,
+            'urlMaps' => $urlMaps
         ]);
     }
 

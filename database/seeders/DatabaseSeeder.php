@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\CompanyManage\PageContent;
 use App\Models\CountryAndShippingFee\Language;
 use App\Services\Operate\PermissionService;
 use Illuminate\Database\Seeder;

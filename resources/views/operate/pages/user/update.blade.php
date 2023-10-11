@@ -12,10 +12,10 @@
                 <div class="white_card">
                     <div class="white_card_header">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h2> {{ __('管理人管理') }} {{ $Data->id ? __('修改') : __('新增') }}</h2>
+                            <h2> {{ __('管理人管理') }} {{ $data->id ? __('修改') : __('新增') }}</h2>
 
                             {{-- @can('user_delete')
-                                @if ($Data->id)
+                                @if ($data->id)
                                     <div class="btn-group ms-2">
                                         <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -57,13 +57,13 @@
 
                                             {{-- <div class="mb-3 row">
                                                 <label for="" class="col-12 col-sm-3 col-form-label pt-0">
-                                                    {{ __($Data->Column_Title_Text['status']) }}
+                                                    {{ __($data->Column_Title_Text['status']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9">
                                                     <select class="form-select" name="status">
-                                                        @foreach ($Data->statusText as $key => $value)
+                                                        @foreach ($data->statusText as $key => $value)
                                                             <option value="{{ $key }}"
-                                                                {{ $Data->status == $key ? 'selected' : '' }}>
+                                                                {{ $data->status == $key ? 'selected' : '' }}>
                                                                 {{ __($value) }}</option>
                                                         @endforeach
                                                     </select>
@@ -72,12 +72,12 @@
 
                                             <div class="mb-3 row">
                                                 <label for="" class="col-12 col-sm-3 col-form-label pt-0">
-                                                    {{ __($Data->Column_Title_Text['status']) }}
+                                                    {{ __($data->Column_Title_Text['status']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9 form-check-wrap">
-                                                    @foreach ($Data->statusText as $key => $value)
+                                                    @foreach ($data->statusText as $key => $value)
                                                         <div class="form-check form-check-inline">
-                                                            <input {{ $Data->status == $key ? 'checked' : '' }}
+                                                            <input {{ $data->status == $key ? 'checked' : '' }}
                                                                 class="form-check-input" type="radio" name="status"
                                                                 value="{{ $key }}" id="{{ $key }}">
                                                             <label class="form-check-label"
@@ -89,15 +89,18 @@
                                                 </div>
                                             </div>
 
-                                            <input type="hidden" class="form-control" name="updated_at"
-                                                value="{{ $Data->updated_at }}">
+                                            {{-- 時間差更新檢查用 --}}
+                                            @include('/operate/components/input/update_at_input', [
+                                                // 'updated_at' => $data->updated_at,
+                                            ])
+
 
                                             <div class="mb-3 row">
                                                 <label for=""
-                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __($Data->Column_Title_Text['name']) }}</label>
+                                                    class="col-12 col-sm-3 col-form-label pt-0">{{ __($data->Column_Title_Text['name']) }}</label>
                                                 <div class="col-12 col-sm-9">
                                                     <input type="text" class="form-control" name="name"
-                                                        value="{{ $Data->name }}">
+                                                        value="{{ $data->name }}">
                                                 </div>
                                             </div>
 
@@ -105,7 +108,7 @@
 
                                             <div class="mb-3 row">
                                                 <label for="" class="col-12 col-sm-3 col-form-label pt-0">
-                                                    {{ __($Data->Column_Title_Text['password']) }}
+                                                    {{ __($data->Column_Title_Text['password']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9">
                                                     <input type="password" class="form-control" name="password"
@@ -116,11 +119,11 @@
 
                                             <div class="mb-3 row">
                                                 <label for="" class="col-12 col-sm-3 col-form-label pt-0">
-                                                    {{ __($Data->Column_Title_Text['email']) }}
+                                                    {{ __($data->Column_Title_Text['email']) }}
                                                 </label>
                                                 <div class="col-12 col-sm-9">
                                                     <input type="text" class="form-control" name="email"
-                                                        value="{{ $Data->email }}">
+                                                        value="{{ $data->email }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -181,7 +184,7 @@
                                 </div>
                                 <div class="col-12 col-xl-7 mb-6">
 
-                                    @foreach ($GroupItemPermission as $key => $value)
+                                    @foreach ($groupItemPermission as $key => $value)
                                         <div class="card mb-3 card-detail border-0">
                                             <div class="card-header border-0 d-flex align-items-center">
                                                 <h5 class="card-title">{{ $value['groupName'] }}</h5>
@@ -214,7 +217,7 @@
                                                                     <input class="form-check-input" type="checkbox"
                                                                         value="" id="{{ $action['key'] }}"
                                                                         name="{{ $action['key'] }}"
-                                                                        {{ in_array($action['key'], $DataPermission->toArray()) ? 'checked' : '' }}>
+                                                                        {{ in_array($action['key'], $dataPermission->toArray()) ? 'checked' : '' }}>
                                                                     <label class="form-check-label"
                                                                         for="{{ $action['key'] }}">
                                                                         {{ $action['label'] }}
@@ -268,7 +271,7 @@
         let delBtn = document.getElementById("delBtn");
         delBtn.onclick = function() {
             let yes = confirm('你確定嗎？');
-            let data = @json($Data);
+            let data = @json($data);
             let id = data.id;
             if (yes) {
                 var postArray = [];
