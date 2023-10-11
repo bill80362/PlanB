@@ -247,7 +247,8 @@
                     <div class="row">
                         <div class="col-12">
                             <x-OperateFilterDiv :model="$model" column="event" setting="select2"></x-OperateFilterDiv>
-
+                            <x-OperateFilterDiv :model="$model" column="route_name" setting="text"></x-OperateFilterDiv>
+                            <x-OperateFilterDiv :model="$model" column="auditable_id" setting="text"></x-OperateFilterDiv>
                         </div>
                     </div>
                     <input id="filter_text_key" name="filter_text_key" type="hidden"

@@ -43,6 +43,8 @@ trait FilterTemplateTrait
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
             } else if ($template == "checkbox" && isset($Data['filter_' . $filterName])) {
                 $query->whereIn($filterName, (array)$Data['filter_' . $filterName]);
+            } else if ($template == "text" && isset($Data['filter_' . $filterName])) {
+                $query->where($filterName, $Data['filter_' . $filterName]);
             } else if (
                 $template == "selectAndInput" &&
                 isset($Data['filter_' . $filterName . "_type"]) &&

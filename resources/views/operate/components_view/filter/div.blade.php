@@ -1,5 +1,5 @@
 @if ($template == 'select2')
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label>{{ __($columnName) }}</label>
         <select name="filter_{{ $column }}[]" class="select2bs5" multiple="multiple" style="width: 100%;">
             @foreach ((array) $model->{Str::camel($column) . 'Text'} as $key => $value)
@@ -88,6 +88,14 @@
             <span class="input-group-text">~</span>
             <input type="datetime-local" class="form-control" name="filter_{{ $column }}_end"
                 value="{{ request()->get('filter_' . $column . '_end') }}">
+        </div>
+    </div>
+@elseif($template == 'text')
+    <div class="form-group mb-3">
+        <label class="form-label d-block">{{ __($columnName) }}</label>
+        <div class="input-group">
+            <input type="text" class="form-control" name="filter_{{ $column }}"
+                   value="{{ request()->get("filter_{$column}") }}">
         </div>
     </div>
 @endif
