@@ -551,4 +551,9 @@
             })
         }
     })
+
+    //摺疊主選單
+    $(document).on('click', '.sidebar-switch', function(){
+        $('body').toggleClass('sidebar-collapsed')
+    })
 }(jQuery));

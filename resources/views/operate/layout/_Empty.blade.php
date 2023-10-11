@@ -1,7 +1,5 @@
 @inject('SystemConfigService', 'App\Services\Operate\SystemConfigService')
 
-@include('/operate/include/_Aside')
-
 @yield('Content')
 
 @include('/operate/components/alert/error_message')

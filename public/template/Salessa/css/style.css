@@ -4160,6 +4160,25 @@ table.dataTable {
   padding-bottom: 18px;
 }
 
+.sidebar-switch {
+  background-color: #fff;
+  border: 0;
+  border-radius: 0 99px 99px 0;
+  box-shadow: 0 5px 10px rgba(80, 143, 244, 0.1);
+  color: #A1A4B9;
+  font-size: 20px;
+  height: 30px;
+  left: 270px;
+  position: fixed;
+  top: 100px;
+  transition: 0.5s !important;
+  width: 40px;
+  z-index: 1000;
+}
+.editor-fullscreen .sidebar-switch {
+  z-index: auto;
+}
+
 @media (max-width: 991px) {
   .active_sidebar {
     left: 0;
@@ -4494,6 +4513,16 @@ body::-webkit-scrollbar {
 }
 .sidebar.dark_sidebar #sidebar_menu > li a::after {
   color: #fff;
+}
+
+.sidebar-collapsed .sidebar {
+  width: 0;
+}
+.sidebar-collapsed .main_content {
+  padding-left: 0;
+}
+.sidebar-collapsed .sidebar-switch {
+  left: 0;
 }
 
 .body_content {
@@ -5640,6 +5669,21 @@ canvas#highlights {
   mask-image: url("/template/ionicons.designerpack/chevron-forward-outline.svg");
 }
 
+.ionicon-chevron-back-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/chevron-back-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/chevron-back-outline.svg");
+}
+
+.ionicon-chevron-down-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/chevron-down-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/chevron-down-outline.svg");
+}
+
+.ionicon-chevron-up-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/chevron-up-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/chevron-up-outline.svg");
+}
+
 .ionicon-funnel-outline::after {
   -webkit-mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
   mask-image: url("/template/ionicons.designerpack/funnel-outline.svg");
@@ -5658,6 +5702,11 @@ canvas#highlights {
 .ionicon-close-outline::after {
   -webkit-mask-image: url("/template/ionicons.designerpack/close-outline.svg");
   mask-image: url("/template/ionicons.designerpack/close-outline.svg");
+}
+
+.ionicon-apps-outline::after {
+  -webkit-mask-image: url("/template/ionicons.designerpack/apps-outline.svg");
+  mask-image: url("/template/ionicons.designerpack/apps-outline.svg");
 }
 
 .lms_category_wrap {

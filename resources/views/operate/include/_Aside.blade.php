@@ -1,6 +1,9 @@
 @inject('menuService', 'App\Services\Operate\MenuService')
 
 <!-- sidebar  -->
+<button class="sidebar-switch d-flex align-items-center justify-content-center" type="button">
+    <i class="ionicon-apps-outline"></i>
+</button>
 <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
     <div class="logo d-flex justify-content-between">
         <a href="index.html"><img src="/template/Salessa/img/logo.png" alt=""></a>

@@ -197,6 +197,25 @@
 
 }
 
+.sidebar-switch {
+    background-color: #fff;
+    border: 0;
+    border-radius: 0 99px 99px 0;
+    box-shadow: 0 5px 10px rgba(80, 143, 244, 0.1);
+    color: #A1A4B9;
+    font-size: 20px;
+    height: 30px;
+    left: 270px;
+    position: fixed;
+    top: 100px;
+    transition: 0.5s !important;
+    width: 40px;
+    z-index: 1000;
+    .editor-fullscreen & {
+        z-index: auto;
+    }
+}
+
 @media #{$tab} {
     .active_sidebar {
         left: 0;
@@ -649,5 +668,18 @@ body {
 
     #sidebar_menu>li a::after {
         color: #fff;
+    }
+}
+
+//主選單折疊
+.sidebar-collapsed {
+    .sidebar {
+        width: 0;
+    }
+    .main_content {
+        padding-left: 0;
+    }
+    .sidebar-switch {
+        left: 0;
     }
 }
