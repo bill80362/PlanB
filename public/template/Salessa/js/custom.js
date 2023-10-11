@@ -449,19 +449,6 @@
             e.preventDefault()
             $(this).parents('.slideFunc-box').removeClass('in-active')
         })
-    
-        // .alert fade out
-    
-        $('.alert').ready(function() {
-            console.log(this)
-        })
-        const alertAry = document.getElementsByClassName('alert');
-        console.log(alertAry)
-        alertAry.forEach((ele, i ) => {
-            ele.onload = setTimeout(() => {
-                $(ele).fadeOut(300).remove()
-            }, 5000)
-        });
         
         //欄位提示
         $('[data-toggle="tooltip"]').tooltip()
@@ -525,19 +512,15 @@
         $(this).parents('.slideFunc-box').removeClass('in-active')
     })
 
-    // .alert fade out
+    // .alert 關閉
 
     $('.alert').ready(function() {
         console.log(this)
     })
-    const alertAry = document.getElementsByClassName('alert');
-    console.log(alertAry)
-    alertAry.forEach((ele, i ) => {
-        ele.onload = setTimeout(() => {
-            $(ele).fadeOut(300).remove()
-        }, 5000)
-        
-    });
+
+    $(document).on('click', '.alert-closer', function(){
+        $('.alert').remove()
+    })
 
     // variant collapse
     $('body').on('click', '.variant-group .collapse-item .variant-setting', function(e) {

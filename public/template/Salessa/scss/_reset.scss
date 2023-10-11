@@ -77,10 +77,13 @@ input:focus {
             width: auto;
         }
     }
+    .form-file-link {
+        max-width: calc(100% - 100px);
+        margin-right: .5em;
+    }
     .form-file-img {
         display: block;
         max-height: 100px;
-        margin-right: .5em;
         max-width: 100%;
         width: auto;
     }

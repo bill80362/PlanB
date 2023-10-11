@@ -104,6 +104,30 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                @elseif($item["input"]=="doc")
+                                                    <div class="row mb-3">
+                                                        <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
+                                                        <div class="col-12 col-sm-9">
+                                                            <div class="form-file-box">
+                                                                <div class="form-file-row d-flex align-items-center">
+                                                                    <input type="text" class="form-control form-input-route" placeholder="{{__('檔案路徑')}}" name="{{$item["id"]}}" value="{{$SystemConfigKeyValue[$item["id"]]??""}}">
+                                                                    <label class="btn btn-dark form-file-label">
+                                                                        <span>{{__('上傳')}}</span>
+                                                                        <input class="form-control hide form-input-img" type="file" name="{{$item["id"]}}_file">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-tips">
+                                                                    {{app(App\Services\Operate\UploadFileService::class)->viewUploadImageLimitTips($Model,$item["id"])}}
+                                                                </div>
+                                                                <div class="form-file-row form-doc-row d-flex align-items-end {{($SystemConfigKeyValue[$item["id"]])?'':'hide'}}">
+                                                                    <a class="form-file-link" href="{{app(App\Services\Operate\UploadFileService::class)->url($SystemConfigKeyValue[$item["id"]])}}" target="_blank">
+                                                                        文件名稱.pdf
+                                                                    </a>
+                                                                    <button class="btn btn-danger form-file-del" type="button">{{__('刪除')}}</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @elseif($item["input"]=="radio")
                                                     <div class="mb-3 row">
                                                         <label for="" class="col-12 col-sm-3 col-form-label pt-0">{{$item["title"]}}</label>
