@@ -60,7 +60,6 @@ class MakeCrud extends Command
         $tagetPath = resource_path('views/operate/pages/' . $subPath . '/');
         (new Filesystem)->ensureDirectoryExists($tagetPath);
         foreach ($bladeNames as $bladeName) {
-
             $fullPath = $tagetPath . $bladeName;
             $stubFile = $stubPath . 'stub_' . $bladeName;  // 範本檔
             $result = $this->stubToFile($stubFile, [
@@ -92,8 +91,22 @@ class MakeCrud extends Command
             dump("建立成功： " . $fullPath);
         }
 
+        // ListColumnService.php
+        $listServicePath = app_path('services/Operate/ListColumnService.php');
+        $stubPath = base_path('stubs') . '/service/ListColumnService.stub';
+        $result = $this->stubToFile($stubPath, [
+            "{{ r_model }}"  => $modelname
+        ], $listServicePath, "// 請勿刪除此行註解，stub產生放置位置");
+
+
+        // PermissionService.php
+
+        // MenuService.php
+
+
+
         /**
-         * 需修改以下檔案
+         * 需修改及確認以下檔案
          */
         // migration
         // model

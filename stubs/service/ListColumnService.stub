@@ -1,11 +1,12 @@
-Models\{{ r_model }}::class => [
-    "lockColumn" => [
-        'default_serial_number',
-    ],
-    "canUseColumn" => [
-        'id','created_at', 'updated_at'
-    ],
-    "lockColumnTail" => [
-        'operate'
-    ],
-],
+// 請勿刪除此行註解，stub產生放置位置
+        Models\{{ r_model }}::class => [
+            "lockColumn" => [
+                'default_serial_number',
+            ],
+            "canUseColumn" => [
+                'id', 'created_at', 'updated_at'
+            ],
+            "lockColumnTail" => [
+                'operate'
+            ],
+        ],
