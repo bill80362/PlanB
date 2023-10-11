@@ -104,7 +104,7 @@ class MakeCrud extends Command
         $stubPath = base_path('stubs') . '/service/PermissionService.stub';
         $result = $this->stubToFile($stubPath, [
             "{{ r_groupKey }}"  => $camelName
-        ], $permissionServicePath, "// 請勿刪除此行註解，stub產生放置位置");
+        ], $permissionServicePath, "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。");
 
         // MenuService.php
         $menuServicePath = app_path('services/Operate/MenuService.php');
@@ -112,7 +112,7 @@ class MakeCrud extends Command
         $result = $this->stubToFile($stubPath, [
             "{{ r_href }}"  => $camelName,
             "{{ r_permission }}"  => $snacktName . '_read'
-        ], $menuServicePath, "// 請勿刪除此行註解，stub產生放置位置");
+        ], $menuServicePath, "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。");
 
 
         /**

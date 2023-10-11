@@ -1,5 +1,4 @@
-// 請勿刪除此行註解，stub產生放置位置
-        Models\{{ r_model }}::class => [
+Models\{{ r_model }}::class => [
             "lockColumn" => [
                 'default_serial_number',
             ],
@@ -10,3 +9,5 @@
                 'operate'
             ],
         ],
+        
+        // 請勿刪除此行註解，stub產生放置位置
