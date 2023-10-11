@@ -8,7 +8,8 @@ class MenuService
 {
     public function getMenu()
     {
-
+        // 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。
+        
         $menus = [
             [
                 'name' => __('儀表板'),
@@ -57,16 +58,6 @@ class MenuService
                         'href' => '/operate/page_content',
                         'permission' => 'pageContent_read',
                     ],
-                    // [
-                    //     'name' => __('隱私權聲明'),
-                    //     'href' => '/operate/company_manage/privacy_statement',
-                    //     'permission' => 'privacyStatement_read',
-                    // ],
-                    // [
-                    //     'name' => __('版權宣告'),
-                    //     'href' => '/operate/company_manage/copyright_notice',
-                    //     'permission' => 'copyrightNotice_read',
-                    // ],
                 ],
             ],
             [
