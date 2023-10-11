@@ -33,7 +33,7 @@ class PermissionService
     public function getGroupItemPermission($lv = null)
     {
         // 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。
-        
+
         $newGroup = [];
         $groups = [
             [
@@ -222,17 +222,6 @@ class PermissionService
                 'groupKey' => 'pageContent',
                 'actions' => ['read', 'update'],
             ],
-            [
-                'label' => '隱私權聲明',
-                'groupKey' => 'privacyStatement',
-                'actions' => ['read', 'update'],
-            ],
-            [
-                'label' => '版權宣告 ',
-                'groupKey' => 'copyrightNotice',
-                'actions' => ['read', 'update'],
-            ],
-
         ];
     }
 

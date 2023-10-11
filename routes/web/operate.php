@@ -96,11 +96,6 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::post('list_column', [Operation\Config\LanguageController::class, 'saveListColumn'])->name('saveListColumn');
         });
 
-        //公司管理
-        // Route::get('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContentHtml'])->name('privacy_statement');
-        // Route::post('/company_manage/{companyKey}/draft', [Operation\Content\CompanyManageController::class, 'saveDraft'])->name('post_privacy_statement_draft');
-        // Route::post('/company_manage/{companyKey}', [Operation\Content\CompanyManageController::class, 'pageContent'])->name('post_privacy_statement');
-
         Route::group([
             'prefix' => 'page_content',
             'as' => 'page_content_',
