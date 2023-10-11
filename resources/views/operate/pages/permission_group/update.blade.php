@@ -151,25 +151,23 @@
             });
         }
 
-        window.onload = function() {
-            let saveBtn = document.getElementById("saveBtn");
-            saveBtn.onclick = function() {
-                document.getElementById("subForm").submit();
-            }
+        let saveBtn = document.getElementById("saveBtn");
+        saveBtn.onclick = function() {
+            document.getElementById("subForm").submit();
+        }
 
-            let delBtn = document.getElementById("delBtn");
-            delBtn.onclick = function() {
-                let yes = confirm('你確定嗎？');
-                let data = @json($Data);
-                let id = data.id;
-                if (yes) {
-                    var postArray = [];
-                    let val = $(this).val();
-                    postArray["id_array[" + id + "]"] = id;
-                    postArray["_token"] = '{{ csrf_token() }}';
-                    //送出
-                    postForm('/operate/permission_group/del?{{ request()->getQueryString() }}', postArray)
-                }
+        let delBtn = document.getElementById("delBtn");
+        delBtn.onclick = function() {
+            let yes = confirm('你確定嗎？');
+            let data = @json($Data);
+            let id = data.id;
+            if (yes) {
+                var postArray = [];
+                let val = $(this).val();
+                postArray["id_array[" + id + "]"] = id;
+                postArray["_token"] = '{{ csrf_token() }}';
+                //送出
+                postForm('/operate/permission_group/del?{{ request()->getQueryString() }}', postArray)
             }
         }
     </script>
