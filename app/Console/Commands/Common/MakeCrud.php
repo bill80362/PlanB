@@ -100,9 +100,19 @@ class MakeCrud extends Command
 
 
         // PermissionService.php
+        $permissionServicePath = app_path('services/Operate/PermissionService.php');
+        $stubPath = base_path('stubs') . '/service/PermissionService.stub';
+        $result = $this->stubToFile($stubPath, [
+            "{{ r_groupKey }}"  => $camelName
+        ], $permissionServicePath, "// 請勿刪除此行註解，stub產生放置位置");
 
         // MenuService.php
-
+        $menuServicePath = app_path('services/Operate/MenuService.php');
+        $stubPath = base_path('stubs') . '/service/MenuService.stub';
+        $result = $this->stubToFile($stubPath, [
+            "{{ r_href }}"  => $camelName,
+            "{{ r_permission }}"  => $snacktName . '_read'
+        ], $menuServicePath, "// 請勿刪除此行註解，stub產生放置位置");
 
 
         /**

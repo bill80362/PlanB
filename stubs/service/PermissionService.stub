@@ -1,5 +1,6 @@
-[
-    'label' => '職業管理',
-    'groupKey' => 'careerManagement',
-    'actions' => ['read', 'create', 'update', 'delete'],
-],
+// 請勿刪除此行註解，stub產生放置位置
+        // [
+        //     'label' => 'xxxx',
+        //     'groupKey' => '{{ r_groupKey }}',
+        //     'actions' => ['read', 'create', 'update', 'delete'],
+        // ],
