@@ -24,7 +24,7 @@ class AuditLog extends Audit
         'tags' => '標籤',
         'version' => '版本',
         'created_at' => '建立時間',
-        'route_name' => '路由名稱',
+
     ];
     //
     public array $eventText = [
