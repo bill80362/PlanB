@@ -77,7 +77,7 @@ class MakeCrud extends Command
         }
 
         // 路由
-        $targetText = "// 請勿刪除此行註解，stub產生放置位置";
+        $targetText = "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下面route並移除註解。";
         $targetFile = base_path('routes/web/operate.php');
 
         $routeSubPath = base_path('stubs/route/operate.stub');
