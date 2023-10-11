@@ -142,7 +142,8 @@
                                                 @foreach ($paginator->items() as $index => $Item)
                                                     <tr class="{{ $index % 2 ? '' : 'bg-muted-light' }}">
                                                         <td class="border-0" data-column="default_serial_number">
-                                                            <input type="checkbox" class="form-check-input" name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
+                                                            <input type="checkbox" class="form-check-input"
+                                                                name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
                                                         </td>
                                                         <td class="border-0" data-column="audit_title">{{ app('App\Services\Route\RouteTitle')->getTitle($Item->route_name) }}</td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
