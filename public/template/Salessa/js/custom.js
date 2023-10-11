@@ -530,8 +530,25 @@
 
     // card detail
     $('body').on('click', '.card-detail .card-header', function(e){
-        e.preventDefault();
-        $(this).siblings('.card-body').slideToggle(400)
-               .parent('.card-detail').toggleClass('in-collapse');
+        if(e.target === e.currentTarget || $(e.target).hasClass('card-title')){
+            e.preventDefault();
+            $(this).siblings('.card-body').slideToggle(400)
+            .parent('.card-detail').toggleClass('in-collapse');
+        }
+    })
+
+    $('body').on('change', '.allselect-group input[type=radio]:checked', function(){
+        let _this = $(this),
+            cardDetail = _this.parents('.card-detail'),
+            val = _this.val()
+        if(val == '1'){
+            cardDetail.find('input[type=checkbox]').each(function(){
+                $(this).prop('checked', true)
+            })
+        }else{
+            cardDetail.find('input[type=checkbox]').each(function(){
+                $(this).prop('checked', false)
+            })
+        }
     })
 }(jQuery));

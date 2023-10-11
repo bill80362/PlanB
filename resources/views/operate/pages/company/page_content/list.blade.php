@@ -1,12 +1,3 @@
-@php
-    /**
-     * 產生後請執行以下步驟：
-     * page_content_ 參數(路由用)
-     * pageContent_ 參數(權限用)
-     * 2. 確認欄位
-     **/
-@endphp
-
 @extends('operate.layout._Empty')
 
 @section('HeaderCSS')
@@ -26,10 +17,10 @@
                                 <h2> @include('/operate/components/title/page_title')</h2>
                                 <!-- Example single danger button -->
                                 <div class="btn-group me-2">
-                                   
+
                                 </div>
                                 <div class="btn-group me-2">
-                                    
+
                                 </div>
                                 <div class="btn-group">
                                     @can('pageContent_create')
@@ -109,16 +100,18 @@
                                                                 name="id_array[]" value="1"> {{ $index + 1 }}
                                                         </td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
-                                                        <td class="border-0" data-column="lang_type">{{ $Item->lang_type }}</td>
-                                                        <td class="border-0" data-column="page_name">{{ $Item->page_name }}</td>
+                                                        <td class="border-0" data-column="lang_type">{{ $Item->lang_type }}
+                                                        </td>
+                                                        <td class="border-0" data-column="page_name">{{ $Item->page_name }}
+                                                        </td>
                                                         <td class="border-0" data-column="slug">{{ $Item->slug }}</td>
-                                                        <td class="border-0" data-column="created_at">{{ $Item->created_at }}</td>
+                                                        <td class="border-0" data-column="created_at">
+                                                            {{ $Item->created_at }}</td>
                                                         <td class="border-0" data-column="updated_at">
                                                             {{ $Item->updated_at }}</td>
                                                         <td class="border-0 text-end" data-column="operate">
                                                             <div class="btn-group">
-                                                                <button type="button"
-                                                                    class="btn btn-light dropdown-toggle"
+                                                                <button type="button" class="btn btn-light dropdown-toggle"
                                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                                     <i class="ti-more-alt"></i>
                                                                 </button>
@@ -128,7 +121,7 @@
                                                                                 href="{{ route('page_content_update', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('編輯') }}</a>
                                                                         </li>
                                                                     @endcan
-                                                                   
+
                                                                     {{-- <a target="_blank" class="dropdown-item"
                                                                         href="{{ route('page_content_audit', ['id' => $Item->id]) }}?{{ request()->getQueryString() }}">{{ __('紀錄') }}</a> --}}
                                                                 </ul>
@@ -162,7 +155,108 @@
 
 
 @section('Modal')
-  
+    <form id="filterForm">
+        <!-- Modal -->
+        <div class="slideFunc-box" id="prodFilter">
+            <div class="slideFunc-content">
+                <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
+                    <h5 class="slideFunc-title" id="prodFilterTitle">{{ __('篩選器') }}</h5>
+                    <button type="button" class="btn-close" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="slideFunc-body px-3 py-3">
+                    <div class="row">
+                        <div class="col-12">
+                            @foreach ($Model->filterTemplate as $column => $setting)
+                                <x-OperateFilterDiv :column="$column" :model="$Model"
+                                    :setting="$setting"></x-OperateFilterDiv>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input id="filter_text_key" name="filter_text_key" type="hidden"
+                        value="{{ request()->get('filter_text_key') }}">
+                    <input id="filter_text_value" name="filter_text_value" type="hidden"
+                        value="{{ request()->get('filter_text_value') }}">
+                </div>
+                <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
+                    <button type="reset" class="btn btn-muted mx-2"
+                        onclick="$('.select2bs5').empty() && $(':input','#filterForm').not(':button, :submit, :reset, :hidden').val('').prop('checked', false).prop('selected', false);
+            ">{{ __('清除篩選器') }}</button>
+                    <button type="submit" class="btn btn-primary mx-2">{{ __('套用篩選條件') }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="slideFunc-box" id="listSetting">
+        <div class="slideFunc-content">
+            <div class="slideFunc-header d-flex justify-content-between align-items-center px-3 py-3">
+                <h5 class="slideFunc-title" id="listSettingTitle">{{ __('列表欄位調整') }}</h5>
+                <button type="button" class="btn-close" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <form action="{{ route('page_content_saveListColumn') }}" method="POST">
+                @csrf
+                <div class="slideFunc-body px-3 py-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="list-group">
+                                <div class="sort-item">
+                                    @foreach ($TableSetting['lockColumn'] as $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox"
+                                                    value="{{ $value }}"
+                                                    aria-label="Checkbox for following text input" checked disabled>
+                                                <label class="form-check-label"
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                            </div>
+                                            <i class="ti-lock "></i>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="sort-item" id="sortGroup">
+                                    @foreach ($TableSetting['canUseColumn'] as $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox"
+                                                    value="{{ $value }}" name="list[]"
+                                                    aria-label="Checkbox for following text input"
+                                                    {{ in_array($value, $columns) ? 'checked' : '' }}>
+                                                <label class="form-check-label"
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                            </div>
+                                            <i class="ti-align-justify"></i>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="sort-item">
+                                    @foreach ($TableSetting['lockColumnTail'] as $value)
+                                        <div class="list-group-item d-flex flex-content-between align-items-center">
+                                            <div class="form-check flex-fill">
+                                                <input class="form-check-input" type="checkbox"
+                                                    value="{{ $value }}"
+                                                    aria-label="Checkbox for following text input" checked disabled>
+                                                <label class="form-check-label"
+                                                    for="">{{ __($Model->Column_Title_Text[$value] ?? $value) }}</label>
+                                            </div>
+                                            <i class="ti-lock "></i>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slideFunc-footer d-flex justify-content-center px-3 py-3">
+                    {{-- <button type="reset" class="btn btn-muted mx-2" >取消</button> --}}
+                    <button type="submit" class="btn btn-primary mx-2">儲存</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 
@@ -200,7 +294,7 @@
         }
 
         //批次刪除
-        
+
 
         //欄位排序修改
         let columns = @json($columns);

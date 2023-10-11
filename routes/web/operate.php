@@ -5,7 +5,7 @@ use App\Http\Controllers\Operation\Config\FileUploadController;
 use App\Http\Controllers\Operation\UserController;
 use Illuminate\Support\Facades\Route;
 
-// 請勿刪除此行註解，stub產生放置位置
+// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下面route並移除註解。
 
 
 
@@ -108,7 +108,7 @@ Route::prefix('operate')->middleware(['lang.extend', 'lang.detect', 'log.request
             Route::get('/', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'listHTML'])->name('list')->can('pageContent_read');
             Route::get('{id}', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'updateHTML'])->whereNumber('id')->name('update_html')->can('pageContent_update');
             Route::post('{id}', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'update'])->whereNumber('id')->name('update')->can('pageContent_update');
-            Route::post('{id}/draft', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'draft'])->whereNumber('id')->name('draft')->can('pageContent_update');
+            Route::post('{id}/draft', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'saveDraft'])->whereNumber('id')->name('draft')->can('pageContent_update');
 
             // Route::post('del', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'delBatch'])->name('del')->can('pageContent_delete');
             // Route::get('export/{type}', [\App\Http\Controllers\Operation\Company\PageContentController::class, 'export'])->name('export')->where("type", '[key|value]+')->can('pageContent_export');
