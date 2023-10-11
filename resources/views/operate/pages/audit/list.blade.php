@@ -75,13 +75,19 @@
                                         <div class="input-group input-group" id="searchContent">
                                             <div class="input-group-prepend">
                                                 <select class="form-select" id="filter_text_key_outside"
-                                                    data-target="#searchFilter"
-                                                    onchange="$('#filter_text_key').val($(this).val())">
+                                                        data-target="#searchFilter"
+                                                        onchange="$('#filter_text_key').val($(this).val())">
                                                     <option value="">{{ __('不限制') }}</option>
-                                                    @foreach (['old_values', 'new_values', 'event', 'version'] as $value)
+                                                    @foreach ($Model->filterTextKey as $value)
                                                         <option value="{{ $value }}"
                                                             {{ request()->get('filter_text_key') == $value ? 'selected' : '' }}>
                                                             {{ __($Model->Column_Title_Text[$value]) }}</option>
+                                                    @endforeach
+
+                                                    @foreach ($Model->filterTextKeyCustom as $key => $value)
+                                                        <option value="{{ $key }}"
+                                                            {{ request()->get('filter_text_key') == $key ? 'selected' : '' }}>
+                                                            {{ __($value) }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
