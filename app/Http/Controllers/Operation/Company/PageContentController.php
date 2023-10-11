@@ -31,10 +31,6 @@ class PageContentController extends Controller
         $TableSetting["canUseColumn"] = collect($TableSetting["canUseColumn"])->sortBy(function ($item, $key) use ($userColumns) {
             return array_search($item, $userColumns);
         })->toArray();
-        //
-        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
-        //過濾條件
-        $paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
 
         $keys = $pageContentService->keys();
         foreach ($keys as $key) {
@@ -45,6 +41,13 @@ class PageContentController extends Controller
                 'page_name' => $key,
             ]);
         }
+
+        //
+        $pageLimit = $this->request->get('pageLimit') ?: 10; //預設10
+        //過濾條件
+        $paginator = $this->oModel->filter($this->request->all())->with("audits")->paginate($pageLimit);
+
+
 
         return view('operate/pages/company/page_content/list', [
             'paginator' => $paginator,
