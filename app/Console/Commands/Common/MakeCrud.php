@@ -45,28 +45,19 @@ class MakeCrud extends Command
 
         // 產生model
         Artisan::call("make:model " . $modelname . " -m");
+
         // 產生controller
         Artisan::call("make:controller " . $controllerName . " --model=" . $modelname);
-
         $controllerPath = app_path('Http/Controllers/' . $controllerName) . ".php";
-        // if (file_exists($controllerPath)) {
-        //     $controllerContent = file_get_contents($controllerPath);
-        //     $controllerContent = str_replace("{{r_blade_folder}}", $subPath, $controllerContent);
-        //     $controllerContent = str_replace("{{r_url}}", $snacktName, $controllerContent);
-        //     file_put_contents($controllerPath, $controllerContent);
-        // }
-
         $result = $this->stubToFile($controllerPath, [
             "{{r_blade_folder}}"  => $subPath,
             "{{r_url}}" => $snacktName
         ], $controllerPath);
 
-
         // 產生blade
         $stubPath = base_path('stubs') . '/blade/';
         $bladeNames = ['list.blade.php', 'update.blade.php']; // ['stub_list.blade.php', 'stub_update.blade.php']
         $tagetPath = resource_path('views/operate/pages/' . $subPath . '/');
-
         (new Filesystem)->ensureDirectoryExists($tagetPath);
         foreach ($bladeNames as $bladeName) {
 
@@ -85,13 +76,10 @@ class MakeCrud extends Command
         }
 
         // 路由
-
         $targetText = "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下面route並移除註解。";
         $targetFile = base_path('routes/web/operate.php');
         $routeSubPath = base_path('stubs/route/operate.stub');
-
         $namespace = str_replace("/", "\\", $controllerName);
-
         $result = $this->stubToFile($routeSubPath, [
             "{{ r_prefix }}"  => $snacktName,
             "{{ r_perm }}" => $camelName,
@@ -117,7 +105,13 @@ class MakeCrud extends Command
 
     }
 
-    public function stubToFile(
+    /**
+     * @param $stubFilePath stub路徑
+     * @param $stubParam 參數key為被取代的參數，value為要更新的參數
+     * @param $targetFilePath 寫入到哪個檔案
+     * @param $targetSubject 如果有填入就是取代掉該檔案中的字串。
+     */
+    private function stubToFile(
         $stubFilePath,
         $stubParam = [],
         $targetFilePath,
