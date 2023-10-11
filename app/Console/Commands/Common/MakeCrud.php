@@ -118,14 +118,14 @@ class MakeCrud extends Command
         /**
          * 需修改及確認以下檔案
          */
-        // migration
-        // model
-        // permissionService.php
-        // ListColumnService.php
-        // MenuService.php
-        // route、controller(確認)
-        // list.blade.php、update.blade.php
-
+        dump("已產生已下檔案：");
+        dump("migrations => 需補上資料表欄位");
+        dump("model => 需補上model設定");
+        dump("PermissionService.php => 需移動註解及補上名稱");
+        dump("MenuService.php => 需移動註解及補上名稱");
+        dump("ListColumnService.php => 需解開註解");
+        dump("operate.php => 需移動註解及補上名稱");
+        dump("list.blade.php、update.blade.php => 需補上對應欄位資料");
     }
 
     /**
