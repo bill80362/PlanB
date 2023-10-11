@@ -7,7 +7,7 @@
      **/
 @endphp
 
-@extends('operate.layout._Master')
+@extends('operate.layout._Empty')
 
 @section('HeaderCSS')
 @endsection

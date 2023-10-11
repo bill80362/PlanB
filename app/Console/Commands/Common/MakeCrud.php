@@ -92,7 +92,15 @@ class MakeCrud extends Command
         $newRouteContent = str_replace($targetText, $stubContent, $targetContent);
         file_put_contents($targetFile, $newRouteContent);
 
-        // 需修改以下檔案
-        // ListColumnService.php MenuService.php PermissionService.php
+        /**
+         * 需修改以下檔案
+         */
+        // migration
+        // model
+        // ListColumnService.php
+        // route、controller
+        // update.balde.php
+        // permissionService.php
+        // MenuService.php
     }
 }
