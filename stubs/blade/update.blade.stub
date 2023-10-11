@@ -38,7 +38,7 @@
                             @endcan
                             <div class="btn-group ms-2">
                                 <a class="btn btn-light"
-                                    href="{{ route('{{route}}_list') }}?{{ request()->getQueryString() }}">
+                                    href="{{ route('{{r_route}}_list') }}?{{ request()->getQueryString() }}">
                                     {{ __('回總覽') }}
                                 </a>
                             </div>
@@ -108,7 +108,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex align-items-center justify-content-end">
                                     <div class="btn-group ms-2">
-                                        <a href="{{ route('{{route}}_list') }}?{{ request()->getQueryString() }}"
+                                        <a href="{{ route('{{r_route}}_list') }}?{{ request()->getQueryString() }}"
                                             class="btn btn-muted mx-2">{{ __('回總覽') }}</a>
                                     </div>
                                     <div class="btn-group ms-2">
@@ -149,7 +149,7 @@
                     postArray["id_array[" + id + "]"] = id;
                     postArray["_token"] = '{{ csrf_token() }}';
                     //送出
-                    postForm("{{ route('{{route}}_del') }}?{{ request()->getQueryString() }}", postArray)
+                    postForm("{{ route('{{r_route}}_del') }}?{{ request()->getQueryString() }}", postArray)
                 }
             }
         }

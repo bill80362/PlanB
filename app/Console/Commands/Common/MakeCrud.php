@@ -50,21 +50,21 @@ class MakeCrud extends Command
         Artisan::call("make:controller " . $controllerName . " --model=" . $modelname);
         $controllerPath = app_path('Http/Controllers/' . $controllerName) . ".php";
         $result = $this->stubToFile($controllerPath, [
-            "{{r_blade_folder}}"  => $subPath,
-            "{{r_url}}" => $snacktName
+            "r_blade_folder"  => $subPath,
+            "r_url" => $snacktName
         ], $controllerPath);
 
         // 產生blade
         $stubPath = base_path('stubs') . '/blade/';
-        $bladeNames = ['list.blade.php', 'update.blade.php']; // ['stub_list.blade.php', 'stub_update.blade.php']
+        $bladeNames = ['list.blade', 'update.blade']; // ['list.blade.stub', 'update.blade.stub']
         $tagetPath = resource_path('views/operate/pages/' . $subPath . '/');
         (new Filesystem)->ensureDirectoryExists($tagetPath);
         foreach ($bladeNames as $bladeName) {
-            $fullPath = $tagetPath . $bladeName;
-            $stubFile = $stubPath . 'stub_' . $bladeName;  // 範本檔
+            $fullPath = $tagetPath . $bladeName . '.php';
+            $stubFile = $stubPath .  $bladeName . '.stub';  // 範本檔
             $result = $this->stubToFile($stubFile, [
-                "{{route}}_"  => $snacktName . '_',
-                "{{perm}}_" => $camelName . '_'
+                "r_route"  => $snacktName,
+                "r_perm" => $camelName
             ], $fullPath);
 
             if (!$result) {
@@ -78,9 +78,9 @@ class MakeCrud extends Command
         $routeSubPath = base_path('stubs/route/operate.stub');
         $namespace = str_replace("/", "\\", $controllerName);
         $result = $this->stubToFile($routeSubPath, [
-            "{{ r_prefix }}"  => $snacktName,
-            "{{ r_perm }}" => $camelName,
-            "{{ r_controller }}" => "\App\Http\Controllers\\" . $namespace
+            "r_prefix"  => $snacktName,
+            "r_perm" => $camelName,
+            "r_controller" => "\App\Http\Controllers\\" . $namespace
         ], $targetFile, $targetText);
 
         if (!$result) {
@@ -91,7 +91,7 @@ class MakeCrud extends Command
         $listServicePath = app_path('services/Operate/ListColumnService.php');
         $stubPath = base_path('stubs') . '/service/ListColumnService.stub';
         $result = $this->stubToFile($stubPath, [
-            "{{ r_model }}"  => $modelname
+            "r_model"  => $modelname
         ], $listServicePath, "// 請勿刪除此行註解，stub產生放置位置");
 
 
@@ -99,15 +99,15 @@ class MakeCrud extends Command
         $permissionServicePath = app_path('services/Operate/PermissionService.php');
         $stubPath = base_path('stubs') . '/service/PermissionService.stub';
         $result = $this->stubToFile($stubPath, [
-            "{{ r_groupKey }}"  => $camelName
+            "r_groupKey"  => $camelName
         ], $permissionServicePath, "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。");
 
         // MenuService.php
         $menuServicePath = app_path('services/Operate/MenuService.php');
         $stubPath = base_path('stubs') . '/service/MenuService.stub';
         $result = $this->stubToFile($stubPath, [
-            "{{ r_href }}"  => $camelName,
-            "{{ r_permission }}"  => $snacktName . '_read'
+            "r_href"  => $camelName,
+            "r_permission"  => $snacktName . '_read'
         ], $menuServicePath, "// 請勿刪除此行註解，stub產生放置位置，請將產生出來的註解程式移至下方程式並移除註解。");
 
 
@@ -140,7 +140,9 @@ class MakeCrud extends Command
         if (!file_exists($stubFilePath)) return false;
         $stubContent = file_get_contents($stubFilePath);
         foreach ($stubParam as $key => $value) {
-            $stubContent = str_replace($key, $value, $stubContent);
+            $stubContent = str_replace([
+                '{{' . $key . '}}', '{{ ' . $key . ' }}'
+            ], $value, $stubContent);
         }
 
 
