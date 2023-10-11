@@ -226,12 +226,8 @@ class LanguageController extends Controller
                 ->mapWithKeys(function ($item) {
                     return [$item['text'] => $item['tran_text']];
                 })->all();
-            $filePath = lang_path($langType . '.json');
             $jsonString = json_encode($languageDatas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             Storage::disk('lang')->put($langType . '.json', $jsonString);
-            // $fp = fopen($filePath, 'w');
-            // fwrite($fp, $jsonString);
-            // fclose($fp);
         }
 
         return back();

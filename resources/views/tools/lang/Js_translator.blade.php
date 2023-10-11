@@ -3,6 +3,11 @@
 <script>
     function $trans(key) {
         let lang = @json($jsTranslator->getJsLang());
-        return lang[key] ?? key;
+        if (lang[key]) {
+            return lang[key];
+        } else {
+            // "沒有語系" + key
+            return key;
+        }
     }
 </script>
