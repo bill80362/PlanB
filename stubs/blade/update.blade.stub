@@ -12,8 +12,7 @@
                 <div class="white_card">
                     <div class="white_card_header">
                         <div class="d-flex align-items-center justify-content-between">
-                            {{-- @include('/operate/components/title/page_title') --}}
-                            {{-- <h2> {{ __('語系管理') }} {{ $Data->id ? __('修改') : __('新增') }}</h2> --}}
+                            <h2> @include('/operate/components/title/page_title') {{ $Data->id ? __('修改') : __('新增') }}</h2>
 
                             @can('language_delete')
                                 @if ($Data->id)
@@ -61,15 +60,14 @@
                                         </div> --}}
                                         <div class="card-body">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                            {{-- <input type="hidden" name="lang_type" value="{{ $Data->lang_type }}"> --}}
 
-                                            {{-- <div class="row mb-3">
+                                            <div class="row mb-3">
                                                 <label for=""
                                                     class="col-12 col-sm-3 col-form-label">{{ __('名稱') }}</label>
                                                 <div class="col-12 col-sm-9">
-                                                    <textarea  name="name" class="form-control" rows="3">{{ $Data->text }}</textarea>
+                                                    <textarea  name="name" class="form-control" rows="3">{{ $Data->name }}</textarea>
                                                 </div>
-                                            </div> --}}
+                                            </div>
 
 
                                             {{-- <div class="row mb-3">
