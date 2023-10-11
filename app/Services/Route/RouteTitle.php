@@ -36,6 +36,9 @@ class RouteTitle
         "http_log_update"=>"串接紀錄詳細",
         //
         "file_upload_list"=>"檔案管理列表",
+        //
+        "page_content_list" => "內容管理列表",
+        "page_content_update_html" => "內容管理修改",
     ];
 
     public function getTitle($routeName){

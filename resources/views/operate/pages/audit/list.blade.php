@@ -114,38 +114,23 @@
                                         <table class="table" id="sortableTable">
                                             <thead>
                                                 <tr>
-                                                    <th class="sortStyle ascStyle" data-column="default_serial_number">
+                                                    <th class="sortStyle" data-column="default_serial_number">
                                                         {{ __('default_serial_number') }}</th>
-                                                    <th class="sortStyle ascStyle" data-column="id">
-                                                        {{ __($model->Column_Title_Text['id']) }}</th>
-                                                    <th class="sortStyle descStyle" data-column="user_type">
-                                                        {{ __($model->Column_Title_Text['user_type']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="user_id">
-                                                        {{ __($model->Column_Title_Text['user_id']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="event">
-                                                        {{ __($model->Column_Title_Text['event']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="auditable_type">
-                                                        {{ __($model->Column_Title_Text['auditable_type']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="auditable_id">
-                                                        {{ __($model->Column_Title_Text['auditable_id']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="old_values">
-                                                        {{ __($model->Column_Title_Text['old_values']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="new_values">
-                                                        {{ __($model->Column_Title_Text['new_values']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="url">
-                                                        {{ __($model->Column_Title_Text['url']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="ip_address">
-                                                        {{ __($model->Column_Title_Text['ip_address']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="user_agent">
-                                                        {{ __($model->Column_Title_Text['user_agent']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="version">
-                                                        {{ __($model->Column_Title_Text['version']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="route_name">
-                                                        {{ __($model->Column_Title_Text['route_name']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="created_at">
-                                                        {{ __($model->Column_Title_Text['created_at']) }}</th>
-                                                    <th class="sortStyle unsortStyle" data-column="audit_title">
-                                                        {{ __('audit_title') }}</th>
+                                                    <x-OperateTh column="audit_title" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="id" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="user_type" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="user_id" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="event" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="auditable_type" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="auditable_id" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="old_values" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="new_values" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="url" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="ip_address" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="user_agent" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="version" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="route_name" :model="$model"></x-OperateTh>
+                                                    <x-OperateTh column="created_at" :model="$model"></x-OperateTh>
                                                     <th class="text-end" data-column="operate">
                                                         <button class="btn btn-link slideFunc-toggle text-muted"
                                                             data-target="#listSetting"><i
@@ -159,6 +144,9 @@
                                                         <td class="border-0" data-column="default_serial_number">
                                                             <input type="checkbox" class="form-check-input"
                                                                 name="id_array[]" value="{{ $Item->id }}"> {{ $index + 1 }}
+                                                        </td>
+                                                        <td class="border-0" data-column="audit_title">
+                                                            {{ app('App\Services\Route\RouteTitle')->getTitle($Item->route_name) }}
                                                         </td>
                                                         <td class="border-0" data-column="id">{{ $Item->id }}</td>
                                                         <td class="border-0" data-column="user_type">
@@ -185,9 +173,6 @@
                                                             {{ $Item->route_name }}</td>
                                                         <td class="border-0" data-column="created_at">
                                                             {{ $Item->created_at }}</td>
-                                                        <td class="border-0" data-column="audit_title">
-                                                            {{ app('App\Services\Route\RouteTitle')->getTitle($Item->route_name) }}
-                                                        </td>
                                                         <td class="border-0 text-end" data-column="operate">
                                                             <div class="btn-group">
                                                                 <button type="button"
