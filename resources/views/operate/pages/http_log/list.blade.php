@@ -28,19 +28,19 @@
                                                     <option value="">{{ __('不限制') }}</option>
                                                     <option value="type"
                                                         {{ request()->get('filter_text_key') == 'type' ? 'selected' : '' }}>
-                                                        {{ __($Model->Column_Title_Text['type']) }}</option>
+                                                        {{ __($model->Column_Title_Text['type']) }}</option>
                                                     <option value="primary_key"
                                                         {{ request()->get('filter_text_key') == 'primary_key' ? 'selected' : '' }}>
-                                                        {{ __($Model->Column_Title_Text['primary_key']) }}</option>
+                                                        {{ __($model->Column_Title_Text['primary_key']) }}</option>
                                                     <option value="url"
                                                         {{ request()->get('filter_text_key') == 'url' ? 'selected' : '' }}>
-                                                        {{ __($Model->Column_Title_Text['url']) }}</option>
+                                                        {{ __($model->Column_Title_Text['url']) }}</option>
                                                     {{-- <option value="event"
                                                         {{ request()->get('filter_text_key') == 'url' ? 'selected' : '' }}>
-                                                        {{ __($Model->Column_Title_Text['event']) }}</option>
+                                                        {{ __($model->Column_Title_Text['event']) }}</option>
                                                     <option value="tags"
                                                         {{ request()->get('filter_text_key') == 'url' ? 'selected' : '' }}>
-                                                        {{ __($Model->Column_Title_Text['tags']) }}</option> --}}
+                                                        {{ __($model->Column_Title_Text['tags']) }}</option> --}}
                                                 </select>
                                             </div>
                                             <input type="text" class="form-control" name="filter_text_value"
@@ -52,9 +52,9 @@
                                     <label>{{ __('排序') }}</label>
                                     <select class="form-control" name="order_by">
                                         <option value="id,desc">
-                                            {{ __($Model->Column_Title_Text['id']) }}({{ __('反序') }})</option>
+                                            {{ __($model->Column_Title_Text['id']) }}({{ __('反序') }})</option>
                                         <option value="id,asc">
-                                            {{ __($Model->Column_Title_Text['id']) }}({{ __('正序') }})</option>
+                                            {{ __($model->Column_Title_Text['id']) }}({{ __('正序') }})</option>
                                         <option value="created_at,desc">{{ __('建立時間') }}({{ __('反序') }})</option>
                                         <option value="created_at,asc">{{ __('建立時間') }}({{ __('正序') }})</option>
                                         <option value="updated_at,desc">{{ __('更新時間') }}({{ __('反序') }})</option>
@@ -91,18 +91,18 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>{{ __($Model->Column_Title_Text['id']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['type']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['primary_key']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['status']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['status_code']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['connect_time']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['method']) }}</th>
-                                        <th>{{ __($Model->Column_Title_Text['created_at']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['id']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['type']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['primary_key']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['status']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['status_code']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['connect_time']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['method']) }}</th>
+                                        <th>{{ __($model->Column_Title_Text['created_at']) }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($Paginator->items() as $Item)
+                                    @foreach ($paginator->items() as $Item)
                                         <tr>
                                             <td>{{ $Item->id }}</td>
                                             <td>{{ $Item->type }}

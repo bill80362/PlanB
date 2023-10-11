@@ -22,8 +22,8 @@ class HttpLogController extends Controller
         $Paginator = $this->oModel->filter($this->request->all())->orderBy('created_at', 'desc')->paginate($pageLimit);
 
         return view('operate/pages/http_log/list', [
-            'Paginator' => $Paginator,
-            'Model' => $this->oModel,
+            'paginator' => $Paginator,
+            'model' => $this->oModel,
         ]);
     }
 
@@ -40,7 +40,7 @@ class HttpLogController extends Controller
         }
 
         return view('operate/pages/http_log/update', [
-            'Data' => $Data,
+            'data' => $Data,
         ]);
     }
 }

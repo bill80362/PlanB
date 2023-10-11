@@ -16,7 +16,7 @@
                                     <a class="btn btn-primary mr-2"
                                         href="{{ route('http_log_list') }}?{{ request()->getQueryString() }}">
                                     </a>
-                                    {{-- {{ __('管理人管理') }} {{ $Data->id ? __('修改') : __('新增') }} --}}
+                                    {{-- {{ __('管理人管理') }} {{ $data->id ? __('修改') : __('新增') }} --}}
                                 </h2>
                             </div>
                         </div>
@@ -29,8 +29,8 @@
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <div>{{ _('編號') }}:{{ $Data->id }}</div>
-                                                <div>{{ _('最後更新時間') }}:{{ $Data->updated_at }}</div>
+                                                <div>{{ _('編號') }}:{{ $data->id }}</div>
+                                                <div>{{ _('最後更新時間') }}:{{ $data->updated_at }}</div>
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -39,32 +39,32 @@
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('分類') }}</label>
                                                         <input type="text" disabled class="form-control" name="name"
-                                                            value="{{ $Data->type }}">
+                                                            value="{{ $data->type }}">
                                                     </div>
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('主鍵') }}</label>
                                                         <input type="text" disabled class="form-control" name="name"
-                                                            value="{{ $Data->primary_key }}">
+                                                            value="{{ $data->primary_key }}">
                                                     </div>
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('網址') }}</label>
                                                         <input type="text" disabled class="form-control" name="name"
-                                                            value="{{ $Data->url }}">
+                                                            value="{{ $data->url }}">
                                                     </div>
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('串接時間') }}</label>
                                                         <input type="text" disabled class="form-control" name="name"
-                                                            value="{{ $Data->connect_time }}">
+                                                            value="{{ $data->connect_time }}">
                                                     </div>
                                                     <div class="form-group mb-3">
                                                         <label>Http Code</label>
                                                         <input type="text" disabled class="form-control" name="name"
-                                                            value="{{ $Data->status_code }}">
+                                                            value="{{ $data->status_code }}">
                                                     </div>
                                                     <div class="form-group mb-3">
                                                         <label>{{ __('建立時間') }}</label>
                                                         <input type="text" disabled class="form-control" name="name"
-                                                            value="{{ $Data->created_at }}">
+                                                            value="{{ $data->created_at }}">
                                                     </div>
                                                 </div>
 
@@ -72,12 +72,12 @@
 
                                                     <div class="form-group mb-3">
                                                         <label>Request</label>
-                                                        <textarea disabled class="form-control" name="text" rows="7">{{ $Data->request }}</textarea>
+                                                        <textarea disabled class="form-control" name="text" rows="7">{{ $data->request }}</textarea>
                                                     </div>
 
                                                     <div class="form-group mb-3">
                                                         <label>Response</label>
-                                                        <textarea disabled class="form-control" name="text" rows="7">{{ $Data->response }}</textarea>
+                                                        <textarea disabled class="form-control" name="text" rows="7">{{ $data->response }}</textarea>
                                                     </div>
 
                                                 </div>
